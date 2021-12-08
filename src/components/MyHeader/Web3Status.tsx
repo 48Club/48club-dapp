@@ -27,7 +27,7 @@ function Web3StatusInner({ pendingCount }: { pendingCount: number }) {
 
   if (account) {
     return (
-      <button className="bg-card py-2 px-4 text-white rounded" onClick={toggleWalletModal}>
+      <button className="bg-primary py-2 px-4 rounded" onClick={toggleWalletModal}>
         {pendingCount > 0 ? (
           <div className="flex flex-row justify-center items-center">
             <div className="pr-2">{pendingCount} Pending</div>

@@ -1,5 +1,5 @@
-const primaryColor = '#13E6FF'
-const borderColor = '#323b45'
+const primaryColor = '#FFC801'
+const secondaryColor = '#E9E9E9'
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -13,23 +13,22 @@ module.exports = {
     backgroundColor: {
       'transparent': 'transparent',
       'primary': primaryColor,
-      'divide': '#323C46',
-      'page': '#0F1923',
-      'card': '#1A242D',
-      'card-hover': '#262F3C',
+      'secondary': secondaryColor,
+      'page': '#ffffff',
+      'card': '#ffffff',
     },
     borderColor: {
-      DEFAULT: borderColor,
+      DEFAULT: '#EAEAEA',
       'primary': primaryColor,
-      'divide': borderColor,
       'transparent': 'transparent',
-      'senior': '#FFD764',
-      'junior': '#6EDAE4',
     },
     borderRadius: {
       DEFAULT: '4px',
       sm: '2px',
       'full': '999999px',
+    },
+    boxShadow: {
+      DEFAULT: '0px 8px 24px rgba(0, 0, 0, 0.06)',
     },
     extend: {},
   },

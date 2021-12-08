@@ -18,7 +18,7 @@ module.exports = {
               '@layout-header-background': tailwindConfig.theme.backgroundColor.sidebar,
               '@layout-body-background': tailwindConfig.theme.backgroundColor.page,
               '@body-background': tailwindConfig.theme.backgroundColor.page,
-              '@text-color': '#ffffff',
+              '@text-color': '#1E1E1E',
             },
             javascriptEnabled: true,
           },

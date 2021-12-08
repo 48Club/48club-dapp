@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApplicationModal } from '../../../state/application/actions'
-import { useModalOpen, useOpenModal } from '../../../state/application/hooks'
+import { useCloseModals, useModalOpen, useOpenModal } from '../../../state/application/hooks'
 import AccountDetails from './AccountDetails'
 import { Modal } from 'antd'
 import { useEthers } from '@usedapp/core'
@@ -8,6 +8,7 @@ import { useEthers } from '@usedapp/core'
 export default function WalletModal() {
   const { modalOpen } = useModalOpen(ApplicationModal.WALLET)
   const openModal = useOpenModal(ApplicationModal.WALLET)
+  const closeModals = useCloseModals()
 
   const { account, error } = useEthers()
 
@@ -33,7 +34,7 @@ export default function WalletModal() {
   }
 
   return (
-    <Modal visible={modalOpen} onCancel={openModal} footer={null} title={getHeader()}>
+    <Modal visible={modalOpen} onCancel={closeModals} footer={null} title={getHeader()}>
       <div className="p-4">
         {getBody()}
       </div>
