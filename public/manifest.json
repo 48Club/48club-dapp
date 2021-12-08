@@ -1,0 +1,9 @@
+{
+  "short_name": "bnb48club",
+  "name": "bnb48club",
+  "icons": [],
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#ff007a",
+  "background_color": "#fff"
+}
