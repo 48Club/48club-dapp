@@ -1,13 +1,6 @@
-# bnb48club Dapp
+# BNB48Club DAPP
 
-## Environments
+## References
 
-- Dev
-  - [dev.bnb48club.com](https://dev.bnb48club.com)
-  - Branch: develop
-- Alpha
-  - [alpha.bnb48club.com](https://alpha.bnb48club.com)
-  - Branch: staging
-- Production
-  - [dapp.bnb48club.com](https://dapp.bnb48club.com)
-  - Branch: master
+Design:
+https://www.figma.com/file/7T1cCrq2oCG3ELgqyQQPUz/KOGE?node-id=13%3A1650
