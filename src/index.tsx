@@ -1,4 +1,4 @@
-import React, { StrictMode, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { ChainId, DAppProvider } from '@usedapp/core'
@@ -19,14 +19,12 @@ const config = {
 }
 
 ReactDOM.render(
-  <StrictMode>
-    <Suspense fallback={null}>
-      <DAppProvider config={config}>
-        <ReduxProvider store={store}>
-          <App />
-        </ReduxProvider>
-      </DAppProvider>
-    </Suspense>
-  </StrictMode>
+  <Suspense fallback={null}>
+    <DAppProvider config={config}>
+      <ReduxProvider store={store}>
+        <App />
+      </ReduxProvider>
+    </DAppProvider>
+  </Suspense>
   , document.getElementById('root'),
 )
