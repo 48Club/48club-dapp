@@ -1,0 +1,80 @@
+.validation-node-page {
+  .case-section {
+    .case-list-card {
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      padding: 24px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease-in;
+
+      @media only screen and (min-width: 768px) {
+        &:hover {
+          transform: translate(0px, -5px);
+        }
+      }
+
+
+      .case-profile-image {
+        width: 150px;
+        height: 150px;
+        // background-color: #f6f9fc;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .case-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        color: #202832;
+        margin-bottom: 3px;
+      }
+
+      .case-content {
+        text-align: center;
+        font-size: 16px;
+        color: #54606c;
+        white-space: pre-wrap;
+        /* These are technically the same, but use both */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+
+        -ms-word-break: break-all;
+        /* This is the dangerous one in WebKit, as it breaks things wherever */
+        word-break: break-all;
+        /* Instead use this non-standard one: */
+        word-break: break-word;
+
+        /* Adds a hyphen where the word breaks, if supported (No Blink) */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+
+        a {
+          color: #54606c;
+
+          &:hover {
+            opacity: 0.8;
+            color: #202832;
+          }
+        }
+      }
+    }
+  }
+}

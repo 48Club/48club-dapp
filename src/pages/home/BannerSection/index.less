@@ -1,0 +1,130 @@
+@import "../../../assets/styles/antd.less";
+
+.home-page {
+  .banner-section {
+    background: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    // overflow: hidden;
+    position: relative;
+
+    @media only screen and (min-width: 768px) {
+      min-height: unset;
+      // height: 600px;
+    }
+
+    .background-container {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+
+      .ant-row-flex {
+        width: 100%;
+        height: 100%;
+      }
+
+      .background-cover {
+        height: 100%;
+        width: 100%;
+        background-image: url('https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-home-banner.png');
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: cover;
+      }
+    }
+
+    .section-cover {
+      // height: 400px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        // height: 100%;
+      }
+    }
+
+
+    .container {
+      display: flex;
+      // align-items: center;
+      // justify-content: center;
+      height: 100%;
+
+      .ant-row-flex {
+        width: 100%;
+      }
+
+      .section-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 0;
+
+        @media only screen and (min-width: 768px) {
+          // align-items: flex-start;
+          padding: 96px 0;
+        }
+
+        .section-title {
+          font-family: 'TiemposHeadline';
+          font-weight: bold;
+          color: #1e1e1e;
+          font-size: 32px;
+          line-height: 36px;
+          margin-bottom: 24px;
+          padding: unset;
+          text-align: center;
+
+          @media only screen and (min-width: 768px) {
+            text-align: left;
+            font-size: 48px;
+            line-height: 56px;
+            margin-bottom: 36px;
+            max-width: 650px;
+          }
+        }
+
+        .section-subtitle {
+          font-size: 16px;
+          padding: unset;
+          margin-bottom: 16px;
+          color: #1e1e1e;
+          text-align: center;
+
+          p {
+            font-size: 14px;
+            padding: 12px 0;
+            opacity: 0.6;
+          }
+
+          @media only screen and (min-width: 768px) {
+            text-align: left;
+            font-size: 18px;
+            max-width: 650px;
+          }
+        }
+
+        a.button {
+          // width: 240px;
+          display: inline-block;
+          border-radius: 5px;
+          padding: 12px 24px;
+          background: #ffc800;
+          color: #000;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 3px;
+          margin: 16px 0;
+        }
+
+      }
+    }
+  }
+}

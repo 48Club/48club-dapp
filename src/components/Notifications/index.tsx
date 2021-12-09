@@ -1,4 +1,4 @@
-import type { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from '@ethersproject/providers'
 import { getExplorerTransactionLink, Notification, useNotifications } from '@usedapp/core'
 import React, { ReactElement } from 'react'
 import { CheckCircle, CheckSquare, Clock, ExternalLink, XCircle } from 'react-feather'

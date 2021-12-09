@@ -5,6 +5,7 @@
     "build": "CI=false craco build"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^5.5.1",
     "@ethersproject/abi": "^5.1.0",
     "@ethersproject/contracts": "^5.1.0",
@@ -29,6 +30,7 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.9",
     "react-ga": "^3.3.0",
+    "react-markdown": "^7.1.1",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",

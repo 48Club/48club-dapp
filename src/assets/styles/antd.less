@@ -1,25 +1,29 @@
-@import '~antd/lib/style/themes/default.less';
-@import '~antd/dist/antd.less';
+@import "~antd/dist/antd.less";
 
-.ant-menu-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.ant-menu-submenu-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  border: none;
-}
-
-.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  box-shadow: none;
-}
+//@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@app-theme-color : #ffc800;
+@primary-color : @app-theme-color;
+@text-selection-bg: #ffc800;
+@font-size-base : 12px;
+@font-size-lg : @font-size-base;
+@font-size-sm : 10px;
+@font-family : 'Inter', sans-serif;
+@layout-sider-background : rgba(0, 0, 0, 0.84);
+@item-active-bg : #f8f8f8;
+// @menu-bg: @component-background;
+// @menu-item-color: @text-color;
+// @menu-highlight-color: #f8f8f8;
+// @menu-item-group-title-color: @text-color-secondary;
+// @menu-dark-bg: rgba(0, 0, 0, 0.84);
+// @menu-dark-item-active-bg: #f8f8f8;
+// @menu-dark-submenu-bg: rgba(0, 0, 0, 0.84);
+// customised
+@app-header-height: 60px;
+// {
+//   xs: '480px',
+//   sm: '576px',
+//   md: '768px',
+//   lg: '992px',
+//   xl: '1200px',
+//   xxl: '1600px',
+// }

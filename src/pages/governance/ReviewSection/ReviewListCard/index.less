@@ -1,0 +1,67 @@
+.governance-page {
+  .review-section {
+    .review-list-card {
+      // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.25s ease-in;
+
+      @media only screen and (min-width: 768px) {
+        &:hover {
+          transform: translate(0px, -5px);
+        }
+      }
+
+      .review-user-part {
+        display: flex;
+
+        .review-user-profile-image {
+          background-color: #f6f9fc;
+          width: 48px;
+          height: 48px;
+          border-radius: 24px;
+          overflow: hidden;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          margin-right: 10px;
+        }
+
+        .review-user-title-part {
+          .review-user-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #202832;
+            margin-bottom: 6px;
+          }
+
+          a {
+            color: #54606c;
+          }
+
+          .anticon {
+            margin-right: 5px;
+            font-size: 14px;
+          }
+
+          img {
+            height: 15px;
+            margin-right: 5px;
+          }
+
+          .review-user-email {
+            margin-bottom: 6px;
+          }
+        }
+      }
+
+      .review-content {
+        font-size: 16px;
+        color: #54606c;
+      }
+    }
+  }
+}
