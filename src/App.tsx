@@ -1,20 +1,20 @@
 import React from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
-import MyHeader from './components/MyHeader'
-import WalletModal from './components/Modal/WalletModal'
+import Header from './components/Header'
 import { NotificationsList } from './components/Notifications'
 import Milestone from './pages/milestone'
 import Home from './pages/home'
 import Governance from './pages/governance'
 import ValidationNode from './pages/validation_node'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
     <BrowserRouter>
       <Layout>
-        <MyHeader />
-        <div className="px-2">
+        <Header />
+        <div className="pt-2">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/milestome" component={Milestone} />
@@ -24,10 +24,9 @@ export default function App() {
               <Redirect to="/" />
             </Route>
           </Switch>
-
           <NotificationsList />
-          <WalletModal />
         </div>
+        <Footer/>
       </Layout>
     </BrowserRouter>
   )

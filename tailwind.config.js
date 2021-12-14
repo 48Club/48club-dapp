@@ -15,7 +15,7 @@ module.exports = {
       'primary': primaryColor,
       'secondary': secondaryColor,
       'page': '#ffffff',
-      'card': '#ffffff',
+      'white': '#ffffff',
     },
     borderColor: {
       DEFAULT: '#EAEAEA',

@@ -27,3 +27,10 @@ input[type=number] {
 .h-fit-content {
   height: fit-content;
 }
+
+body .container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 16px
+}

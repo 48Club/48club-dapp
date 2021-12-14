@@ -23,6 +23,7 @@
     "bignumber.js": "^9.0.1",
     "copy-to-clipboard": "^3.3.1",
     "craco-less": "^1.17.1",
+    "js-cookie": "^3.0.1",
     "moment": "^2.29.1",
     "postcss": "^7.0.0",
     "react": "^16.13.1",

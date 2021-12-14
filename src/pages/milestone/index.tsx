@@ -4,7 +4,7 @@ import BannerSection from './BannerSection'
 
 export default function Milestone() {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="milestone-page max-w-6xl mx-auto">
       <BannerSection />
       <TutorialSection />
     </div>
