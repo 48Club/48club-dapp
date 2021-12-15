@@ -1,8 +1,11 @@
 import React from 'react'
 import { Col, Row } from 'antd'
 import './index.less'
+import { useTranslation } from 'react-i18next'
 
 export default function BannerSection() {
+  const { t } = useTranslation();
+
   return (
     <div className='banner-section'>
       <div className='container'>
@@ -12,23 +15,23 @@ export default function BannerSection() {
               <div className='section-title'>
                 BNB48 Club®
                 <br />
-                {'app_header_menu_governance_title'}
+                {t('app_header_menu_governance_title')}
               </div>
               <div className='section-subtitle'>
-                {'governance_page_banner_section_title_1'}
+                {t('governance_page_banner_section_title_1')}
                 <br />
                 <p>
-                  {'governance_page_banner_section_title_2'}
+                  {t('governance_page_banner_section_title_2')}
                   <br />
                   <br />
-                  {'governance_page_banner_section_title_3'}
+                  {t('governance_page_banner_section_title_3')}
                   <br />
                   <br />
-                  {'governance_page_banner_section_title_3_item_1'}
+                  {t('governance_page_banner_section_title_3_item_1')}
                   <br />
-                  {'governance_page_banner_section_title_3_item_2'}
+                  {t('governance_page_banner_section_title_3_item_2')}
                   <br />
-                  {'governance_page_banner_section_title_3_item_3'}
+                  {t('governance_page_banner_section_title_3_item_3')}
                 </p>
               </div>
             </div>

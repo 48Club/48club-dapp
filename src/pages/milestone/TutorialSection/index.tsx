@@ -192,6 +192,7 @@ const TUTORIAL_ITEMS = [
 ]
 
 export default function TutorialSection() {
+  const language = 'en'
   return (
     <div className='tutorial-section'>
       <div className='container'>
@@ -205,7 +206,7 @@ export default function TutorialSection() {
                     key={`tutorial-card-${item.event_title}-${item.event_content}`}
                     item={{
                       ...item,
-                      event_content: item.event_content,
+                      event_content: language === 'en' ? item.event_content_en : item.event_content,
                     }}
                   />
                 ))

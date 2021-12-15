@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 import './index.less'
 
@@ -18,8 +20,8 @@ export default function ReportListCard(props: { item: any }) {
             {item.event_title}
           </div>
           <div className='item-title'>
-            <div>{(item.event_content || '').trim() || ''}</div>
-          </div>
+            <ReactMarkdown children={(item.event_content || '').trim()} rehypePlugins={[rehypeRaw]}  />
+            </div>
         </div>
       </div>
     </div>

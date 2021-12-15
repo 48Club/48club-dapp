@@ -25,7 +25,7 @@ export default function ReviewListCard(props: { item: any }) {
             <a href={`mailto:${item.subtitle}`}>{item.subtitle}</a>
           </div>
           <div className='review-user-telegram'>
-            <a href={`https://t.me/${item.telegram}`} target='_blank' rel='noopener noreferrer'>
+            <a className='flex flex-row items-center' href={`https://t.me/${item.telegram}`} target='_blank' rel='noopener noreferrer'>
               <img src='/static/logo-contact-tg.png' alt='Telegram' />{item.telegram}
             </a>
           </div>

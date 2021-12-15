@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Row } from 'antd'
 import './index.less'
+import { useTranslation } from 'react-i18next'
 
 const LOGO_URLS = [
   'logo-partner-binance-smart-chain.svg',
@@ -17,13 +18,14 @@ const LOGO_URLS = [
 ]
 
 export default function CustomerSection() {
+  const { t } = useTranslation();
 
   return (
     <div className='customer-section'>
       <div className='container'>
         <div className='section-header'>
           <div className='section-title'>
-            {'home_page_partner_section_subtitle'}
+            {t('home_page_partner_section_subtitle')}
           </div>
           <div className='section-subtitle'>
             {/* Join 7,327+ entrepreneurs, instructors, startups, and big corporations worldwide who are already enjoying full access + free lifetime updates. */}

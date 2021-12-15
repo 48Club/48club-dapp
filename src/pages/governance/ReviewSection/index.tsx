@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import ReviewListCard from './ReviewListCard'
 import './index.less'
+import { useTranslation } from 'react-i18next'
 
 const REVIEW_ITEMS = [
   {
@@ -67,15 +68,17 @@ const REVIEW_ITEMS = [
 ]
 
 export default function ReviewSection() {
+  const { t } = useTranslation();
+
   return (
     <div className='review-section'>
       <div className='container'>
         <div className='section-header'>
           <div className='section-title'>
-            {'governance_page_review_section_title'}
+            {t('governance_page_review_section_title')}
           </div>
           <div className='section-subtitle'>
-            {'governance_page_review_section_subtitle'}
+            {t('governance_page_review_section_subtitle')}
           </div>
           <div className='section-content'>
             <Row gutter={24}>

@@ -1,8 +1,11 @@
 import React from 'react'
 import './index.less'
+import { useTranslation } from 'react-i18next'
 
 export default function CustomerSection (){
-    return (
+  const { t } = useTranslation();
+
+  return (
       <div className='introduction-section'>
         <div className='container'>
           <div className='section-header'>
@@ -10,10 +13,10 @@ export default function CustomerSection (){
               <img src='/static/logo-koge-01.png' alt='Koge' />
             </div>
             <div className='section-title'>
-              {'home_page_introduction_section_title'}
+              {t('home_page_introduction_section_title')}
             </div>
             <div className='section-subtitle'>
-              {'home_page_introduction_section_subtitle'}
+              {t('home_page_introduction_section_subtitle')}
             </div>
           </div>
         </div>

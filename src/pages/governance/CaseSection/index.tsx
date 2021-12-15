@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import CaseListCard from './CaseListCard'
 import './index.less'
+import { useTranslation } from 'react-i18next'
 
 const REVIEW_ITEMS = [{
   id: 1,
@@ -21,6 +22,8 @@ const REVIEW_ITEMS = [{
 }]
 
 export default function CaseSection() {
+  const { t } = useTranslation();
+
   return (
     <div className='case-section'>
       <div className='container'>
@@ -33,8 +36,8 @@ export default function CaseSection() {
                     <CaseListCard
                       item={{
                         ...item,
-                        title: item.title,
-                        content: item.content,
+                        title: t(item.title),
+                        content: t(item.content),
                       }}
                     />
                   </Col>
