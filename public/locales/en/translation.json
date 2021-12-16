@@ -109,6 +109,10 @@
   "user_profile_password_page_form_new_password": "New Password (At least 8 characters)",
   "user_profile_password_page_form_current_password": "Current Password",
   "user_profile_password_page_form_confirm_password": "Confirm Password",
-  "user_profile_password_page_form_confirm_button_title": "Reset Password"
+  "user_profile_password_page_form_confirm_button_title": "Reset Password",
+  "staking": "Staking",
+  "voting": "Voting",
+  "more": "More",
+  "connect_wallet": "Connect to wallet"
 }
 

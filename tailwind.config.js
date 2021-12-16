@@ -1,5 +1,5 @@
 const primaryColor = '#FFC801'
-const secondaryColor = '#E9E9E9'
+const secondaryColor = '#FEFAE8'
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
