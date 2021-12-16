@@ -192,7 +192,7 @@ const TUTORIAL_ITEMS = [
 ]
 
 export default function TutorialSection() {
-  const language = 'en'
+  const language = localStorage.getItem('language')
   return (
     <div className='tutorial-section'>
       <div className='container'>
