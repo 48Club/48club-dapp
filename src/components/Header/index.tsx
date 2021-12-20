@@ -54,9 +54,9 @@ export default function Header() {
             <img alt={''} src={appLogo} className="h-3 md:h-5 mr-3" />
           </Link>
           <div className='hidden md:flex flex-row items-center'>
-            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/'}>{t('staking')}</Link>
-            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/'}>NFT</Link>
-            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/'}>{t('voting')}</Link>
+            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/staking'}>{t('staking')}</Link>
+            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/nft'}>NFT</Link>
+            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/voting'}>{t('voting')}</Link>
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{zIndex: 10000}}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">More</div>
             </Dropdown>

@@ -3,6 +3,7 @@ const secondaryColor = '#FEFAE8'
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  important: true,
   theme: {
     colors: {
       'primary': primaryColor,
@@ -30,7 +31,14 @@ module.exports = {
     boxShadow: {
       DEFAULT: '0px 8px 24px rgba(0, 0, 0, 0.06)',
     },
-    extend: {},
+    extend: {
+      spacing: {
+        '30': '7.5rem',
+        '50': '12.5rem',
+        '100': '25rem',
+        '-5': '-1.25rem'
+      }
+    },
   },
   variants: {
     extend: {},

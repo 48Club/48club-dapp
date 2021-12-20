@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import { Divider, Menu, Modal } from 'antd'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'

@@ -7,6 +7,7 @@ import Milestone from './pages/milestone'
 import Home from './pages/home'
 import Governance from './pages/governance'
 import ValidationNode from './pages/validation_node'
+import Staking from './pages/staking'
 import Footer from './components/Footer'
 import './i18n'
 import { useTranslation } from 'react-i18next';
@@ -20,12 +21,13 @@ export default function App() {
         <Header />
         <div>test</div>
         <div>{t("app_head_title")}</div>
-        <div className="pt-2">
+        <div className="pt-8">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/milestome" component={Milestone} />
             <Route exact path="/governance" component={Governance} />
             <Route exact path="/validation-node" component={ValidationNode} />
+            <Route exact path="/staking" component={Staking} />
             <Route>
               <Redirect to="/" />
             </Route>

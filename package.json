@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "start": "PORT=3090 craco start",
+    "start-win": "set PORT=3090 && craco start",
     "build": "CI=false craco build"
   },
   "dependencies": {
