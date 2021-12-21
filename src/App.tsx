@@ -1,16 +1,19 @@
-import React from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
-import { Layout } from 'antd'
-import Header from './components/Header'
-import { NotificationsList } from './components/Notifications'
-import Milestone from './pages/milestone'
-import Home from './pages/home'
-import Governance from './pages/governance'
-import ValidationNode from './pages/validation_node'
-import Staking from './pages/staking'
-import Footer from './components/Footer'
-import './i18n'
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Layout } from "antd";
+import Header from "./components/Header";
+import { NotificationsList } from "./components/Notifications";
+import Milestone from "./pages/milestone";
+import Home from "./pages/home";
+import Governance from "./pages/governance";
+import ValidationNode from "./pages/validation_node";
+import Staking from "./pages/staking";
+import Voting from "./pages/voting";
+import Footer from "./components/Footer";
+import "./i18n";
+import { useTranslation } from "react-i18next";
+import VotingCreate from "pages/votingCreate";
+import VotingDetail from "pages/votingDetail";
 
 export default function App() {
   const { t } = useTranslation();
@@ -28,14 +31,17 @@ export default function App() {
             <Route exact path="/governance" component={Governance} />
             <Route exact path="/validation-node" component={ValidationNode} />
             <Route exact path="/staking" component={Staking} />
+            <Route exact path="/voting" component={Voting} />
+            <Route exact path="/voting/create" component={VotingCreate} />
+            <Route exact path="/voting/detail/:id" component={VotingDetail} />
             <Route>
               <Redirect to="/" />
             </Route>
           </Switch>
           <NotificationsList />
         </div>
-        <Footer/>
+        <Footer />
       </Layout>
     </BrowserRouter>
-  )
+  );
 }

@@ -11,8 +11,7 @@ export default function SummarySection() {
       >
         <div className="flex flex-col pt-8 px-6" style={{ color: "#54606C" }}>
           <span
-            className="font-bold text-4xl mb-2"
-            style={{ color: "#1e1e1e" }}
+            className="font-bold text-4xl mb-2 text-light-black"
           >
             {t("staking_title")}
           </span>
@@ -22,7 +21,7 @@ export default function SummarySection() {
               <span className="text-sm mb-2 leading-5">
                 {t("staking_summary_total")}
               </span>
-              <span className="text-xl font-bold" style={{ color: "#1e1e1e" }}>
+              <span className="text-xl font-bold text-light-black">
                 123,123,000
               </span>
             </div>
@@ -30,7 +29,7 @@ export default function SummarySection() {
               <span className="text-sm mb-2 leading-5">
                 {t("staking_summary_pledge")}
               </span>
-              <span className="text-xl font-bold" style={{ color: "#1e1e1e" }}>
+              <span className="text-xl font-bold text-light-black">
                 123,123,000
               </span>
             </div>
@@ -38,7 +37,7 @@ export default function SummarySection() {
               <span className="text-sm mb-2 leading-5">
                 {t("staking_summary_own")}
               </span>
-              <span className="text-xl font-bold" style={{ color: "#1e1e1e" }}>
+              <span className="text-xl font-bold text-light-black">
                 6.00%
               </span>
             </div>

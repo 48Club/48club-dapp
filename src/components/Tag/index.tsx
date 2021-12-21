@@ -28,5 +28,5 @@ export default function Tag(props) {
   const { type } = props;
 
   const data = map[type];
-  return <div className="flex flex-row rounded h-7 px-3 py-1" style={data.style}>{data.text}</div>;
+  return <span className="rounded h-7 px-3 py-1 w-fit" style={{...data.style, 'width': 'fit-content'}}>{data.text}</span>;
 }

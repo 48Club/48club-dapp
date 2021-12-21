@@ -21,8 +21,8 @@ export default function PledgeSection() {
         style={{ boxShadow: "0px 0.5rem 1.5rem rgba(0, 0, 0, 0.06)" }}
       >
         <div
-          className="flex flex-col pl-6"
-          style={{ backgroundColor: "#FFFBEC", color: "#1E1E1E" }}
+          className="flex flex-col pl-6 text-light-black"
+          style={{ backgroundColor: "#FFFBEC" }}
         >
           <div className="flex flex-row mt-10 mb-4 ">
             <div className="font-medium text-base mr-3 leading-7">
@@ -51,8 +51,8 @@ export default function PledgeSection() {
           </div>
           <Input suffix={inputMax} className="h-12 mb-6" />
           <Button
-            className="h-12 text-sm"
-            style={{ backgroundColor: "#FFC801", color: "#1E1E1E" }}
+            className="h-12 text-sm text-light-black"
+            style={{ backgroundColor: "#FFC801" }}
           >
             确认
           </Button>
