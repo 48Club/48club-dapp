@@ -13,9 +13,7 @@ export default function ResultSection() {
     <div className="pt-20 w-full">
       <Label text="投票结果" />
 
-      <div
-        className="mt-6 flex flex-col px-6 pb-8 shadow"
-      >
+      <div className="mt-6 flex flex-col px-6 pb-8 shadow">
         <div className="flex flex-row mt-6 pb-4 border-b border-gray">
           <FrownFilled className="text-base text-gray mr-2.5" />
           <span className="text-base text-dark-gray">
@@ -30,14 +28,8 @@ export default function ResultSection() {
             </div>
             <span className="text-black text-sm">KOGE回收数量1,000枚</span>
           </div>
-          <div
-            className="mt-2.5 w-full relative"
-            style={{ borderRadius: "0.75rem" }}
-          >
-            <div
-              className="h-6 rounded-xl bg-green opacity-10"
-              style={{ borderRadius: "0.75rem" }}
-            ></div>
+          <div className="mt-2.5 w-full relative">
+            <div className="h-6 rounded-xl bg-green opacity-10"></div>
             <div className="px-1 absolute left-0 top-1 w-full">
               <div
                 className=" bg-green h-4 rounded-xl"
@@ -55,14 +47,8 @@ export default function ResultSection() {
             </div>
             <span className="text-black text-sm">KOGE回收数量1,000枚</span>
           </div>
-          <div
-            className="mt-2.5 w-full relative"
-            style={{ borderRadius: "0.75rem" }}
-          >
-            <div
-              className="h-6 rounded-xl bg-red opacity-10"
-              style={{ borderRadius: "0.75rem" }}
-            ></div>
+          <div className="mt-2.5 w-full relative">
+            <div className="h-6 rounded-xl bg-red opacity-10"></div>
             <div className="px-1 absolute left-0 top-1 w-full">
               <div
                 className=" bg-red h-4 rounded-xl"

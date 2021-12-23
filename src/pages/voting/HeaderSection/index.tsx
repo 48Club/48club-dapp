@@ -7,8 +7,7 @@ export default function HeaderSection() {
   return (
     <div className="pt-4 w-auto mb-10">
       <div
-        className="h-96 flex flex-col rounded-2xl items-center px-6"
-        style={{ backgroundColor: "#FFFBEC" }}
+        className="h-96 flex flex-col rounded-2xl items-center px-6 bg-another-white"
       >
         <img
           src="/static/voting-header.png"

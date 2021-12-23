@@ -100,7 +100,7 @@ export default function VotingCreate() {
         />
       </div>
       <Button
-        className="h-12 text-sm mt-12 w-full mb-20 text-light-black bg-yellow"
+        className="h-12 text-sm mt-12 w-full mb-20 text-light-black bg-yellow rounded"
       >
         提交NFT
       </Button>

@@ -40,6 +40,9 @@ module.exports = {
       DEFAULT: "4px",
       sm: "2px",
       full: "999999px",
+      '2xl': '1rem',
+      lg: '0.5rem',
+      xl: '0.75rem'
     },
     boxShadow: {
       DEFAULT: "0px 0.5rem 1.5rem rgba(0, 0, 0, 0.06)",
