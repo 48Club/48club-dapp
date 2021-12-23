@@ -11,7 +11,7 @@ export default function NFTModal() {
     <div className="text-center relative">
       <span className="font-bold text-lg text-light-black">选择NFT</span>
       <CloseOutlined
-        className="absolute r-0 text-xs font-bold leading-7 color-gray"
+        className="absolute r-0 text-xs font-bold leading-7 text-gray"
         style={{ right: 0 }}
       />
     </div>
@@ -45,7 +45,7 @@ export default function NFTModal() {
                 <Radio />
               </div>
               <span className="mt-4 text-base text-light-black">Louts</span>
-              <span className="mt-2 text-xs mb-6 color-gray">
+              <span className="mt-2 text-xs mb-6 text-gray">
                 Here is content here is content here is content here is content
                 here is content here is content here is content here is content
                 here is conte...

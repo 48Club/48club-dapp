@@ -16,6 +16,7 @@ module.exports = {
       green: "#08C849",
       red: "#EF2B2B",
       yellow: "#E2B201",
+      blue: "#1DA9F8",
     },
     backgroundColor: {
       transparent: "transparent",
@@ -29,6 +30,9 @@ module.exports = {
       yellow: "#FFC801",
       "light-white": "#F9F9F9",
       "another-white": "#FFFBEC",
+      pink: "rgba(239, 43, 43, 0.04)",
+      'light-green': 'rgba(8, 200, 73, 0.2)',
+      'dark-pink': 'rgba(239, 43, 43, 0.2)'
     },
     borderColor: {
       DEFAULT: "#EAEAEA",
@@ -54,6 +58,7 @@ module.exports = {
     extend: {
       spacing: {
         30: "7.5rem",
+        35: "8.75rem",
         38: "9.5rem",
         50: "12.5rem",
         96: "24rem",

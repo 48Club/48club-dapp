@@ -16,6 +16,7 @@ import VotingCreate from "pages/votingCreate";
 import VotingDetail from "pages/votingDetail";
 import NFT from "pages/nft";
 import NFTCreate from "pages/nftCreate";
+import Manage from "pages/manage";
 
 export default function App() {
   const { t } = useTranslation();
@@ -38,6 +39,7 @@ export default function App() {
             <Route exact path="/voting/detail/:id" component={VotingDetail} />
             <Route exact path="/nft" component={NFT} />
             <Route exact path="/nft/create" component={NFTCreate} />
+            <Route exact path="/manage" component={Manage} />
             <Route>
               <Redirect to="/" />
             </Route>
