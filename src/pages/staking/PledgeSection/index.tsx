@@ -48,7 +48,7 @@ export default function PledgeSection() {
           </div>
           <Input suffix={inputMax} className="h-12 mb-6" />
           <Button
-            className="h-12 text-sm text-light-black bg-yellow"
+            className="h-12 text-sm text-light-black bg-yellow rounded font-medium"
           >
             确认
           </Button>

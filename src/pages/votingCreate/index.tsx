@@ -14,7 +14,7 @@ export default function VotingCreate() {
         style={{ backgroundColor: "#FFFBEC" }}
       >
         <span className="mt-8 font-bold text-2xl mb-4 text-light-black">
-          创建KOGE投票
+          创建 KOGE 投票
         </span>
         <span className="text-base mb-10 text-dark-gray">
           KOGE 投票将觉得治理方向
