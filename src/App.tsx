@@ -14,6 +14,7 @@ import "./i18n";
 import { useTranslation } from "react-i18next";
 import VotingCreate from "pages/votingCreate";
 import VotingDetail from "pages/votingDetail";
+import NFT from "pages/nft";
 
 export default function App() {
   const { t } = useTranslation();
@@ -34,6 +35,7 @@ export default function App() {
             <Route exact path="/voting" component={Voting} />
             <Route exact path="/voting/create" component={VotingCreate} />
             <Route exact path="/voting/detail/:id" component={VotingDetail} />
+            <Route exact path="/nft" component={NFT} />
             <Route>
               <Redirect to="/" />
             </Route>

@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import Tag from "components/Tag";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +7,7 @@ export default function HeaderSection() {
   return (
     <div className="pt-4 w-auto mb-10">
       <div
-        className="flex flex-col rounded-2xl items-center px-6 pt-8 pb-10"
+        className="flex flex-col rounded-2xl items-center px-6 pt-8 pb-10 bg-another-white"
         style={{ backgroundColor: "#FFFBEC" }}
       >
         <span className="font-bold text-2xl mb-4 text-light-black">

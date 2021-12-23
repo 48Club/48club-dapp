@@ -13,12 +13,10 @@ export default function VotingCreate() {
         className="mt-4 rounded-2xl flex flex-col items-center"
         style={{ backgroundColor: "#FFFBEC" }}
       >
-        <span
-          className="mt-8 font-bold text-2xl mb-4 text-light-black"
-        >
+        <span className="mt-8 font-bold text-2xl mb-4 text-light-black">
           创建KOGE投票
         </span>
-        <span className="text-base mb-10" style={{ color: "#54606C" }}>
+        <span className="text-base mb-10 text-dark-gray">
           KOGE 投票将觉得治理方向
         </span>
       </div>
@@ -102,8 +100,7 @@ export default function VotingCreate() {
         />
       </div>
       <Button
-        className="h-12 text-sm mt-12 w-full mb-20 text-light-black"
-        style={{ backgroundColor: "#FFC801" }}
+        className="h-12 text-sm mt-12 w-full mb-20 text-light-black bg-yellow"
       >
         提交NFT
       </Button>

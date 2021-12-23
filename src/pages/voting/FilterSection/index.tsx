@@ -1,4 +1,4 @@
-import { Button, DatePicker, Select, Switch } from "antd";
+import { DatePicker, Select, Switch } from "antd";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -36,10 +36,7 @@ export default function FilterSection() {
         <span className="text-sm leading-5 mb-2 text-light-black">
           筛选时间
         </span>
-        <RangePicker
-          className="h-12 rounded"
-          style={{ background: "#F9F9F9" }}
-        />
+        <RangePicker className="h-12 rounded bg-light-white" />
       </div>
       <div className="flex flex-row">
         <div className="flex flex-col w-full mr-6">
@@ -48,15 +45,14 @@ export default function FilterSection() {
           </span>
           <Select
             defaultValue="all"
-            className="w-full h-12 rounded filter-select"
-            style={{ background: "#F9F9F9" }}
+            className="w-full h-12 rounded filter-select bg-light-white"
           >
             {optionList.map((item) => {
               return <Option value={item.value}>{item.label}</Option>;
             })}
           </Select>
         </div>
-        <div className="shrink-0 w-20 flex flex-col" style={{flexShrink: 0}}>
+        <div className="shrink-0 w-20 flex flex-col" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
             与我相关
           </span>

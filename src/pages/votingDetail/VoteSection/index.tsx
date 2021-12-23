@@ -9,10 +9,7 @@ export default function VoteSection() {
   return (
     <div className="pt-20 w-full">
       <Label text="选择您的投票" />
-      <div
-        className="mt-6 flex flex-col px-6"
-        style={{ boxShadow: "0px 0.5rem 1.5rem rgba(0, 0, 0, 0.06)" }}
-      >
+      <div className="mt-6 flex flex-col px-6 shadow">
         <Button
           className="mt-6 h-12 text-light-black text-xl font-bold"
           icon={

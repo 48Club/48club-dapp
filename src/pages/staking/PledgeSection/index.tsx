@@ -16,10 +16,7 @@ export default function PledgeSection() {
   return (
     <div className="flex flex-col">
       <Label text={t("staking_pledge_title")} />
-      <div
-        className="mt-6 w-auto flex flex-col rounded-lg"
-        style={{ boxShadow: "0px 0.5rem 1.5rem rgba(0, 0, 0, 0.06)" }}
-      >
+      <div className="mt-6 w-auto flex flex-col rounded-lg shadow">
         <div
           className="flex flex-col pl-6 text-light-black"
           style={{ backgroundColor: "#FFFBEC" }}
@@ -51,8 +48,7 @@ export default function PledgeSection() {
           </div>
           <Input suffix={inputMax} className="h-12 mb-6" />
           <Button
-            className="h-12 text-sm text-light-black"
-            style={{ backgroundColor: "#FFC801" }}
+            className="h-12 text-sm text-light-black bg-yellow"
           >
             确认
           </Button>

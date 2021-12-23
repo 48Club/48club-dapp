@@ -1,11 +1,8 @@
 import {
   CheckCircleFilled,
-  CheckCircleTwoTone,
   CloseCircleFilled,
-  CloseCircleTwoTone,
   FrownFilled,
 } from "@ant-design/icons";
-import { Button } from "antd";
 import Label from "components/Label";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,8 +14,7 @@ export default function ResultSection() {
       <Label text="投票结果" />
 
       <div
-        className="mt-6 flex flex-col px-6 pb-8"
-        style={{ boxShadow: "0px 0.5rem 1.5rem rgba(0, 0, 0, 0.06)" }}
+        className="mt-6 flex flex-col px-6 pb-8 shadow"
       >
         <div className="flex flex-row mt-6 pb-4 border-b border-gray">
           <FrownFilled className="text-base text-gray mr-2.5" />
