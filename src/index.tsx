@@ -6,15 +6,9 @@ import './assets/styles/antd.less'
 import './assets/styles/index.css'
 import App from './App'
 import store from './state'
-import BigNumber from 'bignumber.js'
+import { Config } from '@usedapp/core/src/model/config/Config'
 
-BigNumber.config({
-  EXPONENTIAL_AT: 1000,
-  DECIMAL_PLACES: 80,
-  ROUNDING_MODE: BigNumber.ROUND_FLOOR,
-})
-
-const config = {
+const config: Partial<Config> = {
   readOnlyChainId: ChainId.BSCTestnet,
 }
 
