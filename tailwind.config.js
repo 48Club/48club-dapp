@@ -32,7 +32,7 @@ module.exports = {
       "another-white": "#FFFBEC",
       pink: "rgba(239, 43, 43, 0.04)",
       'light-green': 'rgba(8, 200, 73, 0.2)',
-      'dark-pink': 'rgba(239, 43, 43, 0.2)'
+      'dark-pink': 'rgba(239, 43, 43, 0.2)',
     },
     borderColor: {
       DEFAULT: "#EAEAEA",
@@ -53,7 +53,8 @@ module.exports = {
       DEFAULT: "0px 0.5rem 1.5rem rgba(0, 0, 0, 0.06)",
     },
     maxWidth: {
-      48: "12rem",
+      '48': "12rem",
+      '6xl': '72rem',
     },
     extend: {
       spacing: {
