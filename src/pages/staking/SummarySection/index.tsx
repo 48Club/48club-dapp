@@ -22,7 +22,7 @@ export default function SummarySection() {
       >
         <div className="flex flex-col pt-8 px-6 text-dark-gray">
           <span className="font-bold text-4xl mb-2 text-light-black">
-            {t('staking_title')}
+            KOGE Staking
           </span>
           <span className="text-sm mb-10">{t('staking_desc')}</span>
           <div className="flex flex-col">

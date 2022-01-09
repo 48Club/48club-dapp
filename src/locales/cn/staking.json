@@ -1,0 +1,8 @@
+{
+  "staking_title": "KOGE Staking cn",
+  "staking_desc": "KOGE Staking将用于KOGE的一般治理。",
+  "staking_summary_total": "总发行量",
+  "staking_summary_pledge": "总质押量",
+  "staking_summary_own": "个人持仓比例",
+  "staking_pledge_title": "质押池"
+}

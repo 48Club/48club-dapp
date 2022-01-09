@@ -1,0 +1,17 @@
+{
+  "my_pledge_count": "My pledge amount",
+  "pledge": "Pledge",
+  "release_pledge": "Release pledge",
+  "confirm": "Confirm",
+  "pledging": "Pledging",
+  "not_pledge": "Not pledged",
+  "releasing_pledge": "Releasing Pledge",
+  "pledge_details_record": "Pledge details record",
+  "address": "Address",
+  "pledge_operation": "Pledge operation",
+  "pledge_tokens": "Pledge tokens",
+  "amount": "Amount",
+  "date": "Date",
+  "see_more": "See more",
+  "no_records": "No records"
+}

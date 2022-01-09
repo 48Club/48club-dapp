@@ -23,7 +23,7 @@ export default function PledgeSection() {
         >
           <div className="flex flex-row mt-10 mb-4 ">
             <div className="font-medium text-base mr-3 leading-7">
-              我的质押数量
+              {t("my_pledge_count")}
             </div>
             <Tag type="doing" />
           </div>
@@ -40,17 +40,17 @@ export default function PledgeSection() {
         <div className="flex flex-col px-6 mb-20">
           <div className="flex flex-row mt-10 mb-6">
             <div className="py-2 px-4 font-medium text-base text-center active">
-              质押
+              {t("pledge")}
             </div>
             <div className="py-2 px-4 font-medium text-base text-center">
-              解除质押
+              {t("release_pledge")}
             </div>
           </div>
           <Input suffix={inputMax} className="h-12 mb-6" />
           <Button
             className="h-12 text-sm text-light-black bg-yellow rounded font-medium"
           >
-            确认
+            {t("confirm")}
           </Button>
         </div>
       </div>

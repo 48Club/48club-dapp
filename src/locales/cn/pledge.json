@@ -1,0 +1,17 @@
+{
+  "my_pledge_count": "我的质押数量",
+  "pledge": "质押",
+  "release_pledge": "解除质押",
+  "confirm": "确认",
+  "pledging": "质押中",
+  "not_pledge": "未质押",
+  "releasing_pledge": "解除质押中",
+  "pledge_details_record": "质押详情记录",
+  "address": "地址",
+  "pledge_operation": "质押操作",
+  "pledge_tokens": "质押代币",
+  "amount": "数量",
+  "date": "日期",
+  "see_more": "查看更多",
+  "no_records": "暂无记录"
+}

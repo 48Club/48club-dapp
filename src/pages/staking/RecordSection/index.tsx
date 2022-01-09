@@ -8,7 +8,7 @@ export default function RecordSection() {
   const record = [1, 2, 3];
   return (
     <div className="flex flex-col my-20">
-      <Label text="质押详情记录" />
+      <Label text={t("pledge_details_record")} />
       <div className="mt-6 px-6 shadow">
         {record.length > 0 ? (
           <div>
@@ -16,25 +16,25 @@ export default function RecordSection() {
               return (
                 <div className="py-6 flex flex-col border-b border-gray">
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                    <span className="text-gray">地址</span>
+                    <span className="text-gray">{t("address")}</span>
                     <span className="break-words text-right text-light-black max-w-48">
                       0x3050dc66df3253b27eda28529fea26abfb19e4ddfbf45d65632bca3a44cd114c
                     </span>
                   </div>
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                    <span className="text-gray">质押操作</span>
+                    <span className="text-gray">{t("pledge_operation")}</span>
                     <span className="break-words text-right text-light-black max-w-48">
-                      质押代币
+                      {t("pledge_tokens")}
                     </span>
                   </div>
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                    <span className="text-gray">数量</span>
+                    <span className="text-gray">{t("amount")}</span>
                     <span className="break-words text-right text-light-black max-w-48">
                       194.23
                     </span>
                   </div>
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                    <span className="ctext-gray">日期</span>
+                    <span className="ctext-gray">{t("date")}</span>
                     <span className="break-words text-right text-light-black max-w-48">
                       2021-11-12 10:23:22
                     </span>
@@ -44,14 +44,14 @@ export default function RecordSection() {
             })}
             <div className="py-10 text-center">
               <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
-                查看更多
+                {t("see_more")}
               </Button>
             </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
             <img src="/static/staking-no-records.png" className="mb-6" alt="" />
-            <span className="text-base text-gray">暂无记录</span>
+            <span className="text-base text-gray">{t("no_records")}</span>
           </div>
         )}
       </div>
