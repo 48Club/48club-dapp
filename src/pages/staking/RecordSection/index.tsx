@@ -39,7 +39,7 @@ export default function RecordSection() {
         </div>
         {record.length > 0 ? (
           <>
-            {record.map((i) => <Row data={i} />)}
+            {record.map((i) => <Row key={i} data={i} />)}
             <div className="py-10 text-center">
               <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
                 {t('see_more')}
