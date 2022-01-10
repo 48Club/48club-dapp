@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatAmount } from '@funcblock/dapp-sdk'
-import useTotalSupply from '../../../hooks/erc20/useTotalSupply'
-import { KogeAddress } from '../../../constants/contracts'
-import useTotalStakes from '../../../hooks/staking/useTotalStakes'
-import useDecimals from '../../../hooks/erc20/useDecimals'
+import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 
 export default function SummarySection() {
-  const totalStakes = useTotalStakes()
-  const totalSupply = useTotalSupply(KogeAddress)
-  const decimals = useDecimals(KogeAddress)
-
-  console.log(totalStakes?.toString(), decimals, totalSupply?.toString())
-
   const { t } = useTranslation()
+  const { totalStakes, tokenBalance, totalSupply, decimals } = useStakeInfo()
+
+  const balancePercentage = useMemo(() => {
+    if (!tokenBalance || !totalSupply) {
+      return
+    }
+    return tokenBalance.times(100).div(totalSupply)
+  }, [totalSupply, tokenBalance])
+
   return (
     <div className="pt-4 w-auto overflow-y-visible mb-20">
       <div
@@ -46,7 +46,7 @@ export default function SummarySection() {
               <span className="text-sm mb-2 leading-5">
                 {t('staking_summary_own')}
               </span>
-              <span className="text-xl font-bold text-light-black">6.00%</span>
+              <span className="text-xl font-bold text-light-black">{formatAmount(balancePercentage, 0, 2)}%</span>
             </div>
           </div>
         </div>
