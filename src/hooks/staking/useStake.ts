@@ -7,15 +7,23 @@ import { useStakingContract } from '../useContract'
 export default function useStake() {
   const { account } = useEthers()
   const stakingContract = useStakingContract()
-  const { send, state } = useContractFunction(stakingContract, 'stake', { transactionName: 'Stake' })
+  const { send: stake, state: stakeState } = useContractFunction(stakingContract, 'stake', { transactionName: 'Stake' })
+  const { send: unstake, state: unstakeState } = useContractFunction(stakingContract, 'unstake', { transactionName: 'Unstake' })
 
-  const mintYang = useCallback(async (amount: BigNumber) => {
+  const onStake = useCallback(async (amount: BigNumber) => {
     console.info('Staking | stake', amount.toString())
-    await send(amount)
-  }, [account, send])
+    await stake(amount)
+  }, [account, stake])
+
+  const onUnstake = useCallback(async (amount: BigNumber) => {
+    console.info('Staking | unstake', amount.toString())
+    await unstake(amount)
+  }, [account, unstake])
 
   return {
-    mintYang,
-    loading: state.status === 'Mining',
+    onStake,
+    stakeLoading: stakeState.status === 'Mining',
+    onUnstake,
+    unstakeLoading: unstakeState.status === 'Mining',
   }
 }
