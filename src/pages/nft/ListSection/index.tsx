@@ -11,7 +11,7 @@ export default function HeaderSection() {
         return (
           <div className="w-full p-4 pb-8 flex flex-col shadow text-xs mb-10">
             <img
-              src="https://wx1.sinaimg.cn/mw690/783ab46bly1gx3ds68irej20u00u0dm9.jpg"
+              src="/static/manage-header.png"
               alt=""
               className="w-full"
             />
