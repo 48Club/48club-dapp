@@ -1,0 +1,30 @@
+name: Dev
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Install npm dependencies
+        run: yarn install
+      - name: Run build task
+        run: yarn build
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete --filter=':- .gitignore'
+          path: build/*
+          remote_path: /data/bnb48club-dapp
+          remote_host: 168.63.250.90
+          remote_user: why
+          remote_key: ${{ secrets.DEPLOY_KEY }}
