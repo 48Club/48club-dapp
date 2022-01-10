@@ -28,7 +28,7 @@ export default function PledgeSection() {
     <div className="flex flex-col">
       <Label text={t('staking_pledge_title')} />
       <div className="mt-6 w-auto flex flex-row rounded-lg shadow">
-        <div className="flex-1 flex flex-col pl-8 text-light-black" style={{ backgroundColor: '#FFFBEC' }}>
+        <div className="flex-1 flex flex-col pl-8 text-light-black bg-card-yellow">
           <div className="flex flex-row mt-10 mb-4 ">
             <div className="font-medium text-base mr-3 leading-7">
               {t('my_pledge_count')}

@@ -33,6 +33,7 @@ module.exports = {
       pink: "rgba(239, 43, 43, 0.04)",
       'light-green': 'rgba(8, 200, 73, 0.2)',
       'dark-pink': 'rgba(239, 43, 43, 0.2)',
+      'card-yellow': '#FFFBEC',
     },
     borderColor: {
       DEFAULT: "#EAEAEA",
