@@ -12,12 +12,12 @@ export default function useStake() {
 
   const onStake = useCallback(async (amount: BigNumber) => {
     console.info('Staking | stake', amount.toString())
-    await stake(amount)
+    await stake(amount.toString())
   }, [account, stake])
 
   const onUnstake = useCallback(async (amount: BigNumber) => {
     console.info('Staking | unstake', amount.toString())
-    await unstake(amount)
+    await unstake(amount.toString())
   }, [account, unstake])
 
   return {

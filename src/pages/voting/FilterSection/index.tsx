@@ -48,7 +48,7 @@ export default function FilterSection() {
             className="w-full h-12 rounded filter-select bg-light-white"
           >
             {optionList.map((item) => {
-              return <Option value={item.value}>{item.label}</Option>;
+              return <Option key={item.label} value={item.value}>{item.label}</Option>;
             })}
           </Select>
         </div>

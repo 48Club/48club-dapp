@@ -1,28 +1,35 @@
 import { Button, Input } from 'antd'
 import Tag from 'components/Tag'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import useStake from '../../../hooks/staking/useStake'
 import BigNumber from 'bignumber.js'
+import useApprove from '../../../hooks/erc20/useApprove'
+import { KogeAddress, StakingAddress } from '../../../constants/contracts'
+import { useEthers, useTokenAllowance } from '@usedapp/core'
 
 export default function PledgeSection() {
+  const { account } = useEthers()
   const { t } = useTranslation()
   const [activeItem, setActiveItem] = useState(0)
   const [input, setInput] = useState('')
   const { myStake, decimals, unlockTime, tokenBalance } = useStakeInfo()
   const { onStake, onUnstake, stakeLoading, unstakeLoading } = useStake()
 
+  const { approve, loading: approveLoading } = useApprove(KogeAddress, StakingAddress)
+  const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, StakingAddress)?.toString() ?? '0')
+  const inputBN = useMemo(() => new BigNumber(input), [input])
+
   const onSubmit = useCallback(async () => {
-    const inputBN = new BigNumber(input)
     if (inputBN.isNaN()) {
       return
     }
     const func = [onStake, onUnstake][activeItem]
     await func(inputBN)
-  }, [onStake, onUnstake, input])
+  }, [onStake, onUnstake, inputBN])
 
   return (
     <div className="flex flex-col">
@@ -57,12 +64,18 @@ export default function PledgeSection() {
                  className="h-12 mb-6"
                  onChange={(e) => setInput(e.target.value)} />
           <div>Balance: {formatAmount(tokenBalance, decimals)} KOGE</div>
-          <Button
-            className="h-12 text-sm text-light-black bg-yellow rounded font-medium"
-            onClick={onSubmit}
-          >
-            {t('confirm')}
-          </Button>
+
+          {
+            allowance.lte(0) ? (
+              <Button className="h-12" onClick={approve} loading={approveLoading}>
+                Approve
+              </Button>
+            ) : (
+              <Button type='primary' className="h-12" onClick={onSubmit} loading={stakeLoading || unstakeLoading} disabled={stakeLoading || unstakeLoading || !inputBN.gt(0)}>
+                {t('confirm')}
+              </Button>
+            )
+          }
         </div>
       </div>
     </div>
