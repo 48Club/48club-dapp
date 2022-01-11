@@ -50,11 +50,11 @@ export default function useStakeInfo() {
   ]) ?? []) as Result[]
 
   return {
-    totalSupply: totalSupplyResult ? new BigNumber(totalSupplyResult.toString()) : undefined,
     decimals: decimalsResult ? new BigNumber(decimalsResult.toString()).toNumber() : undefined,
-    tokenBalance: tokenBalance ? new BigNumber(tokenBalance.toString()) : undefined,
+    totalSupply: totalSupplyResult ? new BigNumber(totalSupplyResult.toString()) : undefined,
     totalStakes: totalStakesResult ? new BigNumber(totalStakesResult.toString()) : undefined,
-    myStake: myStakeResult ? new BigNumber(myStakeResult.toString()) : undefined,
+    myTokenBalance: tokenBalance ? new BigNumber(tokenBalance.toString()) : undefined,
+    myStakeBalance: myStakeResult ? new BigNumber(myStakeResult.toString()) : undefined,
     unlockTime: (userInfosResult?.lastStakeTime?.toNumber() && unstakeDelayResult) ? parseInt(userInfosResult.lastStakeTime.toString()) + parseInt(unstakeDelayResult.toString()) : undefined,
   }
 }

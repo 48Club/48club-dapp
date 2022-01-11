@@ -4,32 +4,45 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
-import { formatAmount } from '@funcblock/dapp-sdk'
+import { formatAmount, TEN_POW } from '@funcblock/dapp-sdk'
 import useStake from '../../../hooks/staking/useStake'
 import BigNumber from 'bignumber.js'
 import useApprove from '../../../hooks/erc20/useApprove'
 import { KogeAddress, StakingAddress } from '../../../constants/contracts'
 import { useEthers, useTokenAllowance } from '@usedapp/core'
+import moment from 'moment'
 
 export default function PledgeSection() {
   const { account } = useEthers()
   const { t } = useTranslation()
   const [activeItem, setActiveItem] = useState(0)
   const [input, setInput] = useState('')
-  const { myStake, decimals, unlockTime, tokenBalance } = useStakeInfo()
+  const { myStakeBalance, decimals, unlockTime, myTokenBalance } = useStakeInfo()
   const { onStake, onUnstake, stakeLoading, unstakeLoading } = useStake()
 
   const { approve, loading: approveLoading } = useApprove(KogeAddress, StakingAddress)
   const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, StakingAddress)?.toString() ?? '0')
   const inputBN = useMemo(() => new BigNumber(input), [input])
 
+  const unlockMoment = unlockTime ? moment(unlockTime * 1000) : undefined
+  const isLocked = (unlockMoment && unlockMoment.isAfter(moment()))
+
   const onSubmit = useCallback(async () => {
-    if (inputBN.isNaN()) {
+    if (!inputBN.gt(0) || !decimals) {
       return
     }
     const func = [onStake, onUnstake][activeItem]
-    await func(inputBN)
-  }, [onStake, onUnstake, inputBN])
+    await func(inputBN.times(TEN_POW(decimals)))
+  }, [onStake, onUnstake, inputBN, decimals])
+
+  const currentBalance = useMemo(() => {
+    return [myTokenBalance, myStakeBalance][activeItem]
+  }, [myStakeBalance, myTokenBalance, activeItem])
+
+  const onSetMax = useCallback(() => {
+    const max = new BigNumber(currentBalance?.toString() ?? '0').div(TEN_POW(decimals ?? 0)).toString()
+    setInput(max)
+  }, [setInput, currentBalance, decimals])
 
   return (
     <div className="flex flex-col">
@@ -43,10 +56,15 @@ export default function PledgeSection() {
             <Tag type="doing" />
           </div>
           <span className="text-2xl font-bold mb-4 leading-7">
-            {formatAmount(myStake, decimals)} KOGE
+            {formatAmount(myStakeBalance, decimals)} KOGE
           </span>
           <span className="text-sm leading-5 mb-12" style={{ color: '#54606C' }}>
-            Unlock Time: {unlockTime ?? 'NONE'}
+            {
+              isLocked ? (
+                <>Unlock Time: {unlockMoment?.format('YYYY-MM-DD HH:mm')}</>
+              ) : null
+            }
+
           </span>
         </div>
         <div className="flex-1 flex flex-col px-6 mb-20">
@@ -60,10 +78,11 @@ export default function PledgeSection() {
               {t('release_pledge')}
             </div>
           </div>
-          <Input suffix={<span className="text-sm text-primary cursor-pointer">MAX</span>}
-                 className="h-12 mb-6"
+          <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
+                 placeholder={`Balance: ${formatAmount(currentBalance, decimals)} KOGE`}
+                 className="h-12 mb-6 text-base"
+                 value={input}
                  onChange={(e) => setInput(e.target.value)} />
-          <div>Balance: {formatAmount(tokenBalance, decimals)} KOGE</div>
 
           {
             allowance.lte(0) ? (
@@ -71,7 +90,11 @@ export default function PledgeSection() {
                 Approve
               </Button>
             ) : (
-              <Button type='primary' className="h-12" onClick={onSubmit} loading={stakeLoading || unstakeLoading} disabled={stakeLoading || unstakeLoading || !inputBN.gt(0)}>
+              <Button type='primary'
+                      className="h-12"
+                      onClick={onSubmit}
+                      loading={stakeLoading || unstakeLoading}
+                      disabled={stakeLoading || unstakeLoading || !inputBN.gt(0) || (activeItem === 1 && isLocked)}>
                 {t('confirm')}
               </Button>
             )

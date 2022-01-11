@@ -5,14 +5,14 @@ import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 
 export default function SummarySection() {
   const { t } = useTranslation()
-  const { totalStakes, tokenBalance, totalSupply, decimals } = useStakeInfo()
+  const { totalStakes, myTokenBalance, totalSupply, decimals } = useStakeInfo()
 
   const balancePercentage = useMemo(() => {
-    if (!tokenBalance || !totalSupply) {
+    if (!myTokenBalance || !totalSupply) {
       return
     }
-    return tokenBalance.times(100).div(totalSupply)
-  }, [totalSupply, tokenBalance])
+    return myTokenBalance.times(100).div(totalSupply)
+  }, [totalSupply, myTokenBalance])
 
   return (
     <div className="pt-4 w-auto overflow-y-visible mb-20">
