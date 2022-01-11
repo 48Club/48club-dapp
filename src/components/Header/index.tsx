@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
 import i18n from 'i18next'
@@ -11,8 +11,9 @@ import { shorten } from '@funcblock/dapp-sdk'
 
 export default function Header() {
   const { t } = useTranslation()
+  const location = useLocation()
   const { activateBrowserWallet, error, account } = useEthers()
-  const [language, setLanguage] = React.useState(localStorage.getItem('language') || 'en')
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en')
 
   useEffect(() => {
     localStorage.setItem('language', language)
@@ -53,16 +54,19 @@ export default function Header() {
     </Menu>
   )
 
-  const [showResponsiveMenu, setShowResponsiveMenu] = React.useState(false)
+  const [showResponsiveMenu, setShowResponsiveMenu] = useState(false)
   return (
-    <div className="pt-4 fixed w-full h-16 bg-white items-center" style={{ borderBottom: '4px solid #ffc800', zIndex: 9999 }}>
+    <div className="py-4 fixed w-full bg-white items-center" style={{ borderBottom: '4px solid #ffc800', zIndex: 9999 }}>
       <div className="flex flex-row justify-between mx-4 md:mx-auto max-w-6xl">
         <div className="flex flex-row items-center">
           <Link to={'/'}>
             <img alt={''} src={appLogo} className="h-3 md:h-5 mr-3" />
           </Link>
           <div className="hidden md:flex flex-row items-center">
-            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/staking'}>{t('staking')}</Link>
+            <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/staking') ? 'text-primary' : 'text-black'}`}
+                  to={'/staking'}>
+              {t('staking')}
+            </Link>
             {/*<Link className="text-black ml-5 font-medium hover:text-primary" to={'/nft'}>NFT</Link>*/}
             {/*<Link className="text-black ml-5 font-medium hover:text-primary" to={'/voting'}>{t('voting')}</Link>*/}
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
