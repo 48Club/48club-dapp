@@ -17,26 +17,31 @@ export default function PledgeSection() {
   const { t } = useTranslation()
   const [activeItem, setActiveItem] = useState(0)
   const [input, setInput] = useState('')
-  const { myStakeBalance, decimals, unlockTime, myTokenBalance } = useStakeInfo()
-  const { onStake, onUnstake, stakeLoading, unstakeLoading } = useStake()
+  const { myStakeBalance, decimals, unstakeTime, withdrawTime, myTokenBalance, myUnstakeBalance } = useStakeInfo()
+  const { onStake, stakeLoading, onUnstake, unstakeLoading, onWithdraw, withdrawLoading } = useStake()
 
   const { approve, loading: approveLoading } = useApprove(KogeAddress, StakingAddress)
   const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, StakingAddress)?.toString() ?? '0')
   const inputBN = useMemo(() => new BigNumber(input), [input])
 
-  const unlockMoment = unlockTime ? moment(unlockTime * 1000) : undefined
-  const isLocked = (unlockMoment && unlockMoment.isAfter(moment()))
+  const unlockMoment = unstakeTime ? moment(unstakeTime * 1000) : undefined
+  const withdrawMoment = withdrawTime ? moment(withdrawTime * 1000) : undefined
+  const canUnstake = (unlockMoment && unlockMoment.isAfter(moment()))
+  const canWithdraw = (withdrawMoment && withdrawMoment.isAfter(moment()))
 
   const onSubmit = useCallback(async () => {
     if (!inputBN.gt(0) || !decimals) {
       return
     }
-    const func = [onStake, onUnstake][activeItem]
+    let func = [onStake, onUnstake][activeItem]
+    if (canWithdraw) {
+      func = onWithdraw
+    }
     await func(inputBN.times(TEN_POW(decimals)))
-  }, [onStake, onUnstake, inputBN, decimals])
+  }, [onStake, onUnstake, onWithdraw, canWithdraw, inputBN, decimals])
 
   const currentBalance = useMemo(() => {
-    return [myTokenBalance, myStakeBalance][activeItem]
+    return [myTokenBalance, myStakeBalance, myUnstakeBalance][activeItem]
   }, [myStakeBalance, myTokenBalance, activeItem])
 
   const onSetMax = useCallback(() => {
@@ -60,7 +65,7 @@ export default function PledgeSection() {
           </span>
           <span className="text-sm leading-5 mb-12" style={{ color: '#54606C' }}>
             {
-              isLocked ? (
+              canUnstake ? (
                 <>Unlock Time: {unlockMoment?.format('YYYY-MM-DD HH:mm')}</>
               ) : null
             }
@@ -77,6 +82,14 @@ export default function PledgeSection() {
                  onClick={() => setActiveItem(1)}>
               {t('release_pledge')}
             </div>
+            {
+              canWithdraw && (
+                <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 2 ? 'border-yellow' : 'border-transparent'}`}
+                     onClick={() => setActiveItem(2)}>
+                  {t('withdraw')}
+                </div>
+              )
+            }
           </div>
           <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
                  placeholder={`Balance: ${formatAmount(currentBalance, decimals)} KOGE`}
@@ -94,7 +107,7 @@ export default function PledgeSection() {
                       className="h-12"
                       onClick={onSubmit}
                       loading={stakeLoading || unstakeLoading}
-                      disabled={stakeLoading || unstakeLoading || !inputBN.gt(0) || (activeItem === 1 && isLocked)}>
+                      disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && canUnstake)}>
                 {t('confirm')}
               </Button>
             )

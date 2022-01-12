@@ -10,7 +10,7 @@ export default function useStakeInfo() {
   const stakingContract = useStakingContract()
   const tokenBalance = useTokenBalance(KogeAddress, account)
 
-  const [totalSupplyResult, decimalsResult, totalStakesResult, myStakeResult, userInfosResult, unstakeDelayResult] = (useContractCalls([
+  const [totalSupplyResult, decimalsResult, totalStakesResult, myStakeResult, userInfosResult, unstakeDelayResult, withdrawDelayResult] = (useContractCalls([
     {
       address: kogeContract.address,
       abi: kogeContract.interface,
@@ -47,7 +47,15 @@ export default function useStakeInfo() {
       method: 'unstakeDelay',
       args: [],
     },
+    {
+      address: stakingContract.address,
+      abi: stakingContract.interface,
+      method: 'withdrawDelay',
+      args: [],
+    },
   ]) ?? []) as Result[]
+
+  const { lastStakeTime, lastUnstakeTime, stake, unstakedAmount } = userInfosResult ?? {}
 
   return {
     decimals: decimalsResult ? new BigNumber(decimalsResult.toString()).toNumber() : undefined,
@@ -55,6 +63,8 @@ export default function useStakeInfo() {
     totalStakes: totalStakesResult ? new BigNumber(totalStakesResult.toString()) : undefined,
     myTokenBalance: tokenBalance ? new BigNumber(tokenBalance.toString()) : undefined,
     myStakeBalance: myStakeResult ? new BigNumber(myStakeResult.toString()) : undefined,
-    unlockTime: (userInfosResult?.lastStakeTime?.toNumber() && unstakeDelayResult) ? parseInt(userInfosResult.lastStakeTime.toString()) + parseInt(unstakeDelayResult.toString()) : undefined,
+    myUnstakeBalance: unstakedAmount ? new BigNumber(unstakedAmount.toString()) : undefined,
+    unstakeTime: (lastStakeTime && unstakeDelayResult) ? parseInt(lastStakeTime.toString()) + parseInt(unstakeDelayResult.toString()) : undefined,
+    withdrawTime: (lastUnstakeTime && withdrawDelayResult) ? parseInt(lastUnstakeTime.toString()) + parseInt(withdrawDelayResult.toString()) : undefined,
   }
 }
