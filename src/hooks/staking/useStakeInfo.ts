@@ -1,4 +1,4 @@
-import { useContractCalls, useEthers, useTokenBalance } from '@usedapp/core'
+import { useContractCall, useContractCalls, useEthers, useTokenBalance } from '@usedapp/core'
 import useERC20Contract, { useStakingContract, useStakingContractReadonly } from '../useContract'
 import BigNumber from 'bignumber.js'
 import { KogeAddress } from '../../constants/contracts'
@@ -45,33 +45,30 @@ export default function useStakeInfo() {
     },
   ]) ?? []) as Result[]
 
-  console.log(totalSupplyResult)
-
-  const { lastStakeTime, lastUnstakeTime, stake: stakedAmount, unstakedAmount } = {} as any
-  // (useContractCall(account &&
-  //   {
-  //     address: stakingContract.address,
-  //     abi: stakingContract.interface,
-  //     method: 'userInfos',
-  //     args: [account],
-  //   }) ?? {}) as Result
+  const { lastStakeTime, lastUnstakeTime, stake: stakedAmount, unstakedAmount } = (useContractCall(account &&
+    {
+      address: stakingContract.address,
+      abi: stakingContract.interface,
+      method: 'userInfos',
+      args: [account],
+    }) ?? {}) as Result
 
   const [records, setRecords] = useState<any[]>([])
 
   useEffect(() => {
-    // (async () => {
-    //   const stakedFilter = stakingContractReadonly.filters.Staked(null, null)
-    //   const stakedEvents = await stakingContractReadonly.queryFilter(stakedFilter)
-    //   const unstakedFilter = stakingContractReadonly.filters.Unstaked(null, null)
-    //   const unstakedEvents = await stakingContractReadonly.queryFilter(unstakedFilter, 14389118)
-    //   const rows = [...stakedEvents, ...unstakedEvents].map(i => ({
-    //     blockNumber: i.blockNumber,
-    //     event: i.event,
-    //     user: i.args?.user,
-    //     amount: new BigNumber(i.args?.amount.toString()),
-    //   }))
-    //   setRecords(rows)
-    // })()
+    (async () => {
+      const stakedFilter = stakingContractReadonly.filters.Staked(null, null)
+      const stakedEvents = await stakingContractReadonly.queryFilter(stakedFilter)
+      const unstakedFilter = stakingContractReadonly.filters.Unstaked(null, null)
+      const unstakedEvents = await stakingContractReadonly.queryFilter(unstakedFilter, 14389118)
+      const rows = [...stakedEvents, ...unstakedEvents].map(i => ({
+        blockNumber: i.blockNumber,
+        event: i.event,
+        user: i.args?.user,
+        amount: new BigNumber(i.args?.amount.toString()),
+      }))
+      setRecords(rows)
+    })()
   }, [])
 
   return {
