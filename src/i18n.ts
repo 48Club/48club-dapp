@@ -6,6 +6,8 @@ import translationEN from './locales/en/translation.json'
 import stakingEN from './locales/en/staking.json'
 import translationCN from './locales/cn/translation.json'
 import stakingCN from './locales/cn/staking.json'
+import nftEN from './locales/en/nft.json'
+import nftCN from './locales/cn/nft.json'
 
 i18n
   // learn more: https://github.com/i18next/i18next-xhr-backend
@@ -20,6 +22,7 @@ i18n
           ...translationEN,
           ...stakingEN,
           ...stakingEN,
+          ...nftEN,
         },
       },
       cn: {
@@ -27,6 +30,7 @@ i18n
           ...translationCN,
           ...stakingCN,
           ...stakingCN,
+          ...nftCN,
         },
       },
     },

@@ -1,12 +1,18 @@
 import React from "react"
-import MobileNFT from './MobileNFT'
-import PcNFT from './PcNFT'
+import MobileHeaderSection from './MobileHeaderSection'
+import ListSection from './ListSection'
+import PcHeaderSection from './PcHeaderSection'
 
 export default function NFT() {
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className=""></div>
-      <div className=""></div>
+    <div className="px-4 max-w-6xl mx-auto">
+      <div className="block md:hidden">
+        <MobileHeaderSection />
+      </div>
+      <div className="hidden md:block">
+        <PcHeaderSection />
+      </div>
+      <ListSection />
     </div>
   )
 }

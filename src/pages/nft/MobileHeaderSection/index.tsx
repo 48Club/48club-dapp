@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-export default function HeaderSection() {
+export default function MobileHeaderSection() {
   const { t } = useTranslation()
   return (
     <div className="pt-4 w-auto mb-10">
