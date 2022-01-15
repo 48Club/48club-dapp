@@ -6,7 +6,7 @@ import React from "react";
 const { TextArea } = Input;
 export default function NFTCreate() {
   return (
-    <div className="px-4">
+    <div className="px-4 max-w-6xl mx-auto">
       <Back />
       <div
         className="mt-4 rounded-2xl flex flex-col items-center"

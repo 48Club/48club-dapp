@@ -4,7 +4,7 @@ import ListSection from "./ListSection";
 
 export default function NFT() {
   return (
-    <div className="px-4">
+    <div className="px-4 max-w-6xl mx-auto">
       <HeaderSection />
       <ListSection />
     </div>
