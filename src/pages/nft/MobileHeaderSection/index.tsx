@@ -1,8 +1,16 @@
 import { Button } from 'antd'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router'
 
 export default function MobileHeaderSection() {
+  let history = useHistory()
+
+  const createNFT = () => {
+    let path = `/nft/create`
+    history.push(path)
+  }
+
   const { t } = useTranslation()
   return (
     <div className="pt-4 w-auto mb-10">
@@ -19,7 +27,7 @@ export default function MobileHeaderSection() {
           <span className="text-dark-gray ">我的铸造数</span>
           <span className="font-medium text-light-black">3,123件</span>
         </div>
-        <Button className="h-12 text-sm w-full mb-8 text-light-black bg-yellow rounded">
+        <Button className="h-12 text-sm w-full mb-8 text-light-black bg-yellow rounded" onClick={createNFT}>
           铸造NFT
         </Button>
       </div>
