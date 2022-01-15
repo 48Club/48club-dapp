@@ -1,18 +1,14 @@
-import {
-  CloseOutlined,
-  EllipsisOutlined,
-  MinusOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
-import { Button, Input, Modal, Popconfirm } from "antd";
-import Label from "components/Label";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { CloseOutlined, EllipsisOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Input, Modal, Popconfirm } from 'antd'
+import Label from 'components/Label'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import "./index.less";
+import './index.less'
+
 export default function MemberSection() {
-  const { t } = useTranslation();
-  const list = [1, 2, 3];
+  const { t } = useTranslation()
+  const list = [1, 2, 3]
   const modalHeader = (
     <div className="flex flex-row px-4 justify-between py-5">
       <span className="font-bold text-lg text-light-black">
@@ -20,7 +16,7 @@ export default function MemberSection() {
       </span>
       <CloseOutlined className="text-xs font-bold text-gray" />
     </div>
-  );
+  )
 
   const popContent = (
     <div className="flex flex-col w-50">
@@ -33,7 +29,7 @@ export default function MemberSection() {
         <span className="text-sm text-light-black">提名新理事</span>
       </div>
     </div>
-  );
+  )
   return (
     <div className="mt-20 w-auto mb-10">
       <div className="flex flex-row justify-between mb-6">
@@ -43,9 +39,10 @@ export default function MemberSection() {
           placement="bottomRight"
           title={popContent}
           icon={null}
-          onConfirm={() => {}}
-          okButtonProps={{ className: "hidden" }}
-          cancelButtonProps={{ className: "hidden" }}
+          onConfirm={() => {
+          }}
+          okButtonProps={{ className: 'hidden' }}
+          cancelButtonProps={{ className: 'hidden' }}
         >
           <EllipsisOutlined className="text-2xl text-light-black" />
         </Popconfirm>
@@ -66,7 +63,7 @@ export default function MemberSection() {
               </span>
             </div>
           </div>
-        );
+        )
       })}
       <span className="mb-6 font-medium text-light-black text-base block">
         KOGE质押量变更，不符合资格理事名单
@@ -88,7 +85,7 @@ export default function MemberSection() {
             </div>
             <CloseOutlined className="absolute right-4 top-4 text-gray text-xs font-bold" />
           </div>
-        );
+        )
       })}
       <div className="pb-20 text-center">
         <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
@@ -99,8 +96,10 @@ export default function MemberSection() {
         title={modalHeader}
         visible={false}
         footer={null}
-        onOk={() => {}}
-        onCancel={() => {}}
+        onOk={() => {
+        }}
+        onCancel={() => {
+        }}
         className="member-modal"
         width="100%"
       >
@@ -123,5 +122,5 @@ export default function MemberSection() {
         </div>
       </Modal>
     </div>
-  );
+  )
 }

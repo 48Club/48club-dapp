@@ -1,9 +1,9 @@
-import { Button } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { Button } from 'antd'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function HeaderSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="pt-4 w-auto mb-10">
       <div
@@ -25,5 +25,5 @@ export default function HeaderSection() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

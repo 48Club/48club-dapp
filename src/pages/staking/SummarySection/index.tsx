@@ -33,7 +33,7 @@ export default function SummarySection() {
             </div>
             <div className="flex-1 flex flex-col mb-6">
               <span className="text-sm mb-2 leading-5">
-                {t('staking_summary_pledge')}
+                {t('staking_summary_staking')}
               </span>
               <span className="text-xl font-bold text-light-black">
                 {formatAmount(totalStakes, decimals)}

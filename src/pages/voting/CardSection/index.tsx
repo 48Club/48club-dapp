@@ -1,12 +1,12 @@
-import { CheckCircleTwoTone } from "@ant-design/icons";
-import { Button } from "antd";
-import Tag from "components/Tag";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { CheckCircleTwoTone } from '@ant-design/icons'
+import { Button } from 'antd'
+import Tag from 'components/Tag'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function CardSection() {
-  const { t } = useTranslation();
-  const list = [1, 2, 3];
+  const { t } = useTranslation()
+  const list = [1, 2, 3]
   return (
     <div className="pt-4 w-auto mb-20">
       {list.map((item) => {
@@ -32,7 +32,7 @@ export default function CardSection() {
               </span>
             </div>
           </div>
-        );
+        )
       })}
       <div className="text-center">
         <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
@@ -40,5 +40,5 @@ export default function CardSection() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

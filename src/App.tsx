@@ -1,32 +1,32 @@
-import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { Layout } from "antd";
-import Header from "./components/Header";
-import { NotificationsList } from "./components/Notifications";
-import Milestone from "./pages/milestone";
-import Home from "./pages/home";
-import Governance from "./pages/governance";
-import ValidationNode from "./pages/validation_node";
-import Staking from "./pages/staking";
-import Voting from "./pages/voting";
-import Footer from "./components/Footer";
-import "./i18n";
-import { useTranslation } from "react-i18next";
-import VotingCreate from "pages/votingCreate";
-import VotingDetail from "pages/votingDetail";
-import NFT from "pages/nft";
-import NFTCreate from "pages/nftCreate";
-import Manage from "pages/manage";
+import React from 'react'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { Layout } from 'antd'
+import Header from './components/Header'
+import { NotificationsList } from './components/Notifications'
+import Milestone from './pages/milestone'
+import Home from './pages/home'
+import Governance from './pages/governance'
+import ValidationNode from './pages/validation_node'
+import Staking from './pages/staking'
+import Voting from './pages/voting'
+import Footer from './components/Footer'
+import './i18n'
+import { useTranslation } from 'react-i18next'
+import VotingCreate from 'pages/votingCreate'
+import VotingDetail from 'pages/votingDetail'
+import NFT from 'pages/nft'
+import NFTCreate from 'pages/nftCreate'
+import Manage from 'pages/manage'
 
 export default function App() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <BrowserRouter>
       <Layout>
         <Header />
         <div>test</div>
-        <div>{t("app_head_title")}</div>
+        <div>{t('app_head_title')}</div>
         <div className="pt-8">
           <Switch>
             <Route exact path="/" component={Home} />
@@ -49,5 +49,5 @@ export default function App() {
         <Footer />
       </Layout>
     </BrowserRouter>
-  );
+  )
 }

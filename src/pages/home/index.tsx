@@ -6,7 +6,7 @@ import ActivitySection from './ActivitySection'
 
 export default function Home() {
   return (
-    <div className='home-page mx-auto'>
+    <div className="home-page mx-auto">
       <BannerSection />
       <ActivitySection />
       <IntroductionSection />

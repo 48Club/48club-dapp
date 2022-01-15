@@ -1,34 +1,34 @@
-import { DatePicker, Select, Switch } from "antd";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { DatePicker, Select, Switch } from 'antd'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import "./index.less";
+import './index.less'
 
-const { RangePicker } = DatePicker;
-const { Option } = Select;
+const { RangePicker } = DatePicker
+const { Option } = Select
 
 export default function FilterSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const optionList = [
     {
-      label: "全部",
-      value: "all",
+      label: '全部',
+      value: 'all',
     },
     {
-      label: "进行中",
-      value: "doing",
+      label: '进行中',
+      value: 'doing',
     },
     {
-      label: "已通过",
-      value: "done",
+      label: '已通过',
+      value: 'done',
     },
     {
-      label: "已关闭",
-      value: "fail",
+      label: '已关闭',
+      value: 'fail',
     },
-  ];
+  ]
 
-  const [switchValue, changeSwitch] = useState(true);
+  const [switchValue, changeSwitch] = useState(true)
 
   return (
     <div className="pt-4 w-auto mb-10 flex flex-col">
@@ -48,7 +48,7 @@ export default function FilterSection() {
             className="w-full h-12 rounded filter-select bg-light-white"
           >
             {optionList.map((item) => {
-              return <Option key={item.label} value={item.value}>{item.label}</Option>;
+              return <Option key={item.label} value={item.value}>{item.label}</Option>
             })}
           </Select>
         </div>
@@ -64,5 +64,5 @@ export default function FilterSection() {
         </div>
       </div>
     </div>
-  );
+  )
 }

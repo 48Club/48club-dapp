@@ -1,12 +1,12 @@
-import { Button } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import Label from "../../../components/Label";
+import { Button } from 'antd'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import Label from '../../../components/Label'
 
 // todo  抽离表格
 export default function DetailSection() {
-  const { t } = useTranslation();
-  const record = [1, 2, 3];
+  const { t } = useTranslation()
+  const record = [1, 2, 3]
   return (
     <div className="flex flex-col my-20">
       <Label text="投票信息" />
@@ -41,7 +41,7 @@ export default function DetailSection() {
                     </span>
                   </div>
                 </div>
-              );
+              )
             })}
             <div className="py-10 text-center">
               <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
@@ -51,11 +51,11 @@ export default function DetailSection() {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
-            <img src="/static/staking-no-records.png" className="mb-6" alt=""/>
+            <img src="/static/staking-no-records.png" className="mb-6" alt="" />
             <span className="text-base text-gray">暂无记录</span>
           </div>
         )}
       </div>
     </div>
-  );
+  )
 }

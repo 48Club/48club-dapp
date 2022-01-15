@@ -1,12 +1,13 @@
-import { CloseOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Input, Modal } from "antd";
-import Label from "components/Label";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { CloseOutlined, EditOutlined } from '@ant-design/icons'
+import { Button, Input, Modal } from 'antd'
+import Label from 'components/Label'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import "./index.less";
+import './index.less'
+
 export default function StandardSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const modalHeader = (
     <div className="flex flex-row px-4 justify-between py-5">
@@ -15,7 +16,7 @@ export default function StandardSection() {
       </span>
       <CloseOutlined className="text-xs font-bold text-gray" />
     </div>
-  );
+  )
 
   return (
     <div className="mt-20 w-auto mb-10">
@@ -35,8 +36,10 @@ export default function StandardSection() {
         title={modalHeader}
         visible={false}
         footer={null}
-        onOk={() => {}}
-        onCancel={() => {}}
+        onOk={() => {
+        }}
+        onCancel={() => {
+        }}
         className="standard-modal"
         width="100%"
       >
@@ -59,5 +62,5 @@ export default function StandardSection() {
         </div>
       </Modal>
     </div>
-  );
+  )
 }

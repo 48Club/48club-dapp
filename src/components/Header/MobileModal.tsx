@@ -9,7 +9,7 @@ import i18n from 'i18next'
 
 const mentItemStyle = { fontSize: '12px', letterSpacing: '3px' }
 
-export default function MobileModal(props: {visible: boolean, oncancel: () => void}) {
+export default function MobileModal(props: { visible: boolean, oncancel: () => void }) {
   const { t } = useTranslation()
 
   const [language, setLanguage] = React.useState(localStorage.getItem('language') || 'en')
@@ -27,33 +27,33 @@ export default function MobileModal(props: {visible: boolean, oncancel: () => vo
       maskStyle={{
         height: '100%',
       }}
-      width='100%'
-      wrapClassName='app-responsive-menu-modal-wrapper'
+      width="100%"
+      wrapClassName="app-responsive-menu-modal-wrapper"
     >
-      <div className='modal-header'>
-        <div className='logo-container'>
-          <img className='logo-app' src={appLogo} alt='BNB48Club' />
+      <div className="modal-header">
+        <div className="logo-container">
+          <img className="logo-app" src={appLogo} alt="BNB48Club" />
         </div>
         <CloseOutlined onClick={props.oncancel} />
       </div>
-      <div className='modal-content'>
+      <div className="modal-content">
         <Menu
-          mode='vertical'
+          mode="vertical"
           selectable={false}
           selectedKeys={[]}
           onClick={props.oncancel}
         >
           <Menu.Item key={`menu-item-language-en`}>
-            <div className='opacity-75 hover:text-primary' style={mentItemStyle} onClick={() => setLanguage('en')}>English</div>
+            <div className="opacity-75 hover:text-primary" style={mentItemStyle} onClick={() => setLanguage('en')}>English</div>
           </Menu.Item>
           <Menu.Item key={`menu-item-language-cn`}>
-            <div className='opacity-75 hover:text-primary' style={mentItemStyle} onClick={() => setLanguage('cn')}>中文</div>
+            <div className="opacity-75 hover:text-primary" style={mentItemStyle} onClick={() => setLanguage('cn')}>中文</div>
           </Menu.Item>
         </Menu>
         <Divider />
         <Menu
-          className='header-menu'
-          mode='vertical'
+          className="header-menu"
+          mode="vertical"
           selectable={false}
           selectedKeys={[]}
           onClick={props.oncancel}
@@ -86,8 +86,8 @@ export default function MobileModal(props: {visible: boolean, oncancel: () => vo
                    ? 'https://drive.google.com/file/d/1RZxJamk3dK2w-4e4TI98uXe1bCLd2Vz1/view?usp=sharing'
                    : 'https://drive.google.com/file/d/1NFZiOoILO59LemFn2-_LHMD7c3nDBHla/view?usp=sharing'
                }
-               target='_blank'
-               rel='noopener noreferrer'
+               target="_blank"
+               rel="noopener noreferrer"
             >
               {t('app_header_menu_whitepaper_title')}
             </a>

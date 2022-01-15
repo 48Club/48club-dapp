@@ -1,11 +1,11 @@
-import { CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
-import { Button } from "antd";
-import Label from "components/Label";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons'
+import { Button } from 'antd'
+import Label from 'components/Label'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function VoteSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="pt-20 w-full">
       <Label text="选择您的投票" />
@@ -37,5 +37,5 @@ export default function VoteSection() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import { Button } from "antd";
-import Label from "components/Label";
-import React from "react";
+import { Button } from 'antd'
+import Label from 'components/Label'
+import React from 'react'
 
 export default function Manage() {
-  const list = [1, 2, 3];
+  const list = [1, 2, 3]
   return (
     <div className="">
       <Label text="理事会成员管理内容" />
@@ -44,7 +44,7 @@ export default function Manage() {
                 </span>
               </div>
             </div>
-          );
+          )
         })}
         <div className="py-10 text-center">
           <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
@@ -53,5 +53,5 @@ export default function Manage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

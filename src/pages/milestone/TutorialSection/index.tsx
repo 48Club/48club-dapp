@@ -194,10 +194,10 @@ const TUTORIAL_ITEMS = [
 export default function TutorialSection() {
   const language = localStorage.getItem('language')
   return (
-    <div className='tutorial-section'>
-      <div className='container'>
-        <div className='section-content'>
-          <div className='tutorial-image-part'>
+    <div className="tutorial-section">
+      <div className="container">
+        <div className="section-content">
+          <div className="tutorial-image-part">
             {
               TUTORIAL_ITEMS
                 .sort((a, b) => moment(b.event_title, 'YYYY-MM-DD').unix() - moment(a.event_title, 'YYYY-MM-DD').unix())

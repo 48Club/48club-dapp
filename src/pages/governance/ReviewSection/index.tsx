@@ -68,19 +68,19 @@ const REVIEW_ITEMS = [
 ]
 
 export default function ReviewSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
-    <div className='review-section'>
-      <div className='container'>
-        <div className='section-header'>
-          <div className='section-title'>
+    <div className="review-section">
+      <div className="container">
+        <div className="section-header">
+          <div className="section-title">
             {t('governance_page_review_section_title')}
           </div>
-          <div className='section-subtitle'>
+          <div className="section-subtitle">
             {t('governance_page_review_section_subtitle')}
           </div>
-          <div className='section-content'>
+          <div className="section-content">
             <Row gutter={24}>
               {
                 REVIEW_ITEMS.map(item => (

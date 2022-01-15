@@ -1,10 +1,10 @@
-import { Button } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { Button } from 'antd'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function HeaderSection() {
-  const { t } = useTranslation();
-  const list = [1, 2, 3, 4];
+  const { t } = useTranslation()
+  const list = [1, 2, 3, 4]
   return (
     <div className="mt-14 flex flex-col">
       {list.map((item) => {
@@ -22,7 +22,7 @@ export default function HeaderSection() {
               here is conte...
             </span>
           </div>
-        );
+        )
       })}
       <div className="pb-10 text-center">
         <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
@@ -30,5 +30,5 @@ export default function HeaderSection() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

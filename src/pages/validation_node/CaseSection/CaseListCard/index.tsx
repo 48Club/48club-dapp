@@ -9,17 +9,17 @@ export default function CaseListCard(props: { item: any }) {
     return null
   }
   return (
-    <div className='case-list-card'>
+    <div className="case-list-card">
       <div
-        className='case-profile-image'
+        className="case-profile-image"
       >
         <img src={item.image_url} alt={item.title} />
       </div>
-      <div className='case-title'>
+      <div className="case-title">
         {item.title}
       </div>
-      <div className='case-content'>
-        <a href={item.content} target='_blank' rel='noopener noreferrer'>
+      <div className="case-content">
+        <a href={item.content} target="_blank" rel="noopener noreferrer">
           {item.content}
         </a>
       </div>

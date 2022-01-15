@@ -4,15 +4,15 @@ import './index.less'
 import { useTranslation } from 'react-i18next'
 
 export default function BannerSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
-    <div className='banner-section'>
-      <div className='container'>
+    <div className="banner-section">
+      <div className="container">
         <Row className="flex">
           <Col xs={24} md={24}>
-            <div className='section-content'>
-              <div className='section-title'>
+            <div className="section-content">
+              <div className="section-title">
                 BNB48 Club®
                 <br />
                 {t('app_header_menu_node_title')}

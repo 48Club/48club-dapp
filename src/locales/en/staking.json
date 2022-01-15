@@ -1,6 +1,23 @@
 {
   "staking_desc": "KOGE Staking will be used for the general governance of KOGE.",
   "staking_summary_total": "Total circulation",
-  "staking_summary_pledge": "Total pledge amount",
+  "staking_summary_staking": "Total staking amount",
   "staking_summary_own": "Percentage of individual positions",
-  "staking_pledge_title": "Pledge pool"}
+  "staking_staking_title": "Staking pool",
+  "my_staking_count": "My staking amount",
+  "staking": "Staking",
+  "stake": "Stake",
+  "unstake": "Unstake",
+  "withdraw": "Withdraw",
+  "confirm": "Confirm",
+  "not_staking": "Not stakingd",
+  "unstaking": "Unstaking",
+  "staking_details_record": "Staking details record",
+  "address": "Address",
+  "staking_operation": "Staking operation",
+  "staking_tokens": "Staking tokens",
+  "amount": "Amount",
+  "date": "Date",
+  "see_more": "See more",
+  "no_records": "No records"
+}

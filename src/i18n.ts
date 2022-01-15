@@ -1,13 +1,11 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
 
-import Backend from 'i18next-xhr-backend';
-import translationEN from './locales/en/translation.json';
-import stakingEN from './locales/en/staking.json';
-import pledgeEN from './locales/en/pledge.json'
-import translationCN from './locales/cn/translation.json';
-import stakingCN from './locales/cn/staking.json';
-import pledgeCN from './locales/cn/pledge.json'
+import Backend from 'i18next-xhr-backend'
+import translationEN from './locales/en/translation.json'
+import stakingEN from './locales/en/staking.json'
+import translationCN from './locales/cn/translation.json'
+import stakingCN from './locales/cn/staking.json'
 
 i18n
   // learn more: https://github.com/i18next/i18next-xhr-backend
@@ -21,26 +19,26 @@ i18n
         translation: {
           ...translationEN,
           ...stakingEN,
-          ...pledgeEN
-        }
+          ...stakingEN,
+        },
       },
       cn: {
         translation: {
           ...translationCN,
           ...stakingCN,
-          ...pledgeCN
+          ...stakingCN,
         },
-      }
+      },
     },
     debug: false,
-    lng: localStorage.getItem("language") || 'en',
+    lng: localStorage.getItem('language') || 'en',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     detection: {
       caches: ['localStorage', 'sessionStorage', 'cookie'],
-    }
-  });
+    },
+  })
 
-export default i18n;
+export default i18n

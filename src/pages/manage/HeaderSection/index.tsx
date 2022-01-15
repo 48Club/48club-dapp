@@ -1,8 +1,8 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function HeaderSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="pt-4 w-auto mb-10">
       <div className="flex flex-col rounded-2xl items-center px-6 bg-another-white">
@@ -19,5 +19,5 @@ export default function HeaderSection() {
         </span>
       </div>
     </div>
-  );
+  )
 }

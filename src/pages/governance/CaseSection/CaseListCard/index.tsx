@@ -7,17 +7,17 @@ export default function CaseListCard(props: { item: any }) {
     return null
   }
   return (
-    <div className='case-list-card'>
+    <div className="case-list-card">
       <div
-        className='case-profile-image'
+        className="case-profile-image"
         style={{
           backgroundImage: `url(${item.image_url})`,
         }}
       />
-      <div className='case-title'>
+      <div className="case-title">
         {item.title}
       </div>
-      <div className='case-content'>
+      <div className="case-content">
         {item.content}
       </div>
     </div>

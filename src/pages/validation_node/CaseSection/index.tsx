@@ -12,10 +12,10 @@ const REVIEW_ITEMS = [{
 
 export default function CaseSection() {
   return (
-    <div className='case-section'>
-      <div className='container'>
-        <div className='section-header'>
-          <div className='section-content'>
+    <div className="case-section">
+      <div className="container">
+        <div className="section-header">
+          <div className="section-content">
             <Row gutter={24}>
               {
                 REVIEW_ITEMS.map(item => (

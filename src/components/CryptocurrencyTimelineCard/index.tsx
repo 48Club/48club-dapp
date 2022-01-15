@@ -12,16 +12,16 @@ export default function ReportListCard(props: { item: any }) {
     return null
   }
   return (
-    <div className='cryptocurrency-timeline-card'>
-      <div className='dot' />
-      <div className='content'>
-        <div className='item-main'>
-          <div className='item-subtitle'>
+    <div className="cryptocurrency-timeline-card">
+      <div className="dot" />
+      <div className="content">
+        <div className="item-main">
+          <div className="item-subtitle">
             {item.event_title}
           </div>
-          <div className='item-title'>
-            <ReactMarkdown children={(item.event_content || '').trim()} rehypePlugins={[rehypeRaw]}  />
-            </div>
+          <div className="item-title">
+            <ReactMarkdown children={(item.event_content || '').trim()} rehypePlugins={[rehypeRaw]} />
+          </div>
         </div>
       </div>
     </div>

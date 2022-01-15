@@ -1,12 +1,12 @@
-import { CloseOutlined } from "@ant-design/icons";
-import { Button, Modal, Radio } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { CloseOutlined } from '@ant-design/icons'
+import { Button, Modal, Radio } from 'antd'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import "./index.less";
+import './index.less'
 
 export default function NFTModal() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const header = (
     <div className="text-center relative">
       <span className="font-bold text-lg text-light-black">选择NFT</span>
@@ -15,8 +15,8 @@ export default function NFTModal() {
         style={{ right: 0 }}
       />
     </div>
-  );
-  const list = [1, 2, 3, 4, 5];
+  )
+  const list = [1, 2, 3, 4, 5]
   return (
     <Modal
       title={header}
@@ -26,10 +26,10 @@ export default function NFTModal() {
       closable={true}
       wrapClassName="flex flex-col justify-center px-4 nft-modal"
       onCancel={() => {
-        console.log(123);
+        console.log(123)
       }}
       onOk={() => {
-        console.log(123);
+        console.log(123)
       }}
     >
       <div className="px-6">
@@ -51,7 +51,7 @@ export default function NFTModal() {
                 here is conte...
               </span>
             </div>
-          );
+          )
         })}
       </div>
       <div className="text-center py-6 absolute bottom-0 w-full bg-white">
@@ -60,5 +60,5 @@ export default function NFTModal() {
         </Button>
       </div>
     </Modal>
-  );
+  )
 }

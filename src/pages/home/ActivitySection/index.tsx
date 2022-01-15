@@ -17,16 +17,16 @@ const REVIEW_ITEMS = [{
 }]
 
 export default function ActivitySection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
-    <div className='activity-section mx-auto'>
-      <div className='container'>
-        <div className='section-header'>
-          <div className='section-title'>
+    <div className="activity-section mx-auto">
+      <div className="container">
+        <div className="section-header">
+          <div className="section-title">
             {t('home_page_activity_section_title')}
           </div>
-          <div className='section-content'>
+          <div className="section-content">
             <Row gutter={24}>
               {
                 REVIEW_ITEMS.map(item => (
@@ -34,7 +34,7 @@ export default function ActivitySection() {
                     <ActivityListCard
                       item={{
                         ...item,
-                        title:  t(item.title),
+                        title: t(item.title),
                         content: t(item.content),
                       }}
                     />

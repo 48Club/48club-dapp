@@ -1,16 +1,16 @@
-import { PictureOutlined } from "@ant-design/icons";
-import { Button, Input, Upload } from "antd";
-import Back from "components/Back";
-import React from "react";
+import { PictureOutlined } from '@ant-design/icons'
+import { Button, Input, Upload } from 'antd'
+import Back from 'components/Back'
+import React from 'react'
 
-const { TextArea } = Input;
+const { TextArea } = Input
 export default function NFTCreate() {
   return (
     <div className="px-4 max-w-6xl mx-auto">
       <Back />
       <div
         className="mt-4 rounded-2xl flex flex-col items-center"
-        style={{ backgroundColor: "#FFFBEC" }}
+        style={{ backgroundColor: '#FFFBEC' }}
       >
         <span className="mt-8 font-bold text-2xl mb-4 text-light-black">
           创建 KOGE NFT
@@ -81,5 +81,5 @@ export default function NFTCreate() {
         提交NFT
       </Button>
     </div>
-  );
+  )
 }

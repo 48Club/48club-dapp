@@ -22,14 +22,14 @@ const REVIEW_ITEMS = [{
 }]
 
 export default function CaseSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
-    <div className='case-section'>
-      <div className='container'>
-        <div className='section-header'>
-          <div className='section-content'>
-            <Row gutter={24} align='top'>
+    <div className="case-section">
+      <div className="container">
+        <div className="section-header">
+          <div className="section-content">
+            <Row gutter={24} align="top">
               {
                 REVIEW_ITEMS.map(item => (
                   <Col xs={24} md={8} key={`case-list-card-${item.id}`}>

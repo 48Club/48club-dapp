@@ -29,11 +29,11 @@ export default function RecordSection() {
   const record = [1, 2, 3]
   return (
     <div className="flex flex-col my-20">
-      <Label text={t('pledge_details_record')} />
+      <Label text={t('staking_details_record')} />
       <div className="mt-6 px-6 py-6 shadow rounded">
-        <div className='flex flex-row justify-between items-center'>
+        <div className="flex flex-row justify-between items-center">
           <div className="flex-1 text-gray">{t('address')}</div>
-          <div className="flex-1 text-gray">{t('pledge_operation')}</div>
+          <div className="flex-1 text-gray">{t('staking_operation')}</div>
           <div className="flex-1 text-gray">{t('amount')}</div>
           <div className="flex-1 text-gray">{t('date')}</div>
         </div>

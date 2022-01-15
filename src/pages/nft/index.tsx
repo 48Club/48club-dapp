@@ -1,6 +1,6 @@
-import React from "react";
-import HeaderSection from "./HeaderSection";
-import ListSection from "./ListSection";
+import React from 'react'
+import HeaderSection from './HeaderSection'
+import ListSection from './ListSection'
 
 export default function NFT() {
   return (
@@ -8,5 +8,5 @@ export default function NFT() {
       <HeaderSection />
       <ListSection />
     </div>
-  );
+  )
 }

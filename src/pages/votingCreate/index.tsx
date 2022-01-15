@@ -1,9 +1,9 @@
-import { Button, Input } from "antd";
-import Back from "components/Back";
-import React from "react";
-import NFTModal from "./NFTModal";
+import { Button, Input } from 'antd'
+import Back from 'components/Back'
+import React from 'react'
+import NFTModal from './NFTModal'
 
-const { TextArea } = Input;
+const { TextArea } = Input
 
 export default function VotingCreate() {
   return (
@@ -11,7 +11,7 @@ export default function VotingCreate() {
       <Back />
       <div
         className="mt-4 rounded-2xl flex flex-col items-center"
-        style={{ backgroundColor: "#FFFBEC" }}
+        style={{ backgroundColor: '#FFFBEC' }}
       >
         <span className="mt-8 font-bold text-2xl mb-4 text-light-black">
           创建 KOGE 投票
@@ -29,10 +29,10 @@ export default function VotingCreate() {
           placeholder="请选择"
           className="h-12 rounded font-bold text-sm text-light-black"
           onClick={() => {
-            console.log(123);
+            console.log(123)
           }}
           onTouchEnd={() => {
-            console.log(123);
+            console.log(123)
           }}
         />
       </div>
@@ -107,5 +107,5 @@ export default function VotingCreate() {
 
       <NFTModal />
     </div>
-  );
+  )
 }

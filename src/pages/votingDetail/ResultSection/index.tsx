@@ -1,14 +1,10 @@
-import {
-  CheckCircleFilled,
-  CloseCircleFilled,
-  FrownFilled,
-} from "@ant-design/icons";
-import Label from "components/Label";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { CheckCircleFilled, CloseCircleFilled, FrownFilled } from '@ant-design/icons'
+import Label from 'components/Label'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function ResultSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="pt-20 w-full">
       <Label text="投票结果" />
@@ -33,7 +29,7 @@ export default function ResultSection() {
             <div className="px-1 absolute left-0 top-1 w-full">
               <div
                 className=" bg-green h-4 rounded-xl"
-                style={{ width: "60%", borderRadius: "0.75rem" }}
+                style={{ width: '60%', borderRadius: '0.75rem' }}
               ></div>
             </div>
           </div>
@@ -52,12 +48,12 @@ export default function ResultSection() {
             <div className="px-1 absolute left-0 top-1 w-full">
               <div
                 className=" bg-red h-4 rounded-xl"
-                style={{ width: "60%", borderRadius: "0.75rem" }}
+                style={{ width: '60%', borderRadius: '0.75rem' }}
               ></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
