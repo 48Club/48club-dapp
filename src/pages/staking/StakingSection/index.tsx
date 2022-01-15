@@ -92,27 +92,29 @@ export default function StakingSection() {
               )
             }
           </div>
-          <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
-                 placeholder={`Balance: ${formatAmount(currentBalance, decimals)} KOGE`}
-                 className="h-12 mb-6 text-base"
-                 value={input}
-                 onChange={(e) => setInput(e.target.value)} />
+          <div className="flex flex-row justify-between">
+            <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
+                   placeholder={`Balance: ${formatAmount(currentBalance, decimals)} KOGE`}
+                   className="h-12 mb-6 text-base mr-6"
+                   value={input}
+                   onChange={(e) => setInput(e.target.value)} />
+            {
+              allowance.lte(0) ? (
+                <Button className="h-12 rounded" onClick={approve} loading={approveLoading}>
+                  Approve
+                </Button>
+              ) : (
+                <Button type="primary"
+                        className="h-12 rounded"
+                        onClick={onSubmit}
+                        loading={stakeLoading || unstakeLoading}
+                        disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && canUnstake)}>
+                  {t('confirm')}
+                </Button>
+              )
+            }
+          </div>
 
-          {
-            allowance.lte(0) ? (
-              <Button className="h-12" onClick={approve} loading={approveLoading}>
-                Approve
-              </Button>
-            ) : (
-              <Button type="primary"
-                      className="h-12"
-                      onClick={onSubmit}
-                      loading={stakeLoading || unstakeLoading}
-                      disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && canUnstake)}>
-                {t('confirm')}
-              </Button>
-            )
-          }
         </div>
       </div>
     </div>
