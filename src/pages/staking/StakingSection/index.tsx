@@ -63,12 +63,12 @@ export default function StakingSection() {
             {formatAmount(myStakeBalance, decimals)} KOGE
           </div>
           {
-            !canUnstake && (
+            (account && !canUnstake) && (
               <div className="text-sm leading-5 mb-2" style={{ color: '#54606C' }}>Unlock Time: {unlockMoment?.format('YYYY-MM-DD HH:mm')}</div>
             )
           }
           {
-            !canWithdraw && (
+            (account && !canWithdraw) && (
               <div className="text-sm leading-5 mb-2" style={{ color: '#54606C' }}>Withdrawable Time: {unlockMoment?.format('YYYY-MM-DD HH:mm')}</div>
             )
           }

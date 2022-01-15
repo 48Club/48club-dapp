@@ -1,24 +1,23 @@
-import { Button } from 'antd'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
-import { shorten } from '@funcblock/dapp-sdk'
+import { formatAmount, shorten } from '@funcblock/dapp-sdk'
+import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 
 function Row({ data }: { data: any }) {
-  const { t } = useTranslation()
   return (
     <div className="mt-4 pt-4 pb-0 flex flex-row justify-between items-center border-t border-gray" key={data}>
       <div className="flex-1">
-        {shorten('0x3050dc66df3253b27eda28529fea26abfb19e4ddfbf45d65632bca3a44cd114c', 8, 8)}
+        {shorten(data.user, 8, 8)}
       </div>
       <div className="flex-1">
-        Stake
+        {data.event}
       </div>
       <div className="flex-1">
-        194.23
+        {formatAmount(data.amount, 18)}
       </div>
       <div className="flex-1">
-        2021-11-12 10:23:22
+        {data.blockNumber}
       </div>
     </div>
   )
@@ -26,7 +25,7 @@ function Row({ data }: { data: any }) {
 
 export default function RecordSection() {
   const { t } = useTranslation()
-  const record = [1, 2, 3]
+  const { records } = useStakeInfo()
   return (
     <div className="flex flex-col my-20">
       <Label text={t('staking_details_record')} />
@@ -37,14 +36,9 @@ export default function RecordSection() {
           <div className="flex-1 text-gray">{t('amount')}</div>
           <div className="flex-1 text-gray">{t('date')}</div>
         </div>
-        {record.length > 0 ? (
+        {records.length > 0 ? (
           <>
-            {record.map((i) => <Row key={i} data={i} />)}
-            <div className="py-10 text-center">
-              <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
-                {t('see_more')}
-              </Button>
-            </div>
+            {records.slice(50).map((i) => <Row key={i.blockNumber} data={i} />)}
           </>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
