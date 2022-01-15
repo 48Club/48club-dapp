@@ -9,6 +9,10 @@ import store from './state'
 
 const config: Partial<Config> = {
   networks: [BSCTestnet],
+  readOnlyChainId: BSCTestnet.chainId,
+  readOnlyUrls: {
+    [BSCTestnet.chainId]: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
+  },
 }
 
 ReactDOM.render(
