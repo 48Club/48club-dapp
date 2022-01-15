@@ -10,6 +10,8 @@ import useApprove from '../../../hooks/erc20/useApprove'
 import { KogeAddress, StakingAddress } from '../../../constants/contracts'
 import { useEthers, useTokenAllowance } from '@usedapp/core'
 import moment from 'moment'
+import { useOpenModal } from '../../../state/application/hooks'
+import { ApplicationModal } from '../../../state/application/actions'
 
 export default function StakingSection() {
   const { account } = useEthers()
@@ -27,6 +29,7 @@ export default function StakingSection() {
   const withdrawMoment = withdrawTime ? moment(withdrawTime * 1000) : undefined
   const canUnstake = (unlockMoment && unlockMoment.isBefore(moment()))
   const canWithdraw = (withdrawMoment && withdrawMoment.isBefore(moment()))
+  const openModal = useOpenModal(activeItem, inputBN.toString())
 
   const onSubmit = useCallback(async () => {
     if (!inputBN.gt(0) || !decimals) {
@@ -106,7 +109,7 @@ export default function StakingSection() {
               ) : (
                 <Button type="primary"
                         className="h-12 rounded"
-                        onClick={onSubmit}
+                        onClick={openModal}
                         loading={stakeLoading || unstakeLoading}
                         disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && canUnstake)}>
                   {t('confirm')}

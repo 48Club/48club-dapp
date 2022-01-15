@@ -17,6 +17,8 @@ import VotingDetail from 'pages/votingDetail'
 import NFT from 'pages/nft'
 import NFTCreate from 'pages/nftCreate'
 import Manage from 'pages/manage'
+import StakeModal from './components/Modal/StakeModal'
+import UnStakeModal from './components/Modal/UnStakeModal'
 
 export default function App() {
   const { t } = useTranslation()
@@ -44,6 +46,8 @@ export default function App() {
               <Redirect to="/" />
             </Route>
           </Switch>
+          <StakeModal/>
+          <UnStakeModal/>
           <NotificationsList />
         </div>
         <Footer />

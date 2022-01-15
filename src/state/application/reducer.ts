@@ -1,21 +1,23 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { ApplicationModal, setOpenModal } from './actions'
+import { ApplicationModal, setKogeCount, setOpenModal } from './actions'
 
 export interface ApplicationState {
   modal?: ApplicationModal,
-  modalId?: number,
+  kogeCount?: string,
 }
 
 const initialState: ApplicationState = {
   modal: undefined,
-  modalId: undefined,
+  kogeCount: undefined,
 }
 
 export default createReducer(initialState, builder => {
     builder
       .addCase(setOpenModal, (state, action) => {
-        state.modal = action.payload.modal
-        state.modalId = action.payload.id
+        state.modal = action.payload != null ? action.payload : undefined
+      })
+      .addCase(setKogeCount, (state, action) => {
+        state.kogeCount = action.payload || undefined
       })
   },
 )

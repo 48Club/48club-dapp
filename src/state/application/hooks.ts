@@ -1,21 +1,28 @@
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, AppState } from '../index'
-import { ApplicationModal, setOpenModal } from './actions'
+import { ApplicationModal, setKogeCount, setOpenModal } from './actions'
 
 /********** SELECTOR **********/
 export function useModalOpen(modal: ApplicationModal) {
   const application = useSelector((state: AppState) => state.application)
-  return { modalOpen: modal === application.modal, modalId: application.modalId }
+  return modal === application.modal
+}
+
+export function useKogeCount(): string | undefined {
+  return useSelector((state: AppState) => state.application.kogeCount)
 }
 
 /********** ACTION **********/
-export function useOpenModal(modal: ApplicationModal, id?: number) {
+export function useOpenModal(modal: ApplicationModal, kogeCount: string) {
   const dispatch = useDispatch<AppDispatch>()
-  return useCallback(() => dispatch(setOpenModal({ modal, id })), [dispatch, modal, id])
+  return useCallback(() => {
+    dispatch(setOpenModal(modal))
+    dispatch(setKogeCount(kogeCount))
+  }, [dispatch, modal, kogeCount])
 }
 
 export function useCloseModals() {
   const dispatch = useDispatch<AppDispatch>()
-  return useCallback(() => dispatch(setOpenModal({ modal: undefined })), [dispatch])
+  return useCallback(() => dispatch(setOpenModal(null)), [dispatch])
 }
