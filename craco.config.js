@@ -10,6 +10,7 @@ module.exports = {
           lessOptions: {
             modifyVars: {
               '@primary-color': tailwindConfig.theme.colors.primary,
+              '@secondary-color': tailwindConfig.theme.colors.secondary,
               '@border-color-base': tailwindConfig.theme.borderColor.DEFAULT,
               '@border-color-split': tailwindConfig.theme.borderColor.DEFAULT,
               '@border-radius-base': 0,

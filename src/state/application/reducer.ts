@@ -13,11 +13,11 @@ const initialState: ApplicationState = {
 
 export default createReducer(initialState, builder => {
     builder
-      .addCase(setOpenModal, (state, action) => {
-        state.modal = action.payload != null ? action.payload : undefined
+      .addCase(setOpenModal, (state, { payload }) => {
+        state.modal = payload
       })
-      .addCase(setKogeCount, (state, action) => {
-        state.kogeCount = action.payload || undefined
+      .addCase(setKogeCount, (state, { payload }) => {
+        state.kogeCount = payload
       })
   },
 )

@@ -5,6 +5,6 @@ export enum ApplicationModal {
   UNSTAKE,
 }
 
-export const setOpenModal = createAction<ApplicationModal | null>('application/setOpenModal')
+export const setOpenModal = createAction<ApplicationModal | undefined>('application/setOpenModal')
 
 export const setKogeCount = createAction<string | undefined>('application/setKogeCount')

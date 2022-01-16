@@ -14,7 +14,7 @@ export function useKogeCount(): string | undefined {
 }
 
 /********** ACTION **********/
-export function useOpenModal(modal: ApplicationModal, kogeCount: string) {
+export function useOpenModal(modal: ApplicationModal, kogeCount: string | undefined = undefined) {
   const dispatch = useDispatch<AppDispatch>()
   return useCallback(() => {
     dispatch(setOpenModal(modal))
@@ -24,5 +24,5 @@ export function useOpenModal(modal: ApplicationModal, kogeCount: string) {
 
 export function useCloseModals() {
   const dispatch = useDispatch<AppDispatch>()
-  return useCallback(() => dispatch(setOpenModal(null)), [dispatch])
+  return useCallback(() => dispatch(setOpenModal(undefined)), [dispatch])
 }

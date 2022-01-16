@@ -29,16 +29,14 @@ export default function StakingSection() {
   const withdrawMoment = withdrawTime ? moment(withdrawTime * 1000) : undefined
   const canUnstake = (unlockMoment && unlockMoment.isBefore(moment()))
   const canWithdraw = (withdrawMoment && withdrawMoment.isBefore(moment()))
-  const openModal = useOpenModal(activeItem, inputBN.toString())
+  const openStakeModal = useOpenModal(ApplicationModal.STAKE, inputBN.toString())
+  const openUnstakeModal = useOpenModal(ApplicationModal.UNSTAKE, inputBN.toString())
 
   const onSubmit = useCallback(async () => {
     if (!inputBN.gt(0) || !decimals) {
       return
     }
-    let func = [onStake, onUnstake][activeItem]
-    if (canWithdraw) {
-      func = onWithdraw
-    }
+    let func = [openStakeModal, openUnstakeModal, onWithdraw][activeItem]
     await func(inputBN.times(TEN_POW(decimals)))
   }, [onStake, onUnstake, onWithdraw, canWithdraw, inputBN, decimals])
 
@@ -72,7 +70,7 @@ export default function StakingSection() {
           }
           {
             (account && !canWithdraw) && (
-              <div className="text-sm leading-5 mb-2" style={{ color: '#54606C' }}>Withdrawable Time: {unlockMoment?.format('YYYY-MM-DD HH:mm')}</div>
+              <div className="text-sm leading-5 mb-2" style={{ color: '#54606C' }}>Withdrawable Time: {withdrawMoment?.format('YYYY-MM-DD HH:mm')}</div>
             )
           }
         </div>
@@ -109,9 +107,9 @@ export default function StakingSection() {
               ) : (
                 <Button type="primary"
                         className="h-12 rounded"
-                        onClick={openModal}
-                        loading={stakeLoading || unstakeLoading}
-                        disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && canUnstake)}>
+                        onClick={onSubmit}
+                        loading={stakeLoading || unstakeLoading || withdrawLoading}
+                        disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake)}>
                   {t('confirm')}
                 </Button>
               )
