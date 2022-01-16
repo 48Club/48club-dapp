@@ -19,5 +19,6 @@
   "amount": "Amount",
   "date": "Date",
   "see_more": "See more",
-  "no_records": "No records"
+  "no_records": "No records",
+  "blocknumber": "Block number"
 }

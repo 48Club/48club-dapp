@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
 import { formatAmount, shorten } from '@funcblock/dapp-sdk'
-import useStakeInfo from '../../../hooks/staking/useStakeInfo'
+import BigNumber from 'bignumber.js'
+import { useStakingContractReadonly } from '../../../hooks/useContract'
 
 function Row({ data }: { data: any }) {
   return (
@@ -25,7 +26,25 @@ function Row({ data }: { data: any }) {
 
 export default function RecordSection() {
   const { t } = useTranslation()
-  const { records } = useStakeInfo()
+
+  const [records, setRecords] = useState<any[]>([])
+  const stakingContractReadonly = useStakingContractReadonly()
+  useEffect(() => {
+    (async () => {
+      const stakedFilter = stakingContractReadonly.filters.Staked(null, null)
+      const stakedEvents = await stakingContractReadonly.queryFilter(stakedFilter)
+      const unstakedFilter = stakingContractReadonly.filters.Unstaked(null, null)
+      const unstakedEvents = await stakingContractReadonly.queryFilter(unstakedFilter)
+      const rows = [...stakedEvents, ...unstakedEvents].map(i => ({
+        blockNumber: i.blockNumber,
+        event: i.event,
+        user: i.args?.user,
+        amount: new BigNumber(i.args?.amount.toString()),
+      }))
+      setRecords(rows.sort((a, b) => b.blockNumber - a.blockNumber).slice(0, 20))
+    })()
+  }, [])
+
   return (
     <div className="flex flex-col my-20">
       <Label text={t('staking_details_record')} />
@@ -34,11 +53,11 @@ export default function RecordSection() {
           <div className="flex-1 text-gray">{t('address')}</div>
           <div className="flex-1 text-gray">{t('staking_operation')}</div>
           <div className="flex-1 text-gray">{t('amount')}</div>
-          <div className="flex-1 text-gray">{t('date')}</div>
+          <div className="flex-1 text-gray">{t('blocknumber')}</div>
         </div>
         {records.length > 0 ? (
           <>
-            {records.slice(50).map((i) => <Row key={i.blockNumber} data={i} />)}
+            {records.map((i) => <Row key={i.blockNumber} data={i} />)}
           </>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">

@@ -11,7 +11,7 @@ const config: Partial<Config> = {
   networks: [BSCTestnet],
   readOnlyChainId: BSCTestnet.chainId,
   readOnlyUrls: {
-    [BSCTestnet.chainId]: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
+    [BSCTestnet.chainId]: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
   },
 }
 
