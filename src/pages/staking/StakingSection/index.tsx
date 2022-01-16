@@ -38,11 +38,11 @@ export default function StakingSection() {
     }
     let func = [openStakeModal, openUnstakeModal, onWithdraw][activeItem]
     await func(inputBN.times(TEN_POW(decimals)))
-  }, [onStake, onUnstake, onWithdraw, canWithdraw, inputBN, decimals])
+  }, [onWithdraw, inputBN, decimals, activeItem, openStakeModal, openUnstakeModal])
 
   const currentBalance = useMemo(() => {
     return [myTokenBalance, myStakeBalance, myUnstakeBalance][activeItem]
-  }, [myStakeBalance, myTokenBalance, activeItem])
+  }, [myStakeBalance, myTokenBalance, activeItem, myUnstakeBalance])
 
   const onSetMax = useCallback(() => {
     const max = new BigNumber(currentBalance?.toString() ?? '0').div(TEN_POW(decimals ?? 0)).toString()

@@ -26,7 +26,7 @@ export default function StakeModal() {
   return (
     <Modal visible={modalOpen} onCancel={closeModals} footer={null} width={440} closeIcon={null}>
       <div className="flex flex-col items-center pt-8 pb-6 px-6">
-        <img className="w-16 h-16" src={stake} />
+        <img className="w-16 h-16" src={stake} alt=""/>
         <div className="mt-4 mb-2 text-xl font-bold">{`请确认质押KOGE代币数量为：${kogeCount}`}</div>
         <div className="text-base font-normal text-gray">质押成功后，您的KOGE将于48天后方可解除质押。</div>
         <div className="w-full mt-6 flex flex-row">

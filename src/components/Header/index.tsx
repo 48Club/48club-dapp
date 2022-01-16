@@ -6,23 +6,19 @@ import i18n from 'i18next'
 import MobileModal from './MobileModal'
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons'
 import { Dropdown, Menu } from 'antd'
-import { useEthers } from '@usedapp/core'
+import { useEthers, useTransactions } from '@usedapp/core'
 import { shorten } from '@funcblock/dapp-sdk'
+import Loader from '../Loader'
 
 export default function Header() {
   const { t } = useTranslation()
   const location = useLocation()
-  const { activateBrowserWallet, error, account } = useEthers()
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'en')
 
   useEffect(() => {
     localStorage.setItem('language', language)
     i18n.changeLanguage(language).catch(console.error)
   }, [language])
-
-  const activate = useCallback(async () => {
-    await activateBrowserWallet()
-  }, [activateBrowserWallet])
 
   const menu = (
     <Menu className="bg-white">
@@ -77,9 +73,7 @@ export default function Header() {
         <div className="flex flex-row items-center">
           <div className="bg-secondary flex flex-row items-center cursor-pointer">
             <div className="text-primary px-3">BSC</div>
-            <div className="px-4 bg-primary rounded py-2" onClick={activate}>
-              {account ? shorten(account) : t('connect_wallet')}
-            </div>
+            <Web3Status />
           </div>
           <div className="ml-4 hidden md:flex flex-row text-xs font-semibold">
             <div className="cursor-pointer opacity-75 hover:text-primary" onClick={() => setLanguage('cn')} style={{ color: language === 'cn' ? '#FFC801' : 'black' }}>中文</div>
@@ -99,6 +93,36 @@ export default function Header() {
           {<MobileModal visible={showResponsiveMenu} oncancel={() => setShowResponsiveMenu(false)} />}
         </div>
       </div>
+    </div>
+  )
+}
+
+function Web3Status() {
+  const { t } = useTranslation()
+  const { transactions } = useTransactions()
+  const { activateBrowserWallet, error, account } = useEthers()
+  const pendingCount = transactions.filter(i => !i.receipt).length
+
+  const activate = useCallback(async () => {
+    await activateBrowserWallet()
+  }, [activateBrowserWallet])
+
+  if (account) {
+    return (
+      <div className="px-4 bg-primary rounded py-2" onClick={activate}>
+        {pendingCount > 0 ? (
+          <div className="flex flex-row justify-center items-center">
+            <div className="pr-2">{pendingCount} Pending</div>
+            <Loader stroke="black" />
+          </div>
+        ) : shorten(account)}
+      </div>
+    )
+  }
+
+  return (
+    <div className="px-4 bg-primary rounded py-2" onClick={activate}>
+      {t('connect_wallet')}
     </div>
   )
 }

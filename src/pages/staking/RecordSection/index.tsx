@@ -43,7 +43,7 @@ export default function RecordSection() {
       }))
       setRecords(rows.sort((a, b) => b.blockNumber - a.blockNumber).slice(0, 20))
     })()
-  }, [])
+  }, [stakingContractReadonly])
 
   return (
     <div className="flex flex-col my-20">

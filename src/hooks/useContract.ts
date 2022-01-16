@@ -16,7 +16,7 @@ export function useStakingContract() {
 }
 
 export function useStakingContractReadonly() {
-  const provider = new JsonRpcProvider('https://data-seed-prebsc-2-s2.binance.org:8545/')
+  const provider = useMemo(() => new JsonRpcProvider('https://data-seed-prebsc-2-s2.binance.org:8545/'), [])
   return useMemo(() => new Contract(StakingAddress, Staking_ABI, provider), [provider])
 }
 

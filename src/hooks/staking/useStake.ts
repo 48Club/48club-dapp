@@ -14,17 +14,17 @@ export default function useStake() {
   const onStake = useCallback(async (amount: BigNumber) => {
     console.info('Staking | stake', amount.toString())
     await stake(amount.toString())
-  }, [account, stake])
+  }, [stake])
 
   const onUnstake = useCallback(async (amount: BigNumber) => {
     console.info('Staking | unstake', amount.toString())
     await unstake(amount.toString())
-  }, [account, unstake])
+  }, [unstake])
 
   const onWithdraw = useCallback(async (amount: BigNumber) => {
     console.info('Staking | withdraw', amount.toString())
     await withdraw(amount.toString())
-  }, [account, unstake])
+  }, [withdraw])
 
   return {
     onStake,

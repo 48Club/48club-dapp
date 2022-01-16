@@ -26,7 +26,7 @@ export default function UnStakeModal() {
   return (
     <Modal visible={modalOpen} onCancel={closeModals} footer={null} width={440} closeIcon={null}>
       <div className="flex flex-col items-center pt-8 pb-6 px-6">
-        <img className="w-16 h-16" src={unStake} />
+        <img className="w-16 h-16" src={unStake} alt=""/>
         <div className="mt-4 mb-2 text-xl font-bold">{`请确认解除质押KOGE代币数量为：${kogeCount}`}</div>
         <div className="text-base font-normal text-gray">解除质押成功后，您的KOGE将于7天后回到您的钱包。</div>
         <div className="w-full mt-6 flex flex-row">
