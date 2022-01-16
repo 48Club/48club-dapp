@@ -8,6 +8,7 @@
   "my_staking_count": "我的质押数量",
   "staking": "质押",
   "unstake": "解除质押",
+  "withdraw": "撤销",
   "confirm": "确认",
   "not_staking": "未质押",
   "unstaking": "解除质押中",
@@ -18,5 +19,6 @@
   "amount": "数量",
   "date": "日期",
   "see_more": "查看更多",
-  "no_records": "暂无记录"
+  "no_records": "暂无记录",
+  "blocknumber": "区块高度"
 }

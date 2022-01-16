@@ -1,0 +1,7 @@
+{
+  "confirm_stake_count": "请确认质押KOGE代币数量为：",
+  "stake_description": "质押成功后，您的KOGE将于{{val, number}}天后方可解除质押。",
+  "cancel": "取消",
+  "confirm_unstake_count": "请确认解除质押KOGE代币数量为：",
+  "unstake_description": "解除质押成功后，您的KOGE将于{{val, number}}天后回到您的钱包。"
+}

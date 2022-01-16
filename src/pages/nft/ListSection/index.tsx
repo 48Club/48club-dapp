@@ -32,7 +32,7 @@ export default function ListSection() {
       </div>
       <div className="pb-28">
         <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
-          查看更多
+          {t("view_more")}
         </Button>
       </div>
     </div>

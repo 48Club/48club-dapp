@@ -100,7 +100,7 @@ export default function StakingSection() {
                    value={input}
                    onChange={(e) => setInput(e.target.value)} />
             {
-              allowance.lte(0) ? (
+              !allowance.gt(0) ? (
                 <Button className="h-12 rounded" onClick={approve} loading={approveLoading}>
                   Approve
                 </Button>

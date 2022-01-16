@@ -18,7 +18,7 @@ export default function PcHeaderSection() {
       <div>
         <div className="text-4xl font-bold">{t('my_nft')}</div>
         <div className="my-4 text-base font-normal text-dark-gray flex flex-row">
-          <div>{`${t('total_casting')} 3123 ${t('piece')}`}</div>
+          <div className="mr-8">{`${t('total_casting')} 3123 ${t('piece')}`}</div>
           <div>{`${t('my_casting')} 3123 ${t('piece')}`}</div>
         </div>
         <div className="w-40">

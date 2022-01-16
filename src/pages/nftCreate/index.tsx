@@ -2,6 +2,7 @@ import { PictureOutlined } from '@ant-design/icons'
 import { Button, Input, Upload } from 'antd'
 import Back from 'components/Back'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -14,6 +15,7 @@ function getBase64(file) {
 
 const { TextArea } = Input
 export default function NFTCreate() {
+  const { t } = useTranslation()
   const [activeItemOfCount, setActiveItemOfCount] = useState(0)
   const [activeItemOfCustomize, setActiveItemOfCustomize] = useState(0)
   const [previewVisible, setPrebiewVisible] = useState(false)
@@ -38,10 +40,10 @@ export default function NFTCreate() {
           style={{ backgroundColor: '#FFFBEC' }}
         >
         <span className="mt-8 font-bold text-2xl mb-4 text-light-black">
-          创建 KOGE NFT
+          {t("create_koge_nft")}
         </span>
           <span className="text-base mb-10 text-dark-gray">
-          KOGE NFT将用于KOGE的一般治理
+            {t("nft_description")}
         </span>
         </div>
       </div>
@@ -49,45 +51,45 @@ export default function NFTCreate() {
       <div className="max-w-2xl mx-auto">
         <div className="flex flex-col mt-10">
           <span className="text-sm font-medium mb-2 text-light-black">
-            请选择创建数量
+            {t("select_create_count")}
           </span>
           <div className="flex flex-row">
             <div
               className={`cursor-pointer h-10 text-sm text-center w-full mr-4 border leading-10 rounded  ${activeItemOfCount === 0 ? 'border-yellow' : 'border-gray'}`}
               onClick={() => setActiveItemOfCount(0)}
             >
-              创建单个NFT (ERC-721)
+              {t("create_single_nft")}
             </div>
             <div
               className={`cursor-pointer h-10 text-sm text-center w-full border leading-10 rounded ${activeItemOfCount === 1 ? 'border-yellow' : 'border-gray'}`}
               onClick={() => setActiveItemOfCount(1)}
             >
-              创建多个NFT (ERC-1155)
+              {t("create_multiple_nfts")}
             </div>
           </div>
         </div>
         <div className="flex flex-col mt-10">
           <span className="text-sm font-medium mb-2 text-light-black">
-            请选择NFT资料类型
+            {t("create_nft_type")}
           </span>
           <div className="flex flex-row">
             <div
               className={`cursor-pointer h-10 text-sm text-center w-full mr-4 border leading-10 rounded ${activeItemOfCustomize === 0 ? 'border-yellow' : 'border-gray'}`}
               onClick={() => setActiveItemOfCustomize(0)}
             >
-              自定义
+              {t("customize")}
             </div>
             <div
               className={`cursor-pointer h-10 text-sm text-center w-full border text-yellow leading-10 rounded ${activeItemOfCustomize === 1 ? 'border-yellow' : 'border-gray'}`}
               onClick={() => setActiveItemOfCustomize(1)}
             >
-              系统自定义
+              {t("system_customize")}
             </div>
           </div>
         </div>
         <div className="flex flex-col mt-12">
         <span className="text-sm font-medium mb-2 text-light-black">
-          上传NFT文件
+          {t("upload_nft_file")}
         </span>
           <div className="flex flex-col bg-light-white w-full items-center px-12 justify-center py-24">
             {
@@ -96,7 +98,7 @@ export default function NFTCreate() {
                 : <>
                   <PictureOutlined className="text-3xl" />
                   <div className="max-w-xs text-light-black text-xs font-medium mt-3 text-center">
-                    支持JPG、PNG、TIF、GIF格式，文件最大不超过40M
+                    {t("upload_nft_file_requirement")}
                   </div>
                   <Upload
                     action=""
@@ -104,7 +106,7 @@ export default function NFTCreate() {
                     onPreview={handlePreview}
                   >
                     <Button className="h-10 mt-4 w-38 text-sm text-light-black bg-yellow">
-                      上传图片
+                      {t("upload_image")}
                     </Button>
                   </Upload></>
             }
@@ -113,41 +115,41 @@ export default function NFTCreate() {
         </div>
         <div className="flex flex-col mt-12">
           <span className="text-sm font-medium mb-2 text-light-black">
-            NFT名称
+            {t("nft_name")}
           </span>
-            <Input
-              placeholder="请输入"
-              className="h-12 rounded font-medium text-sm text-light-black"
-            />
+          <Input
+            placeholder={t("please_input")}
+            className="h-12 rounded font-medium text-sm text-light-black"
+          />
         </div>
         <div className="flex flex-col mt-12">
           <span className="text-sm font-medium mb-2 text-light-black">
-            NFT简介
+            {t("nft_brief_description")}
           </span>
           <TextArea
             rows={4}
-            placeholder="请输入"
+            placeholder={t("please_input")}
             className="rounded font-medium text-sm text-light-black"
           />
         </div>
         {activeItemOfCount === 1 && <div className="flex flex-col mt-12">
           <span className="text-sm font-medium mb-2 text-light-black">
-            数量
+            {t("amount")}
           </span>
-          <Input type={'number'}/>
+          <Input type={'number'} />
         </div>}
         <div className="flex flex-row justify-between text-sm mt-12">
-          <span className="text-dark-gray ">您需要支付</span>
+          <span className="text-dark-gray ">{t("payment_hint")}</span>
           <span className="text-light-black font-medium">
-          100枚 KOGE (KOGE≈1.23USDT)
+            {t("payment_value", {val: 101})}
         </span>
         </div>
         <div className="flex flex-row justify-between text-sm mt-4">
-          <span className="text-dark-gray ">该NFT序号</span>
-          <span className="text-light-black font-medium">第1,234枚NFT</span>
+          <span className="text-dark-gray ">{t("nft_id_hint")}</span>
+          <span className="text-light-black font-medium">{t("nft_id_value", {val: 1234})}</span>
         </div>
         <Button className="h-12 text-sm text-light-black bg-yellow rounded font-medium mt-6 mb-20 w-full">
-          提交NFT
+          {t("submit_nft")}
         </Button>
       </div>
     </div>
