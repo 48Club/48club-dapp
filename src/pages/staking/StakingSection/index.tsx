@@ -85,7 +85,7 @@ export default function StakingSection() {
               {t('unstake')}
             </div>
             {
-              canWithdraw && (
+              (canWithdraw && myUnstakeBalance?.gt(0)) && (
                 <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 2 ? 'border-yellow' : 'border-transparent'}`}
                      onClick={() => setActiveItem(2)}>
                   {t('withdraw')}
