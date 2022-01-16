@@ -58,7 +58,9 @@ export default function useStakeInfo() {
     myTokenBalance: tokenBalance ? new BigNumber(tokenBalance.toString()) : undefined,
     myStakeBalance: stakedAmount ? new BigNumber(stakedAmount.toString()) : undefined,
     myUnstakeBalance: unstakedAmount ? new BigNumber(unstakedAmount.toString()) : undefined,
+    unstakeDelay: unstakeDelayResult ? new BigNumber(unstakeDelayResult.toString()).toNumber() : 0,
     unstakeTime: (lastStakeTime && unstakeDelayResult) ? parseInt(lastStakeTime.toString()) + parseInt(unstakeDelayResult.toString()) : undefined,
+    withdrawDelay: withdrawDelayResult ? new BigNumber(withdrawDelayResult.toString()).toNumber() : 0,
     withdrawTime: (lastUnstakeTime && withdrawDelayResult) ? parseInt(lastUnstakeTime.toString()) + parseInt(withdrawDelayResult.toString()) : undefined,
   }
 }

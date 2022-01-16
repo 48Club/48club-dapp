@@ -4,7 +4,7 @@ import { ApplicationModal } from '../../../state/application/actions'
 import { Button, Modal } from 'antd'
 import stake from '../../../assets/images/icon/stake.svg'
 import useStake from '../../../hooks/staking/useStake'
-import { TEN_POW } from '@funcblock/dapp-sdk'
+import { formatAmount, TEN_POW } from '@funcblock/dapp-sdk'
 import BigNumber from 'bignumber.js'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 
@@ -13,7 +13,7 @@ export default function StakeModal() {
   const closeModals = useCloseModals()
   const kogeCount = useKogeCount()
   const { onStake, stakeLoading } = useStake()
-  const { decimals } = useStakeInfo()
+  const { decimals, unstakeDelay } = useStakeInfo()
 
   const onSubmit = useCallback(async () => {
     if (!kogeCount || !decimals) {
@@ -28,17 +28,17 @@ export default function StakeModal() {
       <div className="flex flex-col items-center pt-8 pb-6 px-6">
         <img className="w-16 h-16" src={stake} />
         <div className="mt-4 mb-2 text-xl font-bold">{`请确认质押KOGE代币数量为：${kogeCount}`}</div>
-        <div className="text-base font-normal text-gray">质押成功后，您的KOGE将于48天后方可解除质押。</div>
+        <div className="text-base font-normal text-gray">质押成功后，您的KOGE将于{formatAmount(unstakeDelay / (60 * 60 * 24))}天后方可解除质押。</div>
         <div className="w-full mt-6 flex flex-row">
           <Button
-            type='ghost'
+            type="ghost"
             className="flex-1 h-10 mr-2"
             onClick={closeModals}
           >
             取消
           </Button>
           <Button
-            type='primary'
+            type="primary"
             loading={stakeLoading}
             className="flex-1 h-10 ml-2"
             onClick={onSubmit}>
