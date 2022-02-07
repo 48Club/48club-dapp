@@ -53,5 +53,6 @@
   "validation_message_input": "请输入有效选项。",
   "validation_message_phone": "请输入有效的电话号码。",
   "validation_message_password_length": "请输入一个包含8个或更多字符的有效密码。",
+  "more": "更多",
   "placeholder_no_data": "还没有数据"
 }

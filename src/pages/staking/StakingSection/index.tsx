@@ -95,7 +95,7 @@ export default function StakingSection() {
           </div>
           <div className="flex flex-row justify-between">
             <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
-                   placeholder={`Balance: ${formatAmount(currentBalance, decimals)} KOGE`}
+                   placeholder={`${t("balance")}: ${formatAmount(currentBalance, decimals)} KOGE`}
                    className="h-12 mb-6 text-base mr-6"
                    value={input}
                    onChange={(e) => setInput(e.target.value)} />

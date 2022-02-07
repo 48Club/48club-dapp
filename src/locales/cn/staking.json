@@ -1,11 +1,11 @@
 {
-  "staking_title": "KOGE Staking cn",
-  "staking_desc": "KOGE Staking将用于KOGE的一般治理。",
+  "staking_desc": "KOGE质押将用于KOGE的一般治理。",
   "staking_summary_total": "总发行量",
   "staking_summary_staking": "总质押量",
   "staking_summary_own": "个人持仓比例",
   "staking_staking_title": "质押池",
   "my_staking_count": "我的质押数量",
+  "kogeStaking": "Koge质押",
   "staking": "质押",
   "unstake": "解除质押",
   "withdraw": "撤销",
@@ -20,5 +20,6 @@
   "date": "日期",
   "see_more": "查看更多",
   "no_records": "暂无记录",
-  "blocknumber": "区块高度"
+  "blocknumber": "区块高度",
+  "balance": "余额"
 }

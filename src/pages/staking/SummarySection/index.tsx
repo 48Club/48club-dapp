@@ -19,7 +19,7 @@ export default function SummarySection() {
       <div className="flex flex-row relative rounded-2xl" style={{ backgroundColor: '#FFFBEC' }}>
         <div className="flex flex-col pt-8 px-6 text-dark-gray w-full">
           <span className="font-bold text-4xl mb-2 text-light-black">
-            KOGE Staking
+            {t('kogeStaking')}
           </span>
           <span className="text-sm mb-10">{t('staking_desc')}</span>
           <div className="flex flex-row w-2/3">

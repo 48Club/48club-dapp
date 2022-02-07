@@ -5,6 +5,7 @@
   "staking_summary_own": "Percentage of individual positions",
   "staking_staking_title": "Staking pool",
   "my_staking_count": "My staking amount",
+  "kogeStaking": "Koge Staking",
   "staking": "Staking",
   "stake": "Stake",
   "unstake": "Unstake",
@@ -20,5 +21,6 @@
   "date": "Date",
   "see_more": "See more",
   "no_records": "No records",
-  "blocknumber": "Block number"
+  "blocknumber": "Block number",
+  "balance": "余额"
 }
