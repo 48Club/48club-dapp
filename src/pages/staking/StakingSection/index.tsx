@@ -19,7 +19,7 @@ export default function StakingSection() {
   const [activeItem, setActiveItem] = useState(0)
   const [input, setInput] = useState('')
   const { myStakeBalance, decimals, unstakeTime, withdrawTime, myTokenBalance, myUnstakeBalance } = useStakeInfo()
-  const { onStake, stakeLoading, onUnstake, unstakeLoading, onWithdraw, withdrawLoading } = useStake()
+  const { onWithdraw, withdrawLoading } = useStake()
 
   const { approve, loading: approveLoading } = useApprove(KogeAddress, StakingAddress)
   const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, StakingAddress)?.toString() ?? '0')
@@ -58,7 +58,6 @@ export default function StakingSection() {
             <div className="font-medium text-base mr-3 leading-7">
               {t('my_staking_count')}
             </div>
-            {/*<Tag type="doing" />*/}
           </div>
           <div className="text-2xl font-bold mb-4 leading-7">
             {formatAmount(myStakeBalance, decimals)} KOGE
@@ -95,7 +94,7 @@ export default function StakingSection() {
           </div>
           <div className="flex flex-row justify-between">
             <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
-                   placeholder={`${t("balance")}: ${formatAmount(currentBalance, decimals)} KOGE`}
+                   placeholder={`${t('balance')}: ${formatAmount(currentBalance, decimals)} KOGE`}
                    className="h-12 mb-6 text-base mr-6"
                    value={input}
                    onChange={(e) => setInput(e.target.value)} />
@@ -108,8 +107,8 @@ export default function StakingSection() {
                 <Button type="primary"
                         className="h-12 rounded"
                         onClick={onSubmit}
-                        loading={stakeLoading || unstakeLoading || withdrawLoading}
-                        disabled={stakeLoading || unstakeLoading || withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake)}>
+                        loading={withdrawLoading}
+                        disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake)}>
                   {t('confirm')}
                 </Button>
               )
