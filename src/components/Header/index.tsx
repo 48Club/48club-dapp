@@ -63,8 +63,8 @@ export default function Header() {
                   to={'/staking'}>
               {t('staking')}
             </Link>
-            {/*<Link className="text-black ml-5 font-medium hover:text-primary" to={'/nft'}>NFT</Link>*/}
-            {/*<Link className="text-black ml-5 font-medium hover:text-primary" to={'/voting'}>{t('voting')}</Link>*/}
+            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/nft'}>NFT</Link>
+            <Link className="text-black ml-5 font-medium hover:text-primary" to={'/voting'}>{t('voting')}</Link>
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t("more")}</div>
             </Dropdown>
