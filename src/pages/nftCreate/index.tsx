@@ -20,15 +20,57 @@ export default function NFTCreate() {
   const [activeItemOfCustomize, setActiveItemOfCustomize] = useState(0)
   const [previewVisible, setPrebiewVisible] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
-  const [fileList, setFileList] = useState([])
+  const [fileList, setFileList] = useState<any[]>([])
+  const [uploadLoading, setUploadLoading] = useState(false)
 
-  const handlePreview = async file => {
+  const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj)
+      file.preview = await getBase64(file)
     }
 
     setPrebiewVisible(true)
     setPreviewImage(file.url || file.preview)
+  }
+  const exitPreview = () => {
+    setPrebiewVisible(false)
+  }
+
+  const beforeUpload = (file) => {
+    setFileList([...fileList, file])
+    return false
+  }
+
+  const onRemove = (file) => {
+    const index = fileList.indexOf(file)
+    const newList = fileList.slice()
+    newList.splice(index, 1)
+    setFileList(newList)
+  }
+
+  const handleUpload = async () => {
+
+    setUploadLoading(true)
+
+    const ipfsRes = await window.IPFS.add(fileList[0])
+
+    console.log(ipfsRes)
+
+    // 直接用 fetch 也行
+    // const formData = new FormData()
+    // fileList.forEach(file => {
+    //   formData.append('files[]', file)
+    // })
+    // const res = await fetch('https://ipfs.infura.io:5001/api/v0/add?stream-channels=true', {
+    //   method: 'POST',
+    //   body: formData,
+    //   mode: 'cors',
+    // })
+    // const resJson = await res.json()
+    // console.log(resJson)
+
+    setUploadLoading(false)
+    setFileList([])
+
   }
 
   return (
@@ -94,23 +136,27 @@ export default function NFTCreate() {
           <div className="flex flex-col bg-light-white w-full items-center px-12 justify-center py-24">
             {
               previewVisible
-                ? <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                ? <img onClick={exitPreview} alt="example" style={{ width: '100%' }} src={previewImage} />
                 : <>
-                  <PictureOutlined className="text-3xl" />
-                  <div className="max-w-xs text-light-black text-xs font-medium mt-3 text-center">
-                    {t("upload_nft_file_requirement")}
-                  </div>
-                  <Upload
-                    action=""
-                    accept="image/*"
-                    onPreview={handlePreview}
-                  >
-                    <Button className="h-10 mt-4 w-38 text-sm text-light-black bg-yellow">
-                      {t("upload_image")}
-                    </Button>
-                  </Upload></>
+                    <PictureOutlined className="text-3xl" />
+                    <div className="max-w-xs text-light-black text-xs font-medium mt-3 text-center">
+                      {t("upload_nft_file_requirement")}
+                    </div>
+                    <Upload
+                      action=""
+                      accept="image/*"
+                      onPreview={handlePreview}
+                      onRemove={onRemove}
+                      beforeUpload={beforeUpload}
+                      fileList={fileList}
+                      maxCount={1}
+                    >
+                      <Button className="h-10 mt-4 w-38 text-sm text-light-black bg-yellow">
+                        {t("upload_image")}
+                      </Button>
+                    </Upload>
+                  </>
             }
-
           </div>
         </div>
         <div className="flex flex-col mt-12">
@@ -148,7 +194,11 @@ export default function NFTCreate() {
           <span className="text-dark-gray ">{t("nft_id_hint")}</span>
           <span className="text-light-black font-medium">{t("nft_id_value", {val: 1234})}</span>
         </div>
-        <Button className="h-12 text-sm text-light-black bg-yellow rounded font-medium mt-6 mb-20 w-full">
+        <Button
+          className="flex items-center justify-center h-12 text-sm text-light-black bg-yellow rounded font-medium mt-6 mb-20 w-full"
+          onClick={handleUpload}
+          loading={uploadLoading}
+        >
           {t("submit_nft")}
         </Button>
       </div>
