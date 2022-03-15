@@ -20,7 +20,7 @@
   "please_input": "请输入",
   "nft_brief_description": "NFT简介",
   "payment_hint": "您需要支付",
-  "payment_value": "{{val, number}}枚 KOGE (KOGE≈1.23USDT)",
+  "payment_value": "{{val, number}}枚 KOGE",
   "nft_id_hint": "该NFT序号",
   "nft_id_value": "第{{val, number}}枚NFT",
   "submit_nft": "提交NFT"

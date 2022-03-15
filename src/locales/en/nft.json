@@ -20,7 +20,7 @@
   "please_input": "Please input",
   "nft_brief_description": "NFT brief introduction",
   "payment_hint": "You need to pay",
-  "payment_value": "{{val, number}} of KOGE (KOGE ≈ 1.23 USDT)",
+  "payment_value": "{{val, number}} of KOGE",
   "nft_id_hint": "The NFT serial number",
   "nft_id_value": "NFT of {{val, number}}",
   "submit_nft": "Submit NFT"
