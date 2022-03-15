@@ -22,28 +22,32 @@ export default function ListSection() {
 }
 
 function NftItem({ tokenURI }) {
-  const [json, setJson] = useState<any>({})
+  const [json, setJson] = useState<any>()
 
   useEffect(() => {
-    if (!tokenURI) {
+    if (!tokenURI || json) {
       return
     }
     (async () => {
-      const url = tokenURI.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
-      const res = await fetch(url)
-      const json = await res.json()
-      setJson(json)
+      try {
+        const url = tokenURI.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
+        const res = await fetch(url)
+        const json = await res.json()
+        setJson(json)
+      } catch (e) {
+        console.error(e)
+      }
     })()
-  }, [tokenURI])
+  }, [tokenURI, json])
 
   return (
     <div className="w-full md:w-1/4 px-3 flex flex-col text-xs mb-10">
       <div className="relative shadow p-4 pb-8">
-        <img src={json.image?.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')} alt="" className="h-20 w-full" />
+        <img src={json?.image?.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')} alt="" className="h-20 w-full" />
         <img className="absolute top-7 right-7 w-8 h-8 cursor-pointer" src={edit} alt="" />
-        <div className="mt-4 text-light-black text-base">{json.description}</div>
+        <div className="mt-4 text-light-black text-base">{json?.description}</div>
         <div className="mt-2 text-gray text-xs">
-          {json.description}
+          {json?.description}
         </div>
       </div>
     </div>
