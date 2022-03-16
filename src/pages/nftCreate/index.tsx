@@ -57,22 +57,27 @@ export default function NFTCreate() {
 
   const handleUpload = async () => {
     setUploadLoading(true)
-    const imgRes = await window.IPFS.add(fileList[0])
-    if (!imgRes) {
-      return
-    }
-    const imgCid = imgRes.cid.toString()
+    try {
+      const imgRes = await window.IPFS.add(fileList[0])
+      if (!imgRes) {
+        return
+      }
+      const imgCid = imgRes.cid.toString()
 
-    const ipfsRes = await window.IPFS.add({
-      content: JSON.stringify({
-        name: name,
-        description: desc,
-        image: 'ipfs://' + imgCid,
-      }),
-    })
-    await onMint(ipfsRes.cid.toString())
-    setUploadLoading(false)
-    setFileList([])
+      const ipfsRes = await window.IPFS.add({
+        content: JSON.stringify({
+          name: name,
+          description: desc,
+          image: 'ipfs://' + imgCid,
+        }),
+      })
+      await onMint(ipfsRes.cid.toString())
+      setUploadLoading(false)
+      setFileList([])
+    } catch (error) {
+      setUploadLoading(false)
+      setFileList([])
+    }
   }
 
   return (

@@ -47,7 +47,10 @@ function NftItem({ tokenURI }) {
         !json
           ? <Skeleton active />
           : <div className="relative shadow p-4 pb-8">
-              <img src={json?.image?.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')} alt="" className="h-20 w-full" />
+              <img src={json?.image?.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')}
+                alt=""
+                className="h-20 w-full object-cover transform hover:scale-110 transition duration-240"
+              />
               <img className="absolute top-7 right-7 w-8 h-8 cursor-pointer" src={edit} alt="" />
               <div className="mt-4 text-light-black text-base">{json?.description}</div>
               <div className="mt-2 text-gray text-xs">
