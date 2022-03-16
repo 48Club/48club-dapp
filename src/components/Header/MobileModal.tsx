@@ -61,6 +61,12 @@ export default function MobileModal(props: { visible: boolean, oncancel: () => v
           <Menu.Item>
             <Link className="text-black opacity-75 hover:text-primary" to={'/'}>{t('staking')}</Link>
           </Menu.Item>
+          <Menu.Item>
+            <Link className="text-black opacity-75 hover:text-primary" to={'/nft'}>{t('NFT')}</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link className="text-black opacity-75 hover:text-primary" to={'/voting'}>{t('Voting')}</Link>
+          </Menu.Item>
           {/*<Menu.Item>*/}
           {/*  <Link className="text-black opacity-75 hover:text-primary" to={'/governance'}>NFT</Link>*/}
           {/*</Menu.Item>*/}
