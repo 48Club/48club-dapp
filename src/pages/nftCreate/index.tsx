@@ -63,7 +63,7 @@ export default function NFTCreate() {
         return
       }
       const imgCid = imgRes.cid.toString()
-
+      fetch(`https://cloudflare-ipfs.com/ipfs/${imgCid}`)
       const ipfsRes = await window.IPFS.add({
         content: JSON.stringify({
           name: name,
@@ -71,6 +71,7 @@ export default function NFTCreate() {
           image: 'ipfs://' + imgCid,
         }),
       })
+      fetch(`https://cloudflare-ipfs.com/ipfs/${ipfsRes.cid.toString()}`)
       await onMint(ipfsRes.cid.toString())
       setUploadLoading(false)
       setFileList([])
