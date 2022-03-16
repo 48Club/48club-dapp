@@ -44,6 +44,7 @@ export default function NFTCreate() {
 
   const beforeUpload = (file) => {
     setFileList([...fileList, file])
+    handlePreview(file)
     return false
   }
 
