@@ -36,12 +36,12 @@ export default function App() {
             <Route exact path="/governance" component={Governance} />
             <Route exact path="/validation-node" component={ValidationNode} />
             <Route exact path="/staking" component={Staking} />
-            <Route exact path="/voting" component={Voting} />
-            <Route exact path="/voting/create" component={VotingCreate} />
-            <Route exact path="/voting/detail/:id" component={VotingDetail} />
             <Route exact path="/nft" component={NFT} />
             <Route exact path="/nft/create" component={NFTCreate} />
             <Route exact path="/manage" component={Manage} />
+            <Route exact path="/voting" component={Voting} />
+            <Route exact path="/voting/create" component={VotingCreate} />
+            <Route exact path="/voting/detail/:id" component={VotingDetail} />
             <Route>
               <Redirect to="/" />
             </Route>

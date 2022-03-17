@@ -3,17 +3,15 @@ import React from 'react'
 import HeaderSection from './HeaderSection'
 import ResultSection from './ResultSection'
 import VoteSection from './VoteSection'
-import DetailSection from './DetailSection'
 
-export default function VotingDetail(props) {
-  console.log(props.match.params.id)
+export default function VotingDetail() {
   return (
-    <div className="px-4 pt-3">
+    <div className="px-4 max-w-6xl mx-auto pb-20">
       <Back />
       <HeaderSection />
       <VoteSection />
       <ResultSection />
-      <DetailSection />
+      {/*<DetailSection />*/}
     </div>
   )
 }

@@ -3,37 +3,31 @@ import { Button } from 'antd'
 import Label from 'components/Label'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import useGov from '../../../hooks/gov/useGov'
+import { useParams } from 'react-router-dom'
 
 export default function VoteSection() {
   const { t } = useTranslation()
+  const { id } = useParams<{ id: string }>()
+  const { onVote } = useGov()
+
   return (
     <div className="pt-20 w-full">
-      <Label text="选择您的投票" />
-      <div className="mt-6 flex flex-col px-6 shadow">
+      <Label text="Vote" />
+      <div className="mt-6 flex flex-col px-6 shadow py-2">
         <Button
-          className="mt-6 h-12 text-light-black text-xl font-bold"
-          icon={
-            <CheckCircleTwoTone
-              twoToneColor="#08C849"
-              className="align-baseline"
-            />
-          }
+          className="my-4 h-12 text-light-black text-xl font-bold"
+          icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
+          onClick={() => onVote(id, 1)}
         >
-          同意
+          Approve
         </Button>
         <Button
-          className="mt-6 h-12 text-light-black text-xl font-bold"
-          icon={
-            <CloseCircleTwoTone
-              twoToneColor="#EF2B2B"
-              className="align-baseline"
-            />
-          }
+          className="my-4 h-12 text-light-black text-xl font-bold"
+          icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
+          onClick={() => onVote(id, 0)}
         >
-          拒绝
-        </Button>
-        <Button className="h-10 my-8 text-sm font-medium rounded text-light-black bg-gray">
-          确认
+          Reject
         </Button>
       </div>
     </div>

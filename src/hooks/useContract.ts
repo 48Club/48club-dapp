@@ -20,6 +20,11 @@ export function useStakingContractReadonly() {
   return useMemo(() => new Contract(StakingAddress, Staking_ABI, provider), [provider])
 }
 
+export function useGovernanceContractReadonly() {
+  const provider = useMemo(() => new JsonRpcProvider('https://data-seed-prebsc-2-s2.binance.org:8545/'), [])
+  return useMemo(() => new Contract(GovernanceAddress, Governance_ABI, provider), [provider])
+}
+
 export function useNftContract() {
   return useMemo(() => new Contract(NftAddress, Nft_ABI), [])
 }
