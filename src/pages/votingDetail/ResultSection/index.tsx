@@ -1,4 +1,4 @@
-import { CheckCircleFilled, CloseCircleFilled, FrownFilled } from '@ant-design/icons'
+import { CheckCircleFilled, CloseCircleFilled, FrownFilled, SmileFilled } from '@ant-design/icons'
 import Label from 'components/Label'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,16 +8,20 @@ import { useParams } from 'react-router-dom'
 export default function ResultSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { againstVotes, forVotes } = useGovDetailInfo(id)
+  const { againstVotes, forVotes, state } = useGovDetailInfo(id)
   return (
-    <div className="pt-20 w-full">
-      <Label text="投票结果" />
+    <div className="flex-1 ml-2">
+      <Label text="Voting Result" />
 
       <div className="mt-6 flex flex-col px-6 pb-8 shadow">
         <div className="flex flex-row mt-6 pb-4 border-b border-gray">
-          <FrownFilled className="text-base text-gray mr-2.5" />
+          {state === 'Active' && <SmileFilled className="text-base text-gray mr-2.5" />}
+          {state === 'Succeeded' && <SmileFilled className="text-base text-gray mr-2.5" />}
+          {state === 'Defeated' && <FrownFilled className="text-base text-gray mr-2.5" />}
+          {state === 'Invalid' && <FrownFilled className="text-base text-gray mr-2.5" />}
+          {state === 'Refunded' && <FrownFilled className="text-base text-gray mr-2.5" />}
           <span className="text-base text-dark-gray">
-            该提案未达到有效标准，提案总票数小于237 KOGE
+            {state}
           </span>
         </div>
         <div className="flex flex-col mt-8">

@@ -6,11 +6,13 @@ import { useTranslation } from 'react-i18next'
 import { useGovernanceContractReadonly } from '../../../hooks/useContract'
 import { shorten } from '@funcblock/dapp-sdk'
 import moment from 'moment'
+import { Spin } from 'antd'
+import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 
 export default function CardSection() {
   const { t } = useTranslation()
 
-  const [records, setRecords] = useState<any[]>([])
+  const [records, setRecords] = useState<any[] | undefined>(undefined)
   const govContractReadonly = useGovernanceContractReadonly()
   useEffect(() => {
     (async () => {
@@ -29,31 +31,34 @@ export default function CardSection() {
   }, [govContractReadonly])
 
   return (
-    <div className="pt-4 w-auto mb-20">
+    <Spin spinning={!records} className="pt-4 w-full mb-20">
       {
-        records.map((item) => {
-          return (
-            <NavLink to={`/voting/detail/${item.proposalId}`} className="w-full mb-10 flex flex-col p-6 shadow">
-              <Tag type="doing" />
-              <div className="mt-4 text-base leading-6 mb-2 font-medium text-yellow">
-                Author: {shorten(item.proposer)}
-              </div>
-              <div className="font-blod text-xl leading-6 break-words mb-2 text-light-black">
-                {item.description.slice(0, 20)}
-              </div>
-              <div className="break-words text-sm leading-5 mb-12 text-dark-gray">
-                {item.description}
-              </div>
-              <div className="flex flex-row mb-2">
-                <CheckCircleTwoTone twoToneColor="#08C849" className="w-3.5 h-3.5 mr-2" />
-                <div className="text-xs leading-5 text-dark-gray">
-                  End time: {moment.unix(item.endTime).format('YYYY-MM-DD HH:mm')}
-                </div>
-              </div>
-            </NavLink>
-          )
-        })
+        records?.map((item) => <Card item={item} />)
       }
-    </div>
+    </Spin>
+  )
+}
+
+function Card({ item }) {
+  const { state, voteEnd } = useGovDetailInfo(item.proposalId)
+  return (
+    <NavLink to={`/voting/detail/${item.proposalId}`} className="w-full mb-10 flex flex-col p-6 shadow">
+      <Tag type={state} />
+      <div className="mt-4 text-base leading-6 mb-2 font-medium text-yellow">
+        Author: {shorten(item.proposer)}
+      </div>
+      <div className="font-blod text-xl leading-6 break-words mb-2 text-light-black">
+        {item.description.slice(0, 20)}
+      </div>
+      <div className="break-words text-sm leading-5 mb-12 text-dark-gray">
+        {item.description}
+      </div>
+      <div className="flex flex-row mb-2">
+        <CheckCircleTwoTone twoToneColor="#08C849" className="w-3.5 h-3.5 mr-2" />
+        <div className="text-xs leading-5 text-dark-gray">
+          End time: {moment.unix(voteEnd).format('YYYY-MM-DD HH:mm')}
+        </div>
+      </div>
+    </NavLink>
   )
 }

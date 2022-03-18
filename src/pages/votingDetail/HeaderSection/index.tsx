@@ -6,11 +6,12 @@ import { useParams } from 'react-router-dom'
 import { useGovernanceContractReadonly } from '../../../hooks/useContract'
 import { shorten } from '@funcblock/dapp-sdk'
 import moment from 'moment'
+import { Spin } from 'antd'
 
 export default function HeaderSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { proposer, proposerRewardClaimed, refunded, totalReward, totalStakeAtStart, voteEnd, voteStart } = useGovDetailInfo(id)
+  const { proposer, proposerRewardClaimed, refunded, totalReward, totalStakeAtStart, voteEnd, voteStart, state } = useGovDetailInfo(id)
 
   const [records, setRecords] = useState<any[]>([])
   const govContractReadonly = useGovernanceContractReadonly()
@@ -31,18 +32,18 @@ export default function HeaderSection() {
   const detail = records.find(i => i.proposalId === id)
 
   return (
-    <div className="pt-4 w-auto mb-10">
+    <Spin className="pt-4 w-full mb-10" spinning={!detail}>
       <div
         className="flex flex-col rounded-2xl items-center px-6 pt-8 pb-10 bg-another-white"
         style={{ backgroundColor: '#FFFBEC' }}
       >
-        <span className="font-bold text-2xl mb-4 text-light-black">
+        <div className="font-bold text-2xl mb-4 text-light-black">
           {detail?.description.slice(0, 20)}
-        </span>
-        <Tag type="doing" />
-        <span className="text-base mt-4 text-dark-gray pb-6 border-b border-gray text-center">
+        </div>
+        <Tag type={state} />
+        <div className="text-base mt-4 text-dark-gray pb-6 border-b border-gray text-center">
           {detail?.description}
-        </span>
+        </div>
         <div className="mt-6 flex flex-row justify-between text-sm w-full">
           <span className="text-dark-gray">Author</span>
           <span className="font-medium text-light-black">{shorten(proposer, 8)}</span>
@@ -56,6 +57,6 @@ export default function HeaderSection() {
           <span className="font-medium text-light-black">{moment.unix(voteEnd).format('YYYY-MM-DD HH:mm')}</span>
         </div>
       </div>
-    </div>
+    </Spin>
   )
 }

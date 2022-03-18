@@ -3,15 +3,18 @@ import React from 'react'
 import HeaderSection from './HeaderSection'
 import ResultSection from './ResultSection'
 import VoteSection from './VoteSection'
+import HistorySection from './HistorySection'
 
 export default function VotingDetail() {
   return (
     <div className="px-4 max-w-6xl mx-auto pb-20">
       <Back />
       <HeaderSection />
-      <VoteSection />
-      <ResultSection />
-      {/*<DetailSection />*/}
+      <div className="flex flex-row items-stretch mt-20">
+        <VoteSection />
+        <ResultSection />
+      </div>
+      <HistorySection />
     </div>
   )
 }

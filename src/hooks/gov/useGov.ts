@@ -17,7 +17,7 @@ export default function useGov() {
   const onVote = useCallback(async (proposalId, support: 0 | 1, reason: string = '') => {
     console.info('Vote', proposalId, support, reason)
     await vote(proposalId, support, reason)
-  }, [propose])
+  }, [vote])
 
   return {
     onPropose,

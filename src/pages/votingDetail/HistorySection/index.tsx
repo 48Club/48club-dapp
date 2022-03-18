@@ -1,19 +1,25 @@
-import { Button } from 'antd'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
+import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
+import { useParams } from 'react-router-dom'
 
-// todo  抽离表格
-export default function DetailSection() {
+export default function HistorySection() {
   const { t } = useTranslation()
-  const record = [1, 2, 3]
+  const { id } = useParams<{ id: string }>()
+  const { voteRecords } = useGovDetailInfo(id)
+
+  if (!voteRecords) {
+    return null
+  }
+
   return (
     <div className="flex flex-col my-20">
-      <Label text="投票信息" />
+      <Label text="Voting details" />
       <div className="mt-6 px-6 shadow">
-        {record.length > 0 ? (
+        {voteRecords.length > 0 ? (
           <div>
-            {record.map((item) => {
+            {voteRecords.map((item) => {
               return (
                 <div className="py-6 flex flex-col border-b border-gray">
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
@@ -43,16 +49,11 @@ export default function DetailSection() {
                 </div>
               )
             })}
-            <div className="py-10 text-center">
-              <Button className="h-9 text-sm font-medium rounded text-light-black bg-gray">
-                查看更多
-              </Button>
-            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
             <img src="/static/staking-no-records.png" className="mb-6" alt="" />
-            <span className="text-base text-gray">暂无记录</span>
+            <span className="text-base text-gray">No data</span>
           </div>
         )}
       </div>
