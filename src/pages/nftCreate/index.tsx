@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import useNft from '../../hooks/nft/useNft'
 import useNftInfo from '../../hooks/nft/useNftInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
+import ipfs from '../../utils/ipfs'
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -58,21 +59,19 @@ export default function NFTCreate() {
   const handleUpload = async () => {
     setUploadLoading(true)
     try {
-      const imgRes = await window.IPFS.add(fileList[0])
+      const imgRes = await ipfs.add(fileList[0])
       if (!imgRes) {
         return
       }
-      const imgCid = imgRes.cid.toString()
-      fetch(`https://cloudflare-ipfs.com/ipfs/${imgCid}`)
-      const ipfsRes = await window.IPFS.add({
+      const imgCid = imgRes.cid.toV1().toString()
+      const ipfsRes = await ipfs.add({
         content: JSON.stringify({
           name: name,
           description: desc,
           image: 'ipfs://' + imgCid,
         }),
       })
-      fetch(`https://cloudflare-ipfs.com/ipfs/${ipfsRes.cid.toString()}`)
-      await onMint(ipfsRes.cid.toString())
+      await onMint(ipfsRes.cid.toV1().toString())
       setUploadLoading(false)
       setFileList([])
     } catch (error) {

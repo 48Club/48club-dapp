@@ -23,14 +23,14 @@ export default function VotingCreate() {
 
   const { approve, loading: approveLoading } = useApprove(KogeAddress, GovernanceAddress)
   const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, GovernanceAddress)?.toString() ?? '0')
+  const amountBN = new BigNumber(amount).times(TEN_POW(18))
 
   const onSubmit = useCallback(async () => {
-    const amountBN = new BigNumber(amount)
     if (nft === undefined || !amountBN.gt(0)) {
       return
     }
-    await onPropose(nft, amountBN.times(TEN_POW(18)).toString(), desc)
-  }, [nft, desc, amount, onPropose])
+    await onPropose(nft, amountBN.toString(), desc)
+  }, [nft, desc, amountBN, onPropose])
 
   return (
     <div className="px-4 max-w-2xl mx-auto">
@@ -43,7 +43,7 @@ export default function VotingCreate() {
         <span className="text-sm font-medium mb-2 text-light-black">Choose NFT</span>
         <Select value={nft} className="w-full rounded" onChange={e => setNft(e)}>
           {
-            myNFTs.map(i => <Select.Option className=" bg-white" key={i.id} value={i.id}>{i.id}/{i.uri}</Select.Option>)
+            myNFTs.map(i => <Select.Option value={i.id}>{i.id} | {i.name}</Select.Option>)
           }
         </Select>
       </div>
@@ -76,7 +76,7 @@ export default function VotingCreate() {
               Approve
             </Button>
           ) : (
-            <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={onSubmit}>
+            <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={onSubmit} disabled={!minDeposit?.lt(amountBN)}>
               Submit
             </Button>
           )

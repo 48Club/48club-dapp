@@ -4,6 +4,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
+import { formatAmount } from '@funcblock/dapp-sdk'
 
 export default function ResultSection() {
   const { t } = useTranslation()
@@ -30,7 +31,7 @@ export default function ResultSection() {
               <CheckCircleFilled className="mr-2.5 text-green text-base" />
               <span className="text-black text-sm leading-6">Approve</span>
             </div>
-            <span className="text-black text-sm">{forVotes}</span>
+            <span className="text-black text-sm">{formatAmount(forVotes, 0)} KOGE</span>
           </div>
           <div className="mt-2.5 w-full relative">
             <div className="h-6 rounded-xl bg-green opacity-10">&nbsp;</div>
@@ -46,7 +47,7 @@ export default function ResultSection() {
               <CloseCircleFilled className="mr-2.5 text-red text-base" />
               <span className="text-black text-sm leading-6">Reject</span>
             </div>
-            <span className="text-black text-sm">{againstVotes}</span>
+            <span className="text-black text-sm">{formatAmount(againstVotes, 0)} KOGE</span>
           </div>
           <div className="mt-2.5 w-full relative">
             <div className="h-6 rounded-xl bg-red opacity-10">&nbsp;</div>

@@ -16,9 +16,7 @@ export default function useGovInfo() {
     },
   ]) ?? []) as Result[]
 
-  console.log(minDepositResult)
-
   return {
-    minDeposit: minDepositResult ? new BigNumber(minDepositResult.toString()).toNumber() : undefined,
+    minDeposit: minDepositResult ? new BigNumber(minDepositResult.toString()) : undefined,
   }
 }

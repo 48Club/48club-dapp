@@ -27,6 +27,7 @@
     "i18next": "^21.6.0",
     "i18next-xhr-backend": "^3.2.2",
     "ipfs-core": "^0.14.1",
+    "ipfs-http-client": "^56.0.1",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.1",
     "postcss": "^7.0.0",

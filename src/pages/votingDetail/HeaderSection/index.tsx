@@ -24,7 +24,7 @@ export default function HeaderSection() {
         proposer: i.args?.proposer?.toString(),
         startTime: i.args?.startTime?.toNumber(),
         endTime: i.args?.endTime?.toNumber(),
-        description: i.args?.description.toString(),
+        description: i.args?.description?.toString(),
       }))
       setRecords(rows)
     })()

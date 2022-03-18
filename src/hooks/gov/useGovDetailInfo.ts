@@ -2,6 +2,8 @@ import { useContractCalls, useEthers } from '@usedapp/core'
 import { useGovernanceContract, useGovernanceContractReadonly } from '../useContract'
 import { Result } from '@ethersproject/abi'
 import { useEffect, useMemo, useState } from 'react'
+import BigNumber from 'bignumber.js'
+import { TEN_POW } from '@funcblock/dapp-sdk'
 
 export default function useGovDetailInfo(proposalId: string) {
   const { account } = useEthers()
@@ -37,12 +39,12 @@ export default function useGovDetailInfo(proposalId: string) {
       console.log(events)
       const rows = events.map(i => ({
         proposalId: i.args?.proposalId?.toString(),
-        proposer: i.args?.proposer?.toString(),
-        startTime: i.args?.startTime?.toNumber(),
-        endTime: i.args?.endTime?.toNumber(),
-        description: i.args?.description.toString(),
+        reason: i.args?.reason?.toString(),
+        support: i.args?.support?.toString(),
+        voter: i.args?.voter?.toString(),
+        weight: i.args?.weight?.toString(),
+        blockNumber: i.blockNumber,
       }))
-      console.log(rows)
       setVoteRecords(rows)
     })()
   }, [govContractReadonly])
@@ -51,7 +53,6 @@ export default function useGovDetailInfo(proposalId: string) {
   const myCanVote = useMemo(() => {
     return state === 'Active'
   }, [state])
-
   return {
     proposer: proposalResult?.proposer.toString(),
     proposerRewardClaimed: proposalResult?.proposerRewardClaimed.toString(),
@@ -60,8 +61,8 @@ export default function useGovDetailInfo(proposalId: string) {
     totalStakeAtStart: proposalResult?.totalStakeAtStart.toString(),
     voteEnd: proposalResult?.voteEnd.toString(),
     voteStart: proposalResult?.voteStart.toString(),
-    againstVotes: votesResult?.againstVotes.toNumber(),
-    forVotes: votesResult?.forVotes.toNumber(),
+    againstVotes: new BigNumber(votesResult?.againstVotes.toString()).div(TEN_POW(18)).toNumber(),
+    forVotes: new BigNumber(votesResult?.forVotes.toString()).div(TEN_POW(18)).toNumber(),
     state,
     voteRecords,
     myCanVote,
