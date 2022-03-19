@@ -32,7 +32,7 @@ export default function HistorySection() {
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
                     <span className="text-gray">Result</span>
                     <span className="break-words text-right">
-                      {i.support === '1' ? 'YES' : 'NO'}
+                      {i.support === '1' ? 'Approve' : 'Reject'}
                     </span>
                   </div>
                   <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
