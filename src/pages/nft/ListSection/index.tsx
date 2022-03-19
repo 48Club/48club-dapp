@@ -1,4 +1,5 @@
 import React from 'react'
+import { Skeleton } from 'antd'
 import edit from '../../../assets/images/icon/edit.svg'
 import useNftInfo, { INFTInfo } from '../../../hooks/nft/useNftInfo'
 
@@ -17,16 +18,26 @@ export default function ListSection() {
 function NftItem({ nft }: { nft: INFTInfo }) {
   return (
     <div className="w-full md:w-1/4 px-3 flex flex-col text-xs mb-10">
-      <div className="relative shadow p-4 pb-8">
-        <img src={nft.image}
-             alt=""
-             className="h-20 w-full object-cover transform hover:scale-110 transition duration-240"
-        />
-        <img className="absolute top-7 right-7 w-8 h-8 cursor-pointer" src={edit} alt="" />
-        <div className="mt-4 text-light-black text-base">{nft.name}</div>
-        <div className="mt-2 text-gray text-xs">
-          {nft.description}
-        </div>
+      <div className="h-full relative shadow p-4 pb-8">
+        {
+          !nft.image
+          ? <>
+              <Skeleton.Image className="w-full" />
+              <Skeleton active paragraph={{rows: 1}} />
+            </>
+          :
+            <>
+              <img src={nft.image}
+                alt=""
+                className="h-20 w-full object-cover transform hover:scale-105 transition duration-240"
+              />
+              <img className="absolute top-7 right-7 w-8 h-8 cursor-pointer" src={edit} alt="" />
+              <div className="mt-4 text-light-black text-base">{nft.name}</div>
+              <div className="mt-2 text-gray text-xs">
+                {nft.description}
+              </div>
+            </>
+        }
       </div>
     </div>
   )

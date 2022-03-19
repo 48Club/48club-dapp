@@ -7,7 +7,7 @@ import './index.less'
 const { RangePicker } = DatePicker
 const { Option } = Select
 
-export default function FilterSection() {
+export default function FilterSection({ onSwitch }) {
   const { t } = useTranslation()
   const optionList = [
     {
@@ -29,23 +29,39 @@ export default function FilterSection() {
   ]
 
   const [switchValue, changeSwitch] = useState(true)
+  const [status, setStatus] = useState('all')
+  const [timeRange, setTimeRange] = useState<any>()
+
+  const switchHandler = (val: boolean) => {
+    changeSwitch(val)
+    onSwitch(val)
+  }
+  const selectHandler = (val: string) => {
+    setStatus(val)
+    onSwitch(val)
+  }
+  const timeSelectHandler = (val) => {
+    setTimeRange(val)
+    onSwitch(val)
+  }
 
   return (
-    <div className="pt-4 w-auto mb-10 flex flex-col">
-      <div className="flex flex-col mb-6">
+    <div className="pt-4 w-auto mb-12 flex flex-col md:flex-row md:justify-between">
+      <div className="flex flex-col mb-6 md:mr-6 md:w-80">
         <span className="text-sm leading-5 mb-2 text-light-black">
           筛选时间
         </span>
-        <RangePicker className="h-12 rounded bg-light-white" />
+        <RangePicker className="h-12 rounded bg-light-white" onChange={timeSelectHandler} />
       </div>
-      <div className="flex flex-row">
-        <div className="flex flex-col w-full mr-6">
+      <div className="flex md:flex-1 md:justify-between">
+        <div className="flex flex-col w-full mr-6 md:w-80">
           <span className="text-sm leading-5 mb-2 text-light-black">
             提案状态
           </span>
           <Select
-            defaultValue="all"
+            defaultValue={status}
             className="w-full h-12 rounded filter-select bg-light-white"
+            onChange={selectHandler}
           >
             {optionList.map((item) => {
               return <Option key={item.label} value={item.value}>{item.label}</Option>
@@ -59,7 +75,7 @@ export default function FilterSection() {
           <Switch
             checked={switchValue}
             className="filter-switch w-full h-12"
-            onChange={changeSwitch}
+            onChange={switchHandler}
           />
         </div>
       </div>
