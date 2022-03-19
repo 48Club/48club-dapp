@@ -9,7 +9,7 @@ export default function useGovDetailInfo(proposalId: string) {
   const { account } = useEthers()
   const govContract = useGovernanceContract()
 
-  const [proposalResult, votesResult, stateResult] = (useContractCalls([
+  const [proposalResult, votesResult, stateResult, rewardInfoResult] = (useContractCalls([
     {
       address: govContract.address,
       abi: govContract.interface,
@@ -27,6 +27,12 @@ export default function useGovDetailInfo(proposalId: string) {
       abi: govContract.interface,
       method: 'state',
       args: [proposalId],
+    },
+    {
+      address: govContract.address,
+      abi: govContract.interface,
+      method: 'getClaimableRewardInfo',
+      args: [account, proposalId],
     },
   ]) ?? []) as Result[]
 
@@ -66,5 +72,6 @@ export default function useGovDetailInfo(proposalId: string) {
     state,
     voteRecords,
     myCanVote,
+    myReward: new BigNumber(rewardInfoResult?.claimableAmount.toString()),
   }
 }

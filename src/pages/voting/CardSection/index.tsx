@@ -1,39 +1,22 @@
 import { CheckCircleTwoTone } from '@ant-design/icons'
 import Tag from 'components/Tag'
 import { NavLink } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useGovernanceContractReadonly } from '../../../hooks/useContract'
 import { shorten } from '@funcblock/dapp-sdk'
 import moment from 'moment'
 import { Spin } from 'antd'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
+import useGovInfo from '../../../hooks/gov/useGovInfo'
 
 export default function CardSection() {
   const { t } = useTranslation()
-
-  const [records, setRecords] = useState<any[] | undefined>(undefined)
-  const govContractReadonly = useGovernanceContractReadonly()
-  useEffect(() => {
-    (async () => {
-      const createdFilter = govContractReadonly.filters.ProposalCreated(null, null)
-      const events = await govContractReadonly.queryFilter(createdFilter)
-      const rows = events.map(i => ({
-        proposalId: i.args?.proposalId?.toString(),
-        proposer: i.args?.proposer?.toString(),
-        startTime: i.args?.startTime?.toNumber(),
-        endTime: i.args?.endTime?.toNumber(),
-        description: i.args?.description?.toString(),
-      }))
-      console.log(rows)
-      setRecords(rows)
-    })()
-  }, [govContractReadonly])
+  const { proposals } = useGovInfo()
 
   return (
-    <Spin spinning={!records} className="pt-4 w-full mb-20">
+    <Spin spinning={!proposals} className="pt-4 w-full mb-20">
       {
-        records?.map((item) => <Card item={item} />)
+        proposals?.map((item) => <Card item={item} />)
       }
     </Spin>
   )

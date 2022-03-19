@@ -1,35 +1,19 @@
 import Tag from 'components/Tag'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
-import { useGovernanceContractReadonly } from '../../../hooks/useContract'
 import { shorten } from '@funcblock/dapp-sdk'
 import moment from 'moment'
 import { Spin } from 'antd'
+import useGovInfo from '../../../hooks/gov/useGovInfo'
 
 export default function HeaderSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { proposer, proposerRewardClaimed, refunded, totalReward, totalStakeAtStart, voteEnd, voteStart, state } = useGovDetailInfo(id)
-
-  const [records, setRecords] = useState<any[]>([])
-  const govContractReadonly = useGovernanceContractReadonly()
-  useEffect(() => {
-    (async () => {
-      const createdFilter = govContractReadonly.filters.ProposalCreated(null, null)
-      const events = await govContractReadonly.queryFilter(createdFilter)
-      const rows = events.map(i => ({
-        proposalId: i.args?.proposalId?.toString(),
-        proposer: i.args?.proposer?.toString(),
-        startTime: i.args?.startTime?.toNumber(),
-        endTime: i.args?.endTime?.toNumber(),
-        description: i.args?.description?.toString(),
-      }))
-      setRecords(rows)
-    })()
-  }, [govContractReadonly])
-  const detail = records.find(i => i.proposalId === id)
+  const { proposals } = useGovInfo()
+  const { proposer, voteEnd, voteStart, state } = useGovDetailInfo(id)
+  const detail = proposals?.find(i => i.proposalId === id)
 
   return (
     <Spin className="pt-4 w-full mb-10" spinning={!detail}>
