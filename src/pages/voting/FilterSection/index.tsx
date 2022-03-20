@@ -18,16 +18,24 @@ export default function FilterSection() {
     },
     {
       label: '进行中',
-      value: 'doing',
+      value: 'Active',
     },
     {
       label: '已通过',
-      value: 'done',
+      value: 'Succeeded',
     },
     {
       label: '已关闭',
-      value: 'fail',
+      value: 'Invalid',
     },
+    {
+      label: 'Refunded',
+      value: 'Refunded',
+    },
+    {
+      label: 'Defeated',
+      value: 'Defeated',
+    }
   ]
 
   return (
