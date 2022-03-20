@@ -18,5 +18,5 @@ export const NftAddress = {
 
 export const GovernanceAddress = {
   [ChainId.BSC]: '',
-  [ChainId.BSCTestnet]: '0x1eB0275DE87435C59Ae2036D4c3ff57B55279798',
+  [ChainId.BSCTestnet]: '0x0B33029e075e0BC4bF69D2227d60AF9B8E8c039e',
 }[CHAIN_ID]
