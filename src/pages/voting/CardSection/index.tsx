@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { shorten } from '@funcblock/dapp-sdk'
+import { useEthers } from '@usedapp/core'
 import moment from 'moment'
 import { Spin } from 'antd'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
@@ -25,13 +26,17 @@ export default function CardSection() {
 
 function Card({ item }) {
   const info = useGovDetailInfo(item.proposalId)
-  const { state, voteEnd, voteStart, totalReward } = info
-  const { status } = useContext(GovInfoFilterContext)
+  const { state, voteEnd, voteStart, totalReward, proposer } = info
+  const { status, related, timeRanges } = useContext(GovInfoFilterContext)
+  const { account } = useEthers()
 
   return (
     <>
       {
-        (status === 'all' || status === state) &&
+        (status === 'all' || status === state)
+        && (!related || (proposer === account))
+        && (!timeRanges?.length || (moment.unix(voteStart).isAfter(timeRanges?.[0]) && moment.unix(voteStart).isBefore(timeRanges?.[1])))
+        &&
           (<NavLink to={`/voting/detail/${item.proposalId}`} className="w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg">
           <div className="flex flex-col md:flex-row-reverse md:mb-2">
             <Tag type={state} className="min-w-16 h-7" />

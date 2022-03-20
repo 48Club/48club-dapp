@@ -7,7 +7,7 @@ import { GovInfoFilterContext, GovSetFilterContext } from '../../hooks/gov/useGo
 export default function Voting() {
   const [status, setStatus] = useState('all')
   const [timeRanges, setTimeRanges] = useState([])
-  const [related, setRelated] = useState(true)
+  const [related, setRelated] = useState(false)
 
   return (
     <div className="px-4 max-w-6xl mx-auto">

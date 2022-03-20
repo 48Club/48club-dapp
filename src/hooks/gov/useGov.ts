@@ -42,7 +42,7 @@ export default function useGov() {
 export const GovInfoFilterContext = createContext({
   status: 'all',
   timeRanges: [],
-  related: true,
+  related: false,
 })
 
 export const GovSetFilterContext = createContext<{
