@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { createContext, useCallback } from 'react'
 import { useContractFunction, useEthers } from '@usedapp/core'
 import { useGovernanceContract } from '../useContract'
 
@@ -38,3 +38,19 @@ export default function useGov() {
     onRefund,
   }
 }
+
+export const GovInfoFilterContext = createContext({
+  status: 'all',
+  timeRanges: [],
+  related: true,
+})
+
+export const GovSetFilterContext = createContext<{
+  setStatus: any,
+  setTimeRanges: any,
+  setRelated: any
+}>({
+  setStatus: () => {},
+  setTimeRanges: () => {},
+  setRelated: () => {}
+})

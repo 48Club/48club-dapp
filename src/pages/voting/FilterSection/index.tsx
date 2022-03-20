@@ -1,15 +1,16 @@
 import { DatePicker, Select, Switch } from 'antd'
-import React, { useState } from 'react'
+import React, {useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import useGovInfo from '../../../hooks/gov/useGovInfo'
+import { GovSetFilterContext, GovInfoFilterContext } from '../../../hooks/gov/useGov'
 import './index.less'
 
 const { RangePicker } = DatePicker
 const { Option } = Select
 
-export default function FilterSection({ onSwitch }) {
+export default function FilterSection() {
   const { t } = useTranslation()
-  const { related, setRelated, setTimeRanges, status, setStatus } = useGovInfo()
+  const { setRelated, setTimeRanges, setStatus } = useContext(GovSetFilterContext)
+  const { related , status } = useContext(GovInfoFilterContext)
   const optionList = [
     {
       label: '全部',

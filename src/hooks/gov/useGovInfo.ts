@@ -8,11 +8,6 @@ export default function useGovInfo() {
   const { account } = useEthers()
   const govContract = useGovernanceContract()
 
-  // for filter
-  const [related, setRelated] = useState(true)
-  const [timeRanges, setTimeRanges] = useState<any>([])
-  const [status, setStatus] = useState('all')
-
   const [minDepositResult] = (useContractCalls([
     {
       address: govContract.address,
@@ -43,11 +38,5 @@ export default function useGovInfo() {
   return {
     minDeposit: minDepositResult ? new BigNumber(minDepositResult.toString()) : undefined,
     proposals: records,
-    related,
-    setRelated,
-    timeRanges,
-    setTimeRanges,
-    status,
-    setStatus,
   }
 }
