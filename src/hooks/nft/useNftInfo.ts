@@ -1,5 +1,5 @@
 import { useContractCalls, useEthers } from '@usedapp/core'
-import { useNftContract } from '../useContract'
+import { useGovernanceContract, useNftContract } from '../useContract'
 import { Result } from '@ethersproject/abi'
 import BigNumber from 'bignumber.js'
 import { useEffect, useMemo, useState } from 'react'
@@ -18,7 +18,9 @@ export interface INFTInfo {
 export default function useNftInfo() {
   const { account } = useEthers()
   const nftContract = useNftContract()
+  const govContract = useGovernanceContract()
   const nftMeta = useMemo(() => ({ address: nftContract.address, abi: nftContract.interface }), [nftContract])
+  const govMeta = useMemo(() => ({ address: govContract.address, abi: govContract.interface }), [govContract])
 
   const [totalSupplyResult, balanceOfResult, nextMintCostResult] = (useContractCalls([
     { ...nftMeta, method: 'totalSupply', args: [] },
@@ -32,7 +34,7 @@ export default function useNftInfo() {
   const tokensResults = useContractCalls(tokensMeta) as Result[]
   const ownersMeta = useMemo(() => tokenIds.map(id => ({ ...nftMeta, method: 'ownerOf', args: [id] })), [tokenIds, nftMeta])
   const ownersResults = useContractCalls(ownersMeta) as Result[]
-  const isInUseMeta = useMemo(() => tokenIds.map(id => ({ ...nftMeta, method: 'isNftInUse', args: [id] })), [tokenIds, nftMeta])
+  const isInUseMeta = useMemo(() => tokenIds.map(id => ({ ...govMeta, method: 'isNftInUse', args: [id] })), [tokenIds, govMeta])
   const isInUseResults = useContractCalls(isInUseMeta) as Result[]
 
   const owners = useMemo(() => ownersResults.map(i => i?.[0].toString()), [ownersResults])

@@ -46,7 +46,7 @@ export default function VotingCreate() {
         <span className="text-sm font-medium mb-2 text-light-black">{t('choose')}</span>
         <Select value={nft} className="w-full h-12 rounded border-none bg-light-white" style={{ backgroundColor: '#F9F9F9' }} size="large" onChange={e => setNft(e)}>
           {
-            myNFTs.filter(i => !i.isInUse).map(i => <Select.Option className="h-10 flex items-center" value={i.id}>{i.id} | {i.name}</Select.Option>)
+            myNFTs.filter(i => !i.isInUse).map(i => <Select.Option key={i.id} className="h-10 flex items-center" value={i.id}>{i.id} | {i.name}</Select.Option>)
           }
         </Select>
       </div>
