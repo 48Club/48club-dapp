@@ -33,40 +33,49 @@ export default function VotingCreate() {
   }, [nft, desc, amountBN, onPropose])
 
   return (
-    <div className="px-4 max-w-2xl mx-auto">
+    <div className="px-4 max-w-2xl mx-auto relative">
       <Back />
-      <div className="mt-4 rounded-2xl flex flex-col items-center" style={{ backgroundColor: '#FFFBEC' }}>
-        <span className="mt-8 font-bold text-2xl mb-4 text-light-black">Create KOGE Proposal</span>
-        <span className="text-base mb-10 text-dark-gray">KOGE voting will determine the direction of governance</span>
+      <div className="mt-4 px-6 md:mt-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: '#FFFBEC' }}>
+        <span className="mt-10 font-bold text-2xl mb-4 text-light-black">Create KOGE Proposal</span>
+        <span className="text-base mb-12 text-dark-gray">KOGE voting will determine the direction of governance</span>
       </div>
+
       <div className="flex flex-col mt-10">
         <span className="text-sm font-medium mb-2 text-light-black">Choose NFT</span>
-        <Select value={nft} className="w-full rounded" onChange={e => setNft(e)}>
+        <Select value={nft} className="w-full h-12 rounded border-none bg-light-white" style={{ backgroundColor: "#F9F9F9" }} size="large" onChange={e => setNft(e)}>
           {
-            myNFTs.map(i => <Select.Option value={i.id}>{i.id} | {i.name}</Select.Option>)
+            myNFTs.map(i => <Select.Option className="h-10 flex items-center" value={i.id}>{i.id} | {i.name}</Select.Option>)
           }
         </Select>
       </div>
+
       <div className="flex flex-col mt-12">
         <span className="text-sm font-medium mb-2 text-light-black">Description</span>
-        <TextArea rows={4} placeholder="Please input" className="rounded text-sm text-light-black" value={desc} onChange={e => setDesc(e.target.value)} />
+        <TextArea rows={4} placeholder="Please input" className="border-none rounded text-sm text-light-black bg-light-white" value={desc} onChange={e => setDesc(e.target.value)} />
       </div>
-      <div className="flex flex-col mt-12">
-        <span className="text-sm font-medium mb-2 text-light-black">Voting type</span>
-        <Input value="Single choice" className="rounded text-sm text-light-black" disabled />
+
+      <div className="flex flex-col md:flex-row md:justify-between md:gap-4">
+        <div className="flex flex-col mt-12 md:w-1/2">
+          <span className="text-sm font-medium mb-2 text-light-black">Voting type</span>
+          <Input value="Single choice" className="h-12 border-none rounded text-sm text-light-black bg-light-white" disabled />
+        </div>
+        <div className="flex flex-col mt-12 md:w-1/2">
+          <span className="text-sm font-medium mb-2 text-light-black">Voting Period</span>
+          <Input value="7 Days" className="h-12 border-none rounded text-sm text-light-black bg-light-white" disabled />
+        </div>
       </div>
-      <div className="flex flex-col mt-12">
-        <span className="text-sm font-medium mb-2 text-light-black">Voting Period</span>
-        <Input value="7 Days" className="rounded text-sm text-light-black" disabled />
-      </div>
+
       <div className="flex flex-col mt-12">
         <span className="text-sm font-medium mb-2 text-light-black">Options</span>
-        <Input value="Option1: Approve" className="rounded text-sm mb-2 text-light-black" disabled />
-        <Input value="Option2: Reject" className="rounded text-sm text-light-black" disabled />
+        <div className="flex flex-col md:flex-row md:justify-between md:gap-4">
+          <Input value="Option1: Approve" className="h-12 rounded border-none text-sm mb-2 md:mb-0 text-light-black bg-light-white" disabled />
+          <Input value="Option2: Reject" className="h-12 rounded border-none text-sm text-light-black bg-light-white" disabled />
+        </div>
       </div>
+
       <div className="flex flex-col mt-12">
         <span className="text-sm mb-2 text-light-black">Pay (min: {formatAmount(minDeposit, 18)})</span>
-        <Input className="rounded font-medium text-sm text-light-black" suffix="KOGE" value={amount} onChange={e => setAmount(e.target.value)} />
+        <Input className="h-12 border-none rounded text-sm text-light-black bg-light-white" suffix="KOGE" value={amount} onChange={e => setAmount(e.target.value)} />
       </div>
 
       <div className="w-full mt-12 mb-20">

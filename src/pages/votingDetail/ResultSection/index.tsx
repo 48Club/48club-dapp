@@ -11,10 +11,10 @@ export default function ResultSection() {
   const { id } = useParams<{ id: string }>()
   const { againstVotes, forVotes, state } = useGovDetailInfo(id)
   return (
-    <div className="flex-1 ml-2">
+    <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Label text="Voting Result" />
 
-      <div className="mt-6 flex flex-col px-6 pb-8 shadow">
+      <div className="mt-6 flex flex-col flex-1 px-6 pb-8 shadow rounded-lg">
         <div className="flex flex-row mt-6 pb-4 border-b border-gray">
           {state === 'Active' && <SmileFilled className="text-base text-gray mr-2.5" />}
           {state === 'Succeeded' && <SmileFilled className="text-base text-gray mr-2.5" />}

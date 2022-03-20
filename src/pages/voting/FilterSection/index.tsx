@@ -1,7 +1,7 @@
 import { DatePicker, Select, Switch } from 'antd'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import useGovInfo from '../../../hooks/gov/useGovInfo'
 import './index.less'
 
 const { RangePicker } = DatePicker
@@ -9,6 +9,7 @@ const { Option } = Select
 
 export default function FilterSection({ onSwitch }) {
   const { t } = useTranslation()
+  const { related, setRelated, setTimeRanges, status, setStatus } = useGovInfo()
   const optionList = [
     {
       label: '全部',
@@ -28,30 +29,13 @@ export default function FilterSection({ onSwitch }) {
     },
   ]
 
-  const [switchValue, changeSwitch] = useState(true)
-  const [status, setStatus] = useState('all')
-  const [timeRange, setTimeRange] = useState<any>()
-
-  const switchHandler = (val: boolean) => {
-    changeSwitch(val)
-    onSwitch(val)
-  }
-  const selectHandler = (val: string) => {
-    setStatus(val)
-    onSwitch(val)
-  }
-  const timeSelectHandler = (val) => {
-    setTimeRange(val)
-    onSwitch(val)
-  }
-
   return (
     <div className="pt-4 w-auto mb-12 flex flex-col md:flex-row md:justify-between">
       <div className="flex flex-col mb-6 md:mr-6 md:w-80">
         <span className="text-sm leading-5 mb-2 text-light-black">
           筛选时间
         </span>
-        <RangePicker className="h-12 rounded bg-light-white" onChange={timeSelectHandler} />
+        <RangePicker className="h-12 rounded border-none bg-light-white" onChange={setTimeRanges} />
       </div>
       <div className="flex md:flex-1 md:justify-between">
         <div className="flex flex-col w-full mr-6 md:w-80">
@@ -60,11 +44,11 @@ export default function FilterSection({ onSwitch }) {
           </span>
           <Select
             defaultValue={status}
-            className="w-full h-12 rounded filter-select bg-light-white"
-            onChange={selectHandler}
+            className="w-full h-12 rounded border-none filter-select bg-light-white"
+            onChange={setStatus}
           >
             {optionList.map((item) => {
-              return <Option key={item.label} value={item.value}>{item.label}</Option>
+              return <Option className="h-10 flex items-center" key={item.label} value={item.value}>{item.label}</Option>
             })}
           </Select>
         </div>
@@ -73,9 +57,9 @@ export default function FilterSection({ onSwitch }) {
             与我相关
           </span>
           <Switch
-            checked={switchValue}
+            checked={related}
             className="filter-switch w-full h-12"
-            onChange={switchHandler}
+            onChange={setRelated}
           />
         </div>
       </div>

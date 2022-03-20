@@ -18,27 +18,31 @@ export default function HeaderSection() {
   return (
     <Spin className="pt-4 w-full mb-10" spinning={!detail}>
       <div
-        className="flex flex-col rounded-2xl items-center px-6 pt-8 pb-10 bg-another-white"
+        className="flex flex-col rounded-2xl items-center px-6 pt-8 pb-10 bg-another-white md:mt-8"
         style={{ backgroundColor: '#FFFBEC' }}
       >
-        <div className="font-bold text-2xl mb-4 text-light-black">
-          {detail?.description.slice(0, 20)}
+        <div className="flex flex-col items-center mb-4 md:flex-row">
+          <div className="font-bold text-2xl mb-4 text-light-black md:mb-0 md:mr-4 md:text-4xl">
+            {detail?.description.slice(0, 20)}
+          </div>
+          <Tag type={state} />
         </div>
-        <Tag type={state} />
-        <div className="text-base mt-4 text-dark-gray pb-6 border-b border-gray text-center">
+        <div className="w-full mb-4 text-base text-dark-gray pb-6 border-b border-gray text-center md:pb-8 md:border-none md:mb-0">
           {detail?.description}
         </div>
-        <div className="mt-6 flex flex-row justify-between text-sm w-full">
-          <span className="text-dark-gray">Author</span>
-          <span className="font-medium text-light-black">{shorten(proposer, 8)}</span>
-        </div>
-        <div className="mt-4 flex flex-row justify-between text-sm w-full">
-          <span className="text-dark-gray">Start time</span>
-          <span className="font-medium text-light-black">{moment.unix(voteStart).format('YYYY-MM-DD HH:mm')}</span>
-        </div>
-        <div className="mt-4 flex flex-row justify-between text-sm w-full">
-          <span className="text-dark-gray">End time</span>
-          <span className="font-medium text-light-black">{moment.unix(voteEnd).format('YYYY-MM-DD HH:mm')}</span>
+        <div className="w-full md:flex md:justify-around">
+          <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
+            <span className="text-dark-gray md:mb-2">Author</span>
+            <span className="font-medium text-light-black">{shorten(proposer, 8)}</span>
+          </div>
+          <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
+            <span className="text-dark-gray md:mb-2">Start time</span>
+            <span className="font-medium text-light-black">{moment.unix(voteStart).format('YYYY-MM-DD HH:mm')}</span>
+          </div>
+          <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
+            <span className="text-dark-gray md:mb-2">End time</span>
+            <span className="font-medium text-light-black">{moment.unix(voteEnd).format('YYYY-MM-DD HH:mm')}</span>
+          </div>
         </div>
       </div>
     </Spin>

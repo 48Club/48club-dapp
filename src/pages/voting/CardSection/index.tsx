@@ -16,7 +16,7 @@ export default function CardSection() {
   return (
     <Spin spinning={!proposals} className="pt-4 w-full mb-20">
       {
-        proposals?.map((item) => <Card item={item} />)
+        proposals?.map((item, index) => <Card item={item} key={index}/>)
       }
     </Spin>
   )

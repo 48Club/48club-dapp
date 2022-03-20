@@ -7,10 +7,10 @@ import HistorySection from './HistorySection'
 
 export default function VotingDetail() {
   return (
-    <div className="px-4 max-w-6xl mx-auto pb-20">
+    <div className="relative px-4 max-w-6xl mx-auto pb-20">
       <Back />
       <HeaderSection />
-      <div className="flex flex-row items-stretch mt-20">
+      <div className="flex flex-col md:flex-row items-stretch mt-20">
         <VoteSection />
         <ResultSection />
       </div>

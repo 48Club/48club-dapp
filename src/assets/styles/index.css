@@ -34,3 +34,7 @@ body .container {
   margin-right: auto;
   padding: 0 16px
 }
+
+iframe {
+  display: none;
+}
