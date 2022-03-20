@@ -44,9 +44,9 @@ export default function VotingCreate() {
 
       <div className="flex flex-col mt-10">
         <span className="text-sm font-medium mb-2 text-light-black">{t('choose')}</span>
-        <Select value={nft} className="w-full h-12 rounded border-none bg-light-white" style={{ backgroundColor: "#F9F9F9" }} size="large" onChange={e => setNft(e)}>
+        <Select value={nft} className="w-full h-12 rounded border-none bg-light-white" style={{ backgroundColor: '#F9F9F9' }} size="large" onChange={e => setNft(e)}>
           {
-            myNFTs.map(i => <Select.Option className="h-10 flex items-center" value={i.id}>{i.id} | {i.name}</Select.Option>)
+            myNFTs.filter(i => !i.isInUse).map(i => <Select.Option className="h-10 flex items-center" value={i.id}>{i.id} | {i.name}</Select.Option>)
           }
         </Select>
       </div>
@@ -82,16 +82,15 @@ export default function VotingCreate() {
 
       <div className="w-full mt-12 mb-20">
         {
-          !allowance.gt(0) ? (
-            <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={approve} loading={approveLoading}>
-              {t('approve')}
-            </Button>
-          ) : (
-            <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={onSubmit} disabled={!minDeposit?.lt(amountBN)}>
-              {t('submit')}
-            </Button>
-          )
+          !allowance.gt(0) &&
+          <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={approve} loading={approveLoading}>
+            {t('approve')}
+          </Button>
         }
+        <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={onSubmit}
+                disabled={!minDeposit?.lt(amountBN) || !allowance.gt(0)}>
+          {t('submit')}
+        </Button>
       </div>
     </div>
   )

@@ -9,6 +9,7 @@ export interface INFTInfo {
   id: number
   uri: string
   owner: string
+  isInUse: boolean
   image: string
   name: string
   description: string
@@ -31,8 +32,11 @@ export default function useNftInfo() {
   const tokensResults = useContractCalls(tokensMeta) as Result[]
   const ownersMeta = useMemo(() => tokenIds.map(id => ({ ...nftMeta, method: 'ownerOf', args: [id] })), [tokenIds, nftMeta])
   const ownersResults = useContractCalls(ownersMeta) as Result[]
+  const isInUseMeta = useMemo(() => tokenIds.map(id => ({ ...nftMeta, method: 'isNftInUse', args: [id] })), [tokenIds, nftMeta])
+  const isInUseResults = useContractCalls(isInUseMeta) as Result[]
 
   const owners = useMemo(() => ownersResults.map(i => i?.[0].toString()), [ownersResults])
+  const isInUses = useMemo(() => isInUseResults.map(i => i?.[0]), [isInUseResults])
   const tokenURIs = useMemo(() => tokensResults.map(i => i?.[0].toString()), [tokensResults])
   const [jsons, setJsons] = useState<any[]>([])
 
@@ -60,11 +64,12 @@ export default function useNftInfo() {
       id: index,
       uri: tokenURIs[index],
       owner: owners[index],
+      isInUse: isInUses[index],
       image: ipfsToHttp(jsons[index]?.image) ?? '',
       name: jsons[index]?.name ?? '...',
       description: jsons[index]?.description ?? '...',
     }
-  })), [tokenURIs, owners, jsons])
+  })), [tokenURIs, owners, jsons, isInUses])
 
   return {
     totalSupply,

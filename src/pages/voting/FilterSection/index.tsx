@@ -1,7 +1,7 @@
 import { DatePicker, Select, Switch } from 'antd'
-import React, {useContext } from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { GovSetFilterContext, GovInfoFilterContext } from '../../../hooks/gov/useGov'
+import { GovInfoFilterContext, GovSetFilterContext } from '../../../hooks/gov/useGov'
 import './index.less'
 
 const { RangePicker } = DatePicker
@@ -10,14 +10,14 @@ const { Option } = Select
 export default function FilterSection() {
   const { t } = useTranslation()
   const { setRelated, setTimeRanges, setStatus } = useContext(GovSetFilterContext)
-  const { related , status } = useContext(GovInfoFilterContext)
+  const { related, status } = useContext(GovInfoFilterContext)
   const optionList = [
     {
       label: t('all'),
       value: 'all',
     },
     {
-      label: t('action'),
+      label: t('active'),
       value: 'Active',
     },
     {
@@ -35,7 +35,7 @@ export default function FilterSection() {
     {
       label: t('defeated'),
       value: 'Defeated',
-    }
+    },
   ]
 
   return (
@@ -56,9 +56,7 @@ export default function FilterSection() {
             className="w-full h-12 rounded border-none filter-select bg-light-white"
             onChange={setStatus}
           >
-            {optionList.map((item) => {
-              return <Option className="h-10 flex items-center" key={item.label} value={item.value}>{item.label}</Option>
-            })}
+            {optionList.map((item) => <Option className="h-10 flex items-center" key={item.label} value={item.value}>{item.label}</Option>)}
           </Select>
         </div>
         <div className="shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
