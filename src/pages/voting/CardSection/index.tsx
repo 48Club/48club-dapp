@@ -77,7 +77,7 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
         <div className="flex items-center mt-1 md:ml-2 md:mt-0">
           <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
           <div className="text-xs leading-5 text-dark-gray">
-            {t('start_time')}: {moment.unix(info.voteStart).format('YYYY-MM-DD HH:mm')}
+            {t('start_time')}: {moment.unix(info.voteStart).fromNow()}
           </div>
         </div>
       </>
@@ -86,7 +86,7 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
       result = <div className="flex items-center">
         <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
         <div className="text-xs leading-5 text-dark-gray">
-          {t('end_time')}: {moment(moment.unix(info.voteEnd).fromNow()).format('YYYY-MM-DD HH:mm')}
+          {t('end_time')}: {moment.unix(info.voteEnd).fromNow()}
         </div>
       </div>
       break
@@ -94,7 +94,7 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
       result = <div className="flex items-center">
         <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
         <div className="text-xs leading-5 text-dark-gray">
-          {t('start_time')}: {moment.unix(info.voteStart).format('YYYY-MM-DD HH:mm')}
+          {t('start_time')}: {moment.unix(info.voteStart).fromNow()}
         </div>
       </div>
       break
