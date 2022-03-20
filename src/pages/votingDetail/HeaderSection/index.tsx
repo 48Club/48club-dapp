@@ -32,15 +32,15 @@ export default function HeaderSection() {
         </div>
         <div className="w-full md:flex md:justify-around">
           <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
-            <span className="text-dark-gray md:mb-2">Author</span>
+            <span className="text-dark-gray md:mb-2">{t('author')}</span>
             <span className="font-medium text-light-black">{shorten(proposer, 8)}</span>
           </div>
           <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
-            <span className="text-dark-gray md:mb-2">Start time</span>
+            <span className="text-dark-gray md:mb-2">{t('start_time')}</span>
             <span className="font-medium text-light-black">{moment.unix(voteStart).format('YYYY-MM-DD HH:mm')}</span>
           </div>
           <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
-            <span className="text-dark-gray md:mb-2">End time</span>
+            <span className="text-dark-gray md:mb-2">{t('end_time')}</span>
             <span className="font-medium text-light-black">{moment.unix(voteEnd).format('YYYY-MM-DD HH:mm')}</span>
           </div>
         </div>

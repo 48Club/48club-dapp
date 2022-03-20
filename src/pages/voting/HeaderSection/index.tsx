@@ -16,15 +16,15 @@ export default function HeaderSection() {
         <img src="/static/voting-header.png" className="block w-48 mb-10 md:absolute md:right-16 md:top-4 md:w-72" alt="" />
         <div className="flex flex-col">
           <span className="font-bold text-2xl leading-7 mb-4 text-light-black">
-            KOGE Proposal List
+            {t('proposal_list')}
           </span>
           <span className="text-base leading-6 mb-5 text-dark-gray">
-            Review the list of all proposals
+            {t('review_all_proposal')}
           </span>
 
           <NavLink to="/voting/create">
             <Button className="h-10 text-sm font-medium w-full rounded text-light-black bg-gray">
-              New Proposal
+              {t('create_proposal')}
             </Button>
           </NavLink>
         </div>

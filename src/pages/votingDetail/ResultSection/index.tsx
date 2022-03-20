@@ -12,7 +12,7 @@ export default function ResultSection() {
   const { againstVotes, forVotes, state } = useGovDetailInfo(id)
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
-      <Label text="Voting Result" />
+      <Label text={t('vote_result')} />
 
       <div className="mt-6 flex flex-col flex-1 px-6 pb-8 shadow rounded-lg">
         <div className="flex flex-row mt-6 pb-4 border-b border-gray">
@@ -22,14 +22,14 @@ export default function ResultSection() {
           {state === 'Invalid' && <FrownFilled className="text-base text-gray mr-2.5" />}
           {state === 'Refunded' && <FrownFilled className="text-base text-gray mr-2.5" />}
           <span className="text-base text-dark-gray">
-            {state}
+            {t(state?.toLowerCase())}
           </span>
         </div>
         <div className="flex flex-col mt-8">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row">
               <CheckCircleFilled className="mr-2.5 text-green text-base" />
-              <span className="text-black text-sm leading-6">Approve</span>
+              <span className="text-black text-sm leading-6">{t('approve')}</span>
             </div>
             <span className="text-black text-sm">{formatAmount(forVotes, 0)} KOGE</span>
           </div>
@@ -45,7 +45,7 @@ export default function ResultSection() {
           <div className="flex flex-row justify-between">
             <div className="flex flex-row">
               <CloseCircleFilled className="mr-2.5 text-red text-base" />
-              <span className="text-black text-sm leading-6">Reject</span>
+              <span className="text-black text-sm leading-6">{t('reject')}</span>
             </div>
             <span className="text-black text-sm">{formatAmount(againstVotes, 0)} KOGE</span>
           </div>

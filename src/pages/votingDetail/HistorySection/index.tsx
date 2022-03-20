@@ -16,30 +16,30 @@ export default function HistorySection() {
 
   return (
     <div className="flex flex-col my-20">
-      <Label text="Voting details" />
+      <Label text={t('vote_details')} />
       <div className="mt-6 px-6 shadow rounded-lg">
         {voteRecords.length > 0 ? (
           <div>
             <div className="hidden md:grid justify-between pt-10 pb-4 text-gray"
               style={{gridTemplateColumns: "51% 16.33% 16.33% 16.33%"}}
             >
-              <span className="flex">Address</span>
-              <span>Result</span>
+              <span className="flex">{t('address')}</span>
+              <span>{t('result')}</span>
               <span>KOGE</span>
-              <span>Block number</span>
+              <span>{t('block_number')}</span>
             </div>
             {voteRecords.map((i, index) => {
               return (
                 <>
                   <div className="pt-6 pb-2 flex flex-col border-b border-gray md:hidden" key={index + 'sm'}>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                      <span className="text-gray">Address</span>
+                      <span className="text-gray">{t('address')}</span>
                       <span className="break-words text-right text-light-black break-all">
                         {i.voter}
                       </span>
                     </div>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                      <span className="text-gray">Result</span>
+                      <span className="text-gray">{t('result')}</span>
                       <span className="break-words text-right">
                         {i.support === '1' ? 'Approve' : 'Reject'}
                       </span>
@@ -51,7 +51,7 @@ export default function HistorySection() {
                       </span>
                     </div>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                      <span className="text-gray">Block number</span>
+                      <span className="text-gray">{t('block_number')}</span>
                       <span className="break-words text-right">
                         {i.blockNumber}
                       </span>
@@ -78,7 +78,7 @@ export default function HistorySection() {
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
             <img src="/static/staking-no-records.png" className="mb-6 w-60" alt="" />
-            <span className="text-base text-gray">No data</span>
+            <span className="text-base text-gray">{t('no_data')}</span>
           </div>
         )}
       </div>

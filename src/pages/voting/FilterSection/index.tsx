@@ -13,27 +13,27 @@ export default function FilterSection() {
   const { related , status } = useContext(GovInfoFilterContext)
   const optionList = [
     {
-      label: '全部',
+      label: t('all'),
       value: 'all',
     },
     {
-      label: '进行中',
+      label: t('action'),
       value: 'Active',
     },
     {
-      label: '已通过',
+      label: t('succeeded'),
       value: 'Succeeded',
     },
     {
-      label: '已关闭',
+      label: t('invalid'),
       value: 'Invalid',
     },
     {
-      label: 'Refunded',
+      label: t('refunded'),
       value: 'Refunded',
     },
     {
-      label: 'Defeated',
+      label: t('defeated'),
       value: 'Defeated',
     }
   ]
@@ -42,14 +42,14 @@ export default function FilterSection() {
     <div className="pt-4 w-auto mb-12 flex flex-col md:flex-row md:justify-between">
       <div className="flex flex-col mb-6 md:mr-6 md:w-80">
         <span className="text-sm leading-5 mb-2 text-light-black">
-          筛选时间
+          {t('filter_time')}
         </span>
         <RangePicker className="h-12 rounded border-none bg-light-white" onChange={setTimeRanges} />
       </div>
       <div className="flex md:flex-1 md:justify-between">
         <div className="flex flex-col w-full mr-6 md:w-80">
           <span className="text-sm leading-5 mb-2 text-light-black">
-            提案状态
+          {t('filter_status')}
           </span>
           <Select
             defaultValue={status}
@@ -61,9 +61,9 @@ export default function FilterSection() {
             })}
           </Select>
         </div>
-        <div className="shrink-0 w-20 flex flex-col" style={{ flexShrink: 0 }}>
+        <div className="shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
-            与我相关
+            {t('filter_related')}
           </span>
           <Switch
             checked={related}

@@ -37,5 +37,5 @@ const map = {
 export default function Tag({ type, className = '' }) {
   const { t } = useTranslation()
   const data = map[type] ?? {}
-  return <span className={`rounded h-7 px-3 py-1 w-fit ${className}`} style={{ ...data.style, 'width': 'fit-content' }}>{type}</span>
+  return <span className={`rounded h-7 px-3 py-1 w-fit ${className}`} style={{ ...data.style, 'width': 'fit-content' }}>{t(type?.toLowerCase())}</span>
 }

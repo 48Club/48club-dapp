@@ -26,7 +26,7 @@ export default function VoteSection() {
 
   return (
     <div className="flex-1 flex flex-col md:mr-4">
-      <Label text="Vote" />
+      <Label text={t('vote')} />
       <div className="mt-6 flex flex-col justify-center p-10 flex-1 rounded-lg shadow">
         {getPanel()}
       </div>
@@ -36,6 +36,8 @@ export default function VoteSection() {
 
 function ActionPanel({ id, myCanVote }) {
   const { onVote } = useGov()
+  const { t } = useTranslation()
+
   return <>
     <Button
       className="h-12 text-light-black text-xl font-bold"
@@ -43,7 +45,7 @@ function ActionPanel({ id, myCanVote }) {
       onClick={() => onVote(id, 1)}
       disabled={!myCanVote}
     >
-      Approve
+      {t('approve')}
     </Button>
     <Button
       className="mt-6 h-12 text-light-black text-xl font-bold"
@@ -51,7 +53,7 @@ function ActionPanel({ id, myCanVote }) {
       onClick={() => onVote(id, 0)}
       disabled={!myCanVote}
     >
-      Reject
+      {t('reject')}
     </Button>
   </>
 }
@@ -59,15 +61,17 @@ function ActionPanel({ id, myCanVote }) {
 
 function ClaimRewardPanel({ id, myReward }) {
   const { onClaim } = useGov()
+  const { t } = useTranslation()
+
   return <div className="flex flex-col items-center">
     <CheckCircleTwoTone className="md:pb-7" style={{fontSize: '52px'}} twoToneColor="#08C849" />
-    <div className="mb-4 text-lg font-bold">The proposal is valid. Please claim your reward</div>
+    <div className="mb-4 text-lg font-bold">{t('vote_success_desc')}</div>
     <Button
       className="my-4 h-12 md:h-10 bg-primary text-black border-none rounded text-sm"
       onClick={() => onClaim(id)}
       disabled={!myReward.gt(0)}
     >
-      Claim {formatAmount(myReward, 18)} KOGE
+      {t('claim')} {formatAmount(myReward, 18)} KOGE
     </Button>
   </div>
 }
@@ -75,6 +79,8 @@ function ClaimRewardPanel({ id, myReward }) {
 
 function InvalidPanel({ id, state }) {
   const { onRefund } = useGov()
+  const { t } = useTranslation()
+
   return <div className="flex flex-col justify-center items-center">
     <MinusCircleTwoTone className="md:pb-7" style={{fontSize: '52px'}} twoToneColor="#A9A9A9" />
     <div className="mb-4 text-lg font-bold">The proposal is invalid</div>
@@ -84,9 +90,9 @@ function InvalidPanel({ id, state }) {
           className="my-4 h-12 md:h-10 bg-primary text-black flex flex-row items-center border-none rounded text-sm"
           onClick={() => onRefund(id)}
         >
-          <div className="mr-1">Close</div>
+          <div className="mr-1">{t('close')}</div>
           <Tooltip className="opacity-50" placement="top"
-                   title="Closing invalid proposal will be rewarded">
+            title="Closing invalid proposal will be rewarded">
             <HelpCircle size={16} />
           </Tooltip>
         </Button>

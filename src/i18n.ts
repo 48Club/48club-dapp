@@ -8,6 +8,8 @@ import translationCN from './locales/cn/translation.json'
 import stakingCN from './locales/cn/staking.json'
 import nftEN from './locales/en/nft.json'
 import nftCN from './locales/cn/nft.json'
+import votingEN from './locales/en/voting.json'
+import votingCN from './locales/cn/voting.json'
 import modalEN from './locales/en/modal.json'
 import modalCN from './locales/cn/modal.json'
 
@@ -27,6 +29,7 @@ i18n
           ...stakingEN,
           ...nftEN,
           ...modalEN,
+          ...votingEN,
         },
       },
       cn: {
@@ -36,6 +39,7 @@ i18n
           ...stakingCN,
           ...nftCN,
           ...modalCN,
+          ...votingCN,
         },
       },
     },
