@@ -3,7 +3,7 @@ import Tag from 'components/Tag'
 import { NavLink } from 'react-router-dom'
 import React, { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { shorten } from '@funcblock/dapp-sdk'
+import { formatAmount, shorten } from '@funcblock/dapp-sdk'
 import { useEthers } from '@usedapp/core'
 import moment from 'moment'
 import { Spin } from 'antd'
@@ -71,7 +71,7 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
         <div className="flex items-center">
           <CheckCircleTwoTone twoToneColor="#08C849" className="w-3.5 h-3.5 mr-2" />
           <div className="text-xs leading-5 text-dark-gray">
-            {t('pass')}: KOGE {t('number')} {info.totalReward} {t('piece')}
+            {t('pass')}: KOGE {t('number')} {formatAmount(info.totalReward, 18)} {t('piece')}
           </div>
         </div>
         <div className="flex items-center mt-1 md:ml-2 md:mt-0">

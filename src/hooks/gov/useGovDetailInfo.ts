@@ -1,6 +1,7 @@
 import { useContractCalls, useEthers } from '@usedapp/core'
 import { useGovernanceContract, useGovernanceContractReadonly } from '../useContract'
 import { Result } from '@ethersproject/abi'
+import { utils } from 'ethers'
 import { useEffect, useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
@@ -46,7 +47,7 @@ export default function useGovDetailInfo(proposalId: string) {
   const govContractReadonly = useGovernanceContractReadonly()
   useEffect(() => {
     (async () => {
-      const filter = govContractReadonly.filters.VoteCast(null, null)
+      const filter = govContractReadonly.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
       const events = await govContractReadonly.queryFilter(filter)
       const rows = events.map(i => ({
         proposalId: i.args?.proposalId?.toString(),
@@ -56,7 +57,7 @@ export default function useGovDetailInfo(proposalId: string) {
         weight: i.args?.weight?.toString(),
         blockNumber: i.blockNumber,
       }))
-      setVoteRecords(rows.filter(i => i.proposalId === proposalId))
+      setVoteRecords(rows)
     })()
   }, [govContractReadonly, proposalId])
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any

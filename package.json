@@ -24,6 +24,7 @@
     "bignumber.js": "^9.0.1",
     "copy-to-clipboard": "^3.3.1",
     "craco-less": "^1.17.1",
+    "ethers": "^5.6.1",
     "i18next": "^21.6.0",
     "i18next-xhr-backend": "^3.2.2",
     "ipfs-core": "^0.14.1",
