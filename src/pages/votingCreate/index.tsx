@@ -82,14 +82,15 @@ export default function VotingCreate() {
 
       <div className="w-full mt-12 mb-20">
         {
-          !allowance.gt(0) &&
-          <Button className="h-12 rounded w-full rounded"
-                  type="primary"
-                  onClick={approve}
-                  loading={approveLoading}
-          >
-            {t('approve')}
-          </Button>
+          !allowance.gt(0) && (
+            <Button className="h-12 rounded w-full rounded mb-6"
+                    type="primary"
+                    onClick={approve}
+                    loading={approveLoading}
+            >
+              {t('approve')}
+            </Button>
+          )
         }
         <Button className="h-12 rounded w-full rounded" onClick={onSubmit}
                 type="primary"

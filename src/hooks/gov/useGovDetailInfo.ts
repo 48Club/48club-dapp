@@ -42,7 +42,6 @@ export default function useGovDetailInfo(proposalId: string) {
     (async () => {
       const filter = govContractReadonly.filters.VoteCast(null, null)
       const events = await govContractReadonly.queryFilter(filter)
-      console.log(events)
       const rows = events.map(i => ({
         proposalId: i.args?.proposalId?.toString(),
         reason: i.args?.reason?.toString(),
@@ -51,9 +50,9 @@ export default function useGovDetailInfo(proposalId: string) {
         weight: i.args?.weight?.toString(),
         blockNumber: i.blockNumber,
       }))
-      setVoteRecords(rows)
+      setVoteRecords(rows.filter(i => i.proposalId === proposalId))
     })()
-  }, [govContractReadonly])
+  }, [govContractReadonly, proposalId])
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any
 
   const myCanVote = useMemo(() => {

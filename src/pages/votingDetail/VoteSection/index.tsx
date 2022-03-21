@@ -1,5 +1,5 @@
 import { CheckCircleTwoTone, CloseCircleTwoTone, MinusCircleTwoTone } from '@ant-design/icons'
-import { Button, Tooltip } from 'antd'
+import { Button, Spin, Tooltip } from 'antd'
 import Label from 'components/Label'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import { HelpCircle } from 'react-feather'
+import { useEthers } from '@usedapp/core'
 
 export default function VoteSection() {
   const { t } = useTranslation()
@@ -36,26 +37,31 @@ export default function VoteSection() {
 
 function ActionPanel({ id, myCanVote }) {
   const { onVote } = useGov()
+  const { account } = useEthers()
+  const { voteRecords } = useGovDetailInfo(id)
   const { t } = useTranslation()
+  const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
 
-  return <>
-    <Button
-      className="h-12 text-light-black text-xl font-bold"
-      icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
-      onClick={() => onVote(id, 1)}
-      disabled={!myCanVote}
-    >
-      {t('approve')}
-    </Button>
-    <Button
-      className="mt-6 h-12 text-light-black text-xl font-bold"
-      icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
-      onClick={() => onVote(id, 0)}
-      disabled={!myCanVote}
-    >
-      {t('reject')}
-    </Button>
-  </>
+  return <Spin spinning={!voteRecords}>
+    <div className="flex flex-col justify-center">
+      <Button
+        className={`bg-white h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
+        icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
+        onClick={() => !myVoted && onVote(id, 1)}
+        disabled={!myCanVote || myVoted}
+      >
+        {t('approve')}
+      </Button>
+      <Button
+        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '0' && 'border-primary'}`}
+        icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
+        onClick={() => !myVoted && onVote(id, 0)}
+        disabled={!myCanVote || myVoted}
+      >
+        {t('reject')}
+      </Button>
+    </div>
+  </Spin>
 }
 
 
@@ -64,7 +70,7 @@ function ClaimRewardPanel({ id, myReward }) {
   const { t } = useTranslation()
 
   return <div className="flex flex-col items-center">
-    <CheckCircleTwoTone className="md:pb-7" style={{fontSize: '52px'}} twoToneColor="#08C849" />
+    <CheckCircleTwoTone className="md:pb-7" style={{ fontSize: '52px' }} twoToneColor="#08C849" />
     <div className="mb-4 text-lg font-bold">{t('vote_success_desc')}</div>
     <Button
       className="my-4 h-12 md:h-10 bg-primary text-black border-none rounded text-sm"
@@ -82,7 +88,7 @@ function InvalidPanel({ id, state }) {
   const { t } = useTranslation()
 
   return <div className="flex flex-col justify-center items-center">
-    <MinusCircleTwoTone className="md:pb-7" style={{fontSize: '52px'}} twoToneColor="#A9A9A9" />
+    <MinusCircleTwoTone className="md:pb-7" style={{ fontSize: '52px' }} twoToneColor="#A9A9A9" />
     <div className="mb-4 text-lg font-bold">The proposal is invalid</div>
     {
       state === 'Invalid' && (
@@ -92,7 +98,7 @@ function InvalidPanel({ id, state }) {
         >
           <div className="mr-1">{t('close')}</div>
           <Tooltip className="opacity-50" placement="top"
-            title="Closing invalid proposal will be rewarded">
+                   title="Closing invalid proposal will be rewarded">
             <HelpCircle size={16} />
           </Tooltip>
         </Button>

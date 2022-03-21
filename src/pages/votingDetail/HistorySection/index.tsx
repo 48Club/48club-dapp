@@ -21,7 +21,7 @@ export default function HistorySection() {
         {voteRecords.length > 0 ? (
           <div>
             <div className="hidden md:grid justify-between pt-10 pb-4 text-gray"
-              style={{gridTemplateColumns: "51% 16.33% 16.33% 16.33%"}}
+                 style={{ gridTemplateColumns: '51% 16.33% 16.33% 16.33%' }}
             >
               <span className="flex">{t('address')}</span>
               <span>{t('result')}</span>
@@ -30,7 +30,7 @@ export default function HistorySection() {
             </div>
             {voteRecords.map((i, index) => {
               return (
-                <>
+                <div key={index}>
                   <div className="pt-6 pb-2 flex flex-col border-b border-gray md:hidden" key={index + 'sm'}>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
                       <span className="text-gray">{t('address')}</span>
@@ -57,7 +57,7 @@ export default function HistorySection() {
                       </span>
                     </div>
                   </div>
-                  <div className="hidden md:grid border-b justify-between py-4" style={{gridTemplateColumns: "51% 16.33% 16.33% 16.33%"}} key={index + 'md'}>
+                  <div className="hidden md:grid border-b justify-between py-4" style={{ gridTemplateColumns: '51% 16.33% 16.33% 16.33%' }} key={index + 'md'}>
                     <span className="break-words text-light-black">
                       {i.voter}
                     </span>
@@ -71,7 +71,7 @@ export default function HistorySection() {
                       {i.blockNumber}
                     </span>
                   </div>
-                </>
+                </div>
               )
             })}
           </div>
