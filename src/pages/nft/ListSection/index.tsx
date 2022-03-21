@@ -31,7 +31,7 @@ function NftItem({ nft }: { nft: INFTInfo }) {
                 alt=""
                 className="h-20 w-full object-cover transform hover:scale-105 transition duration-240"
               />
-              <img className="absolute top-7 right-7 w-8 h-8 cursor-pointer" src={edit} alt="" />
+              <img className="absolute top-7 right-7 w-8 h-8 cursor-pointer hidden" src={edit} alt="" />
               <div className="mt-4 text-light-black text-base">{nft.name}</div>
               <div className="mt-2 text-gray text-xs">
                 {nft.description}

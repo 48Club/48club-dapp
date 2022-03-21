@@ -13,10 +13,10 @@ export const StakingAddress = {
 
 export const NftAddress = {
   [ChainId.BSC]: '',
-  [ChainId.BSCTestnet]: '0x8Eaf33b038df435B81c40BE629D292eDaEf9f97f',
+  [ChainId.BSCTestnet]: '0x3e401dBE4d2c492fE997B1BfBE9D57e6d01d865c',
 }[CHAIN_ID]
 
 export const GovernanceAddress = {
   [ChainId.BSC]: '',
-  [ChainId.BSCTestnet]: '0x0B33029e075e0BC4bF69D2227d60AF9B8E8c039e',
+  [ChainId.BSCTestnet]: '0x28463a0345b0894685A6535b965a40a5030E90b1',
 }[CHAIN_ID]
