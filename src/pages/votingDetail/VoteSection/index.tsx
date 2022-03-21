@@ -72,13 +72,16 @@ function ClaimRewardPanel({ id, myReward }) {
   return <div className="flex flex-col items-center">
     <CheckCircleTwoTone className="md:pb-7" style={{ fontSize: '52px' }} twoToneColor="#08C849" />
     <div className="mb-4 text-lg font-bold">{t('vote_success_desc')}</div>
-    <Button
-      className="my-4 h-12 md:h-10 bg-primary text-black border-none rounded text-sm"
-      onClick={() => onClaim(id)}
-      disabled={!myReward.gt(0)}
-    >
-      {t('claim')} {formatAmount(myReward, 18)} KOGE
-    </Button>
+    {
+      myReward.gt(0) && (
+        <Button
+          className="my-4 h-12 md:h-10 bg-primary text-black border-none rounded text-sm"
+          onClick={() => onClaim(id)}
+        >
+          {t('claim')} {formatAmount(myReward, 18)} KOGE
+        </Button>
+      )
+    }
   </div>
 }
 

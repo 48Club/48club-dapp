@@ -24,7 +24,7 @@
   "reject": "不同意",
   "claim": "领取",
   "close": "关闭",
-  "vote_success_desc": "该提案已经达到有效提案，您可以领取相应奖励。",
+  "vote_success_desc": "该提案已经达到有效提案。",
   "address": "地址",
   "result": "投票结果",
   "block_number": "区块编号",
@@ -45,6 +45,6 @@
   "seven_days": "7 日",
   "op1": "选项一：同意",
   "op2": "选项二：不同意",
-  "result_tip1": "总票数少于",
+  "result_tip1": "总票数少于 ",
   "result_tip2": "总票数："
 }

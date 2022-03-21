@@ -24,7 +24,7 @@
   "reject": "Reject",
   "claim": "Claim",
   "close": "Close",
-  "vote_success_desc": "The proposal is valid. Please claim your reward",
+  "vote_success_desc": "The proposal is valid.",
   "address": "Address",
   "result": "Result",
   "block_number": "Block Number",
@@ -45,6 +45,6 @@
   "seven_days": "7 Days",
   "op1": "Option1: Approve",
   "op2": "Option2: Reject",
-  "result_tip1": "The votes are less than",
+  "result_tip1": "The votes are less than ",
   "result_tip2": "Total votes: "
 }
