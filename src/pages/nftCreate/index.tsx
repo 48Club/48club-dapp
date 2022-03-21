@@ -206,18 +206,10 @@ export default function NFTCreate() {
           <span className="text-light-black font-medium">{t('nft_id_value', { val: totalSupply })}</span>
         </div>
         {
-          isAllowed ? (
+          !isAllowed && (
             <Button
-              className="flex items-center justify-center h-12 text-sm text-light-black bg-yellow rounded font-medium mt-6 mb-20 w-full"
-              onClick={handleUpload}
-              loading={uploadLoading}
-              disabled={fileList.length < 1}
-            >
-              {t('submit_nft')}
-            </Button>
-          ) : (
-            <Button
-              className="flex items-center justify-center h-12 text-sm text-light-black bg-yellow rounded font-medium mt-6 mb-20 w-full"
+              className="flex items-center justify-center h-12 text-sm rounded font-medium mt-6 mb-6 w-full"
+              type="primary"
               onClick={onApprove}
               loading={approveLoading}
             >
@@ -225,6 +217,16 @@ export default function NFTCreate() {
             </Button>
           )
         }
+
+        <Button
+          className="flex items-center justify-center h-12 text-sm rounded font-medium mt-6 mb-20 w-full"
+          type="primary"
+          onClick={handleUpload}
+          loading={uploadLoading}
+          disabled={!isAllowed || fileList.length < 1}
+        >
+          {t('submit_nft')}
+        </Button>
       </div>
     </div>
   )

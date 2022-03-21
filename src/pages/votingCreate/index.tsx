@@ -83,12 +83,17 @@ export default function VotingCreate() {
       <div className="w-full mt-12 mb-20">
         {
           !allowance.gt(0) &&
-          <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={approve} loading={approveLoading}>
+          <Button className="h-12 rounded w-full rounded"
+                  type="primary"
+                  onClick={approve}
+                  loading={approveLoading}
+          >
             {t('approve')}
           </Button>
         }
-        <Button className="h-12 rounded w-full bg-yellow rounded text-light-black" onClick={onSubmit}
-                disabled={!minDeposit?.lt(amountBN) || !allowance.gt(0)}>
+        <Button className="h-12 rounded w-full rounded" onClick={onSubmit}
+                type="primary"
+                disabled={!minDeposit?.lte(amountBN) || !allowance.gt(0)}>
           {t('submit')}
         </Button>
       </div>
