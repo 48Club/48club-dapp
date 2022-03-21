@@ -44,5 +44,7 @@
   "single_choice": "Single choice",
   "seven_days": "7 Days",
   "op1": "Option1: Approve",
-  "op2": "Option2: Reject"
+  "op2": "Option2: Reject",
+  "result_tip1": "The votes are less than",
+  "result_tip2": "Total votes: "
 }

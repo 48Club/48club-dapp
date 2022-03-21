@@ -9,20 +9,24 @@ import { formatAmount } from '@funcblock/dapp-sdk'
 export default function ResultSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { againstVotes, forVotes, state } = useGovDetailInfo(id)
+  const { againstVotes, forVotes, state, quorum } = useGovDetailInfo(id)
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Label text={t('vote_result')} />
 
       <div className="mt-6 flex flex-col flex-1 px-6 pb-8 shadow rounded-lg">
-        <div className="flex flex-row mt-6 pb-4 border-b border-gray">
+        <div className="flex flex-row items-center mt-6 pb-4 border-b border-gray">
           {state === 'Active' && <SmileFilled className="text-base text-gray mr-2.5" />}
           {state === 'Succeeded' && <SmileFilled className="text-base text-gray mr-2.5" />}
           {state === 'Defeated' && <FrownFilled className="text-base text-gray mr-2.5" />}
           {state === 'Invalid' && <FrownFilled className="text-base text-gray mr-2.5" />}
           {state === 'Refunded' && <FrownFilled className="text-base text-gray mr-2.5" />}
-          <span className="text-base text-dark-gray">
-            {t(state?.toLowerCase())}
+          <span className="text-sm text-dark-gray">
+            {
+              t(state?.toLowerCase())}. {(state === 'Invalid' || state === 'Refunded') ?
+            <span>{t('result_tip1')}{quorum} KOGE</span> :
+            <span>{t('result_tip2')}{forVotes + againstVotes} KOGE</span>
+          }
           </span>
         </div>
         <div className="flex flex-col mt-8">
