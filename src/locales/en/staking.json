@@ -5,6 +5,8 @@
   "staking_summary_own": "Percentage of individual positions",
   "staking_staking_title": "Staking pool",
   "my_staking_count": "My staking amount",
+  "my_unstaking_count": "Unstaking amount",
+  "my_withdrawable_count": "Withdrawable amount",
   "kogeStaking": "Koge Staking",
   "staking": "Staking",
   "stake": "Stake",

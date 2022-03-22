@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd'
+import { Button, Input, Tooltip } from 'antd'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
@@ -53,25 +53,33 @@ export default function StakingSection() {
     <div className="flex flex-col">
       <Label text={t('staking_staking_title')} />
       <div className="mt-6 w-auto flex flex-row rounded-lg shadow">
-        <div className="flex-1 flex flex-col pl-8 text-light-black bg-card-yellow">
-          <div className="flex flex-row mt-10 mb-4 ">
-            <div className="font-medium text-base mr-3 leading-7">
+        <div className="flex-1 flex flex-col pl-8 bg-card-yellow">
+          <div>
+            <div className="font-medium text-base mr-3 mt-10 mb-4">
               {t('my_staking_count')}
             </div>
+            <div className="text-2xl font-bold mb-4">
+              {formatAmount(myStakeBalance, decimals)} KOGE
+            </div>
           </div>
-          <div className="text-2xl font-bold mb-4 leading-7">
-            {formatAmount(myStakeBalance, decimals)} KOGE
+          <div className="flex flex-row items-center text-sm mt-6 mb-4">
+            <div>
+              <div className="font-medium mb-1 mr-10">
+                {t('my_unstaking_count')}
+              </div>
+              <div className="">
+                {formatAmount(canWithdraw ? 0 : myStakeBalance, decimals)} KOGE
+              </div>
+            </div>
+            <div>
+              <div className="font-medium mb-1">
+                {t('my_withdrawable_count')}
+              </div>
+              <div className="">
+                {formatAmount(myUnstakeBalance, decimals)} KOGE
+              </div>
+            </div>
           </div>
-          {
-            (account && !canUnstake) && (
-              <div className="text-sm leading-5 mb-2" style={{ color: '#54606C' }}>Unlock Time: {unlockMoment?.format('YYYY-MM-DD HH:mm')}</div>
-            )
-          }
-          {
-            (account && !canWithdraw) && (
-              <div className="text-sm leading-5 mb-2" style={{ color: '#54606C' }}>Withdrawable Time: {withdrawMoment?.format('YYYY-MM-DD HH:mm')}</div>
-            )
-          }
         </div>
         <div className="flex-1 flex flex-col px-6 mb-20">
           <div className="flex flex-row mt-10 mb-6">
@@ -83,19 +91,15 @@ export default function StakingSection() {
                  onClick={() => setActiveItem(1)}>
               {t('unstake')}
             </div>
-            {
-              (canWithdraw && myUnstakeBalance?.gt(0)) && (
-                <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 2 ? 'border-yellow' : 'border-transparent'}`}
-                     onClick={() => setActiveItem(2)}>
-                  {t('withdraw')}
-                </div>
-              )
-            }
+            <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 2 ? 'border-yellow' : 'border-transparent'}`}
+                 onClick={() => setActiveItem(2)}>
+              {t('withdraw')}
+            </div>
           </div>
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between h-12">
             <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
                    placeholder={`${t('balance')}: ${formatAmount(currentBalance, decimals)} KOGE`}
-                   className="h-12 mb-6 text-base mr-6"
+                   className="h-12 mb-6 text-base mr-6 bg-white"
                    value={input}
                    onChange={(e) => setInput(e.target.value)} />
             {
@@ -104,13 +108,19 @@ export default function StakingSection() {
                   Approve
                 </Button>
               ) : (
-                <Button type="primary"
-                        className="h-12 rounded"
-                        onClick={onSubmit}
-                        loading={withdrawLoading}
-                        disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake)}>
-                  {t('confirm')}
-                </Button>
+                <Tooltip placement="top"
+                         title={
+                           (activeItem === 1 && account && !canUnstake) ? `Unlock Time: ${unlockMoment?.format('YYYY-MM-DD HH:mm')}` :
+                             (activeItem === 2 && account && !canWithdraw) ? `Withdrawable Time: ${withdrawMoment?.format('YYYY-MM-DD HH:mm')}` : undefined
+                         }>
+                  <Button type="primary"
+                          className="h-full rounded"
+                          onClick={onSubmit}
+                          loading={withdrawLoading}
+                          disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake)}>
+                    {t('confirm')}
+                  </Button>
+                </Tooltip>
               )
             }
           </div>
