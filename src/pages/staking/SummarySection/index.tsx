@@ -43,7 +43,7 @@ export default function SummarySection() {
               <span className="text-sm mb-2 leading-5">
                 {t('staking_summary_own')}
               </span>
-              <span className="text-xl font-bold text-light-black">{formatAmount(balancePercentage, 0, 2)}%</span>
+              <span className="text-xl font-bold text-light-black">{formatAmount(balancePercentage ?? 0, 0, 2)}%</span>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ export const KogeAddress = {
 
 export const StakingAddress = {
   [ChainId.BSC]: '',
-  [ChainId.BSCTestnet]: '0xA40219BBA6c455b41C2340123E03439f2B8cDbD7',
+  [ChainId.BSCTestnet]: '0x4D481fB79a22759c0Dbc0deB8d8DcA8C2F7B45EA',
 }[CHAIN_ID]
 
 export const NftAddress = {
@@ -18,5 +18,5 @@ export const NftAddress = {
 
 export const GovernanceAddress = {
   [ChainId.BSC]: '',
-  [ChainId.BSCTestnet]: '0x12ea021b16F6E0Ad7Cc736D02f931C91E42D00a6',
+  [ChainId.BSCTestnet]: '0x8E0180877F236C039459a9Cfd302a8F84F786709',
 }[CHAIN_ID]

@@ -87,7 +87,7 @@ export default function StakingSection() {
                 {t('my_withdrawable_count')}
               </div>
               <div className="">
-                {formatAmount(canWithdraw ? myUnstakeBalance : 0, decimals)} KOGE
+                {formatAmount(canWithdraw ? (myUnstakeBalance ?? 0) : 0, decimals)} KOGE
               </div>
             </div>
           </div>

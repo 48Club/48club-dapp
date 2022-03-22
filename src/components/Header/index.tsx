@@ -121,7 +121,7 @@ function Web3Status() {
     } catch (e) {
       console.error(e)
     }
-    setTimeout(activateBrowserWallet, 100)
+    setTimeout(activateBrowserWallet, 1000)
   }, [activateBrowserWallet])
 
   if (account) {
