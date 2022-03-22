@@ -12,6 +12,7 @@ import { useEthers, useTokenAllowance } from '@usedapp/core'
 import moment from 'moment'
 import { useOpenModal } from '../../../state/application/hooks'
 import { ApplicationModal } from '../../../state/application/actions'
+import { HelpCircle } from 'react-feather'
 
 export default function StakingSection() {
   const { account } = useEthers()
@@ -67,8 +68,18 @@ export default function StakingSection() {
               <div className="font-medium mb-1 mr-10">
                 {t('my_unstaking_count')}
               </div>
-              <div className="">
-                {formatAmount(canWithdraw ? 0 : myStakeBalance, decimals)} KOGE
+              <div className="flex flex-row items-center">
+                {formatAmount(canWithdraw ? 0 : myUnstakeBalance, decimals)} KOGE
+                {
+                  !canWithdraw && (
+                    <Tooltip placement="bottom"
+                             className="ml-1"
+                             title={(withdrawMoment && !canWithdraw) ? `Withdrawable: ${withdrawMoment.format('YYYY-MM-DD HH:mm')}` : undefined}
+                    >
+                      <HelpCircle size={16} />
+                    </Tooltip>
+                  )
+                }
               </div>
             </div>
             <div>
@@ -76,7 +87,7 @@ export default function StakingSection() {
                 {t('my_withdrawable_count')}
               </div>
               <div className="">
-                {formatAmount(myUnstakeBalance, decimals)} KOGE
+                {formatAmount(canWithdraw ? myUnstakeBalance : 0, decimals)} KOGE
               </div>
             </div>
           </div>
@@ -110,8 +121,7 @@ export default function StakingSection() {
               ) : (
                 <Tooltip placement="top"
                          title={
-                           (activeItem === 1 && account && !canUnstake) ? `Unlock Time: ${unlockMoment?.format('YYYY-MM-DD HH:mm')}` :
-                             (activeItem === 2 && account && !canWithdraw) ? `Withdrawable Time: ${withdrawMoment?.format('YYYY-MM-DD HH:mm')}` : undefined
+                           (activeItem === 1 && account && !canUnstake) ? `Unlock Time: ${unlockMoment?.format('YYYY-MM-DD HH:mm')}` : undefined
                          }>
                   <Button type="primary"
                           className="h-full rounded"
