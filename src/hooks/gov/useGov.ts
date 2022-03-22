@@ -33,9 +33,13 @@ export default function useGov() {
 
   return {
     onPropose,
+    proposeLoading: proposeState.status === 'Mining',
     onVote,
+    voteLoading: voteState.status === 'Mining',
     onClaim,
+    claimLoading: claimState.status === 'Mining',
     onRefund,
+    refundLoading: refundState.status === 'Mining',
   }
 }
 
@@ -50,7 +54,10 @@ export const GovSetFilterContext = createContext<{
   setTimeRanges: any,
   setRelated: any
 }>({
-  setStatus: () => {},
-  setTimeRanges: () => {},
-  setRelated: () => {}
+  setStatus: () => {
+  },
+  setTimeRanges: () => {
+  },
+  setRelated: () => {
+  },
 })

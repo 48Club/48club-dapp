@@ -1,18 +1,23 @@
-import { useContractCalls, useEthers } from '@usedapp/core'
+import { useContractCalls } from '@usedapp/core'
 import { useGovernanceContract, useGovernanceContractReadonly } from '../useContract'
 import BigNumber from 'bignumber.js'
 import { Result } from '@ethersproject/abi'
 import { useEffect, useState } from 'react'
 
 export default function useGovInfo() {
-  const { account } = useEthers()
   const govContract = useGovernanceContract()
 
-  const [minDepositResult] = (useContractCalls([
+  const [minDepositResult, rewardResult] = (useContractCalls([
     {
       address: govContract.address,
       abi: govContract.interface,
       method: 'minDeposit',
+      args: [],
+    },
+    {
+      address: govContract.address,
+      abi: govContract.interface,
+      method: 'calcRewardFromPool',
       args: [],
     },
   ]) ?? []) as Result[]
@@ -34,9 +39,9 @@ export default function useGovInfo() {
       setRecords(rows.reverse())
     })()
   }, [govContractReadonly])
-
   return {
-    minDeposit: minDepositResult ? new BigNumber(minDepositResult.toString()) : undefined,
+    minDeposit: minDepositResult ? new BigNumber(minDepositResult[0].toString()) : undefined,
+    reward: rewardResult ? new BigNumber(rewardResult[0].toString()) : undefined,
     proposals: records,
   }
 }

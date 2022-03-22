@@ -7,6 +7,7 @@ import useNft from '../../hooks/nft/useNft'
 import useNftInfo from '../../hooks/nft/useNftInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import ipfs from '../../utils/ipfs'
+import { useHistory } from 'react-router'
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -20,6 +21,7 @@ function getBase64(file) {
 const { TextArea } = Input
 export default function NFTCreate() {
   const { t } = useTranslation()
+  const history = useHistory()
   const [activeItemOfCount, setActiveItemOfCount] = useState(0)
   const [activeItemOfCustomize, setActiveItemOfCustomize] = useState(0)
   const [previewVisible, setPrebiewVisible] = useState(false)
@@ -78,6 +80,8 @@ export default function NFTCreate() {
       setUploadLoading(false)
       setFileList([])
     }
+
+    history.push('/nft')
   }
 
   return (

@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
-import { shorten } from '@funcblock/dapp-sdk'
+import { formatAmount, shorten } from '@funcblock/dapp-sdk'
 import moment from 'moment'
 import { Spin } from 'antd'
 import useGovInfo from '../../../hooks/gov/useGovInfo'
@@ -12,7 +12,7 @@ export default function HeaderSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
   const { proposals } = useGovInfo()
-  const { proposer, voteEnd, voteStart, state } = useGovDetailInfo(id)
+  const { proposer, voteEnd, voteStart, state, totalReward } = useGovDetailInfo(id)
   const detail = proposals?.find(i => i.proposalId === id)
 
   return (
@@ -42,6 +42,10 @@ export default function HeaderSection() {
           <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
             <span className="text-dark-gray md:mb-2">{t('end_time')}</span>
             <span className="font-medium text-light-black">{moment.unix(voteEnd).format('YYYY-MM-DD HH:mm')}</span>
+          </div>
+          <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
+            <span className="text-dark-gray md:mb-2">{t('total_reward')}</span>
+            <span className="font-medium text-light-black">{formatAmount(totalReward, 18)} KOGE</span>
           </div>
         </div>
       </div>

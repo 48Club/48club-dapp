@@ -10,13 +10,15 @@ import useApprove from '../../hooks/erc20/useApprove'
 import { GovernanceAddress, KogeAddress } from '../../constants/contracts'
 import { useEthers, useTokenAllowance } from '@usedapp/core'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router'
 
 const { TextArea } = Input
 
 export default function VotingCreate() {
+  const history = useHistory()
   const { account } = useEthers()
-  const { onPropose } = useGov()
-  const { minDeposit } = useGovInfo()
+  const { onPropose, proposeLoading } = useGov()
+  const { minDeposit, reward } = useGovInfo()
   const { myNFTs } = useNftInfo()
   const [nft, setNft] = useState<string | undefined>()
   const [desc, setDesc] = useState('')
@@ -32,7 +34,8 @@ export default function VotingCreate() {
       return
     }
     await onPropose(nft, amountBN.toString(), desc)
-  }, [nft, desc, amountBN, onPropose])
+    history.push('/voting')
+  }, [nft, desc, amountBN, onPropose, history])
 
   return (
     <div className="px-4 max-w-2xl mx-auto relative">
@@ -44,7 +47,7 @@ export default function VotingCreate() {
 
       <div className="flex flex-col mt-10">
         <span className="text-sm font-medium mb-2 text-light-black">{t('choose')}</span>
-        <Select value={nft} className="w-full h-12 rounded border-none bg-light-white" style={{ backgroundColor: '#F9F9F9' }} size="large" onChange={e => setNft(e)}>
+        <Select value={nft} className="w-full h-12 rounded border bg-white" style={{ backgroundColor: '#F9F9F9' }} size="large" onChange={e => setNft(e)}>
           {
             myNFTs.filter(i => !i.isInUse).map(i => <Select.Option key={i.id} className="h-10 flex items-center" value={i.id}>{i.id} | {i.name}</Select.Option>)
           }
@@ -53,7 +56,7 @@ export default function VotingCreate() {
 
       <div className="flex flex-col mt-12">
         <span className="text-sm font-medium mb-2 text-light-black">{t('description')}</span>
-        <TextArea rows={4} placeholder={t('please_input')} className="border-none rounded text-sm text-light-black bg-light-white" value={desc} onChange={e => setDesc(e.target.value)} />
+        <TextArea rows={4} placeholder={t('please_input')} className="border rounded text-sm text-light-black" value={desc} onChange={e => setDesc(e.target.value)} />
       </div>
 
       <div className="flex flex-col md:flex-row md:justify-between md:gap-4">
@@ -77,7 +80,12 @@ export default function VotingCreate() {
 
       <div className="flex flex-col mt-12">
         <span className="text-sm mb-2 text-light-black">{t('pay')} ({t('min')}: {formatAmount(minDeposit, 18)})</span>
-        <Input className="h-12 border-none rounded text-sm text-light-black bg-light-white" suffix="KOGE" value={amount} onChange={e => setAmount(e.target.value)} />
+        <Input className="h-12 border rounded text-sm text-light-black" suffix="KOGE" value={amount} onChange={e => setAmount(e.target.value)} />
+      </div>
+
+      <div className="flex flex-col mt-12">
+        <span className="text-sm mb-2 text-light-black">Estimate reward from pool</span>
+        <div className="bg-light-white h-12 px-2 flex flex-row items-center">{formatAmount(reward?.plus(amountBN.gt(0) ? amountBN : 0), 18)} KOGE</div>
       </div>
 
       <div className="w-full mt-12 mb-20">
@@ -94,6 +102,7 @@ export default function VotingCreate() {
         }
         <Button className="h-12 rounded w-full rounded" onClick={onSubmit}
                 type="primary"
+                loading={proposeLoading}
                 disabled={!minDeposit?.lte(amountBN) || !allowance.gt(0)}>
           {t('submit')}
         </Button>
