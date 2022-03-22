@@ -9,6 +9,7 @@ import { Dropdown, Menu } from 'antd'
 import { useEthers, useTransactions } from '@usedapp/core'
 import { shorten } from '@funcblock/dapp-sdk'
 import Loader from '../Loader'
+import { CHAIN_ID } from '../../constants/env'
 
 export default function Header() {
   const { t } = useTranslation()
@@ -110,7 +111,17 @@ function Web3Status() {
   const pendingCount = transactions.filter(i => !i.receipt).length
 
   const activate = useCallback(async () => {
-    await activateBrowserWallet()
+    try {
+      if (window.ethereum && window.ethereum.request) {
+        window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x' + CHAIN_ID.toString(16) }],
+        })
+      }
+    } catch (e) {
+      console.error(e)
+    }
+    setTimeout(activateBrowserWallet, 100)
   }, [activateBrowserWallet])
 
   if (account) {
