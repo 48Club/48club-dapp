@@ -8,7 +8,10 @@ import { useStakingContractReadonly } from '../../../hooks/useContract'
 function Row({ data }: { data: any }) {
   return (
     <div className="mt-4 pt-4 pb-0 flex flex-row justify-between items-center border-t border-gray" key={data}>
-      <div className="flex-1">
+      <div className="flex-1 block md:hidden">
+        {shorten(data.user, 4, 4)}
+      </div>
+      <div className="flex-1 hidden md:block">
         {shorten(data.user, 8, 8)}
       </div>
       <div className="flex-1">
@@ -17,7 +20,7 @@ function Row({ data }: { data: any }) {
       <div className="flex-1">
         {formatAmount(data.amount, 18)}
       </div>
-      <div className="flex-1">
+      <div className="flex-1 hidden md:block">
         {data.blockNumber}
       </div>
     </div>
@@ -53,7 +56,7 @@ export default function RecordSection() {
           <div className="flex-1 text-gray">{t('address')}</div>
           <div className="flex-1 text-gray">{t('staking_operation')}</div>
           <div className="flex-1 text-gray">{t('amount')}</div>
-          <div className="flex-1 text-gray">{t('blocknumber')}</div>
+          <div className="flex-1 text-gray hidden md:block">{t('blocknumber')}</div>
         </div>
         {records.length > 0 ? (
           <>

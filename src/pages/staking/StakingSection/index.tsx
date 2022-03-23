@@ -53,7 +53,7 @@ export default function StakingSection() {
   return (
     <div className="flex flex-col">
       <Label text={t('staking_staking_title')} />
-      <div className="mt-6 w-auto flex flex-row rounded-lg shadow">
+      <div className="mt-6 w-auto flex flex-col md:flex-row rounded-lg shadow">
         <div className="flex-1 flex flex-col pl-8 bg-card-yellow">
           <div>
             <div className="font-medium text-base mr-3 mt-10 mb-4">
