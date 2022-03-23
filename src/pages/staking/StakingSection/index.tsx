@@ -19,7 +19,7 @@ export default function StakingSection() {
   const { t } = useTranslation()
   const [activeItem, setActiveItem] = useState(0)
   const [input, setInput] = useState('')
-  const { myStakeBalance, decimals, unstakeTime, withdrawTime, myTokenBalance, myUnstakeBalance } = useStakeInfo()
+  const { myStakeBalance, decimals, unstakeTime, withdrawTime, myTokenBalance, myLockedUnstakeBalance, myUnlockedUnstakeBalance } = useStakeInfo()
   const { onWithdraw, withdrawLoading } = useStake()
 
   const { approve, loading: approveLoading } = useApprove(KogeAddress, StakingAddress)
@@ -29,7 +29,7 @@ export default function StakingSection() {
   const unlockMoment = unstakeTime ? moment(unstakeTime * 1000) : undefined
   const withdrawMoment = withdrawTime ? moment(withdrawTime * 1000) : undefined
   const canUnstake = (unlockMoment && unlockMoment.isBefore(moment()))
-  const canWithdraw = (withdrawMoment && withdrawMoment.isBefore(moment()))
+  const canWithdraw = !!myUnlockedUnstakeBalance?.gt(0)
   const openStakeModal = useOpenModal(ApplicationModal.STAKE, inputBN.toString())
   const openUnstakeModal = useOpenModal(ApplicationModal.UNSTAKE, inputBN.toString())
 
@@ -42,8 +42,8 @@ export default function StakingSection() {
   }, [onWithdraw, inputBN, decimals, activeItem, openStakeModal, openUnstakeModal])
 
   const currentBalance = useMemo(() => {
-    return [myTokenBalance, myStakeBalance, myUnstakeBalance][activeItem]
-  }, [myStakeBalance, myTokenBalance, activeItem, myUnstakeBalance])
+    return [myTokenBalance, myStakeBalance, myUnlockedUnstakeBalance][activeItem]
+  }, [myStakeBalance, myTokenBalance, activeItem, myUnlockedUnstakeBalance])
 
   const onSetMax = useCallback(() => {
     const max = new BigNumber(currentBalance?.toString() ?? '0').div(TEN_POW(decimals ?? 0)).toString()
@@ -69,12 +69,12 @@ export default function StakingSection() {
                 {t('my_unstaking_count')}
               </div>
               <div className="flex flex-row items-center">
-                {formatAmount(canWithdraw ? 0 : myUnstakeBalance, decimals)} KOGE
+                {formatAmount(myLockedUnstakeBalance, decimals)} KOGE
                 {
                   !canWithdraw && (
                     <Tooltip placement="bottom"
                              className="ml-1"
-                             title={(withdrawMoment && !canWithdraw) ? `Withdrawable: ${withdrawMoment.format('YYYY-MM-DD HH:mm')}` : undefined}
+                             title={withdrawMoment ? `Withdrawable: ${withdrawMoment.format('YYYY-MM-DD HH:mm')}` : undefined}
                     >
                       <HelpCircle size={16} />
                     </Tooltip>
@@ -87,7 +87,7 @@ export default function StakingSection() {
                 {t('my_withdrawable_count')}
               </div>
               <div className="">
-                {formatAmount(canWithdraw ? (myUnstakeBalance ?? 0) : 0, decimals)} KOGE
+                {formatAmount(myUnlockedUnstakeBalance, decimals)} KOGE
               </div>
             </div>
           </div>
