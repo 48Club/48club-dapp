@@ -47,6 +47,7 @@ export default function useGovDetailInfo(proposalId: string) {
   const govContractReadonly = useGovernanceContractReadonly()
 
   const reloadVoteRecords = useCallback(async () => {
+    setVoteRecords(undefined)
     const filter = govContractReadonly.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
     const events = await govContractReadonly.queryFilter(filter)
     const rows = events.map(i => ({
@@ -62,7 +63,7 @@ export default function useGovDetailInfo(proposalId: string) {
 
   useEffect(() => {
     reloadVoteRecords().catch(console.error)
-  })
+  }, [reloadVoteRecords])
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any
 
 
