@@ -4,12 +4,14 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
-import { formatAmount } from '@funcblock/dapp-sdk'
+import { formatAmount, TEN_POW } from '@funcblock/dapp-sdk'
+import BigNumber from 'bignumber.js'
 
 export default function ResultSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { againstVotes, forVotes, state, quorum } = useGovDetailInfo(id)
+  const { againstVotes, forVotes, state, quorum, totalStakeAtStart } = useGovDetailInfo(id)
+  const quorumBN = new BigNumber(quorum).div(TEN_POW(4)).times(totalStakeAtStart)
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Label text={t('vote_result')} />
@@ -24,8 +26,8 @@ export default function ResultSection() {
           <span className="text-sm text-dark-gray">
             {
               t(state?.toLowerCase())}. {(state === 'Invalid' || state === 'Refunded') ?
-            <span>{t('result_tip1')}{quorum} KOGE</span> :
-            <span>{t('result_tip2')}{forVotes + againstVotes} KOGE</span>
+            <span>{t('result_tip1')}{formatAmount(quorumBN, 18)} KOGE</span> :
+            <span>{t('result_tip2')}{forVotes + againstVotes} KOGE. Quorum: {formatAmount(quorumBN, 18)} KOGE</span>
           }
           </span>
         </div>

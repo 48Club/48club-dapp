@@ -2,7 +2,7 @@ import { useContractCalls, useEthers } from '@usedapp/core'
 import { useGovernanceContract, useGovernanceContractReadonly } from '../useContract'
 import { Result } from '@ethersproject/abi'
 import { utils } from 'ethers'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
 
@@ -45,22 +45,26 @@ export default function useGovDetailInfo(proposalId: string) {
 
   const [voteRecords, setVoteRecords] = useState<any[] | undefined>(undefined)
   const govContractReadonly = useGovernanceContractReadonly()
-  useEffect(() => {
-    (async () => {
-      const filter = govContractReadonly.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
-      const events = await govContractReadonly.queryFilter(filter)
-      const rows = events.map(i => ({
-        proposalId: i.args?.proposalId?.toString(),
-        reason: i.args?.reason?.toString(),
-        support: i.args?.support?.toString(),
-        voter: i.args?.voter?.toString(),
-        weight: i.args?.weight?.toString(),
-        blockNumber: i.blockNumber,
-      }))
-      setVoteRecords(rows)
-    })()
+
+  const reloadVoteRecords = useCallback(async () => {
+    const filter = govContractReadonly.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
+    const events = await govContractReadonly.queryFilter(filter)
+    const rows = events.map(i => ({
+      proposalId: i.args?.proposalId?.toString(),
+      reason: i.args?.reason?.toString(),
+      support: i.args?.support?.toString(),
+      voter: i.args?.voter?.toString(),
+      weight: i.args?.weight?.toString(),
+      blockNumber: i.blockNumber,
+    }))
+    setVoteRecords(rows)
   }, [govContractReadonly, proposalId])
+
+  useEffect(() => {
+    reloadVoteRecords().catch(console.error)
+  })
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any
+
 
   const myCanVote = useMemo(() => {
     return state === 'Active'
@@ -80,5 +84,6 @@ export default function useGovDetailInfo(proposalId: string) {
     myCanVote,
     quorum: quorumThresholdResult?.[0]?.toNumber(),
     myReward: new BigNumber(rewardInfoResult?.claimableAmount.toString()),
+    reloadVoteRecords,
   }
 }

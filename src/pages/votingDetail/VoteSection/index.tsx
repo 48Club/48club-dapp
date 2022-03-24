@@ -1,7 +1,7 @@
 import { CheckCircleTwoTone, CloseCircleTwoTone, MinusCircleTwoTone } from '@ant-design/icons'
 import { Button, Spin, Tooltip } from 'antd'
 import Label from 'components/Label'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import useGov from '../../../hooks/gov/useGov'
 import { useParams } from 'react-router-dom'
@@ -9,6 +9,7 @@ import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import { HelpCircle } from 'react-feather'
 import { useEthers } from '@usedapp/core'
+import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 
 export default function VoteSection() {
   const { t } = useTranslation()
@@ -38,16 +39,22 @@ export default function VoteSection() {
 function ActionPanel({ id, myCanVote }) {
   const { onVote } = useGov()
   const { account } = useEthers()
-  const { voteRecords } = useGovDetailInfo(id)
+  const { voteRecords, reloadVoteRecords } = useGovDetailInfo(id)
+  const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
   const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
+  const onSubmit = useCallback(async (id, support) => {
+    await onVote(id, support)
+    setTimeout(reloadVoteRecords, 1000)
+  }, [onVote, reloadVoteRecords])
 
   return <Spin spinning={!voteRecords}>
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center items-stretch">
+      <div className="mb-2 text-center text-dark-gray">My staking: {formatAmount(myStakeBalance, 18)} KOGE</div>
       <Button
         className={`bg-white h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
-        onClick={() => !myVoted && onVote(id, 1)}
+        onClick={() => !myVoted && onSubmit(id, 1)}
         disabled={!myCanVote || myVoted}
       >
         {t('approve')}
@@ -55,7 +62,7 @@ function ActionPanel({ id, myCanVote }) {
       <Button
         className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '0' && 'border-primary'}`}
         icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
-        onClick={() => !myVoted && onVote(id, 0)}
+        onClick={() => !myVoted && onSubmit(id, 0)}
         disabled={!myCanVote || myVoted}
       >
         {t('reject')}
