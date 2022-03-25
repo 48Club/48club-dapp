@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="container">
         <div className="website-link">
           <Row gutter={48} align="top">
-            <Col xs={24} md={6}>
+            <Col xs={24} md={8}>
               <div className="website-info">
                 <img
                   className="app-logo"
@@ -35,7 +35,7 @@ export default function Footer() {
                 </div>
               </div>
             </Col>
-            <Col xs={24} md={6}>
+            <Col xs={24} md={8}>
               <div className="widget">
                 <div className="title">
                   {t('app_footer_website_section_title')}
@@ -93,7 +93,7 @@ export default function Footer() {
                 </ul>
               </div>
             </Col>
-            <Col xs={24} md={6}>
+            <Col xs={24} md={8}>
               <div className="widget">
                 <div className="title">
                   {t('app_footer_social_section_title')}
@@ -103,12 +103,6 @@ export default function Footer() {
                     <a className="flex flex-row items-center" href="https://twitter.com/bnb48club" target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-twitter.svg" alt="Twitter" />
                       Twitter
-                    </a>
-                  </li>
-                  <li>
-                    <a className="flex flex-row items-center" href="https://weibo.com/bnb48sirian" target="_blank" rel="noopener noreferrer">
-                      <img className="social-icon" src="/static/icon-social-weibo.png" alt="Weibo" />
-                      {t('app_footer_item_weibo')}
                     </a>
                   </li>
                   <li>
@@ -137,8 +131,6 @@ export default function Footer() {
                   </li>
                 </ul>
               </div>
-            </Col>
-            <Col xs={24} md={6}>
             </Col>
           </Row>
         </div>

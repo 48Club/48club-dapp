@@ -15,6 +15,8 @@ const LOGO_URLS = [
   'logo-partner-defi-labs.svg',
   'mayor-capital.svg',
   'mugglepay-logo.png',
+  '/static/logo1.png',
+  '/static/cnm.png',
 ]
 
 export default function CustomerSection() {
@@ -37,7 +39,7 @@ export default function CustomerSection() {
                 LOGO_URLS.map(url => (
                   <Col xs={12} md={6} key={`partner-logo-${url}`}>
                     <div className="customer-list-card">
-                      <img src={`https://bnb48club-prod.oss-accelerate.aliyuncs.com/${url}`} alt="合作伙伴" />
+                      <img src={url.startsWith('/static') ? url : `https://bnb48club-prod.oss-accelerate.aliyuncs.com/${url}`} alt="合作伙伴" />
                     </div>
                   </Col>
                 ))
