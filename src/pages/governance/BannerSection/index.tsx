@@ -17,23 +17,6 @@ export default function BannerSection() {
                 <br />
                 {t('app_header_menu_governance_title')}
               </div>
-              <div className="section-subtitle">
-                {t('governance_page_banner_section_title_1')}
-                <br />
-                <p>
-                  {t('governance_page_banner_section_title_2')}
-                  <br />
-                  <br />
-                  {t('governance_page_banner_section_title_3')}
-                  <br />
-                  <br />
-                  {t('governance_page_banner_section_title_3_item_1')}
-                  <br />
-                  {t('governance_page_banner_section_title_3_item_2')}
-                  <br />
-                  {t('governance_page_banner_section_title_3_item_3')}
-                </p>
-              </div>
             </div>
           </Col>
         </Row>

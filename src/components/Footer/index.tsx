@@ -62,6 +62,21 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/staking">
+                      {t('staking')}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/nft">
+                      NFT
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/voting">
+                      {t('voting')}
+                    </Link>
+                  </li>
+                  <li>
                     <a
                       className="app-button"
                       href={
@@ -124,13 +139,6 @@ export default function Footer() {
               </div>
             </Col>
             <Col xs={24} md={6}>
-              <div className="widget">
-                <div className="title">
-                  <WechatOutlined />
-                  {t('app_footer_wechat_section_title')}
-                </div>
-                <img src="/static/BNB48_二维码.png" alt="WeChat" style={{ height: '100px', marginBottom: '24px' }} />
-              </div>
             </Col>
           </Row>
         </div>
