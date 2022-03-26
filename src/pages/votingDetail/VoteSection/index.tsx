@@ -59,7 +59,7 @@ function ActionPanel({ id, myCanVote }) {
         onClick={() => !myVoted && onSubmit(id, 1)}
         disabled={!myCanVote || myVoted}
       >
-        {t('approve')}
+        {t('approve_vote')}
       </Button>
       <Button
         className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '0' && 'border-primary'}`}
@@ -67,7 +67,7 @@ function ActionPanel({ id, myCanVote }) {
         onClick={() => !myVoted && onSubmit(id, 0)}
         disabled={!myCanVote || myVoted}
       >
-        {t('reject')}
+        {t('reject_vote')}
       </Button>
     </div>
   </Spin>
