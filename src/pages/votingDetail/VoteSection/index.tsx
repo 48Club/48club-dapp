@@ -39,7 +39,7 @@ export default function VoteSection() {
 function ActionPanel({ id, myCanVote }) {
   const { onVote } = useGov()
   const { account } = useEthers()
-  const { voteRecords, reloadVoteRecords } = useGovDetailInfo(id)
+  const { voteRecords, reloadVoteRecords, myVotes } = useGovDetailInfo(id)
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
   const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
@@ -48,9 +48,11 @@ function ActionPanel({ id, myCanVote }) {
     setTimeout(reloadVoteRecords, 1000)
   }, [onVote, reloadVoteRecords])
 
+  const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
+
   return <Spin spinning={!voteRecords}>
     <div className="flex flex-col justify-center items-stretch">
-      <div className="mb-2 text-center text-dark-gray">My staking: {formatAmount(myStakeBalance, 18)} KOGE</div>
+      <div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
       <Button
         className={`bg-white h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}

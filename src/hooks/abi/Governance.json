@@ -596,6 +596,47 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "_proposalId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_account",
+        "type": "address"
+      }
+    ],
+    "name": "proposalVoteInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "enum Governance.VoteType",
+            "name": "voteType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "weight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "rewardClaimed",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Governance.VoteInfo",
+        "name": "_voteInfo",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "",
         "type": "uint256"
       }

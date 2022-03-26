@@ -10,7 +10,7 @@ export default function useGovDetailInfo(proposalId: string) {
   const { account } = useEthers()
   const govContract = useGovernanceContract()
 
-  const [proposalResult, votesResult, stateResult, rewardInfoResult, quorumThresholdResult] = (useContractCalls([
+  const [proposalResult, votesResult, myVoteInfoResult, stateResult, rewardInfoResult, quorumThresholdResult] = (useContractCalls([
     {
       address: govContract.address,
       abi: govContract.interface,
@@ -22,6 +22,12 @@ export default function useGovDetailInfo(proposalId: string) {
       abi: govContract.interface,
       method: 'proposalVotes',
       args: [proposalId],
+    },
+    {
+      address: govContract.address,
+      abi: govContract.interface,
+      method: 'proposalVoteInfo',
+      args: [proposalId, account],
     },
     {
       address: govContract.address,
@@ -42,7 +48,6 @@ export default function useGovDetailInfo(proposalId: string) {
       args: [],
     },
   ]) ?? []) as Result[]
-
   const [voteRecords, setVoteRecords] = useState<any[] | undefined>(undefined)
   const govContractReadonly = useGovernanceContractReadonly()
 
@@ -66,10 +71,10 @@ export default function useGovDetailInfo(proposalId: string) {
   }, [reloadVoteRecords])
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any
 
-
   const myCanVote = useMemo(() => {
     return state === 'Active'
   }, [state])
+
   return {
     proposer: proposalResult?.proposer.toString(),
     proposerRewardClaimed: proposalResult?.proposerRewardClaimed.toString(),
@@ -82,9 +87,10 @@ export default function useGovDetailInfo(proposalId: string) {
     forVotes: new BigNumber(votesResult?.forVotes.toString()).div(TEN_POW(18)).toNumber(),
     state,
     voteRecords,
-    myCanVote,
     quorum: quorumThresholdResult?.[0]?.toNumber(),
+    myCanVote,
     myReward: new BigNumber(rewardInfoResult?.claimableAmount.toString()),
+    myVotes: new BigNumber(myVoteInfoResult?.[0].weight.toString()),
     reloadVoteRecords,
   }
 }
