@@ -52,3 +52,20 @@ export const TG_URL = 'https://t.me/bnb48club_cn'
 export const GITHUB_URL = 'https://github.com/BNB48Club'
 export const DISCORD_URL = 'https://discord.gg/FzA9Pzr'
 export const MEDIUM_URL = 'https://medium.com/bnb48-club-publish'
+
+
+export const PARTNER_URLS = [
+  'logo-partner-binance-smart-chain.svg',
+  'logo-partner-dodo.svg',
+  'logo-partner-kava.svg',
+  'logo-partner-swingby.svg',
+  'logo-partner-mathwallet.svg',
+  'logo-partner-roostoo.svg',
+  'logo-partner-12.jpeg',
+  'logo-partner-realsatoshi.png',
+  'logo-partner-defi-labs.svg',
+  'mayor-capital.svg',
+  '/static/logo1.png',
+  '/static/cnm.png',
+  'https://sheepdex.org/logo.svg',
+]

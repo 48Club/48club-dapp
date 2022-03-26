@@ -2,22 +2,8 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import './index.less'
 import { useTranslation } from 'react-i18next'
+import { PARTNER_URLS } from '../../../constants/bnb48'
 
-const LOGO_URLS = [
-  'logo-partner-binance-smart-chain.svg',
-  'logo-partner-dodo.svg',
-  'logo-partner-kava.svg',
-  'logo-partner-swingby.svg',
-  'logo-partner-mathwallet.svg',
-  'logo-partner-roostoo.svg',
-  'logo-partner-12.jpeg',
-  'logo-partner-realsatoshi.png',
-  'logo-partner-defi-labs.svg',
-  'mayor-capital.svg',
-  'mugglepay-logo.png',
-  '/static/logo1.png',
-  '/static/cnm.png',
-]
 
 export default function CustomerSection() {
   const { t } = useTranslation()
@@ -36,10 +22,13 @@ export default function CustomerSection() {
           <div className="section-content">
             <Row gutter={24} align="stretch">
               {
-                LOGO_URLS.map(url => (
+                PARTNER_URLS.map(url => (
                   <Col xs={12} md={6} key={`partner-logo-${url}`}>
                     <div className="customer-list-card">
-                      <img src={url.startsWith('/static') ? url : `https://bnb48club-prod.oss-accelerate.aliyuncs.com/${url}`} alt="合作伙伴" />
+                      <img src={
+                        (url.startsWith('/static') || url.startsWith('http')) ?
+                          url :
+                          `https://bnb48club-prod.oss-accelerate.aliyuncs.com/${url}`} alt="合作伙伴" />
                     </div>
                   </Col>
                 ))
