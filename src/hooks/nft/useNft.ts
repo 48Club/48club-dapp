@@ -9,6 +9,7 @@ import BigNumber from 'bignumber.js'
 export default function useNft() {
   const { account } = useEthers()
   const nftContract = useNftContract()
+  const { send: setTokenURI, state: setTokenURIState } = useContractFunction(nftContract, 'setTokenURI', { transactionName: 'SetTokenURI'})
   const { send: mint, state: mintState } = useContractFunction(nftContract, 'safeMint', { transactionName: 'Mint' })
   const { approve: onApprove, loading: approveLoading } = useApprove(KogeAddress, nftContract.address)
   const allowance = useTokenAllowance(KogeAddress, account, nftContract.address)
@@ -18,11 +19,18 @@ export default function useNft() {
     await mint(account, tokenURI)
   }, [account, mint])
 
+  const onSetTokenURI = useCallback(async (tokenId: string, tokenURI: string) => {
+    console.info('NFT | setTokenURI', tokenId, '->', tokenURI)
+    await setTokenURI(tokenId, tokenURI)
+  }, [setTokenURI])
+
   return {
     onMint,
     mintLoading: mintState.status === 'Mining',
     onApprove,
     approveLoading,
     isAllowed: new BigNumber(allowance?.toString() ?? 0).gt(0),
+    onSetTokenURI,
+    setBaseURILoading: setTokenURIState.status === 'Mining',
   }
 }

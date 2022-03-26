@@ -12,4 +12,5 @@ const ipfs = ipfsClient.create({
     authorization: auth,
   },
 })
+
 export default ipfs

@@ -22,10 +22,11 @@ export default function useNftInfo() {
   const nftMeta = useMemo(() => ({ address: nftContract.address, abi: nftContract.interface }), [nftContract])
   const govMeta = useMemo(() => ({ address: govContract.address, abi: govContract.interface }), [govContract])
 
-  const [totalSupplyResult, balanceOfResult, nextMintCostResult] = (useContractCalls([
+  const [totalSupplyResult, balanceOfResult, nextMintCostResult, updateURICostResult ] = (useContractCalls([
     { ...nftMeta, method: 'totalSupply', args: [] },
     { ...nftMeta, method: 'balanceOf', args: [account] },
     { ...nftMeta, method: 'getNextMintCost', args: [] },
+    { ...nftMeta, method: 'updateURICost', args: []}
   ]) ?? []) as Result[]
 
   const totalSupply = totalSupplyResult?.[0].toNumber() ?? 0
@@ -77,6 +78,7 @@ export default function useNftInfo() {
     totalSupply,
     myBalance: balanceOfResult?.[0].toNumber() ?? 0,
     nextMintCost: new BigNumber(nextMintCostResult?.[0].toString() ?? 0),
+    updateURICost: new BigNumber(updateURICostResult?.[0].toString() ?? 0),
     NFTs,
     myNFTs: NFTs.filter(i => i.owner === account),
   }

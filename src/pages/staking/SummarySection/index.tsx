@@ -39,12 +39,6 @@ export default function SummarySection() {
                 {formatAmount(totalStakes, decimals)}
               </span>
             </div>
-            <div className="flex-1 flex flex-col mb-6">
-              <span className="text-sm mb-2 leading-5">
-                {t('staking_summary_own')}
-              </span>
-              <span className="text-xl font-bold text-light-black">{formatAmount(balancePercentage ?? 0, 0, 2)}%</span>
-            </div>
           </div>
         </div>
         <div className="absolute right-0 -bottom-5 w-48">

@@ -16,7 +16,7 @@ export default function PcHeaderSection() {
   const { t } = useTranslation()
 
   return (
-    <div className="mt-8 px-14 flex flex-row justify-between bg-another-white items-center">
+    <div className="mt-8 px-14 flex flex-row justify-between bg-another-white items-center min-h-[220px]">
       <div>
         <div className="text-4xl font-bold">{t('my_nft')}</div>
         <div className="my-4 text-base font-normal text-dark-gray flex flex-row">
