@@ -48,9 +48,9 @@ export default function NFTCreate() {
 
   useEffect(() => {
     if (editingNTF) {
-      setName(editingNTF.name);
-      setDesc(editingNTF.description);
-      editingNTF.image &&
+      !name && setName(editingNTF.name);
+      !desc && setDesc(editingNTF.description);
+      !fileList.length && editingNTF.image &&
         fetch(editingNTF.image).then((res) => {
           res.blob().then((file) => {
             setFileList([
@@ -66,7 +66,7 @@ export default function NFTCreate() {
           });
         });
     }
-  }, [editingNTF]);
+  }, [editingNTF, name, desc, fileList]);
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {

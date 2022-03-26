@@ -69,8 +69,8 @@ export default function useNftInfo() {
       owner: owners[index],
       isInUse: isInUses[index],
       image: ipfsToHttp(jsons[index]?.image) ?? '',
-      name: jsons[index]?.name ?? '...',
-      description: jsons[index]?.description ?? '...',
+      name: jsons[index]?.name ?? '',
+      description: jsons[index]?.description ?? '',
     }
   })), [tokenURIs, owners, jsons, isInUses])
 
