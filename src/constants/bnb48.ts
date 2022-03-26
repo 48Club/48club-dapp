@@ -25,16 +25,6 @@ export const COMMITTEE_LIST = [
     telegram: 'SirIanM',
   },
   {
-    title: 'Jerry',
-    subtitle: 'jerry@bnb48.club',
-    telegram: 'JerryZhou',
-  },
-  {
-    title: 'Mao',
-    subtitle: 'mao@bnb48.club',
-    telegram: 'heymattbkk',
-  },
-  {
     title: 'Mars',
     subtitle: 'mars@bnb48.club',
     telegram: 'Brun0Mars',
@@ -48,11 +38,6 @@ export const COMMITTEE_LIST = [
     title: 'Yoyo',
     subtitle: 'yoyo@bnb48.club',
     telegram: 'supremacy2018',
-  },
-  {
-    title: '大麦',
-    subtitle: 'damal@bnb48.club',
-    telegram: 'BigMaimai',
   },
   {
     title: '千年韭菜',
