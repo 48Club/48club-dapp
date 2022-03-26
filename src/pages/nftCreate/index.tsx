@@ -48,9 +48,9 @@ export default function NFTCreate() {
 
   useEffect(() => {
     if (editingNTF) {
-      !name && setName(editingNTF.name);
-      !desc && setDesc(editingNTF.description);
-      !fileList.length && editingNTF.image &&
+      setName(editingNTF.name);
+      setDesc(editingNTF.description);
+      editingNTF.image &&
         fetch(editingNTF.image).then((res) => {
           res.blob().then((file) => {
             setFileList([
