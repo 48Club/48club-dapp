@@ -19,7 +19,7 @@
   "nft_name": "48er 头衔",
   "please_input": "请输入",
   "nft_brief_description": "48er 简介",
-  "payment_hint": "您需要支付",
+  "payment_hint": "您需要销毁",
   "payment_value": "{{val, number}}枚 KOGE",
   "nft_id_hint": "该NFT序号",
   "nft_id_value": "第{{val, number}}枚NFT",
