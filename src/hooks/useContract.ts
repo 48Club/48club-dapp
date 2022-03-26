@@ -6,6 +6,7 @@ import Nft_ABI from './abi/Nft.json'
 import Staking_ABI from './abi/Staking.json'
 import { GovernanceAddress, NftAddress, StakingAddress } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
+import { READONLY_RPC_URL } from '../constants/env'
 
 export default function useERC20Contract(address?: string) {
   return useMemo(() => address ? new Contract(address, ERC20Interface) : undefined, [address])
@@ -16,12 +17,12 @@ export function useStakingContract() {
 }
 
 export function useStakingContractReadonly() {
-  const provider = useMemo(() => new JsonRpcProvider('https://data-seed-prebsc-2-s2.binance.org:8545/'), [])
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(StakingAddress, Staking_ABI, provider), [provider])
 }
 
 export function useGovernanceContractReadonly() {
-  const provider = useMemo(() => new JsonRpcProvider('https://data-seed-prebsc-2-s2.binance.org:8545/'), [])
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(GovernanceAddress, Governance_ABI, provider), [provider])
 }
 
