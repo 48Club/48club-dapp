@@ -48,9 +48,9 @@ export default function NFTCreate() {
 
   useEffect(() => {
     if (editingNTF) {
-      setName(editingNTF.name);
-      setDesc(editingNTF.description);
-      editingNTF.image &&
+      !editingNTF.name && setName(editingNTF.name);
+      !editingNTF.description && setDesc(editingNTF.description);
+      !fileList.length && editingNTF.image &&
         fetch(editingNTF.image).then((res) => {
           res.blob().then((file) => {
             setFileList([
@@ -110,7 +110,7 @@ export default function NFTCreate() {
         }),
       });
       if (isEdit && editingNTF?.uri) {
-        await onSetTokenURI(editId?.toString(), ipfsRes.cid.toV1().toString())
+        await onSetTokenURI(editId?.toString() || '', ipfsRes.cid.toV1().toString())
       } else {
         await onMint(ipfsRes.cid.toV1().toString());
       }
