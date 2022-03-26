@@ -189,6 +189,11 @@ const TUTORIAL_ITEMS = [
     event_content: 'CoinSwap 支持 KOGE/BNB 流动性挖矿',
     event_content_en: 'CoinSwap enables KOGE/BNB lp farming',
   },
+  {
+    event_title: '2022-03-27',
+    event_content: '链上DAO进行Beta测试',
+    event_content_en: 'Beta test of on-chain DAO',
+  },
 ]
 
 export default function TutorialSection() {
