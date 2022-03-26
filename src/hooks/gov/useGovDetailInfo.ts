@@ -5,8 +5,7 @@ import { utils } from 'ethers'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
-import { JsonRpcProvider } from '@ethersproject/providers'
-import { READONLY_RPC_URL } from '../../constants/env'
+import { START_BLOCK_NUMBER } from '../../constants/contracts'
 
 export default function useGovDetailInfo(proposalId: string) {
   const { account } = useEthers()
@@ -55,10 +54,8 @@ export default function useGovDetailInfo(proposalId: string) {
 
   const reloadVoteRecords = useCallback(async () => {
     setVoteRecords(undefined)
-    const provider = new JsonRpcProvider(READONLY_RPC_URL)
-    const blockNumber = await provider.getBlockNumber()
     const filter = govContractReadonly.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
-    const events = await govContractReadonly.queryFilter(filter, blockNumber - 7 * 24 * 3600)
+    const events = await govContractReadonly.queryFilter(filter, START_BLOCK_NUMBER)
     const rows = events.map(i => ({
       proposalId: i.args?.proposalId?.toString(),
       reason: i.args?.reason?.toString(),

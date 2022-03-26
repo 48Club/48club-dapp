@@ -3,8 +3,7 @@ import { useGovernanceContract, useGovernanceContractReadonly } from '../useCont
 import BigNumber from 'bignumber.js'
 import { Result } from '@ethersproject/abi'
 import { useEffect, useState } from 'react'
-import { JsonRpcProvider } from '@ethersproject/providers'
-import { READONLY_RPC_URL } from '../../constants/env'
+import { START_BLOCK_NUMBER } from '../../constants/contracts'
 
 export default function useGovInfo() {
   const govContract = useGovernanceContract()
@@ -28,10 +27,8 @@ export default function useGovInfo() {
   const govContractReadonly = useGovernanceContractReadonly()
   useEffect(() => {
     (async () => {
-      const provider = new JsonRpcProvider(READONLY_RPC_URL)
-      const blockNumber = await provider.getBlockNumber()
       const createdFilter = govContractReadonly.filters.ProposalCreated(null, null)
-      const events = await govContractReadonly.queryFilter(createdFilter, blockNumber - 7 * 24 * 3600)
+      const events = await govContractReadonly.queryFilter(createdFilter, START_BLOCK_NUMBER)
       const rows = events.map(i => ({
         address: i.address?.toString(),
         proposalId: i.args?.proposalId?.toString(),

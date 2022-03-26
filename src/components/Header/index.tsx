@@ -66,11 +66,11 @@ export default function Header() {
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/nft') ? 'text-primary' : 'text-black'}`}
                   to={'/nft'}>
-              NFT
+              48er
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/voting') ? 'text-primary' : 'text-black'}`}
                   to={'/voting'}>
-              {t('voting')}
+              DAO
             </Link>
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('more')}</div>

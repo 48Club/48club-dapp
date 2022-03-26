@@ -1,10 +1,11 @@
 import React from 'react'
 import { Col, Row } from 'antd'
-import { LockOutlined, WechatOutlined } from '@ant-design/icons'
+import { LockOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import './index.less'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
+import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TG_URL, TWITTER_URL } from '../../constants/bnb48'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -68,12 +69,12 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link to="/nft">
-                      NFT
+                      48er
                     </Link>
                   </li>
                   <li>
                     <Link to="/voting">
-                      {t('voting')}
+                      DAO
                     </Link>
                   </li>
                   <li>
@@ -100,31 +101,31 @@ export default function Footer() {
                 </div>
                 <ul>
                   <li>
-                    <a className="flex flex-row items-center" href="https://twitter.com/bnb48club" target="_blank" rel="noopener noreferrer">
+                    <a className="flex flex-row items-center" href={TWITTER_URL} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-twitter.svg" alt="Twitter" />
                       Twitter
                     </a>
                   </li>
                   <li>
-                    <a className="flex flex-row items-center" href="https://t.me/bnb48club_cn" target="_blank" rel="noopener noreferrer">
+                    <a className="flex flex-row items-center" href={TG_URL} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-telegram.png" alt="Telegram" />
                       Telegram
                     </a>
                   </li>
                   <li>
-                    <a className="flex flex-row items-center" href="https://github.com/BNB48Club" target="_blank" rel="noopener noreferrer">
+                    <a className="flex flex-row items-center" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-github.png" alt="Github" />
                       Github
                     </a>
                   </li>
                   <li>
-                    <a className="flex flex-row items-center" href="https://discord.gg/FzA9Pzr" target="_blank" rel="noopener noreferrer">
+                    <a className="flex flex-row items-center" href={DISCORD_URL} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-discord.png" alt="Discord" />
                       Discord
                     </a>
                   </li>
                   <li>
-                    <a className="flex flex-row items-center" href="https://medium.com/bnb48-club-publish" target="_blank" rel="noopener noreferrer">
+                    <a className="flex flex-row items-center" href={MEDIUM_URL} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-medium.png" alt="Medium" />
                       Medium
                     </a>

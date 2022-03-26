@@ -1,6 +1,8 @@
 import { ChainId } from '@usedapp/core'
 import { CHAIN_ID } from './env'
 
+export const START_BLOCK_NUMBER = 16397000
+
 export const KogeAddress = {
   [ChainId.BSC]: '0xe6df05ce8c8301223373cf5b969afcb1498c5528',
   [ChainId.BSCTestnet]: '0x2b7bfe79ec36653b84a43e86aff704b91e9f072f',

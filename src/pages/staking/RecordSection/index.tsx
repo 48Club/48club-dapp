@@ -4,8 +4,7 @@ import Label from '../../../components/Label'
 import { formatAmount, shorten } from '@funcblock/dapp-sdk'
 import BigNumber from 'bignumber.js'
 import { useStakingContractReadonly } from '../../../hooks/useContract'
-import { JsonRpcProvider } from '@ethersproject/providers'
-import { READONLY_RPC_URL } from '../../../constants/env'
+import { START_BLOCK_NUMBER } from '../../../constants/contracts'
 
 function Row({ data }: { data: any }) {
   return (
@@ -36,12 +35,10 @@ export default function RecordSection() {
   const stakingContractReadonly = useStakingContractReadonly()
   useEffect(() => {
     (async () => {
-      const provider = new JsonRpcProvider(READONLY_RPC_URL)
-      const blockNumber = await provider.getBlockNumber()
       const stakedFilter = stakingContractReadonly.filters.Staked(null, null)
-      const stakedEvents = await stakingContractReadonly.queryFilter(stakedFilter, blockNumber - 7 * 24 * 3600)
+      const stakedEvents = await stakingContractReadonly.queryFilter(stakedFilter, START_BLOCK_NUMBER)
       const unstakedFilter = stakingContractReadonly.filters.Unstaked(null, null)
-      const unstakedEvents = await stakingContractReadonly.queryFilter(unstakedFilter, blockNumber - 7 * 24 * 3600)
+      const unstakedEvents = await stakingContractReadonly.queryFilter(unstakedFilter, START_BLOCK_NUMBER)
       const rows = [...stakedEvents, ...unstakedEvents].map(i => ({
         blockNumber: i.blockNumber,
         event: i.event,

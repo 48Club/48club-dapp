@@ -16,7 +16,6 @@ import VotingCreate from 'pages/votingCreate'
 import VotingDetail from 'pages/votingDetail'
 import NFT from 'pages/nft'
 import NFTCreate from 'pages/nftCreate'
-import Manage from 'pages/manage'
 import StakeModal from './components/Modal/StakeModal'
 import UnStakeModal from './components/Modal/UnStakeModal'
 
@@ -38,7 +37,7 @@ export default function App() {
             <Route exact path="/staking" component={Staking} />
             <Route exact path="/nft" component={NFT} />
             <Route exact path="/nft/create" component={NFTCreate} />
-            <Route exact path="/manage" component={Manage} />
+            {/*<Route exact path="/manage" component={Manage} />*/}
             <Route exact path="/voting" component={Voting} />
             <Route exact path="/voting/create" component={VotingCreate} />
             <Route exact path="/voting/detail/:id" component={VotingDetail} />
@@ -46,8 +45,8 @@ export default function App() {
               <Redirect to="/" />
             </Route>
           </Switch>
-          <StakeModal/>
-          <UnStakeModal/>
+          <StakeModal />
+          <UnStakeModal />
           <NotificationsList />
         </div>
         <Footer />

@@ -3,69 +3,7 @@ import { Col, Row } from 'antd'
 import ReviewListCard from './ReviewListCard'
 import './index.less'
 import { useTranslation } from 'react-i18next'
-
-const REVIEW_ITEMS = [
-  {
-    title: 'Dominator008',
-    subtitle: 'dominator008@bnb48.club',
-    telegram: 'Dominator008',
-  },
-  {
-    title: 'Gui',
-    subtitle: 'gui@bnb48.club',
-    telegram: 'gscoin',
-  },
-  {
-    title: 'HelloWorld',
-    subtitle: 'hw@bnb48.club',
-    telegram: 'hongp',
-  },
-  {
-    title: 'Hutian280',
-    subtitle: 'hu@bnb48.club',
-    telegram: 'hutian280',
-  },
-  {
-    title: 'Ian',
-    subtitle: 'sirian@bnb48.club',
-    telegram: 'SirIanM',
-  },
-  {
-    title: 'Jerry',
-    subtitle: 'jerry@bnb48.club',
-    telegram: 'JerryZhou',
-  },
-  {
-    title: 'Mao',
-    subtitle: 'mao@bnb48.club',
-    telegram: 'heymattbkk',
-  },
-  {
-    title: 'Mars',
-    subtitle: 'mars@bnb48.club',
-    telegram: 'Brun0Mars',
-  },
-  {
-    title: 'Orca',
-    subtitle: 'orca@bnb48.club',
-    telegram: 'orcinuslaorca',
-  },
-  {
-    title: 'Yoyo',
-    subtitle: 'yoyo@bnb48.club',
-    telegram: 'supremacy2018',
-  },
-  {
-    title: '大麦',
-    subtitle: 'damal@bnb48.club',
-    telegram: 'BigMaimai',
-  },
-  {
-    title: '千年韭菜',
-    subtitle: 'qian@bnb48.club',
-    telegram: 'qianjiu000',
-  },
-]
+import { COMMITTEE_LIST } from '../../../constants/bnb48'
 
 export default function ReviewSection() {
   const { t } = useTranslation()
@@ -83,7 +21,7 @@ export default function ReviewSection() {
           <div className="section-content">
             <Row gutter={24}>
               {
-                REVIEW_ITEMS.map(item => (
+                COMMITTEE_LIST.map(item => (
                   <Col xs={24} md={6} key={`review-list-card-${item.title}`}>
                     <ReviewListCard item={item} />
                   </Col>

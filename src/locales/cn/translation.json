@@ -15,7 +15,6 @@
   "home_page_introduction_section_subtitle": "Koge，是BNB48 Club®发行的Token，代表参与BNB48 Club®治理的权力，也是BNB48 Club®高端社群的准入凭据，同时捕获了BNB48 Club®的盈利。",
   "home_page_introduction_section_desc": "Koge 合约:",
   "home_page_partner_section_subtitle": "合作伙伴",
-  
   "governance_page_banner_section_title_1": "理事会获Koge全体持有者授权执行BNB48 Club®的日常事务，对全体Koge持有者负责。",
   "governance_page_banner_section_title_2": "Koge持有者发起提案、公开投票表决是俱乐部的根本权力形式。超过总量5%的Koge持有者联署，发起提案即视为有效。",
   "governance_page_banner_section_title_3": "投票通常拥有赞成、反对、弃权、否决四个选项。每项表决结果遵循简单多数原则，1 Koge 1 票，同时满足以下条件即表决通过。",
@@ -30,7 +29,6 @@
   "governance_page_case_section_content_3": "理事会获Koge全体持有者授权执行俱乐部日常事务，对全体Koge持有者负责。理事的新增与罢免服从DAO治理。",
   "governance_page_review_section_title": "理事会",
   "governance_page_review_section_subtitle": "名单&联系方式",
-  
   "app_header_menu_home_title": "主页",
   "app_header_menu_governance_title": "理事会",
   "app_header_menu_node_title": "验证节点",
@@ -52,10 +50,6 @@
   "app_footer_item_wechat_subtitle_5": "讨论BNB48Club Kava 治理节点、质押及与Kava相关的其他话题",
   "app_footer_copyright": "版权所有 © 2020 BNB48Club",
   "app_footer_website_info_security": "受 SSL 保护",
-  "list_load_more_card_title": "加载更多",
-  "validation_message_input": "请输入有效选项。",
-  "validation_message_phone": "请输入有效的电话号码。",
-  "validation_message_password_length": "请输入一个包含8个或更多字符的有效密码。",
   "more": "更多",
-  "placeholder_no_data": "还没有数据"
+  "connect_wallet": "连接钱包"
 }
