@@ -24,7 +24,7 @@ jobs:
         with:
           switches: -avzr --delete --filter=':- .gitignore'
           path: build/*
-          remote_path: /data/bnb48club-dapp
-          remote_host: 168.63.250.90
+          remote_path: /data/bnb48club-dapp-dev
+          remote_host: 20.212.6.4
           remote_user: why
           remote_key: ${{ secrets.DEPLOY_KEY }}
