@@ -50,7 +50,7 @@ export const COMMITTEE_LIST = [
 export const TWITTER_URL = 'https://twitter.com/bnb48club'
 export const TG_URL = 'https://t.me/bnb48club_cn'
 export const GITHUB_URL = 'https://github.com/BNB48Club'
-export const DISCORD_URL = 'https://discord.gg/FzA9Pzr'
+export const DISCORD_URL = 'https://discord.gg/DDeeWYdCyJ'
 export const MEDIUM_URL = 'https://medium.com/bnb48-club-publish'
 
 
