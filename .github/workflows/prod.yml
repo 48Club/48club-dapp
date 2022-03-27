@@ -2,7 +2,7 @@ name: Prod
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -12,11 +12,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: "16.x"
       - name: Install yarn
         run: npm install -g yarn
       - name: Install npm dependencies
-        run: yarn install
+        run: |
+          mv .package.json package.json
+          yarn install
       - name: Run build task
         run: yarn build
       - name: rsync deployments
