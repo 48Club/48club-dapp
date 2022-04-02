@@ -28,7 +28,7 @@ export default function HeaderSection() {
           <Tag type={state} />
         </div>
         <div className="w-full mb-4 text-base text-dark-gray pb-6 border-b border-gray text-center md:pb-8 md:border-none md:mb-0">
-          {detail?.description}
+          {detail?.description.split('\n').map((item, index) => (index === 0) ? item : [<br key={index} />, item])}
         </div>
         <div className="w-full md:flex md:justify-around">
           <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">
