@@ -39,6 +39,7 @@ function Card({ item }) {
     return statusShow && timeShow && releatedShow
   }, [status, state, timeRanges, voteStart, related, account, proposer])
 
+  const ntitle = (item?.ntitle) === '' ? (item?.description.slice(0, 20)) : (item?.ntitle)
 
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
@@ -49,7 +50,7 @@ function Card({ item }) {
         </div>
       </div>
       <div className="font-bold text-xl leading-6 break-words mb-2 text-light-black">
-        {item.description.slice(0, 20)}
+        {ntitle}
       </div>
       <div className="break-words text-sm leading-5 mb-12 md:mb-9 text-dark-gray">
         {item.description.slice(0, 200)}

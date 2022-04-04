@@ -14,6 +14,7 @@ export default function HeaderSection() {
   const { proposals } = useGovInfo()
   const { proposer, voteEnd, voteStart, state, totalReward } = useGovDetailInfo(id)
   const detail = proposals?.find(i => i.proposalId === id)
+  const ntitle = (detail?.ntitle) === '' ? (detail?.description.slice(0, 20)) : (detail?.ntitle)
 
   return (
     <Spin className="pt-4 w-full mb-10" spinning={!detail}>
@@ -23,7 +24,7 @@ export default function HeaderSection() {
       >
         <div className="flex flex-col items-center mb-4 md:flex-row">
           <div className="font-bold text-2xl mb-4 text-light-black md:mb-0 md:mr-4 md:text-4xl">
-            {detail?.description.slice(0, 20)}
+            {ntitle}
           </div>
           <Tag type={state} />
         </div>
