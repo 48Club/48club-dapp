@@ -52,7 +52,7 @@ function Card({ item }) {
         {item.description.slice(0, 20)}
       </div>
       <div className="break-words text-sm leading-5 mb-12 md:mb-9 text-dark-gray">
-        {item.description}
+        {item.description.slice(0, 200)}
       </div>
       <div className="mb-2 flex flex-col md:flex-row md:items-center">
         {
