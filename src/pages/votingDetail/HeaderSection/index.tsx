@@ -27,7 +27,7 @@ export default function HeaderSection() {
           </div>
           <Tag type={state} />
         </div>
-        <div className="w-full mb-4 text-base text-dark-gray pb-6 border-b border-gray text-center md:pb-8 md:border-none md:mb-0">
+        <div className="w-full mb-4 text-base text-dark-gray pb-6 border-b border-gray text-left md:pb-8 md:border-none md:mb-0 break-word break-all">
           {detail?.description.split('\n').map((item, index) => (index === 0) ? item : [<br key={index} />, item])}
         </div>
         <div className="w-full md:flex md:justify-around">
