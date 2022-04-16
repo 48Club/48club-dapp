@@ -28,5 +28,6 @@ notes.txt
 .idea/
 .vscode/
 
+package.json
 package-lock.json
 yarn.lock
