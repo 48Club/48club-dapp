@@ -35,7 +35,6 @@ function Card({ item }) {
     const statusShow = status === 'all' || status === state
     const timeShow = !timeRanges.length || (moment.unix(voteStart).isAfter(timeRanges?.[0]) && moment.unix(voteStart).isBefore(timeRanges?.[1]))
     const releatedShow = !related || account === proposer
-
     return statusShow && timeShow && releatedShow
   }, [status, state, timeRanges, voteStart, related, account, proposer])
 
@@ -74,8 +73,8 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
             KOGE {t('number')} {formatAmount(info.totalReward, 18)} {t('piece')}
           </div>
         </div>
-        <div className="flex items-center mt-1 md:ml-1 md:mt-0">
-          <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
+        <div className="flex items-center mt-1 md:ml-2 md:mt-0">
+          <ClockCircleFilled className="w-3.5 h-3.5 mr-1 text-dark-gray" />
           <div className="text-xs leading-5 text-dark-gray">
             {t('start_time')}: {moment.unix(info.voteStart).fromNow()}
           </div>

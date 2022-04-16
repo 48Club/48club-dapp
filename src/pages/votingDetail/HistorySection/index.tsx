@@ -1,14 +1,14 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
-import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
 import { formatAmount } from '@funcblock/dapp-sdk'
+import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
 
 export default function HistorySection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { voteRecords } = useGovDetailInfo(id)
+  const { voteRecords } = useGovDetailVotes(id)
 
   if (!voteRecords) {
     return null

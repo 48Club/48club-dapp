@@ -10,6 +10,7 @@ import { formatAmount } from '@funcblock/dapp-sdk'
 import { HelpCircle } from 'react-feather'
 import { useEthers } from '@usedapp/core'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
+import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
 
 export default function VoteSection() {
   const { t } = useTranslation()
@@ -40,7 +41,8 @@ export default function VoteSection() {
 function ActionPanel({ id, canVote }) {
   const { onVote } = useGov()
   const { account } = useEthers()
-  const { voteRecords, reloadVoteRecords, myVotes } = useGovDetailInfo(id)
+  const { myVotes } = useGovDetailInfo(id)
+  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
   const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
