@@ -127,7 +127,7 @@ export default function StakingSection() {
                           className="h-full rounded"
                           onClick={onSubmit}
                           loading={withdrawLoading}
-                          disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake)}>
+                          disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake) || (activeItem === 2 && !canWithdraw)}>
                     {t('confirm')}
                   </Button>
                 </Tooltip>
