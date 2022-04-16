@@ -15,6 +15,7 @@ export default function VoteSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
   const { myCanVote, state, myReward } = useGovDetailInfo(id)
+  const { myStakeBalance } = useStakeInfo()
 
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
@@ -23,7 +24,7 @@ export default function VoteSection() {
     if (state === 'Invalid' || state === 'Refunded') {
       return <InvalidPanel id={id} state={state} />
     }
-    return <ActionPanel id={id} myCanVote={myCanVote} />
+    return <ActionPanel id={id} canVote={myCanVote && myStakeBalance?.gt(0)} />
   }
 
   return (
@@ -36,7 +37,7 @@ export default function VoteSection() {
   )
 }
 
-function ActionPanel({ id, myCanVote }) {
+function ActionPanel({ id, canVote }) {
   const { onVote } = useGov()
   const { account } = useEthers()
   const { voteRecords, reloadVoteRecords, myVotes } = useGovDetailInfo(id)
@@ -57,7 +58,7 @@ function ActionPanel({ id, myCanVote }) {
         className={`bg-white h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 1)}
-        disabled={!myCanVote || myVoted}
+        disabled={!canVote || myVoted}
       >
         {t('approve_vote')}
       </Button>
@@ -65,7 +66,7 @@ function ActionPanel({ id, myCanVote }) {
         className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '0' && 'border-primary'}`}
         icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 0)}
-        disabled={!myCanVote || myVoted}
+        disabled={!canVote || myVoted}
       >
         {t('reject_vote')}
       </Button>

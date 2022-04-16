@@ -4,7 +4,7 @@ export const CHAIN_ID = (parseInt(process.env.REACT_APP_CHAIN_ID ?? ChainId.BSC.
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const RPC_URLS = {
-  [BSCTestnet.chainId]: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+  [BSCTestnet.chainId]: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
   [BSC.chainId]: 'https://bsc-dataseed.binance.org/',
 }
 
