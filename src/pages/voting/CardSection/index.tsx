@@ -1,4 +1,4 @@
-import { CheckCircleTwoTone, ClockCircleFilled } from '@ant-design/icons'
+import { CheckCircleTwoTone, ClockCircleFilled, CloseCircleTwoTone } from '@ant-design/icons'
 import Tag from 'components/Tag'
 import { NavLink } from 'react-router-dom'
 import React, { useContext, useMemo } from 'react'
@@ -65,40 +65,43 @@ function Card({ item }) {
 }
 
 function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInfo>) {
-  let result = <></>
   switch (info.state) {
     case 'Succeeded':
-      result = <>
+      return <>
         <div className="flex items-center">
-          <CheckCircleTwoTone twoToneColor="#08C849" className="w-3.5 h-3.5 mr-2" />
+          <CheckCircleTwoTone twoToneColor="#08C849" className="w-3.5 h-3.5 mr-1" />
           <div className="text-xs leading-5 text-dark-gray">
-            {t('pass')}: KOGE {t('number')} {formatAmount(info.totalReward, 18)} {t('piece')}
+            KOGE {t('number')} {formatAmount(info.totalReward, 18)} {t('piece')}
           </div>
         </div>
-        <div className="flex items-center mt-1 md:ml-2 md:mt-0">
+        <div className="flex items-center mt-1 md:ml-1 md:mt-0">
           <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
           <div className="text-xs leading-5 text-dark-gray">
             {t('start_time')}: {moment.unix(info.voteStart).fromNow()}
           </div>
         </div>
       </>
-      break
     case 'Active':
-      result = <div className="flex items-center">
-        <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
+      return <div className="flex items-center">
+        <ClockCircleFilled className="w-3.5 h-3.5 mr-1 text-dark-gray" />
         <div className="text-xs leading-5 text-dark-gray">
           {t('end_time')}: {moment.unix(info.voteEnd).fromNow()}
         </div>
       </div>
-      break
     default:
-      result = <div className="flex items-center">
-        <ClockCircleFilled className="w-3.5 h-3.5 mr-2 text-dark-gray" />
-        <div className="text-xs leading-5 text-dark-gray">
-          {t('start_time')}: {moment.unix(info.voteStart).fromNow()}
+      return <div className="flex items-center">
+        <div className="flex items-center">
+          <CloseCircleTwoTone twoToneColor="#C82853" className="w-3.5 h-3.5 mr-1" />
+          <div className="text-xs leading-5 text-dark-gray">
+            KOGE {t('number')} {formatAmount(info.totalReward, 18)} {t('piece')}
+          </div>
+        </div>
+        <div className="flex items-center mt-1 md:ml-2 md:mt-0">
+          <ClockCircleFilled className="w-3.5 h-3.5 mr-1 text-dark-gray" />
+          <div className="text-xs leading-5 text-dark-gray">
+            {t('start_time')}: {moment.unix(info.voteStart).fromNow()}
+          </div>
         </div>
       </div>
-      break
   }
-  return result
 }
