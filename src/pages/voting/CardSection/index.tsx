@@ -39,7 +39,7 @@ function Card({ item }) {
     return statusShow && timeShow && releatedShow
   }, [status, state, timeRanges, voteStart, related, account, proposer])
 
-  const ntitle = (item?.ntitle) === '' ? (item?.description.slice(0, 20)) : (item?.ntitle)
+  const ntitle = (item?.ntitle) === '' ? item?.description : (item?.ntitle)
 
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
@@ -49,7 +49,7 @@ function Card({ item }) {
           {t('author')}: {shorten(item.proposer)}
         </div>
       </div>
-      <div className="font-bold text-xl leading-6 break-words mb-2 text-light-black">
+      <div className="font-bold text-xl leading-6 break-words mb-2 text-light-black overflow-hidden" style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {ntitle}
       </div>
       <div className="break-words text-sm leading-5 mb-12 md:mb-9 text-dark-gray">

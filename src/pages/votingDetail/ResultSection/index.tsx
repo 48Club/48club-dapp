@@ -27,7 +27,7 @@ export default function ResultSection() {
             {
               t(state?.toLowerCase())}. {(state === 'Invalid' || state === 'Refunded') ?
             <span>{t('result_tip1')}{formatAmount(quorumBN, 18)} KOGE</span> :
-            <span>{t('result_tip2')}{forVotes + againstVotes} KOGE. Quorum: {formatAmount(quorumBN, 18)} KOGE</span>
+            <span>{t('result_tip2')}{formatAmount(forVotes + againstVotes, 0)} KOGE. Quorum: {formatAmount(quorumBN, 18)} KOGE</span>
           }
           </span>
         </div>
