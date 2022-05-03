@@ -36,7 +36,7 @@ export default function SummarySection() {
                 {t('staking_summary_staking')}
               </span>
               <span className="text-xl font-bold text-light-black">
-                {formatAmount(totalStakes, decimals)}
+                {formatAmount(totalStakes, decimals, 0)}
               </span>
             </div>
           </div>
