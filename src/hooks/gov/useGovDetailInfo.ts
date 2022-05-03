@@ -55,6 +55,7 @@ export default function useGovDetailInfo(proposalId: string) {
   }, [state])
 
   return {
+    loading: !proposalResult || !votesResult,
     proposer: proposalResult?.proposer.toString(),
     proposerRewardClaimed: proposalResult?.proposerRewardClaimed.toString(),
     refunded: proposalResult?.refunded.toString(),

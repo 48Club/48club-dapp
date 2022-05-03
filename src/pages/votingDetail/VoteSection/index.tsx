@@ -11,21 +11,26 @@ import { HelpCircle } from 'react-feather'
 import { useEthers } from '@usedapp/core'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
+import useGovDetailClaims from '../../../hooks/gov/useGovDetailClaims'
 
 export default function VoteSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
   const { myCanVote, state, myReward } = useGovDetailInfo(id)
   const { myStakeBalance } = useStakeInfo()
+  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
+  const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id)
 
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
-      return <ClaimRewardPanel id={id} myReward={myReward} />
+      return <ClaimRewardPanel id={id} myReward={myReward}
+                               claimRecords={claimRecords} reloadClaimRecords={reloadClaimRecords} />
     }
     if (state === 'Invalid' || state === 'Refunded') {
       return <InvalidPanel id={id} state={state} />
     }
-    return <ActionPanel id={id} canVote={myCanVote && myStakeBalance?.gt(0)} />
+    return <ActionPanel id={id} canVote={myCanVote && myStakeBalance?.gt(0)}
+                        voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} />
   }
 
   return (
@@ -38,11 +43,10 @@ export default function VoteSection() {
   )
 }
 
-function ActionPanel({ id, canVote }) {
+function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
   const { onVote } = useGov()
   const { account } = useEthers()
   const { myVotes } = useGovDetailInfo(id)
-  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
   const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
@@ -77,9 +81,16 @@ function ActionPanel({ id, canVote }) {
 }
 
 
-function ClaimRewardPanel({ id, myReward }) {
+function ClaimRewardPanel({ id, myReward, claimRecords, reloadClaimRecords }) {
   const { onClaim } = useGov()
   const { t } = useTranslation()
+  const { account } = useEthers()
+  const myClaim = claimRecords?.find(i => i.caller === account)
+
+  const onSubmit = useCallback(async () => {
+    await onClaim(id)
+    setTimeout(reloadClaimRecords, 1000)
+  }, [onClaim, id, reloadClaimRecords])
 
   return <div className="flex flex-col items-center">
     <CheckCircleTwoTone className="md:pb-7" style={{ fontSize: '52px' }} twoToneColor="#08C849" />
@@ -88,10 +99,15 @@ function ClaimRewardPanel({ id, myReward }) {
       myReward.gt(0) && (
         <Button
           className="my-4 h-12 md:h-10 bg-primary text-black border-none rounded text-sm"
-          onClick={() => onClaim(id)}
+          onClick={onSubmit}
         >
           {t('claim')} {formatAmount(myReward, 18)} KOGE
         </Button>
+      )
+    }
+    {
+      myClaim && (
+        <div>{formatAmount(myClaim.amount, 18)} KOGE {t('claimed')}</div>
       )
     }
   </div>

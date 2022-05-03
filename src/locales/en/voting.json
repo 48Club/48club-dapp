@@ -24,6 +24,7 @@
   "approve_vote": "Approve",
   "reject_vote": "Reject",
   "claim": "Claim",
+  "claimed": "Claimed",
   "close": "Close",
   "vote_success_desc": "The proposal is valid.",
   "address": "Address",

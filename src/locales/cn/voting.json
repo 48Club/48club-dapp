@@ -24,6 +24,7 @@
   "approve_vote": "赞成",
   "reject_vote": "反对",
   "claim": "领取",
+  "claimed": "已领取",
   "close": "关闭",
   "vote_success_desc": "该提案已经达到有效投票数",
   "address": "地址",
