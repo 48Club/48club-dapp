@@ -9,8 +9,8 @@ const { Option } = Select
 
 export default function FilterSection() {
   const { t } = useTranslation()
-  const { setRelated, setTimeRanges, setStatus } = useContext(GovSetFilterContext)
-  const { related, status } = useContext(GovInfoFilterContext)
+  const { setRelated, setTimeRanges, setClaimable, setStatus } = useContext(GovSetFilterContext)
+  const { related, status, claimable } = useContext(GovInfoFilterContext)
   const optionList = [
     {
       label: t('all'),
@@ -67,6 +67,16 @@ export default function FilterSection() {
             checked={related}
             className="filter-switch w-full h-12"
             onChange={setRelated}
+          />
+        </div>
+        <div className="shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
+          <span className="text-sm leading-5 mb-2 text-light-black">
+            {t('filter_claimable')}
+          </span>
+          <Switch
+            checked={claimable}
+            className="filter-switch w-full h-12"
+            onChange={setClaimable}
           />
         </div>
       </div>

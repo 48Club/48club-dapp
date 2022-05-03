@@ -28,15 +28,16 @@ function Card({ item }) {
   const { t } = useTranslation()
   const info = useGovDetailInfo(item.proposalId)
   const { state, voteStart, proposer } = info
-  const { status, related, timeRanges } = useContext(GovInfoFilterContext)
+  const { status, related, claimable, timeRanges } = useContext(GovInfoFilterContext)
   const { account } = useEthers()
 
   const show = useMemo(() => {
     const statusShow = status === 'all' || status === state
     const timeShow = !timeRanges.length || (moment.unix(voteStart).isAfter(timeRanges?.[0]) && moment.unix(voteStart).isBefore(timeRanges?.[1]))
     const releatedShow = !related || account === proposer
-    return statusShow && timeShow && releatedShow
-  }, [status, state, timeRanges, voteStart, related, account, proposer])
+    const claimableShow = !claimable || item.claimable
+    return statusShow && timeShow && releatedShow && claimableShow
+  }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item])
 
   const ntitle = (item?.ntitle) === '' ? item?.description : (item?.ntitle)
 

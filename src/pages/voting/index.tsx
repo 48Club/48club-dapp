@@ -8,6 +8,7 @@ export default function Voting() {
   const [status, setStatus] = useState('all')
   const [timeRanges, setTimeRanges] = useState([])
   const [related, setRelated] = useState(false)
+  const [claimable, setClaimable] = useState(false)
 
   return (
     <div className="px-4 max-w-6xl mx-auto">
@@ -16,11 +17,13 @@ export default function Voting() {
         status,
         timeRanges,
         related,
+        claimable,
       }}>
         <GovSetFilterContext.Provider value={{
           setStatus,
           setTimeRanges,
-          setRelated
+          setRelated,
+          setClaimable,
         }}>
           <FilterSection />
         </GovSetFilterContext.Provider>
@@ -30,6 +33,7 @@ export default function Voting() {
         status,
         timeRanges,
         related,
+        claimable,
       }}>
         <CardSection />
       </GovInfoFilterContext.Provider>

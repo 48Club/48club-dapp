@@ -47,17 +47,21 @@ export const GovInfoFilterContext = createContext({
   status: 'all',
   timeRanges: [],
   related: false,
+  claimable: false,
 })
 
 export const GovSetFilterContext = createContext<{
   setStatus: any,
   setTimeRanges: any,
-  setRelated: any
+  setRelated: any,
+  setClaimable: any,
 }>({
   setStatus: () => {
   },
   setTimeRanges: () => {
   },
   setRelated: () => {
+  },
+  setClaimable: () => {
   },
 })
