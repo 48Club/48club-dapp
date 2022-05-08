@@ -107,7 +107,7 @@ export default function Footer() {
                     </a>
                   </li>
                   <li>
-                    <a className="flex flex-row items-center" href={TG_URL} target="_blank" rel="noopener noreferrer">
+                    <a className="flex flex-row items-center" href={t('telegram_invite_href')} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-telegram.png" alt="Telegram" />
                       Telegram
                     </a>
