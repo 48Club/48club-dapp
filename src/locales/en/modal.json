@@ -1,7 +1,7 @@
 {
-  "confirm_stake_count": "Please confirm the number of pledged KOGE tokens:",
-  "stake_description": "After a successful pledge, your KOGE will not be released from the pledge until {{val, number}} days later.",
+  "confirm_stake_count": "Please confirm the amount of KOGE gonna be staked:",
+  "stake_description": "Once confirmed, you can't unstake any of your staked KOGE until {{val, number}} days later.",
   "cancel": "Cancel",
-  "confirm_unstake_count": "Please confirm that the number of released pledged KOGE tokens：",
-  "unstake_description": "After the successful release of the pledge, your KOGE will be returned to your wallet after {{val, number}} days."
+  "confirm_unstake_count": "Please confirm the amount of KOGE gonna be unstaked:",
+  "unstake_description": "You unstaked KOGE will be claimable after {{val, number}} days."
 }
