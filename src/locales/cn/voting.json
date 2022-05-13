@@ -34,7 +34,7 @@
   "no_data": "暂无数据",
   "create": "发起",
   "proposal": "提案",
-  "koge_desc": "提案人需要支付一定数量的KOGE投入治理激励；有效提案的提案人可以得到本提案治理激励的4.8%",
+  "koge_desc": "提案人需要支付一定数量的KOGE投入治理激励；有效提案的提案人可以得到本提案治理激励的4.8%；建議在發起提案前，將提案內容在Telegram治理群 https://t.me/bnb48_gov_doscuss 發表並經過充分討論，有助於吸引票數，提高提案有效的概率。",
   "choose": "选择 48er",
   "description": "提案内容",
   "voting_type": "表决类型",
