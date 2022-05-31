@@ -51,6 +51,10 @@
   "app_footer_copyright": "Rights Reserved © 2020 BNB48Club",
   "app_footer_website_info_security": "Secured by SSL",
   "more": "More",
+  "nav-staking": "Stake",
+  "nav-nft": "48er",
+  "nav-voting": "Vote",
+  "nav-more": "More",
   "connect_wallet": "Connect to wallet",
   "telegram_invite_href": "https://t.me/bnb48club_en"
 }

@@ -62,18 +62,18 @@ export default function Header() {
           <div className="hidden md:flex flex-row items-center">
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/staking') ? 'text-primary' : 'text-black'}`}
                   to={'/staking'}>
-              {t('staking')}
+              {t('nav-staking')}
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/nft') ? 'text-primary' : 'text-black'}`}
                   to={'/nft'}>
-              48er
+              {t('nav-nft')}
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/voting') ? 'text-primary' : 'text-black'}`}
                   to={'/voting'}>
-              DAO
+              {t('nav-voting')}
             </Link>
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
-              <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('more')}</div>
+              <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
             </Dropdown>
           </div>
         </div>
