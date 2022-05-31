@@ -48,8 +48,8 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/governance">
-                      {t('app_header_menu_governance_title')}
+                    <Link to="/committee">
+                      {t('app_header_menu_committee_title')}
                     </Link>
                   </li>
                   <li>

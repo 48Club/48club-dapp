@@ -27,7 +27,7 @@ export default function Header() {
         <Link className="text-black opacity-75 hover:text-primary" to={'/'}>{t('app_header_menu_home_title')}</Link>
       </Menu.Item>
       <Menu.Item>
-        <Link className="text-black opacity-75 hover:text-primary" to={'/governance'}>{t('app_header_menu_governance_title')}</Link>
+        <Link className="text-black opacity-75 hover:text-primary" to={'/committee'}>{t('app_header_menu_committee_title')}</Link>
       </Menu.Item>
       <Menu.Item>
         <Link className="text-black opacity-75 hover:text-primary" to={'/validation-node'}>{t('app_header_menu_node_title')}</Link>

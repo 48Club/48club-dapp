@@ -7,7 +7,7 @@ import './index.less'
 
 export default function Governance() {
   return (
-    <div className="governance-page max-w-6xl mx-auto">
+    <div className="committee-page max-w-6xl mx-auto">
       <BannerSection />
       <CaseSection />
       <ReviewSection />

@@ -6,18 +6,18 @@ import { useTranslation } from 'react-i18next'
 
 const REVIEW_ITEMS = [{
   id: 1,
-  title: 'governance_page_case_section_title_1',
-  content: 'governance_page_case_section_content_1',
+  title: 'committee_page_case_section_title_1',
+  content: 'committee_page_case_section_content_1',
   image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-governance-graphic-1.png',
 }, {
   id: 2,
-  title: 'governance_page_case_section_title_2',
-  content: 'governance_page_case_section_content_2',
+  title: 'committee_page_case_section_title_2',
+  content: 'committee_page_case_section_content_2',
   image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-governance-graphic-2.png',
 }, {
   id: 2,
-  title: 'governance_page_case_section_title_3',
-  content: 'governance_page_case_section_content_3',
+  title: 'committee_page_case_section_title_3',
+  content: 'committee_page_case_section_content_3',
   image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-governance-graphic-3.png',
 }]
 

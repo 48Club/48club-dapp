@@ -13,10 +13,10 @@ export default function ReviewSection() {
       <div className="container">
         <div className="section-header">
           <div className="section-title">
-            {t('governance_page_review_section_title')}
+            {t('committee_page_review_section_title')}
           </div>
           <div className="section-subtitle">
-            {t('governance_page_review_section_subtitle')}
+            {t('committee_page_review_section_subtitle')}
           </div>
           <div className="section-content">
             <Row gutter={24}>

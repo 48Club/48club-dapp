@@ -15,7 +15,7 @@ export default function BannerSection() {
               <div className="section-title">
                 BNB48 Club®
                 <br />
-                {t('app_header_menu_governance_title')}
+                {t('app_header_menu_committee_title')}
               </div>
             </div>
           </Col>
