@@ -16,6 +16,7 @@ import VotingCreate from 'pages/votingCreate'
 import VotingDetail from 'pages/votingDetail'
 import NFT from 'pages/nft'
 import NFTCreate from 'pages/nftCreate'
+import Pool from 'pages/pool'
 import StakeModal from './components/Modal/StakeModal'
 import UnStakeModal from './components/Modal/UnStakeModal'
 
@@ -41,6 +42,7 @@ export default function App() {
             <Route exact path="/voting" component={Voting} />
             <Route exact path="/voting/create" component={VotingCreate} />
             <Route exact path="/voting/detail/:id" component={VotingDetail} />
+            <Route exact path="/pool" component={Pool}></Route>
             <Route>
               <Redirect to="/" />
             </Route>

@@ -1,8 +1,8 @@
-@import "~antd/dist/antd.less";
+@import '~antd/dist/antd.less';
 
 //@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 @app-theme-color: #ffc800;
-@btn-primary-color: #1E1E1E;
+@btn-primary-color: #1e1e1e;
 @primary-color: @app-theme-color;
 @text-selection-bg: #ffc800;
 @font-size-base: 14px;
@@ -43,7 +43,7 @@
 }
 
 .ant-select-item.ant-select-item-option-selected {
-  color: #E2B201 !important;
+  color: #e2b201 !important;
 }
 
 .ant-select-selector {
@@ -93,6 +93,30 @@
   }
 }
 
-.ant-btn-primary[disabled], .ant-btn-primary[disabled]:hover, .ant-btn-primary[disabled]:focus, .ant-btn-primary[disabled]:active {
+.ant-btn-primary[disabled],
+.ant-btn-primary[disabled]:hover,
+.ant-btn-primary[disabled]:focus,
+.ant-btn-primary[disabled]:active {
   height: 100%;
+}
+
+.ant-modal-content {
+  border-radius: 12px;
+}
+
+.ant-select-selection-placeholder {
+  line-height: 48px !important;
+}
+
+.ant-picker-dropdown {
+  background-color: #ffffff;
+}
+
+.ant-message-notice-content {
+  background-color: #ffffff;
+}
+
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
 }

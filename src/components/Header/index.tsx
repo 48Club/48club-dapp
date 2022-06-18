@@ -53,7 +53,7 @@ export default function Header() {
 
   const [showResponsiveMenu, setShowResponsiveMenu] = useState(false)
   return (
-    <div className="py-4 fixed w-full bg-white items-center" style={{ borderBottom: '4px solid #ffc800', zIndex: 9999 }}>
+    <div className="py-4 fixed w-full bg-white items-center" style={{ borderBottom: '4px solid #ffc800', zIndex: 20 }}>
       <div className="flex flex-row justify-between mx-4 md:mx-auto max-w-6xl <xl:px-4">
         <div className="flex flex-row items-center">
           <Link to={'/'}>
