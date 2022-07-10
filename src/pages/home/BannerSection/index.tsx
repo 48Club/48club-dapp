@@ -49,7 +49,7 @@ export default function BannerSection() {
       <Row>
         <Col xs={24} md={0}>
           <div className="section-cover">
-            <img src="https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-home-banner.png" alt="BNB48Club" />
+            <img src="https://img-oss.bnb48.club/oss/illustration-home-banner.png" alt="BNB48Club" />
           </div>
         </Col>
       </Row>

@@ -8,17 +8,17 @@ const REVIEW_ITEMS = [{
   id: 1,
   title: 'committee_page_case_section_title_1',
   content: 'committee_page_case_section_content_1',
-  image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-governance-graphic-1.png',
+  image_url: 'https://img-oss.bnb48.club/oss/illustration-governance-graphic-1.png',
 }, {
   id: 2,
   title: 'committee_page_case_section_title_2',
   content: 'committee_page_case_section_content_2',
-  image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-governance-graphic-2.png',
+  image_url: 'https://img-oss.bnb48.club/oss/illustration-governance-graphic-2.png',
 }, {
   id: 2,
   title: 'committee_page_case_section_title_3',
   content: 'committee_page_case_section_content_3',
-  image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-governance-graphic-3.png',
+  image_url: 'https://img-oss.bnb48.club/oss/illustration-governance-graphic-3.png',
 }]
 
 export default function CaseSection() {

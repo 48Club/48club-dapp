@@ -28,7 +28,7 @@ export default function CustomerSection() {
                       <img src={
                         (url.startsWith('/static') || url.startsWith('http')) ?
                           url :
-                          `https://bnb48club-prod.oss-accelerate.aliyuncs.com/${url}`} alt="合作伙伴" />
+                          `https://img-oss.bnb48.club/oss/${url}`} alt="合作伙伴" />
                     </div>
                   </Col>
                 ))

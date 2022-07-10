@@ -17,7 +17,7 @@ const REVIEW_ITEMS = [
     content:
       "https://kava.mintscan.io/validators/kavavaloper1nhcvgj0j7mrvrat3dfhudpypaqn00eaf2dh0gp",
     image_url:
-      "https://bnb48club-prod.oss-accelerate.aliyuncs.com/logo-partner-kava.svg",
+      "https://img-oss.bnb48.club/oss/logo-partner-kava.svg",
   },
 ];
 

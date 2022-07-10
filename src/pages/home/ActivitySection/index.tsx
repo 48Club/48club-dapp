@@ -8,12 +8,12 @@ const REVIEW_ITEMS = [{
   id: 1,
   title: 'home_page_activity_section_title_1',
   content: 'home_page_activity_section_content_1',
-  image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-home-activity-1-updated.png',
+  image_url: 'https://img-oss.bnb48.club/oss/illustration-home-activity-1-updated.png',
 }, {
   id: 2,
   title: 'home_page_activity_section_title_2',
   content: 'home_page_activity_section_content_2',
-  image_url: 'https://bnb48club-prod.oss-accelerate.aliyuncs.com/illustration-home-activity-2.png',
+  image_url: 'https://img-oss.bnb48.club/oss/illustration-home-activity-2.png',
 }]
 
 export default function ActivitySection() {
