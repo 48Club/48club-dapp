@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Tag, Button, message } from 'antd'
+import { usePool } from '../../../hooks/pool/usePool'
+import { useStakeShow, useStakeOrClaim } from '../../../store'
 
 export const PoolCardSection = () => {
   return (
     <div className="flex flex-wrap gap-6 mb-30 <sm:justify-center">
-      <PoolCard pool={{}} userDetail={{}} />
-      <PoolCard pool={{}} userDetail={{}} />
       <PoolCard pool={{}} userDetail={{}} />
     </div>
   )
 }
 
 function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
+  const { onApprove, isAllowed, approveLoading, myBalance, stakePoolLoading } = usePool()
+  const [stakeShow, setStakeShow] = useStakeShow()
+  const { setCurrentType } = useStakeOrClaim()
+
   const claimHandler = () => {
-    console.log('okok')
     message.success('恭喜您，奖励领取成功。', 10)
   }
+
+  const handleApprove = useCallback(() => {
+    if (!isAllowed) {
+      onApprove()
+    } else {
+      setStakeShow(true)
+      setCurrentType(1)
+    }
+  }, [isAllowed, onApprove, setCurrentType, setStakeShow])
 
   return (
     <div className="relative w-80 flex-col py-10 px-8 shadow rounded-xl bg-white">
@@ -45,12 +57,20 @@ function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
       </div>
 
       <div className="w-full flex gap-4">
-        <Button type="primary" size="large" className="h-12 flex-1 rounded">
-          授权
+        <Button
+          type="primary"
+          loading={stakePoolLoading || approveLoading}
+          size="large"
+          className="h-12 flex-1 rounded"
+          onClick={handleApprove}
+        >
+          {isAllowed ? '质押' : '授权'}
         </Button>
-        <Button size="large" disabled className="h-12 flex-1 rounded">
-          解质押
-        </Button>
+        {isAllowed && (
+          <Button size="large" disabled className="h-12 flex-1 rounded">
+            解质押
+          </Button>
+        )}
       </div>
     </div>
   )

@@ -4,7 +4,10 @@ import { ERC20Interface } from '@usedapp/core'
 import Governance_ABI from './abi/Governance.json'
 import Nft_ABI from './abi/Nft.json'
 import Staking_ABI from './abi/Staking.json'
-import { GovernanceAddress, NftAddress, StakingAddress } from '../constants/contracts'
+import Farming_ABI from './abi/FarmingPool.json'
+import Koge_ABI from './abi/Koge.json'
+import TStaking_ABI from './abi/TStaking.json'
+import { GovernanceAddress, NftAddress, StakingAddress, FarmingAddress } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { READONLY_RPC_URL } from '../constants/env'
 
@@ -32,4 +35,9 @@ export function useNftContract() {
 
 export function useGovernanceContract() {
   return useMemo(() => new Contract(GovernanceAddress, Governance_ABI), [])
+}
+
+export function useFarmingContract() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(FarmingAddress, Farming_ABI, provider), [provider])
 }
