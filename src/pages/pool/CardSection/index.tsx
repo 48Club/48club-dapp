@@ -1,12 +1,16 @@
 import React, { useCallback } from 'react'
 import { Tag, Button, message } from 'antd'
-import { usePool } from '../../../hooks/pool/usePool'
+import { usePool, usePoolFactory } from '../../../hooks/pool/usePool'
 import { useStakeShow, useStakeOrClaim } from '../../../store'
 
 export const PoolCardSection = () => {
+  const { poolAddresses } = usePoolFactory()
+
   return (
     <div className="flex flex-wrap gap-6 mb-30 <sm:justify-center">
-      <PoolCard pool={{}} userDetail={{}} />
+      {poolAddresses.map((pool) => (
+        <PoolCard pool={{}} userDetail={{}} key={pool} />
+      ))}
     </div>
   )
 }

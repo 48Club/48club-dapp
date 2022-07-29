@@ -5,9 +5,10 @@ import Governance_ABI from './abi/Governance.json'
 import Nft_ABI from './abi/Nft.json'
 import Staking_ABI from './abi/Staking.json'
 import Farming_ABI from './abi/FarmingPool.json'
+import FarmingFactory_ABI from './abi/FarmingPoolFactory.json'
 import Koge_ABI from './abi/Koge.json'
 import TStaking_ABI from './abi/TStaking.json'
-import { GovernanceAddress, NftAddress, StakingAddress, FarmingAddress } from '../constants/contracts'
+import { GovernanceAddress, NftAddress, StakingAddress, FarmingAddress, FarmingFactoryAddress } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { READONLY_RPC_URL } from '../constants/env'
 
@@ -40,4 +41,9 @@ export function useGovernanceContract() {
 export function useFarmingContract() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(FarmingAddress, Farming_ABI, provider), [provider])
+}
+
+export function useFarmingFactoryContract() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(FarmingFactoryAddress, FarmingFactory_ABI, provider), [provider])
 }

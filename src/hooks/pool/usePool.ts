@@ -1,13 +1,36 @@
 import { useCallback } from 'react'
-import { useContractFunction, useEthers, useTokenAllowance, useContractCall } from '@usedapp/core'
-import { useFarmingContract } from '../useContract'
+import { useContractFunction, useEthers, useTokenAllowance, useContractCall, useContractCalls } from '@usedapp/core'
+import { useFarmingContract, useFarmingFactoryContract } from '../useContract'
 import useApprove from '../erc20/useApprove'
 import { KogeAddress } from '../../constants/contracts'
 import BigNumber from 'bignumber.js'
 
+export const usePoolFactory = () => {
+  const farmingFactoryContract = useFarmingFactoryContract()
+  const poolNum = useContractCall({
+    abi: farmingFactoryContract.interface,
+    address: farmingFactoryContract.address,
+    method: 'numPools',
+    args: [],
+  })
+  const poolAddresses = useContractCalls(
+    Array(poolNum?.[0] || 0).map((item, index) => ({
+      address: farmingFactoryContract.address,
+      abi: farmingFactoryContract.interface,
+      method: 'pools',
+      args: [index],
+    }))
+  )
+
+  return {
+    poolAddresses: poolAddresses?.[0] ?? [],
+  }
+}
+
 export const usePool = () => {
   const { account } = useEthers()
   const farmingContract = useFarmingContract() as any
+
   const { approve: onApprove, loading: approveLoading } = useApprove(KogeAddress, farmingContract.address)
   const allowance = useTokenAllowance(KogeAddress, account, farmingContract.address)
 
