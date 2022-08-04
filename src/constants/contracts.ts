@@ -28,10 +28,10 @@ export const TStakingAddress = {
   [ChainId.BSCTestnet]: '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E',
 }[CHAIN_ID]
 
-export const FarmingAddress = {
-  [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
-  [ChainId.BSCTestnet]: '0x826Ae68C2E908bB4e280f09Eb2DC41DfB1f9a484',
-}[CHAIN_ID]
+// export const FarmingAddress = {
+//   [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
+//   [ChainId.BSCTestnet]: '0x826Ae68C2E908bB4e280f09Eb2DC41DfB1f9a484',
+// }[CHAIN_ID]
 
 export const FarmingFactoryAddress = {
   [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',

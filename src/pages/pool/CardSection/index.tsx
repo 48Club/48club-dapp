@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Tag, Button, message } from 'antd'
-import { usePool, usePoolFactory } from '../../../hooks/pool/usePool'
+import { usePool, usePoolFactory, usePoolInfo } from '../../../hooks/pool/usePool'
 import { useStakeShow, useStakeOrClaim } from '../../../store'
 
 export const PoolCardSection = () => {
@@ -9,16 +9,17 @@ export const PoolCardSection = () => {
   return (
     <div className="flex flex-wrap gap-6 mb-30 <sm:justify-center">
       {poolAddresses.map((pool) => (
-        <PoolCard pool={{}} userDetail={{}} key={pool} />
+        <PoolCard pool={pool} userDetail={{}} key={pool} />
       ))}
     </div>
   )
 }
 
 function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
-  const { onApprove, isAllowed, approveLoading, myBalance, stakePoolLoading } = usePool()
+  const { onApprove, isAllowed, approveLoading, myBalance, stakePoolLoading } = usePool(pool)
   const [stakeShow, setStakeShow] = useStakeShow()
-  const { setCurrentType } = useStakeOrClaim()
+  const { setCurrentType, setCurAddress } = useStakeOrClaim()
+  // const { rewardTokens } = usePoolInfo(pool)
 
   const claimHandler = () => {
     message.success('恭喜您，奖励领取成功。', 10)
@@ -30,8 +31,9 @@ function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
     } else {
       setStakeShow(true)
       setCurrentType(1)
+      setCurAddress(pool)
     }
-  }, [isAllowed, onApprove, setCurrentType, setStakeShow])
+  }, [isAllowed, onApprove, pool, setCurAddress, setCurrentType, setStakeShow])
 
   return (
     <div className="relative w-80 flex-col py-10 px-8 shadow rounded-xl bg-white">

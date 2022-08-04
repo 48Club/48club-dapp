@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useContractFunction, useEthers, useTokenAllowance, useContractCall, useContractCalls } from '@usedapp/core'
 import { useFarmingContract, useFarmingFactoryContract } from '../useContract'
 import useApprove from '../erc20/useApprove'
-import { KogeAddress } from '../../constants/contracts'
+import { TStakingAddress } from '../../constants/contracts'
 import BigNumber from 'bignumber.js'
 
 export const usePoolFactory = () => {
@@ -27,12 +27,12 @@ export const usePoolFactory = () => {
   }
 }
 
-export const usePool = () => {
+export const usePool = (tokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract() as any
+  const farmingContract = useFarmingContract(tokenAddress) as any
 
-  const { approve: onApprove, loading: approveLoading } = useApprove(KogeAddress, farmingContract.address)
-  const allowance = useTokenAllowance(KogeAddress, account, farmingContract.address)
+  const { approve: onApprove, loading: approveLoading } = useApprove(TStakingAddress, farmingContract.address)
+  const allowance = useTokenAllowance(TStakingAddress, account, farmingContract.address)
 
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',
@@ -53,6 +53,13 @@ export const usePool = () => {
     address: farmingContract.address,
     method: 'balanceOf',
     args: [account],
+  })
+
+  const binType = useContractCall({
+    abi: farmingContract.interface,
+    address: farmingContract.address,
+    method: 'stakingToken',
+    args: [],
   })
 
   const onStakePool = useCallback(
@@ -97,9 +104,26 @@ export const usePool = () => {
     exitLoading: exitState.status === 'Mining',
     onClaimRewards,
     claimLoading: claimState.status === 'Mining',
-    myBalance: balanceOfResult?.[0].toNumber() ?? 0,
+    myBalance: balanceOfResult?.[0].toString() ?? '0',
+    binType: binType?.[0].toString() ?? '',
     onApprove,
     approveLoading,
     isAllowed: new BigNumber(allowance?.toString() ?? 0).gt(0),
+  }
+}
+
+export const usePoolInfo = (tokenAddress: string) => {
+  console.log('usePoolInfo')
+  const farmingContract = useFarmingContract(tokenAddress)
+  const rewardTokens = useContractCall({
+    abi: farmingContract.interface,
+    address: farmingContract.address,
+    method: 'rewardTokensArray',
+    args: [],
+  })
+  console.log(rewardTokens?.[0])
+
+  return {
+    rewardTokens: rewardTokens?.[0] ?? []
   }
 }
