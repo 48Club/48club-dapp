@@ -113,17 +113,31 @@ export const usePool = (tokenAddress: string) => {
 }
 
 export const usePoolInfo = (tokenAddress: string) => {
-  console.log('usePoolInfo')
+  const { account } = useEthers()
   const farmingContract = useFarmingContract(tokenAddress)
-  const rewardTokens = useContractCall({
+  const rewardToken = useContractCall({
     abi: farmingContract.interface,
     address: farmingContract.address,
     method: 'rewardTokensArray',
-    args: [],
+    args: [0],
   })
-  console.log(rewardTokens?.[0])
+
+  const rewardTokenInfo = useContractCall({
+    abi: farmingContract.interface,
+    address: farmingContract.address,
+    method: 'rewardTokenInfo',
+    args: [rewardToken?.[0]],
+  })
+
+  const earnedAmount = useContractCall({
+    abi: farmingContract.interface,
+    address: farmingContract.address,
+    method: 'earned',
+    args: [rewardToken?.[0], account],
+  })
 
   return {
-    rewardTokens: rewardTokens?.[0] ?? []
+    rewardTokenInfo: rewardTokenInfo?.[0] ?? {},
+    earnedAmount: earnedAmount?.[0] ?? 0
   }
 }

@@ -142,6 +142,25 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "balances",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "claimRewards",
     "outputs": [],
@@ -257,6 +276,24 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_receiver",
+        "type": "address"
+      }
+    ],
+    "name": "rescueFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_rewardToken",
         "type": "address"
       }
@@ -300,13 +337,58 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "rewardTokens",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "index",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint32",
+        "name": "periodFinish",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint32",
+        "name": "lastUpdateTime",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint128",
+        "name": "rewardPerTokenStored",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "rewardRate",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "rewardTokensArray",
     "outputs": [
       {
-        "internalType": "address[]",
-        "name": "rewardTokens_",
-        "type": "address[]"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -320,29 +402,6 @@
         "internalType": "address",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "s",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "rewardsDistribution",
-        "type": "address"
-      },
-      {
-        "internalType": "contract IERC20",
-        "name": "stakingToken",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "totalSupply",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -399,7 +458,7 @@
     "name": "stakingToken",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "contract IERC20",
         "name": "",
         "type": "address"
       }
@@ -413,7 +472,7 @@
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "totalSupply_",
+        "name": "",
         "type": "uint256"
       }
     ],

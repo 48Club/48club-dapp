@@ -1,7 +1,10 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
+import Bignumber from 'bignumber.js'
 import { Tag, Button, message } from 'antd'
+import { useBlockMeta } from '@usedapp/core'
 import { usePool, usePoolFactory, usePoolInfo } from '../../../hooks/pool/usePool'
 import { useStakeShow, useStakeOrClaim } from '../../../store'
+import { TEN_POW, shorten, formatAmount } from '@funcblock/dapp-sdk'
 
 export const PoolCardSection = () => {
   const { poolAddresses } = usePoolFactory()
@@ -19,7 +22,17 @@ function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
   const { onApprove, isAllowed, approveLoading, myBalance, stakePoolLoading } = usePool(pool)
   const [stakeShow, setStakeShow] = useStakeShow()
   const { setCurrentType, setCurAddress } = useStakeOrClaim()
-  // const { rewardTokens } = usePoolInfo(pool)
+  const { rewardTokenInfo, earnedAmount } = usePoolInfo(pool)
+  const { timestamp } = useBlockMeta()
+
+  const curBlockTimestamp = useMemo(() => (timestamp ? new Date(timestamp).getTime() : 0), [timestamp])
+  const rate = useMemo(
+    () =>
+      rewardTokenInfo?.rewardRate
+        ? new Bignumber(rewardTokenInfo?.rewardRate?.toString()).div(TEN_POW(18)).times(3)
+        : 0,
+    [rewardTokenInfo?.rewardRate]
+  )
 
   const claimHandler = () => {
     message.success('恭喜您，奖励领取成功。', 10)
@@ -53,10 +66,10 @@ function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
           <span className="text-dark-gray">发行总量：1,123.7634 Koge</span>
           <span className="text-primary underline underline-primary">追加资金</span>
         </div>
-        <div className="mt-2 text-dark-gray text-sm">释放速率：1block - 3个</div>
+        <div className="mt-2 text-dark-gray text-sm">释放速率：1block - {formatAmount(rate)}个</div>
       </div>
       <div className="py-6 flex justify-between text-sm">
-        <span className="">我的奖励：23.7634 Koge</span>
+        <span className="">我的奖励：{formatAmount(earnedAmount)} Koge</span>
         <span className="text-primary underline underline-primary" onClick={claimHandler}>
           领取奖励
         </span>
