@@ -33,6 +33,17 @@ function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
         : 0,
     [rewardTokenInfo?.rewardRate]
   )
+  const remaining = useMemo(() => {
+    if (rewardTokenInfo.periodFinish && curBlockTimestamp) {
+      return new Bignumber(curBlockTimestamp)
+        .div(1000)
+        .minus(rewardTokenInfo.periodFinish.toString())
+        .times(rate)
+        .toString()
+    } else {
+      return 0
+    }
+  }, [rewardTokenInfo.periodFinish, curBlockTimestamp, rate])
 
   const claimHandler = () => {
     message.success('恭喜您，奖励领取成功。', 10)
@@ -63,7 +74,7 @@ function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
       </div>
       <div className="pt-8 pb-6 border-b border-solid">
         <div className="flex justify-between text-sm">
-          <span className="text-dark-gray">发行总量：1,123.7634 Koge</span>
+          <span className="text-dark-gray">发行总量：{formatAmount(remaining)} Koge</span>
           <span className="text-primary underline underline-primary">追加资金</span>
         </div>
         <div className="mt-2 text-dark-gray text-sm">释放速率：1block - {formatAmount(rate)}个</div>
