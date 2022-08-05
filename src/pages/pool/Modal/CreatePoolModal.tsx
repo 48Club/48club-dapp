@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Button, Modal, ModalProps, Form, Input, Select, DatePicker } from 'antd'
+import { usePoolFactory } from '../../../hooks/pool/usePool'
 
 export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
+  const { poolAddresses, deployLoading, onDeploy, updateRewardLoading } = usePoolFactory()
   const [form] = Form.useForm()
+
+  const lastAddress = useMemo(() => {
+    return poolAddresses?.[0] ?? ''
+  }, [poolAddresses])
+
+  console.log(lastAddress)
 
   return (
     <Modal {...props} footer={false} closeIcon={null} className="rounded-xl">
@@ -19,7 +27,8 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
 
         <Form form={form} layout="vertical" size="large">
           <Form.Item label="质押币种">
-            <Select className="h-12 border-none rounded bg-light-white" placeholder="请选择" />
+            {/* <Select className="h-12 border-none rounded bg-light-white" placeholder="请选择" /> */}
+            <Input className="h-12 border-none rounded bg-light-white" placeholder="请输入" />
           </Form.Item>
           <Form.Item label="奖励币种">
             <Input className="h-12 border-none rounded bg-light-white" placeholder="请输入" />
@@ -30,13 +39,13 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
           <Form.Item label="释放速率">
             <Input className="h-12 border-none rounded bg-light-white" placeholder="请输入" />
           </Form.Item>
-          <Form.Item label="开始时间">
+          {/* <Form.Item label="开始时间">
             <DatePicker
               placeholder="请选择"
               format="YYYY-MM-DD HH:mm:ss"
               className="h-12 border-none rounded bg-light-white"
             />
-          </Form.Item>
+          </Form.Item> */}
         </Form>
 
         <div className="w-full flex justify-center gap-6 flex-wrap">

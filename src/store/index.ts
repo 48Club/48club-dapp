@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 export const createPoolType = atom<1 | 2 | 3>(1) // 1 create ; 2 restart; 3 append;
 export const createPoolShow = atom(false)
 export const stakeShow = atom(false)
-export const stakeOrClaim = atom<1 | 2>(1) // 1 stake ; 2 claim
+export const stakeOrClaim = atom<1 | 2 | undefined>(undefined) // 1 stake ; 2 claim
 export const currentPoolAddress = atom('')
 
 export const useCreatePoolShow = () => {

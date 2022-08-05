@@ -1,18 +1,48 @@
 import { useCallback } from 'react'
-import { useContractFunction, useEthers, useTokenAllowance, useContractCall, useContractCalls } from '@usedapp/core'
+import {
+  useContractFunction,
+  useEthers,
+  useTokenAllowance,
+  useContractCall,
+  useContractCalls,
+  useToken,
+} from '@usedapp/core'
 import { useFarmingContract, useFarmingFactoryContract } from '../useContract'
 import useApprove from '../erc20/useApprove'
-import { TStakingAddress } from '../../constants/contracts'
+import { KogeAddress } from '../../constants/contracts'
 import BigNumber from 'bignumber.js'
 
 export const usePoolFactory = () => {
-  const farmingFactoryContract = useFarmingFactoryContract()
+  const farmingFactoryContract = useFarmingFactoryContract() as any
   const poolNum = useContractCall({
     abi: farmingFactoryContract.interface,
     address: farmingFactoryContract.address,
     method: 'numPools',
     args: [],
   })
+
+  const { send: deploy, state: deployState } = useContractFunction(farmingFactoryContract, 'deploy', {
+    transactionName: 'deploy',
+  })
+
+  const onDeploy = useCallback(async () => {
+    console.info('FarmingFactory | deploy')
+    await deploy(KogeAddress)
+  }, [deploy])
+
+  const { send: notifyRewardAmount, state: updateRewardState } = useContractFunction(
+    farmingFactoryContract,
+    'notifyRewardAmount',
+    {
+      transactionName: 'notifyRewardAmount',
+    }
+  )
+
+  const onUpdateReward = useCallback(async(poolId: string, rewardAddress, rewardAmount) => {
+    console.info('FarmingFactory | update')
+    await notifyRewardAmount(poolId,[[]])
+  }, [notifyRewardAmount])
+
   const poolAddresses = useContractCalls(
     Array(poolNum?.[0] || 0).map((item, index) => ({
       address: farmingFactoryContract.address,
@@ -24,6 +54,10 @@ export const usePoolFactory = () => {
 
   return {
     poolAddresses: poolAddresses?.[0] ?? [],
+    onDeploy,
+    deployLoading: deployState.status === 'Mining',
+    updateRewardLoading: updateRewardState.status === 'Mining',
+    onUpdateReward,
   }
 }
 
@@ -52,15 +86,20 @@ export const usePool = (tokenAddress: string) => {
     args: [account],
   })
 
-  const binType = useContractCall({
+  const stakeTokenAddress = useContractCall({
     abi: farmingContract.interface,
     address: farmingContract.address,
     method: 'stakingToken',
     args: [],
   })
 
-  const { approve: onApprove, loading: approveLoading } = useApprove(binType?.[0].toString(), farmingContract.address)
-  const allowance = useTokenAllowance(binType?.[0].toString(), account, farmingContract.address)
+  const data = useToken(stakeTokenAddress?.[0])
+
+  const { approve: onApprove, loading: approveLoading } = useApprove(
+    stakeTokenAddress?.[0].toString(),
+    farmingContract.address
+  )
+  const allowance = useTokenAllowance(stakeTokenAddress?.[0].toString(), account, farmingContract.address)
 
   const onStakePool = useCallback(
     async (amount: BigNumber) => {
@@ -104,8 +143,9 @@ export const usePool = (tokenAddress: string) => {
     exitLoading: exitState.status === 'Mining',
     onClaimRewards,
     claimLoading: claimState.status === 'Mining',
-    myBalance: balanceOfResult?.[0].toString() ?? '0',
-    binType: binType?.[0].toString() ?? '',
+    myStakeAmount: balanceOfResult?.[0].toString() ?? '0',
+    stakeTokenAddress: stakeTokenAddress?.[0].toString() ?? '',
+    stakeTokenSymbol: data?.symbol ?? '',
     onApprove,
     approveLoading,
     isAllowed: new BigNumber(allowance?.toString() ?? 0).gt(0),
@@ -136,8 +176,12 @@ export const usePoolInfo = (tokenAddress: string) => {
     args: [rewardToken?.[0], account],
   })
 
+  const data = useToken(rewardToken?.[0])
+
   return {
+    rewardToken: rewardToken?.[0]?.toString(),
     rewardTokenInfo: rewardTokenInfo?.[0] ?? {},
-    earnedAmount: earnedAmount?.[0] ?? 0
+    earnedAmount: earnedAmount?.[0]?.toString() ?? 0,
+    rewardTokenSymbol: data?.symbol || '',
   }
 }
