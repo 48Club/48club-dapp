@@ -31,9 +31,6 @@ export const usePool = (tokenAddress: string) => {
   const { account } = useEthers()
   const farmingContract = useFarmingContract(tokenAddress) as any
 
-  const { approve: onApprove, loading: approveLoading } = useApprove(TStakingAddress, farmingContract.address)
-  const allowance = useTokenAllowance(TStakingAddress, account, farmingContract.address)
-
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',
   })
@@ -61,6 +58,9 @@ export const usePool = (tokenAddress: string) => {
     method: 'stakingToken',
     args: [],
   })
+
+  const { approve: onApprove, loading: approveLoading } = useApprove(binType?.[0].toString(), farmingContract.address)
+  const allowance = useTokenAllowance(binType?.[0].toString(), account, farmingContract.address)
 
   const onStakePool = useCallback(
     async (amount: BigNumber) => {

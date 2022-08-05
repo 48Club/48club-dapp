@@ -19,7 +19,7 @@ export const PoolCardSection = () => {
 }
 
 function PoolCard({ pool, userDetail }: { pool: any; userDetail: any }) {
-  const { onApprove, isAllowed, approveLoading, myBalance, stakePoolLoading } = usePool(pool)
+  const { onApprove, isAllowed, approveLoading, myBalance, stakePoolLoading, binType } = usePool(pool)
   const [stakeShow, setStakeShow] = useStakeShow()
   const { setCurrentType, setCurAddress } = useStakeOrClaim()
   const { rewardTokenInfo, earnedAmount } = usePoolInfo(pool)

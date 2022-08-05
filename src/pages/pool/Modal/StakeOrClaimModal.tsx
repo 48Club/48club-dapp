@@ -12,8 +12,8 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
   const [amount, setAmount] = useState('')
   const amountBN = useMemo(() => new BigNumber(amount).times(TEN_POW(18)), [amount])
   const { account } = useEthers()
-  const balance = useTokenBalance(KogeAddress, account)
-  const { stakePoolLoading, onStakePool, binType } = usePool(curAddress || '')
+  const balance = useTokenBalance(curAddress, account)
+  const { stakePoolLoading, onStakePool, binType, myBalance } = usePool(curAddress || '')
 
   const handleStakePool = useCallback(async () => {
     if (!stakePoolLoading && amountBN.gt(0) && amountBN.lt(new BigNumber(balance?.toString() || ''))) {
@@ -40,13 +40,13 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <span>奖励币种</span>
-            <Input value={binType} readOnly size="large" className="h-12 border-none rounded bg-light-white" />
+            <Input value={0} readOnly size="large" className="h-12 border-none rounded bg-light-white" />
           </div>
         </div>
         <div className="mt-8 flex flex-col gap-2">
           <span>{currentType === 1 ? '' : '解'}质押数量</span>
           <Input
-            value={amount}
+            value={amount || myBalance}
             type="number"
             size="large"
             className="h-12 border-none rounded bg-light-white"
