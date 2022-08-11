@@ -2,13 +2,16 @@ import React, { useState, useMemo, useCallback } from 'react'
 import { Button, Modal, ModalProps, Input } from 'antd'
 import BigNumber from 'bignumber.js'
 import { useTokenBalance, useEthers } from '@usedapp/core'
+import { useTranslation } from 'react-i18next'
 import { usePool, usePoolInfo } from '../../../hooks/pool/usePool'
-import { formatAmount, TEN_POW } from '@funcblock/dapp-sdk'
+import { TEN_POW } from '@funcblock/dapp-sdk'
 import { useStakeOrClaim, useStakeShow } from '../../../store'
 
 export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
+  const { t } = useTranslation()
   const { currentType, curAddress } = useStakeOrClaim()
   const [amount, setAmount] = useState('')
+  const [isMax, setMax] = useState(false)
   const amountBN = useMemo(() => new BigNumber(amount).times(TEN_POW(18)), [amount])
   const { account } = useEthers()
   const [_, hideModal] = useStakeShow()
@@ -16,7 +19,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
     stakePoolLoading,
     onStakePool,
     stakeTokenSymbol,
-    stakeTokenAddress,
+    stakeToken,
     onWithdraw,
     withdrawLoading,
     onWithdrawAll,
@@ -24,7 +27,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
     onExit,
     exitLoading,
   } = usePool(curAddress || '')
-  const stakeBalance = useTokenBalance(stakeTokenAddress, account)
+  const stakeBalance = useTokenBalance(stakeToken, account)
   const stakeAmount = useTokenBalance(curAddress, account)
   const { rewardTokenSymbol } = usePoolInfo(curAddress)
 
@@ -38,13 +41,18 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
 
   const handleWithdraw = useCallback(async () => {
     if (!amountBN.gt(new BigNumber(stakeAmount?.toString() ?? ''))) {
-      await onWithdraw(amountBN)
+      if (isMax) {
+        await onWithdrawAll()
+      } else {
+        await onWithdraw(amountBN)
+      }
       hideModal(false)
       setAmount('')
     }
-  }, [amountBN, hideModal, onWithdraw, stakeAmount])
+  }, [amountBN, hideModal, isMax, onWithdraw, onWithdrawAll, stakeAmount])
 
   const stakeMax = useCallback(async () => {
+    setMax(true)
     if (currentType === 1) {
       setAmount(new BigNumber(stakeBalance?.toString() ?? '').div(TEN_POW(18)).toString())
     } else {
@@ -56,7 +64,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
     <Modal {...props} footer={false} closeIcon={null} className="rounded-xl" destroyOnClose>
       <div className="p-6 rounded-xl">
         <div className="relative pt-4 text-center text-[#1E1E1E] text-xl font-bold">
-          {currentType === 1 ? '' : '解'}质押代币
+          {currentType === 1 ? t('pool_pledge') : t('pool_unpledge')}
           <img
             src="/static/close.svg"
             className="absolute top-0 right-0 transform -translate-y-1/2 cursor-pointer"
@@ -66,7 +74,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
         </div>
         <div className="mt-6 flex gap-11">
           <div className="flex-1 flex flex-col gap-3">
-            <span>质押币种</span>
+            <span>{t('pool_staking_currency')}</span>
             <Input
               value={stakeTokenSymbol ?? ''}
               readOnly
@@ -75,7 +83,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
             />
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <span>奖励币种</span>
+            <span>{t('pool_reward_currency')}</span>
             <Input
               value={rewardTokenSymbol}
               readOnly
@@ -85,7 +93,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
           </div>
         </div>
         <div className="mt-8 flex flex-col gap-2">
-          <span>{currentType === 1 ? '' : '解'}质押数量</span>
+          <span>{currentType === 1 ? t('pool_staking_amount') : t('pool_un_staking_amount')}</span>
           <Input
             value={amount}
             type="number"
@@ -96,10 +104,10 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
             }}
             placeholder={
               currentType === 1
-                ? `钱包余额: ${new BigNumber(stakeBalance?.toString() ?? '')
+                ? `${t('pool_balance')}: ${new BigNumber(stakeBalance?.toString() ?? '')
                     .div(TEN_POW(18))
                     .toString()} ${stakeTokenSymbol}`
-                : `质押数量：${new BigNumber(stakeAmount?.toString() ?? '')
+                : `${t('pool_staking_amount')}: ${new BigNumber(stakeAmount?.toString() ?? '')
                     .div(TEN_POW(18))
                     .toString()} ${stakeTokenSymbol}`
             }
@@ -120,7 +128,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
               onClick={handleStakePool}
               loading={stakePoolLoading}
             >
-              确定
+              {t('pool_confirm')}
             </Button>
           )}
           {currentType === 2 && (
@@ -132,7 +140,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
               onClick={handleWithdraw}
               loading={withdrawLoading || withdrawAllLoading || exitLoading}
             >
-              确定
+              {t('pool_confirm')}
             </Button>
           )}
         </div>

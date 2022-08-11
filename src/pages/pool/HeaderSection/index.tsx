@@ -27,8 +27,9 @@ export default function HeaderSection() {
 
           <Button
             type="primary"
-            className="min-w-30 md:w-30 h-10 text-sm font-medium rounded text-light-black"
+            className="min-w-30 h-10 text-sm font-medium rounded text-light-black"
             onClick={() => showCreate(1)}
+            style={{ maxWidth: 'max-content' }}
           >
             {t('pool_btn_text')}
           </Button>

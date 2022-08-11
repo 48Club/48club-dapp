@@ -3,7 +3,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "uint256",
         "name": "poolId",
         "type": "uint256"
@@ -19,6 +19,30 @@
         "internalType": "address",
         "name": "stakingToken",
         "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "rewardToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rewardRate",
+        "type": "uint256"
       }
     ],
     "name": "FarmingPoolDeployed",
@@ -65,12 +89,22 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_stakingToken",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "_poolId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_newStartTime",
+        "type": "uint256"
       }
     ],
-    "name": "deploy",
+    "name": "contribute",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -78,34 +112,32 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_stakingToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardToken",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
-        "name": "_poolId",
+        "name": "_rewardRate",
         "type": "uint256"
       },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "rewardToken",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "reward",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "rewardDuration",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct FarmingPool.RewardTokenArgs[]",
-        "name": "_args",
-        "type": "tuple[]"
+        "internalType": "uint256",
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
       }
     ],
-    "name": "notifyRewardAmount",
+    "name": "deploy",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

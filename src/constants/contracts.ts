@@ -35,6 +35,6 @@ export const TStakingAddress = {
 
 export const FarmingFactoryAddress = {
   [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
-  [ChainId.BSCTestnet]: '0xDa4549c618EfBf068671AFE50E22227F3928F530',
+  [ChainId.BSCTestnet]: '0x62bAa0521101f3c8204Dfa07120135206047a24F',
 }[CHAIN_ID]
 

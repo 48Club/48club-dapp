@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import {
   useContractFunction,
   useEthers,
@@ -7,12 +7,12 @@ import {
   useContractCalls,
   useToken,
 } from '@usedapp/core'
+import BigNumber from 'bignumber.js'
 import { useFarmingContract, useFarmingFactoryContract } from '../useContract'
 import useApprove from '../erc20/useApprove'
-import { KogeAddress } from '../../constants/contracts'
-import BigNumber from 'bignumber.js'
 
-export const usePoolFactory = () => {
+export const usePoolFactory = (rewardToken?: string) => {
+  const { account } = useEthers()
   const farmingFactoryContract = useFarmingFactoryContract() as any
   const poolNum = useContractCall({
     abi: farmingFactoryContract.interface,
@@ -25,23 +25,38 @@ export const usePoolFactory = () => {
     transactionName: 'deploy',
   })
 
-  const onDeploy = useCallback(async () => {
-    console.info('FarmingFactory | deploy')
-    await deploy(KogeAddress)
-  }, [deploy])
-
-  const { send: notifyRewardAmount, state: updateRewardState } = useContractFunction(
-    farmingFactoryContract,
-    'notifyRewardAmount',
-    {
-      transactionName: 'notifyRewardAmount',
-    }
+  const onDeploy = useCallback(
+    async ({
+      stakingToken,
+      rewardToken,
+      rewardRate,
+      startTime,
+      amount,
+    }: {
+      stakingToken: string
+      rewardToken: string
+      rewardRate: string
+      startTime: string
+      amount: string
+    }) => {
+      console.info('FarmingFactory | deploy', stakingToken, rewardToken, rewardRate, startTime, amount)
+      await deploy(stakingToken, rewardToken, rewardRate, startTime, amount)
+    },
+    [deploy]
   )
 
-  const onUpdateReward = useCallback(async(poolId: string, rewardAddress, rewardAmount) => {
-    console.info('FarmingFactory | update')
-    await notifyRewardAmount(poolId,[[]])
-  }, [notifyRewardAmount])
+  const { send: contribute, state: contributeState } = useContractFunction(farmingFactoryContract, 'contribute', {
+    transactionName: 'contribute',
+  })
+  const allowance = useTokenAllowance(rewardToken, account, farmingFactoryContract.address)
+
+  const onContribute = useCallback(
+    async ({ poolId, amount, startTime }: { poolId: string; startTime: string; amount: string }) => {
+      console.info('FarmingFactory | contribute', startTime, amount)
+      await contribute(poolId, amount, startTime)
+    },
+    [contribute]
+  )
 
   const poolAddresses = useContractCalls(
     Array(poolNum?.[0] || 0).map((item, index) => ({
@@ -52,18 +67,23 @@ export const usePoolFactory = () => {
     }))
   )
 
+  const { approve: onApprove, loading: approveLoading } = useApprove(rewardToken, farmingFactoryContract.address)
+
   return {
     poolAddresses: poolAddresses?.[0] ?? [],
     onDeploy,
     deployLoading: deployState.status === 'Mining',
-    updateRewardLoading: updateRewardState.status === 'Mining',
-    onUpdateReward,
+    onContribute,
+    contributeLoading: contributeState.status === 'Mining',
+    onApprove,
+    approveLoading,
+    isAllowed: new BigNumber(allowance?.toString() ?? 0).gt(0),
   }
 }
 
-export const usePool = (tokenAddress: string) => {
+export const usePool = (poolTokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract(tokenAddress) as any
+  const farmingContract = useFarmingContract(poolTokenAddress) as any
 
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',
@@ -75,8 +95,8 @@ export const usePool = (tokenAddress: string) => {
     transactionName: 'withdrawAll',
   })
   const { send: exit, state: exitState } = useContractFunction(farmingContract, 'exit', { transactionName: 'exit' })
-  const { send: claimRewards, state: claimState } = useContractFunction(farmingContract, 'claimRewards', {
-    transactionName: 'claimRewards',
+  const { send: claimReward, state: claimState } = useContractFunction(farmingContract, 'claimReward', {
+    transactionName: 'claimReward',
   })
 
   const balanceOfResult = useContractCall({
@@ -127,10 +147,10 @@ export const usePool = (tokenAddress: string) => {
     await exit()
   }, [exit])
 
-  const onClaimRewards = useCallback(async () => {
-    console.info('Farming | claimRewards')
-    await claimRewards()
-  }, [claimRewards])
+  const onClaimReward = useCallback(async () => {
+    console.info('Farming | claimReward')
+    await claimReward()
+  }, [claimReward])
 
   return {
     onStakePool,
@@ -141,10 +161,10 @@ export const usePool = (tokenAddress: string) => {
     withdrawAllLoading: withdrawAllState.status === 'Mining',
     onExit,
     exitLoading: exitState.status === 'Mining',
-    onClaimRewards,
+    onClaimReward,
     claimLoading: claimState.status === 'Mining',
     myStakeAmount: balanceOfResult?.[0].toString() ?? '0',
-    stakeTokenAddress: stakeTokenAddress?.[0].toString() ?? '',
+    stakeToken: stakeTokenAddress?.[0].toString() ?? '',
     stakeTokenSymbol: data?.symbol ?? '',
     onApprove,
     approveLoading,
@@ -152,36 +172,41 @@ export const usePool = (tokenAddress: string) => {
   }
 }
 
-export const usePoolInfo = (tokenAddress: string) => {
+export const usePoolInfo = (poolTokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract(tokenAddress)
+  const farmingContract = useFarmingContract(poolTokenAddress)
   const rewardToken = useContractCall({
     abi: farmingContract.interface,
     address: farmingContract.address,
-    method: 'rewardTokensArray',
-    args: [0],
+    method: 'rewardToken',
+    args: [],
   })
+  const poolInfo = useContractCalls([
+    { abi: farmingContract.interface, address: farmingContract.address, method: 'startTime', args: [] },
+    { abi: farmingContract.interface, address: farmingContract.address, method: 'endTime', args: [] },
+    { abi: farmingContract.interface, address: farmingContract.address, method: 'rewardRate', args: [] },
+    { abi: farmingContract.interface, address: farmingContract.address, method: 'lastUpdateTime', args: [] },
+    {
+      abi: farmingContract.interface,
+      address: farmingContract.address,
+      method: 'earned',
+      args: [account],
+    },
+  ])
 
-  const rewardTokenInfo = useContractCall({
-    abi: farmingContract.interface,
-    address: farmingContract.address,
-    method: 'rewardTokenInfo',
-    args: [rewardToken?.[0]],
-  })
-
-  const earnedAmount = useContractCall({
-    abi: farmingContract.interface,
-    address: farmingContract.address,
-    method: 'earned',
-    args: [rewardToken?.[0], account],
-  })
+  const results = useMemo(() => poolInfo?.map((res) => res?.[0]?.toString()), [poolInfo])
 
   const data = useToken(rewardToken?.[0])
 
   return {
     rewardToken: rewardToken?.[0]?.toString(),
-    rewardTokenInfo: rewardTokenInfo?.[0] ?? {},
-    earnedAmount: earnedAmount?.[0]?.toString() ?? 0,
+    rewardTokenInfo: {
+      startTime: results[0],
+      endTime: results[1],
+      rewardRate: results[2],
+      lastUpdateTime: results[3],
+    },
+    earnedAmount: results[4] ?? 0,
     rewardTokenSymbol: data?.symbol || '',
   }
 }

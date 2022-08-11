@@ -6,7 +6,7 @@ import { CreatePoolModal, StakeOrClaimModal } from './Modal'
 import { useCreatePoolShow, useStakeShow } from '../../store'
 
 export default function Pool() {
-  const { show: createShow, hide } = useCreatePoolShow()
+  const { isShow, hide } = useCreatePoolShow()
   const [stakeShow, setStakeShow] = useStakeShow()
 
   return (
@@ -15,7 +15,7 @@ export default function Pool() {
       {/* <FilterSection /> */}
       <PoolCardSection />
 
-      <CreatePoolModal visible={createShow} onCancel={() => hide()} />
+      <CreatePoolModal visible={isShow} onCancel={() => hide()} />
       <StakeOrClaimModal visible={stakeShow} onCancel={() => setStakeShow(false)} />
     </div>
   )
