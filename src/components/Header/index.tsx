@@ -72,6 +72,10 @@ export default function Header() {
                   to={'/voting'}>
               {t('nav-voting')}
             </Link>
+            <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/pool') ? 'text-primary' : 'text-black'}`}
+                  to={'/pool'}>
+              {t('Pool')}
+            </Link>
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
             </Dropdown>
