@@ -117,7 +117,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
             <DatePicker
               placeholder={t('pool_select')}
               format="YYYY-MM-DD HH:mm:ss"
-              className="h-12 border-none rounded bg-light-white"
+              className="w-full h-12 border-none rounded bg-light-white"
               onChange={(e) => {
                 if (e) {
                   setStartTime((e.valueOf() / 1000).toFixed(0))
