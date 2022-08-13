@@ -28,5 +28,7 @@
   "pool_select": "Please select",
   "pool_staking_amount": "Staking amount",
   "pool_un_staking_amount": "UnStaking amount",
-  "pool_balance": "Balance"
+  "pool_balance": "Balance",
+  "pool_congratulation": "Congratulations, your reward has been successfully claimed.",
+  "pool_fail": "The reward collection failed, please try again."
 }

@@ -28,5 +28,7 @@
   "pool_select": "请选择",
   "pool_staking_amount": "质押数量",
   "pool_un_staking_amount": "解质押数量",
-  "pool_balance": "钱包余额"
+  "pool_balance": "钱包余额",
+  "pool_congratulation": "恭喜您，奖励领取成功。",
+  "pool_fail": "奖励领取失败，请重试。"
 }

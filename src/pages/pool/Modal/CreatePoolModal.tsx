@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
   const { t } = useTranslation()
-  const { poolType, poolMeta } = useCreatePoolShow()
+  const { poolType, poolMeta, hide } = useCreatePoolShow()
   const [stakingToken, setStakingToken] = useState(poolMeta.stakingToken || '')
   const [rewardToken, setRewardToken] = useState(poolMeta.rewardToken || '')
   const [rewardRate, setRewardRate] = useState(poolMeta.rewardRate || '')
@@ -49,8 +49,11 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
         startTime,
       })
     }
+
+    window.setTimeout(hide, 400)
   }, [
     amount,
+    hide,
     isAllowed,
     onApprove,
     onContribute,

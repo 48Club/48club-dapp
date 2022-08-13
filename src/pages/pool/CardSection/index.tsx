@@ -71,12 +71,12 @@ function PoolCard({ pool }: { pool: string }) {
     if (new Bignumber(earnedAmount).gt(0) && !claimLoading) {
       try {
         await onClaimReward()
-        message.success('恭喜您，奖励领取成功。')
+        message.success(t('pool_congratulation'))
       } catch (error) {
-        message.error('奖励领取失败，请重试。')
+        message.error(t('pool_fail'))
       }
     }
-  }, [claimLoading, earnedAmount, onClaimReward])
+  }, [claimLoading, earnedAmount, onClaimReward, t])
 
   const handleApprove = useCallback(() => {
     if (!isAllowed) {
