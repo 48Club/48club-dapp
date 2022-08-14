@@ -24,6 +24,7 @@
   "pool_reward_currency": "Reward token",
   "pool_reward_amount": "Rewards amount",
   "pool_start_time": "Start time",
+  "pool_end_time": "End time",
   "pool_input": "Please input",
   "pool_select": "Please select",
   "pool_staking_amount": "Staking amount",

@@ -24,6 +24,7 @@
   "pool_reward_currency": "奖励币种",
   "pool_reward_amount": "奖励总量",
   "pool_start_time": "开始时间",
+  "pool_end_time": "结束时间",
   "pool_input": "请输入",
   "pool_select": "请选择",
   "pool_staking_amount": "质押数量",

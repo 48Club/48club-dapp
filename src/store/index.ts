@@ -1,9 +1,24 @@
 import { atom, useAtom } from 'jotai'
 import { useCallback } from 'react'
 
+type IPoolMeta = {
+  stakingToken: string | undefined
+  rewardToken: string
+  rewardRate: string
+  startTime: string
+  poolId: string
+}
+
 export const createPoolType = atom<1 | 2 | 3>(1) // 1 create ; 2 restart; 3 append;
 export const createPoolShow = atom(false)
-export const createPoolMeta = atom({ stakingToken: '', rewardToken: '', rewardRate: '', startTime: '', poolId: '' })
+export const createPoolMeta = atom<IPoolMeta>({
+  stakingToken: undefined,
+  rewardToken: '',
+  rewardRate: '',
+  startTime: '',
+  poolId: '',
+})
+export const rewardTokenSymbolList = atom<Record<string, string>>({})
 
 export const stakeShow = atom(false)
 export const stakeOrClaim = atom<1 | 2 | undefined>(undefined) // 1 stake ; 2 claim
@@ -15,16 +30,7 @@ export const useCreatePoolShow = () => {
   const [poolMeta, setPoolMeta] = useAtom(createPoolMeta)
 
   const showCreate = useCallback(
-    (
-      type: 1 | 2 | 3,
-      poolMeta?: {
-        stakingToken: string
-        rewardToken: string
-        rewardRate: string
-        startTime: string
-        poolId: string
-      }
-    ) => {
+    (type: 1 | 2 | 3, poolMeta?: IPoolMeta) => {
       setType(type)
       if (poolMeta) {
         setPoolMeta(poolMeta)
@@ -42,7 +48,7 @@ export const useCreatePoolShow = () => {
     poolMeta,
     hide: () => {
       setShow(false)
-      setPoolMeta({ stakingToken: '', rewardToken: '', rewardRate: '', startTime: '', poolId: '' })
+      setPoolMeta({ stakingToken: undefined, rewardToken: '', rewardRate: '', startTime: '', poolId: '' })
     },
   }
 }
@@ -61,4 +67,10 @@ export const useStakeOrClaim = () => {
     curAddress,
     setCurAddress,
   }
+}
+
+export const useRewardTokenSymbolList = () => {
+  const [list, setList] = useAtom(rewardTokenSymbolList)
+
+  return { list, setList }
 }

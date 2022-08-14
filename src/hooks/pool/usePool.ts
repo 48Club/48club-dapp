@@ -13,7 +13,7 @@ import useApprove from '../erc20/useApprove'
 
 export const usePoolFactory = (rewardToken?: string) => {
   const { account } = useEthers()
-  const farmingFactoryContract = useFarmingFactoryContract() as any
+  const farmingFactoryContract = useFarmingFactoryContract()
   const poolNum = useContractCall({
     abi: farmingFactoryContract.interface,
     address: farmingFactoryContract.address,
@@ -83,7 +83,7 @@ export const usePoolFactory = (rewardToken?: string) => {
 
 export const usePool = (poolTokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract(poolTokenAddress) as any
+  const farmingContract = useFarmingContract(poolTokenAddress)
 
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',
@@ -201,6 +201,7 @@ export const usePoolInfo = (poolTokenAddress: string) => {
   return {
     rewardToken: rewardToken?.[0]?.toString(),
     rewardTokenInfo: {
+      poolTokenAddress,
       startTime: results[0],
       endTime: results[1],
       rewardRate: results[2],
@@ -210,3 +211,18 @@ export const usePoolInfo = (poolTokenAddress: string) => {
     rewardTokenSymbol: data?.symbol || '',
   }
 }
+
+export const stakingList = [
+  {
+    text: 'KOGE',
+    token: '0x2b7bfe79ec36653b84a43e86aff704b91e9f072f',
+  },
+  {
+    text: 'WBNB',
+    token: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+  },
+  {
+    text: 'Pancake KOGE/BNB LP',
+    token: '0xfcd08643a6390c465d8b12c42c0b4afc291eac12',
+  },
+]
