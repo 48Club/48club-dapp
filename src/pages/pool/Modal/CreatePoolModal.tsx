@@ -5,23 +5,33 @@ import Bignumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
 import moment from 'moment'
 import { usePoolFactory, stakingList } from '../../../hooks/pool/usePool'
-import { useCreatePoolShow } from '../../../store/index'
+import { useCreatePoolShow, useRewardTokenSymbolList } from '../../../store/index'
 import { useTranslation } from 'react-i18next'
 
 const { Option } = Select
 
 export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
   const { t } = useTranslation()
+  const [form] = Form.useForm()
   const { poolType, poolMeta, hide } = useCreatePoolShow()
+
   const [stakingToken, setStakingToken] = useState(poolMeta.stakingToken)
   const [rewardToken, setRewardToken] = useState(poolMeta.rewardToken)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [amount, setAmount] = useState('')
-  const { deployLoading, onDeploy, onApprove, approveLoading, onContribute, contributeLoading, isAllowed } =
-    usePoolFactory(rewardToken)
-
   const rewardTokenData = useToken(rewardToken)
+
+  const {
+    deployLoading,
+    onDeploy,
+    onApprove,
+    approveLoading,
+    onContribute,
+    contributeLoading,
+    isAllowed,
+    rewardBalance,
+  } = usePoolFactory(rewardToken)
 
   const amountBN = useMemo(() => new Bignumber(amount).times(TEN_POW(18)), [amount])
   const rewardRate = useMemo(() => {
@@ -87,6 +97,13 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
     startTime,
   ])
 
+  const rewardMax = useCallback(async () => {
+    if (isAllowed) {
+      setAmount(new Bignumber(rewardBalance).toFixed(0))
+      form.setFieldValue('amount', new Bignumber(rewardBalance).toFixed(0))
+    }
+  }, [form, isAllowed, rewardBalance])
+
   return (
     <Modal {...props} footer={false} closeIcon={null} className="rounded-xl" destroyOnClose>
       <div className="p-6 rounded-xl">
@@ -100,7 +117,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
           />
         </div>
 
-        <Form layout="vertical" size="large" initialValues={poolMeta}>
+        <Form form={form} layout="vertical" size="large" initialValues={poolMeta}>
           <Form.Item name="stakingToken" label={t('pool_staking_currency')}>
             <Select
               key="stakingToken"
@@ -141,6 +158,11 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
               className="h-12 border-none rounded bg-light-white"
               placeholder={t('pool_input')}
               onChange={(e) => setAmount(e.target.value)}
+              suffix={
+                <span className="text-primary text-sm font-bold cursor-pointer" onClick={rewardMax}>
+                  {isAllowed ? 'MAX' : ''}
+                </span>
+              }
             />
           </Form.Item>
           {/* <Form.Item name="rewardRate" label={t('pool_rate')}>

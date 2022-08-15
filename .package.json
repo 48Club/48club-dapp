@@ -19,7 +19,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.0",
     "@usedapp/core": "^0.7.3",
-    "antd": "^4.17.2",
+    "antd": "^4.22.0",
     "autoprefixer": "^9.0.0",
     "bignumber.js": "^9.0.1",
     "copy-to-clipboard": "^3.3.1",

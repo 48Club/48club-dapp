@@ -6,14 +6,16 @@ import {
   useContractCall,
   useContractCalls,
   useToken,
+  useTokenBalance,
 } from '@usedapp/core'
 import BigNumber from 'bignumber.js'
+import { TEN_POW } from '@funcblock/dapp-sdk'
 import { useFarmingContract, useFarmingFactoryContract } from '../useContract'
 import useApprove from '../erc20/useApprove'
 
 export const usePoolFactory = (rewardToken?: string) => {
   const { account } = useEthers()
-  const farmingFactoryContract = useFarmingFactoryContract()
+  const farmingFactoryContract = useFarmingFactoryContract() as any
   const poolNum = useContractCall({
     abi: farmingFactoryContract.interface,
     address: farmingFactoryContract.address,
@@ -49,6 +51,7 @@ export const usePoolFactory = (rewardToken?: string) => {
     transactionName: 'contribute',
   })
   const allowance = useTokenAllowance(rewardToken, account, farmingFactoryContract.address)
+  const rewardBalance = useTokenBalance(rewardToken, account)
 
   const onContribute = useCallback(
     async ({ poolId, amount, startTime }: { poolId: string; startTime: string; amount: string }) => {
@@ -78,12 +81,13 @@ export const usePoolFactory = (rewardToken?: string) => {
     onApprove,
     approveLoading,
     isAllowed: new BigNumber(allowance?.toString() ?? 0).gt(0),
+    rewardBalance: new BigNumber(rewardBalance?.toString() ?? 0).div(TEN_POW(18)).toString(),
   }
 }
 
 export const usePool = (poolTokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract(poolTokenAddress)
+  const farmingContract = useFarmingContract(poolTokenAddress) as any
 
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',

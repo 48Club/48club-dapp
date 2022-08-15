@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './index.less'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
-import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TG_URL, TWITTER_URL } from '../../constants/bnb48'
+import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TWITTER_URL } from '../../constants/bnb48'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -75,6 +75,11 @@ export default function Footer() {
                   <li>
                     <Link to="/voting">
                       DAO
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/pool">
+                      Pool
                     </Link>
                   </li>
                   <li>

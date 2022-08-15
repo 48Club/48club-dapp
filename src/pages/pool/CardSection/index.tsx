@@ -1,10 +1,10 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Bignumber from 'bignumber.js'
 import { Tag, Button, message } from 'antd'
 import { useBlockMeta, useTokenBalance, useEthers } from '@usedapp/core'
 import { usePool, usePoolFactory, usePoolInfo } from '../../../hooks/pool/usePool'
-import { useStakeShow, useStakeOrClaim, useCreatePoolShow } from '../../../store'
+import { useStakeShow, useStakeOrClaim, useCreatePoolShow, useRewardTokenSymbolList } from '../../../store'
 import { TEN_POW, formatAmount } from '@funcblock/dapp-sdk'
 
 export const PoolCardSection = () => {
@@ -34,9 +34,20 @@ function PoolCard({ pool }: { pool: string }) {
   } = usePool(pool)
   const [_, setStakeShow] = useStakeShow()
   const { setCurrentType, setCurAddress } = useStakeOrClaim()
+  const { list, setList } = useRewardTokenSymbolList()
   const { rewardTokenInfo, earnedAmount, rewardTokenSymbol, rewardToken } = usePoolInfo(pool)
   const { timestamp } = useBlockMeta()
   const { showCreate } = useCreatePoolShow()
+
+  useEffect(() => {
+    if (rewardToken && rewardTokenSymbol) {
+      setList((list) => ({ ...list, [rewardToken.toString()]: rewardTokenSymbol }))
+    }
+
+    if (stakeToken && stakeTokenSymbol) {
+      setList((list) => ({ ...list, [stakeToken.toString()]: stakeTokenSymbol }))
+    }
+  }, [rewardTokenSymbol, rewardToken, stakeToken, stakeTokenSymbol, setList])
 
   const stakeAmount = useTokenBalance(pool, account)
   const curBlockTimestamp = useMemo(() => (timestamp ? new Date(timestamp).getTime() : 0), [timestamp])
