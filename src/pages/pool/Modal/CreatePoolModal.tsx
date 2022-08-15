@@ -34,13 +34,14 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
   } = usePoolFactory(rewardToken)
 
   const amountBN = useMemo(() => new Bignumber(amount).times(TEN_POW(18)), [amount])
+  const timeGap = useMemo(() => new Bignumber(endTime).minus(new Bignumber(startTime)), [endTime, startTime])
   const rewardRate = useMemo(() => {
     if (!(endTime && startTime)) {
       return new Bignumber(0)
     } else {
-      return amountBN.div(new Bignumber(endTime).minus(new Bignumber(startTime)))
+      return amountBN.div(timeGap)
     }
-  }, [amountBN, endTime, startTime])
+  }, [amountBN, endTime, startTime, timeGap])
 
   useEffect(() => {
     setStakingToken(poolMeta.stakingToken)
@@ -67,7 +68,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
         stakingToken,
         rewardToken,
         rewardRate: rewardRate.toFixed(0),
-        amount: amountBN.toString(),
+        amount: rewardRate.times(timeGap).toString(),
         startTime,
       })
     } else {
