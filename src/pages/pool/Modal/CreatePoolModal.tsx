@@ -105,7 +105,17 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
   }, [form, isAllowed, rewardBalance])
 
   return (
-    <Modal {...props} footer={false} closeIcon={null} className="rounded-xl" destroyOnClose>
+    <Modal
+      visible={props.visible}
+      onCancel={(e) => {
+        props.onCancel?.(e)
+        form?.resetFields()
+      }}
+      footer={false}
+      closeIcon={null}
+      className="rounded-xl"
+      destroyOnClose
+    >
       <div className="p-6 rounded-xl">
         <div className="relative text-center text-[#1E1E1E] text-xl font-bold">
           {poolType === 1 ? t('pool_btn_text') : poolType === 2 ? t('pool_restart_pool') : t('pool_append_pool')}
@@ -117,7 +127,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
           />
         </div>
 
-        <Form form={form} layout="vertical" size="large" initialValues={poolMeta}>
+        <Form form={form} layout="vertical" size="large" initialValues={poolMeta} preserve={false}>
           <Form.Item name="stakingToken" label={t('pool_staking_currency')}>
             <Select
               key="stakingToken"
