@@ -49,7 +49,12 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
   }, [poolMeta])
 
   const onSubmit = useCallback(async () => {
-    if (!(stakingToken && rewardToken && amount && endTime && startTime)) {
+    if (poolType === 1 && !(stakingToken && rewardToken && amount && endTime && startTime)) {
+      console.error('complete form')
+      return
+    }
+
+    if (poolType !== 1 && !(amount && startTime)) {
       console.error('complete form')
       return
     }
@@ -83,7 +88,6 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
     window.setTimeout(hide, 400)
   }, [
     amount,
-    amountBN,
     endTime,
     hide,
     isAllowed,
@@ -96,6 +100,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
     rewardToken,
     stakingToken,
     startTime,
+    timeGap,
   ])
 
   const rewardMax = useCallback(async () => {
@@ -176,14 +181,11 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
               }
             />
           </Form.Item>
-          {/* <Form.Item name="rewardRate" label={t('pool_rate')}>
-            <Input
-              className="h-12 border-none rounded bg-light-white"
-              placeholder={t('pool_input')}
-              readOnly={poolType !== 1}
-              onChange={(e) => setRewardRate(e.target.value)}
-            />
-          </Form.Item> */}
+          {poolType !== 1 && (
+            <Form.Item name="rewardRate" label={t('pool_rate')}>
+              <Input className="h-12 border-none rounded bg-light-white" placeholder={t('pool_input')} disabled />
+            </Form.Item>
+          )}
           <Form.Item name="startTime" label={t('pool_start_time')}>
             <DatePicker
               placeholder={t('pool_select')}
@@ -200,22 +202,24 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
               }}
             />
           </Form.Item>
-          <Form.Item name="endTime" label={t('pool_end_time')}>
-            <DatePicker
-              placeholder={t('pool_select')}
-              showTime
-              format="YYYY-MM-DD HH:mm:ss"
-              className="w-full h-12 border-none rounded bg-light-white"
-              disabledDate={(current) => {
-                return !startTime ? false : current < moment.unix(Number(startTime)).startOf('date')
-              }}
-              onChange={(e) => {
-                if (e) {
-                  setEndTime((e.valueOf() / 1000).toFixed(0))
-                }
-              }}
-            />
-          </Form.Item>
+          {poolType === 1 && (
+            <Form.Item name="endTime" label={t('pool_end_time')}>
+              <DatePicker
+                placeholder={t('pool_select')}
+                showTime
+                format="YYYY-MM-DD HH:mm:ss"
+                className="w-full h-12 border-none rounded bg-light-white"
+                disabledDate={(current) => {
+                  return !startTime ? false : current < moment.unix(Number(startTime)).startOf('date')
+                }}
+                onChange={(e) => {
+                  if (e) {
+                    setEndTime((e.valueOf() / 1000).toFixed(0))
+                  }
+                }}
+              />
+            </Form.Item>
+          )}
         </Form>
 
         <div className="w-full flex justify-center gap-6 flex-wrap">

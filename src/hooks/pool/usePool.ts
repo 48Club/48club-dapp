@@ -87,7 +87,7 @@ export const usePoolFactory = (rewardToken?: string) => {
 
 export const usePool = (poolTokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract(poolTokenAddress) as any
+  const farmingContract = useFarmingContract(poolTokenAddress)
 
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',
@@ -229,4 +229,8 @@ export const stakingList = [
     text: 'Pancake KOGE/BNB LP',
     token: '0xfcd08643a6390c465d8b12c42c0b4afc291eac12',
   },
+  {
+    text: 'Test LP',
+    token: '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E'
+  }
 ]
