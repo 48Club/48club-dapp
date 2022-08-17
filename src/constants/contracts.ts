@@ -5,7 +5,7 @@ export const START_BLOCK_NUMBER = 16397000
 
 export const KogeAddress = {
   [ChainId.BSC]: '0xe6df05ce8c8301223373cf5b969afcb1498c5528',
-  [ChainId.BSCTestnet]: '0x2b7bfe79ec36653b84a43e86aff704b91e9f072f',
+  [ChainId.BSCTestnet]: '0x2B7BFE79eC36653b84A43E86AfF704B91E9f072f',
 }[CHAIN_ID]
 
 export const StakingAddress = {
