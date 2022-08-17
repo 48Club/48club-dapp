@@ -219,15 +219,15 @@ export const usePoolInfo = (poolTokenAddress: string) => {
 export const stakingList = [
   {
     text: 'KOGE',
-    token: '0x2b7bfe79ec36653b84a43e86aff704b91e9f072f',
+    token: '0x2B7BFE79eC36653b84A43E86AfF704B91E9f072f',
   },
   {
     text: 'WBNB',
-    token: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    token: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
   },
   {
     text: 'Pancake KOGE/BNB LP',
-    token: '0xfcd08643a6390c465d8b12c42c0b4afc291eac12',
+    token: '0xfcd08643A6390C465D8b12C42C0B4AFc291EAC12',
   },
   {
     text: 'Test LP',
