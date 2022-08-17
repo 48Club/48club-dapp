@@ -6,7 +6,7 @@ type IPoolMeta = {
   rewardToken: string
   rewardRate: string
   startTime: string
-  poolId: string
+  poolId: number | undefined
 }
 
 export const createPoolType = atom<1 | 2 | 3>(1) // 1 create ; 2 restart; 3 append;
@@ -16,7 +16,7 @@ export const createPoolMeta = atom<IPoolMeta>({
   rewardToken: '',
   rewardRate: '',
   startTime: '',
-  poolId: '',
+  poolId: undefined,
 })
 export const rewardTokenSymbolList = atom<Record<string, string>>({})
 
@@ -48,7 +48,7 @@ export const useCreatePoolShow = () => {
     poolMeta,
     hide: () => {
       setShow(false)
-      setPoolMeta({ stakingToken: undefined, rewardToken: '', rewardRate: '', startTime: '', poolId: '' })
+      setPoolMeta({ stakingToken: undefined, rewardToken: '', rewardRate: '', startTime: '', poolId: undefined })
     },
   }
 }

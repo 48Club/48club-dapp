@@ -54,7 +54,7 @@ export const usePoolFactory = (rewardToken?: string) => {
   const rewardBalance = useTokenBalance(rewardToken, account)
 
   const onContribute = useCallback(
-    async ({ poolId, amount, startTime }: { poolId: string; startTime: string; amount: string }) => {
+    async ({ poolId, amount, startTime }: { poolId: number; startTime: string; amount: string }) => {
       console.info('FarmingFactory | contribute', startTime, amount)
       await contribute(poolId, amount, startTime)
     },

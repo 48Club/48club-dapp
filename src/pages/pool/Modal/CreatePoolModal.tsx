@@ -63,7 +63,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
       await onApprove()
     }
 
-    if (!rewardRate.gt(0)) {
+    if (poolType === 1 && !rewardRate.gt(0)) {
       message.error('Please set the correct time range')
       return
     }

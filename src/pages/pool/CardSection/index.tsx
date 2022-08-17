@@ -12,14 +12,14 @@ export const PoolCardSection = () => {
 
   return (
     <div className="flex flex-wrap gap-6 mb-30 <sm:justify-center">
-      {poolAddresses.map((pool) => (
-        <PoolCard pool={pool} key={pool} />
+      {poolAddresses.map((pool, index) => (
+        <PoolCard pool={pool} key={pool} id={index} />
       ))}
     </div>
   )
 }
 
-function PoolCard({ pool }: { pool: string }) {
+function PoolCard({ pool, id }: { pool: string, id: number }) {
   const { account } = useEthers()
   const { t } = useTranslation()
   const {
@@ -136,7 +136,7 @@ function PoolCard({ pool }: { pool: string }) {
                 rewardToken,
                 rewardRate: rate.div(3).toString(),
                 startTime: '',
-                poolId: pool,
+                poolId: id,
               })
             }
           >
@@ -192,7 +192,7 @@ function PoolCard({ pool }: { pool: string }) {
                 rewardToken,
                 rewardRate: rate.div(3).toString(),
                 startTime: '',
-                poolId: pool,
+                poolId: id,
               })
             }}
           >
