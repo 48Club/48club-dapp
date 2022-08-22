@@ -11,15 +11,13 @@ export const PoolCardSection = () => {
   const { poolAddresses } = usePoolFactory()
 
   return (
-    <div className="flex flex-wrap gap-6 mb-30 <sm:justify-center">
-      {poolAddresses.map((pool, index) => (
-        <PoolCard pool={pool} key={pool} id={index} />
-      ))}
+    <div className="flex flex-wrap gap-6 pt-20 mb-30 <sm:justify-center">
+      {poolAddresses.map((pool, index) => (pool ? <PoolCard pool={pool} key={pool} id={index} /> : null))}
     </div>
   )
 }
 
-function PoolCard({ pool, id }: { pool: string, id: number }) {
+function PoolCard({ pool, id }: { pool: string; id: number }) {
   const { account } = useEthers()
   const { t } = useTranslation()
   const {
@@ -107,7 +105,10 @@ function PoolCard({ pool, id }: { pool: string, id: number }) {
 
   return (
     <div className="relative w-90 flex-col py-10 px-8 shadow rounded-xl bg-white">
-      <Tag color="#EF2B2B" className="absolute top-0 left-8 transform -translate-y-1/2 rounded border-none text-sm">
+      <Tag
+        color={finishStatus === 0 ? '#EF2B2B' : finishStatus === 1 ? '#08C849' : '#B9817D'}
+        className="absolute top-0 left-8 transform -translate-y-1/2 rounded border-none text-sm"
+      >
         {finishStatus === 0 ? t('pool_coming') : finishStatus === 1 ? t('pool_ongoing') : t('pool_closed')}
       </Tag>
       <div className="relative flex flex-col items-center">

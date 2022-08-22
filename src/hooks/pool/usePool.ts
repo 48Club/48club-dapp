@@ -62,7 +62,7 @@ export const usePoolFactory = (rewardToken?: string) => {
   )
 
   const poolAddresses = useContractCalls(
-    Array(poolNum?.[0] || 0).map((item, index) => ({
+    Array(poolNum?.[0]?.toNumber() || 0).fill(1).map((item, index) => ({
       address: farmingFactoryContract.address,
       abi: farmingFactoryContract.interface,
       method: 'pools',
@@ -73,7 +73,7 @@ export const usePoolFactory = (rewardToken?: string) => {
   const { approve: onApprove, loading: approveLoading } = useApprove(rewardToken, farmingFactoryContract.address)
 
   return {
-    poolAddresses: poolAddresses?.[0] ?? [],
+    poolAddresses:poolAddresses?.map(item => item?.[0]) ?? [],
     onDeploy,
     deployLoading: deployState.status === 'Mining',
     onContribute,
