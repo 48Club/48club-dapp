@@ -42,7 +42,7 @@ export const usePoolFactory = (rewardToken?: string) => {
       amount: string
     }) => {
       console.info('FarmingFactory | deploy', stakingToken, rewardToken, rewardRate, startTime, amount)
-      await deploy(stakingToken, rewardToken, rewardRate, startTime, amount)
+      await deploy(stakingToken, rewardToken, rewardRate, Number(startTime), amount)
     },
     [deploy]
   )
@@ -56,7 +56,7 @@ export const usePoolFactory = (rewardToken?: string) => {
   const onContribute = useCallback(
     async ({ poolId, amount, startTime }: { poolId: number; startTime: string; amount: string }) => {
       console.info('FarmingFactory | contribute', startTime, amount)
-      await contribute(poolId, amount, startTime)
+      await contribute(poolId, amount, Number(startTime))
     },
     [contribute]
   )
