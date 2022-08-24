@@ -73,7 +73,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
         stakingToken,
         rewardToken,
         rewardRate: rewardRate.toFixed(0),
-        amount: rewardRate.times(timeGap).toString(),
+        amount: new Bignumber(rewardRate.toFixed(0)).times(timeGap).toString(),
         startTime,
       })
     } else {
