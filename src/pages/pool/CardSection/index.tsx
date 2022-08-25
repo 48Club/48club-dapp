@@ -131,13 +131,13 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           <span
             className="text-primary underline underline-primary cursor-pointer"
             onClick={() =>
-              finishStatus === 1 &&
               showCreate(3, {
                 stakingToken: stakeToken,
                 rewardToken,
                 rewardRate: rate.div(3).toString(),
                 startTime: '',
                 poolId: id,
+                status: finishStatus
               })
             }
           >
@@ -165,7 +165,6 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
               loading={stakePoolLoading || approveLoading}
               size="large"
               className="h-12 flex-1 rounded"
-              disabled={finishStatus !== 1}
               onClick={handleApprove}
             >
               {isAllowed ? t('pool_pledge') : 'Approve'}
@@ -187,6 +186,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
             danger
             size="large"
             className="h-12 flex-1 rounded"
+            disabled={!account}
             onClick={() => {
               showCreate(2, {
                 stakingToken: stakeToken,
@@ -194,6 +194,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
                 rewardRate: rate.div(3).toString(),
                 startTime: '',
                 poolId: id,
+                status: finishStatus
               })
             }}
           >

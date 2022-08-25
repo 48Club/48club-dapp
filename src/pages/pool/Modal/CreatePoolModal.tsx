@@ -50,12 +50,17 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
 
   const onSubmit = useCallback(async () => {
     if (poolType === 1 && !(stakingToken && rewardToken && amount && endTime && startTime)) {
-      console.error('complete form')
+      console.error('Please complete form')
       return
     }
 
-    if (poolType !== 1 && !(amount && startTime)) {
-      console.error('complete form')
+    if ((poolType === 2 || (poolType === 3 && poolMeta.status === 2)) && !(amount && startTime)) {
+      console.error('Please complete form')
+      return
+    }
+
+    if (!amount) {
+      console.error('Please complete form')
       return
     }
 
@@ -68,7 +73,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
       return
     }
 
-    if (poolType === 1) {
+    if (poolType === 1 && stakingToken) {
       await onDeploy({
         stakingToken,
         rewardToken,
@@ -77,11 +82,14 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
         startTime,
       })
     } else {
-      console.log(poolMeta.poolId)
+      const currentAmount = new Bignumber(poolMeta.rewardRate).times(
+        new Bignumber(amount).div(poolMeta.rewardRate).toFixed(0)
+      )
+
       await onContribute({
-        poolId: poolMeta.poolId,
-        amount: new Bignumber(amount).times(TEN_POW(18)).toString(),
-        startTime,
+        poolId: poolMeta.poolId!,
+        amount: new Bignumber(currentAmount).times(TEN_POW(18)).toString(),
+        startTime: startTime ? startTime : (Date.now() / 1000).toFixed(0),
       })
     }
 
@@ -95,6 +103,8 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
     onContribute,
     onDeploy,
     poolMeta.poolId,
+    poolMeta.rewardRate,
+    poolMeta.status,
     poolType,
     rewardRate,
     rewardToken,
@@ -186,22 +196,24 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
               <Input className="h-12 border-none rounded bg-light-white" placeholder={t('pool_input')} disabled />
             </Form.Item>
           )}
-          <Form.Item name="startTime" label={t('pool_start_time')}>
-            <DatePicker
-              placeholder={t('pool_select')}
-              showTime
-              format="YYYY-MM-DD HH:mm:ss"
-              className="w-full h-12 border-none rounded bg-light-white"
-              disabledDate={(current) => {
-                return current && current < moment().startOf('date')
-              }}
-              onChange={(e) => {
-                if (e) {
-                  setStartTime((e.valueOf() / 1000).toFixed(0))
-                }
-              }}
-            />
-          </Form.Item>
+          {(poolType === 1 || poolMeta.status === 2) && (
+            <Form.Item name="startTime" label={t('pool_start_time')}>
+              <DatePicker
+                placeholder={t('pool_select')}
+                showTime
+                format="YYYY-MM-DD HH:mm:ss"
+                className="w-full h-12 border-none rounded bg-light-white"
+                disabledDate={(current) => {
+                  return current && current < moment().startOf('date')
+                }}
+                onChange={(e) => {
+                  if (e) {
+                    setStartTime((e.valueOf() / 1000).toFixed(0))
+                  }
+                }}
+              />
+            </Form.Item>
+          )}
           {poolType === 1 && (
             <Form.Item name="endTime" label={t('pool_end_time')}>
               <DatePicker
