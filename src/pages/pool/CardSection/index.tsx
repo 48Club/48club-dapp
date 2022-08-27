@@ -52,7 +52,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
 
   const finishStatus = useMemo(() => {
     const startTime = new Bignumber(rewardTokenInfo.startTime ?? 0)
-    const endTime = startTime.plus(new Bignumber(rewardTokenInfo.endTime))
+    const endTime = new Bignumber(rewardTokenInfo.endTime)
     const currentTime = new Bignumber(curBlockTimestamp).div(1000)
 
     if (currentTime.lt(startTime)) {
@@ -71,10 +71,17 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         : new Bignumber(0),
     [rewardTokenInfo?.rewardRate]
   )
-  const allAmount = useMemo(
-    () => new Bignumber(rate).times(rewardTokenInfo.endTime ?? 0).div(3),
-    [rate, rewardTokenInfo]
-  )
+  const allAmount = useMemo(() => {
+    const startTime = new Bignumber(rewardTokenInfo.startTime ?? 0)
+    const endTime = new Bignumber(rewardTokenInfo.endTime)
+    const rate = new Bignumber(rewardTokenInfo?.rewardRate?.toString() ?? 0)
+
+    if (startTime && endTime && rate) {
+      return endTime.minus(startTime).times(rate)
+    } else {
+      return
+    }
+  }, [rewardTokenInfo])
 
   const claimHandler = useCallback(async () => {
     if (new Bignumber(earnedAmount).gt(0) && !claimLoading) {
@@ -126,7 +133,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       <div className="pt-8 pb-6 border-b border-solid">
         <div className="flex justify-between gap-2 text-sm">
           <span className="text-dark-gray">
-            {t('pool_total_amount')}: {formatAmount(allAmount)} {rewardTokenSymbol}
+            {t('pool_total_amount')}: {formatAmount(allAmount, 18)} {rewardTokenSymbol}
           </span>
           <span
             className="text-primary underline underline-primary cursor-pointer"
@@ -137,7 +144,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
                 rewardRate: rate.div(3).toString(),
                 startTime: '',
                 poolId: id,
-                status: finishStatus
+                status: finishStatus,
               })
             }
           >
@@ -150,7 +157,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       </div>
       <div className="py-6 flex justify-between text-sm">
         <span className="">
-          {t('pool_my_reward')}: {formatAmount(earnedAmount)} {rewardTokenSymbol}
+          {t('pool_my_reward')}: {formatAmount(earnedAmount, 18)} {rewardTokenSymbol}
         </span>
         <span className="text-primary underline underline-primary cursor-pointer" onClick={claimHandler}>
           {t('pool_claim')}
@@ -194,7 +201,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
                 rewardRate: rate.div(3).toString(),
                 startTime: '',
                 poolId: id,
-                status: finishStatus
+                status: finishStatus,
               })
             }}
           >
