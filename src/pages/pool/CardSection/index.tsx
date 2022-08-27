@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Bignumber from 'bignumber.js'
 import { Tag, Button, message } from 'antd'
+import moment from 'moment'
 import { useBlockMeta, useTokenBalance, useEthers } from '@usedapp/core'
 import { usePool, usePoolFactory, usePoolInfo } from '../../../hooks/pool/usePool'
 import { useStakeShow, useStakeOrClaim, useCreatePoolShow, useRewardTokenSymbolList } from '../../../store'
@@ -29,6 +30,9 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
     onClaimReward,
     claimLoading,
     stakeToken,
+    totalStakeAmount,
+    onExit,
+    exitLoading,
   } = usePool(pool)
   const [_, setStakeShow] = useStakeShow()
   const { setCurrentType, setCurAddress } = useStakeOrClaim()
@@ -94,6 +98,10 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
     }
   }, [claimLoading, earnedAmount, onClaimReward, t])
 
+  const exitHandler = useCallback(async () => {
+    await onExit()
+  }, [onExit])
+
   const handleApprove = useCallback(() => {
     if (!isAllowed) {
       onApprove()
@@ -131,7 +139,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         </span>
       </div>
       <div className="pt-8 pb-6 border-b border-solid">
-        <div className="flex justify-between gap-2 text-sm">
+        <div className="flex justify-between items-center gap-2 text-sm">
           <span className="text-dark-gray">
             {t('pool_total_amount')}: {formatAmount(allAmount, 18)} {rewardTokenSymbol}
           </span>
@@ -154,14 +162,44 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         <div className="mt-2 text-dark-gray text-sm">
           {t('pool_rate')}: 1 block - {formatAmount(rate)}个
         </div>
+
+        <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+          <span>Total Staked:</span>
+          <span>
+            {formatAmount(totalStakeAmount, 18)} {stakeTokenSymbol}
+          </span>
+        </div>
+        <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+          <span>My Staked:</span>
+          <span>
+            {formatAmount(stakeAmount, 18)} {stakeTokenSymbol}
+          </span>
+        </div>
+        {rewardTokenInfo.startTime && (
+          <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+            <span>{t('pool_start_time')}:</span>
+            <span>{moment.unix(rewardTokenInfo.startTime).format('YYYY/MM/DD HH:mm:ss')}</span>
+          </div>
+        )}
+        {rewardTokenInfo.endTime && (
+          <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+            <span>{t('pool_end_time')}:</span>
+            <span>{moment.unix(rewardTokenInfo.endTime).format('YYYY/MM/DD HH:mm:ss')}</span>
+          </div>
+        )}
       </div>
-      <div className="py-6 flex justify-between text-sm">
+      <div className="py-6 flex justify-between items-center text-sm">
         <span className="">
           {t('pool_my_reward')}: {formatAmount(earnedAmount, 18)} {rewardTokenSymbol}
         </span>
-        <span className="text-primary underline underline-primary cursor-pointer" onClick={claimHandler}>
-          {t('pool_claim')}
-        </span>
+        <div className="flex items-center gap-1">
+          <Button type="primary" size="small" loading={claimLoading} onClick={claimHandler}>
+            {t('pool_claim')}
+          </Button>
+          <Button type="primary" size="small" loading={exitLoading} onClick={exitHandler}>
+            {t('Exit')}
+          </Button>
+        </div>
       </div>
 
       <div className="w-full flex gap-4">

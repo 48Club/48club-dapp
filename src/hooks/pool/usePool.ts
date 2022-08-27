@@ -87,7 +87,7 @@ export const usePoolFactory = (rewardToken?: string) => {
 
 export const usePool = (poolTokenAddress: string) => {
   const { account } = useEthers()
-  const farmingContract = useFarmingContract(poolTokenAddress)
+  const farmingContract = useFarmingContract(poolTokenAddress) as any
 
   const { send: stakePool, state: stakePoolState } = useContractFunction(farmingContract, 'stake', {
     transactionName: 'stakePool',
@@ -103,11 +103,17 @@ export const usePool = (poolTokenAddress: string) => {
     transactionName: 'claimReward',
   })
 
-  const balanceOfResult = useContractCall({
+  // const balanceOfResult = useContractCall({
+  //   abi: farmingContract.interface,
+  //   address: farmingContract.address,
+  //   method: 'balanceOf',
+  //   args: [account],
+  // })
+  const totalSupplyResult = useContractCall({
     abi: farmingContract.interface,
     address: farmingContract.address,
-    method: 'balanceOf',
-    args: [account],
+    method: 'totalSupply',
+    args: [],
   })
 
   const stakeTokenAddress = useContractCall({
@@ -167,7 +173,8 @@ export const usePool = (poolTokenAddress: string) => {
     exitLoading: exitState.status === 'Mining',
     onClaimReward,
     claimLoading: claimState.status === 'Mining',
-    myStakeAmount: balanceOfResult?.[0].toString() ?? '0',
+    // myStakeAmount: balanceOfResult?.[0].toString() ?? '0',
+    totalStakeAmount: totalSupplyResult?.[0].toString() ?? '0',
     stakeToken: stakeTokenAddress?.[0].toString() ?? '',
     stakeTokenSymbol: data?.symbol ?? '',
     onApprove,
