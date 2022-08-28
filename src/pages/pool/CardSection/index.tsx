@@ -194,13 +194,13 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         </div>
 
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
-          <span>Total Staked:</span>
+          <span>{t('pool_total_stake')}:</span>
           <span>
             {formatAmount(totalStakeAmount, 18)} {TOKENS[stakeToken] ?? stakeTokenSymbol}
           </span>
         </div>
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
-          <span>My Staked:</span>
+          <span>{t('pool_my_stake')}:</span>
           <span>
             {formatAmount(stakeAmount, 18)} {TOKENS[stakeToken] ?? stakeTokenSymbol}
           </span>
