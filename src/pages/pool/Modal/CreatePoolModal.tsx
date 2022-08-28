@@ -4,9 +4,10 @@ import { useToken } from '@usedapp/core'
 import Bignumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
 import moment from 'moment'
-import { usePoolFactory, stakingList } from '../../../hooks/pool/usePool'
-import { useCreatePoolShow, useRewardTokenSymbolList } from '../../../store/index'
 import { useTranslation } from 'react-i18next'
+import { STAKING_WHITELIST, TOKENS } from '../../../constants/tokens'
+import { usePoolFactory } from '../../../hooks/pool/usePool'
+import { useCreatePoolShow } from '../../../store/index'
 
 const { Option } = Select
 
@@ -154,9 +155,9 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
                 setStakingToken(e)
               }}
             >
-              {stakingList.map((i) => (
-                <Option key={i.token} value={i.token}>
-                  {i.text}
+              {STAKING_WHITELIST.map((i) => (
+                <Option key={i} value={i}>
+                  {TOKENS[i]}
                 </Option>
               ))}
             </Select>
@@ -176,7 +177,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
               onChange={(e) => {
                 setRewardToken(e.target.value.length === 42 ? e.target.value : '')
               }}
-              suffix={<div>{rewardTokenData?.symbol ?? ''}</div>}
+              suffix={<div>{TOKENS[rewardToken] ?? rewardTokenData?.symbol ?? ''}</div>}
             />
           </Form.Item>
           <Form.Item name="amount" label={t('pool_reward_amount')}>

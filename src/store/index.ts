@@ -29,8 +29,7 @@ export const currentPoolAddress = atom('')
 export const useCreatePoolShow = () => {
   const [isShow, setShow] = useAtom(createPoolShow)
   const [type, setType] = useAtom(createPoolType)
-  const [poolMeta, setPoolMeta] = useAtom(createPoolMeta) as unknown as [IPoolMeta, (config: IPoolMeta) => void ]
-
+  const [poolMeta, setPoolMeta] = useAtom(createPoolMeta) as unknown as [IPoolMeta, (config: IPoolMeta) => void]
 
   const showCreate = useCallback(
     (type: 1 | 2 | 3, poolMeta?: IPoolMeta) => {
@@ -83,4 +82,17 @@ export const useRewardTokenSymbolList = () => {
   const [list, setList] = useAtom(rewardTokenSymbolList)
 
   return { list, setList }
+}
+
+const filterStatus = atom({
+  status: -1,
+})
+
+export const usePoolFilter = () => {
+  const [filterDetail, setFilterDetail] = useAtom(filterStatus)
+
+  return {
+    filterDetail,
+    setFilterDetail,
+  }
 }

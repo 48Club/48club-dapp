@@ -12,7 +12,7 @@ export default function Pool() {
   return (
     <div className="px-4 max-w-6xl mx-auto">
       <HeaderSection />
-      {/* <FilterSection /> */}
+      <FilterSection />
       <PoolCardSection />
 
       <CreatePoolModal visible={isShow} onCancel={() => hide()} />

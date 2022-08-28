@@ -3,9 +3,10 @@ import { Button, Modal, ModalProps, Input } from 'antd'
 import BigNumber from 'bignumber.js'
 import { useTokenBalance, useEthers } from '@usedapp/core'
 import { useTranslation } from 'react-i18next'
-import { usePool, usePoolInfo } from '../../../hooks/pool/usePool'
 import { TEN_POW } from '@funcblock/dapp-sdk'
+import { usePool, usePoolInfo } from '../../../hooks/pool/usePool'
 import { useStakeOrClaim, useStakeShow } from '../../../store'
+import { TOKENS } from '../../../constants/tokens'
 
 export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
   const { t } = useTranslation()
@@ -29,7 +30,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
   } = usePool(curAddress || '')
   const stakeBalance = useTokenBalance(stakeToken, account)
   const stakeAmount = useTokenBalance(curAddress, account)
-  const { rewardTokenSymbol } = usePoolInfo(curAddress)
+  const { rewardTokenSymbol, rewardToken } = usePoolInfo(curAddress)
 
   const handleStakePool = useCallback(async () => {
     if (!stakePoolLoading && amountBN.gt(0) && amountBN.lt(new BigNumber(stakeBalance?.toString() || ''))) {
@@ -76,7 +77,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
           <div className="flex-1 flex flex-col gap-3">
             <span>{t('pool_staking_currency')}</span>
             <Input
-              value={stakeTokenSymbol ?? ''}
+              value={TOKENS[stakeToken] ?? stakeTokenSymbol ?? ''}
               readOnly
               size="large"
               className="h-12 border-none rounded bg-light-white"
@@ -85,7 +86,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
           <div className="flex-1 flex flex-col gap-3">
             <span>{t('pool_reward_currency')}</span>
             <Input
-              value={rewardTokenSymbol}
+              value={TOKENS[rewardToken] ?? rewardTokenSymbol}
               readOnly
               size="large"
               className="h-12 border-none rounded bg-light-white"
@@ -106,10 +107,10 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
               currentType === 1
                 ? `${t('pool_balance')}: ${new BigNumber(stakeBalance?.toString() ?? '')
                     .div(TEN_POW(18))
-                    .toString()} ${stakeTokenSymbol}`
+                    .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
                 : `${t('pool_staking_amount')}: ${new BigNumber(stakeAmount?.toString() ?? '')
                     .div(TEN_POW(18))
-                    .toString()} ${stakeTokenSymbol}`
+                    .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
             }
             suffix={
               <span className="text-primary text-sm font-bold cursor-pointer" onClick={stakeMax}>
