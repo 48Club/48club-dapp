@@ -130,7 +130,10 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
   return (
     <div
       className={`relative w-90 flex-col py-10 px-8 shadow rounded-xl bg-white ${
-        filterDetail.status === -1 || filterDetail.status === finishStatus ? '' : 'hidden'
+        (filterDetail.status === -1 || filterDetail.status === finishStatus) &&
+        (filterDetail.stakeAddress === stakeToken || filterDetail.stakeAddress === '')
+          ? ''
+          : 'hidden'
       }`}
     >
       <Tag

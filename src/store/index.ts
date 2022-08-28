@@ -86,6 +86,7 @@ export const useRewardTokenSymbolList = () => {
 
 const filterStatus = atom({
   status: -1,
+  stakeAddress: ''
 })
 
 export const usePoolFilter = () => {
