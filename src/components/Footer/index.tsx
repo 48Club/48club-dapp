@@ -64,22 +64,22 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link to="/staking">
-                      {t('staking')}
+                      {t('nav-staking')}
                     </Link>
                   </li>
                   <li>
                     <Link to="/nft">
-                      48er
+                      {t('nav-nft')}
                     </Link>
                   </li>
                   <li>
                     <Link to="/voting">
-                      DAO
+                      {t('nav-voting')}
                     </Link>
                   </li>
                   <li>
                     <Link to="/pool">
-                      Pool
+                      {t('nav-farm')}
                     </Link>
                   </li>
                   <li>
