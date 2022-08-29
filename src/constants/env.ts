@@ -1,6 +1,10 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
-export const CHAIN_ID = (parseInt(process.env.REACT_APP_CHAIN_ID ?? ChainId.BSC.toString())) as ChainId
+export let CHAIN_ID = 56 as ChainId
+if (window.location.hostname !== 'www.bnb48.club') {
+  CHAIN_ID = 97 as ChainId
+}
+
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const RPC_URLS = {
@@ -10,7 +14,7 @@ export const RPC_URLS = {
 
 export const READONLY_RPC_URL = {
   ...RPC_URLS,
-  [BSC.chainId]: 'https://erigon-bsc.bnb48.club/',
+  [BSC.chainId]: 'https://erigon-bsc.bnb48.club',
 }[CHAIN_ID]
 
 console.log('IS_PRODUCTION', IS_PRODUCTION)
