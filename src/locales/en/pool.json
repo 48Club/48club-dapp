@@ -33,5 +33,6 @@
   "pool_congratulation": "Successfully Claimed.",
   "pool_fail": "Failed, please try again.",
   "pool_total_stake": "Total Staked",
-  "pool_my_stake": "My Staked"
+  "pool_my_stake": "My Staked",
+  "pool_exit": "Exit"
 }

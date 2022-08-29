@@ -190,7 +190,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           </span>
         </div>
         <div className="mt-2 text-dark-gray text-sm">
-          {t('pool_rate')}: 1 block - {formatAmount(rate)}个
+          {t('pool_rate')}: 1 block - {formatAmount(rate)}
         </div>
 
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
@@ -227,7 +227,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
             {t('pool_claim')}
           </Button>
           <Button type="primary" size="small" loading={exitLoading} onClick={exitHandler}>
-            {t('Exit')}
+            {t('pool_exit')}
           </Button>
         </div>
       </div>

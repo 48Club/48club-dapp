@@ -33,5 +33,6 @@
   "pool_congratulation": "领取成功。",
   "pool_fail": "领取失败，请重试。",
   "pool_total_stake": "质押总量",
-  "pool_my_stake": "我的质押"
+  "pool_my_stake": "我的质押",
+  "pool_exit": "退出"
 }
