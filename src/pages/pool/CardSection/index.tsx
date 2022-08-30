@@ -19,7 +19,7 @@ export const PoolCardSection = () => {
   const { poolAddresses } = usePoolFactory()
 
   return (
-    <div className="flex flex-wrap gap-6 pt-0 mb-30 <sm:justify-center">
+    <div className="flex md:flex-wrap md:flex-row md:items-start sm:flex-col sm:items-stretch gap-6 pt-0 mb-30">
       {poolAddresses.map((pool, index) => (pool ? <PoolCard pool={pool} key={pool} id={index} /> : null))}
     </div>
   )
