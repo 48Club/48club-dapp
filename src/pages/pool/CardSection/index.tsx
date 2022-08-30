@@ -143,8 +143,8 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         {finishStatus === 0 ? t('pool_coming') : finishStatus === 1 ? t('pool_ongoing') : t('pool_closed')}
       </Tag>
       <div className="relative flex flex-col items-center">
-        <img src="/static/pool_avatar.svg" alt="" />
-        <img src="/static/autorenew.svg" className="absolute bottom-0 right-50% transform translate-x-full" alt="" />
+        <img src="/static/logo-koge.png" alt="" className="w-24 h-24" />
+        {/* <img src="/static/autorenew.svg" className="absolute bottom-0 right-50% transform translate-x-full" alt="" /> */}
       </div>
       <div className="flex flex-col items-center mt-8 font-bold text-lg">
         <span>
