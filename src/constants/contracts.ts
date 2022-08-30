@@ -5,7 +5,7 @@ export const START_BLOCK_NUMBER = 16397000
 
 export const KogeAddress = {
   [ChainId.BSC]: '0xe6df05ce8c8301223373cf5b969afcb1498c5528',
-  [ChainId.BSCTestnet]: '0x2b7bfe79ec36653b84a43e86aff704b91e9f072f',
+  [ChainId.BSCTestnet]: '0x2B7BFE79eC36653b84A43E86AfF704B91E9f072f',
 }[CHAIN_ID]
 
 export const StakingAddress = {
@@ -22,3 +22,19 @@ export const GovernanceAddress = {
   [ChainId.BSC]: '0x71E4407ba985d6a08c637E91FC0AA3721B456F3f',
   [ChainId.BSCTestnet]: '0xc7bC41894Fb8E87f23b7eFe0ee57DFc4F66b6782',
 }[CHAIN_ID]
+
+export const TStakingAddress = {
+  [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
+  [ChainId.BSCTestnet]: '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E',
+}[CHAIN_ID]
+
+// export const FarmingAddress = {
+//   [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
+//   [ChainId.BSCTestnet]: '0x826Ae68C2E908bB4e280f09Eb2DC41DfB1f9a484',
+// }[CHAIN_ID]
+
+export const FarmingFactoryAddress = {
+  [ChainId.BSC]: '0x58f0F7508E188f3AB10f8E346507bf04D469Cd2b',
+  [ChainId.BSCTestnet]: '0xE088b760c249cf8AcdE5395645c0ef535b0101C8',
+}[CHAIN_ID]
+

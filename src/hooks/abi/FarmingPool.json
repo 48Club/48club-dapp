@@ -3,17 +3,22 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_koge",
+        "name": "_admin",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_stakingToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardToken",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "_unstakeDelay",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_withdrawDelay",
+        "name": "_rewardRate",
         "type": "uint256"
       }
     ],
@@ -26,17 +31,62 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "previousOwner",
+        "name": "prevAdmin",
         "type": "address"
       },
       {
         "indexed": true,
         "internalType": "address",
-        "name": "newOwner",
+        "name": "newAdmin",
         "type": "address"
       }
     ],
-    "name": "OwnershipTransferred",
+    "name": "AdminTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "reward",
+        "type": "uint256"
+      }
+    ],
+    "name": "RewardAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "reward",
+        "type": "uint256"
+      }
+    ],
+    "name": "RewardPaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newStartTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "RewardStartScheduled",
     "type": "event"
   },
   {
@@ -64,63 +114,6 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "unstakeDelay",
-        "type": "uint256"
-      }
-    ],
-    "name": "UnstakeDelayUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "Unstaked",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "caller",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "withdrawDelay",
-        "type": "uint256"
-      }
-    ],
-    "name": "WithdrawDelayUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
         "name": "user",
         "type": "address"
       },
@@ -135,14 +128,46 @@
     "type": "event"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
       {
         "internalType": "address",
-        "name": "_user",
+        "name": "",
         "type": "address"
       }
     ],
-    "name": "getStake",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_account",
+        "type": "address"
+      }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "balances",
     "outputs": [
       {
         "internalType": "uint256",
@@ -155,33 +180,7 @@
   },
   {
     "inputs": [],
-    "name": "koge",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "renounceOwnership",
+    "name": "claimReward",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -190,11 +189,16 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_unstakeDelay",
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_newStartTime",
         "type": "uint256"
       }
     ],
-    "name": "setUnstakeDelay",
+    "name": "contribute",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -202,14 +206,129 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_account",
+        "type": "address"
+      }
+    ],
+    "name": "earned",
+    "outputs": [
+      {
         "internalType": "uint256",
-        "name": "_withdrawDelay",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "setWithdrawDelay",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "endTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "exit",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastUpdateTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_receiver",
+        "type": "address"
+      }
+    ],
+    "name": "rescueFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardPerTokenStored",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "rewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -226,47 +345,67 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "totalStakes",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
         "name": "_amount",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_deadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_s",
+        "type": "bytes32"
       }
     ],
-    "name": "unstake",
+    "name": "stakeWithPermit",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "unstakeDelay",
+    "name": "stakingToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "startTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalSupply",
     "outputs": [
       {
         "internalType": "uint256",
@@ -281,35 +420,28 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "transferAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "",
         "type": "address"
       }
     ],
-    "name": "userInfos",
+    "name": "userRewardPerTokenPaid",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "lastStakeTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lastUnstakeTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "stake",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lockedUnstakedAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "unlockedUnstakedAmount",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -331,15 +463,9 @@
   },
   {
     "inputs": [],
-    "name": "withdrawDelay",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "withdrawAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

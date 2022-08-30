@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './index.less'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
-import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TG_URL, TWITTER_URL } from '../../constants/bnb48'
+import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TWITTER_URL } from '../../constants/bnb48'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -64,17 +64,22 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link to="/staking">
-                      {t('staking')}
+                      {t('nav-staking')}
                     </Link>
                   </li>
                   <li>
                     <Link to="/nft">
-                      48er
+                      {t('nav-nft')}
                     </Link>
                   </li>
                   <li>
                     <Link to="/voting">
-                      DAO
+                      {t('nav-voting')}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/pool">
+                      {t('nav-farm')}
                     </Link>
                   </li>
                   <li>

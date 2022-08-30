@@ -1,14 +1,141 @@
-import React from 'react'
-import { Button, Modal, ModalProps, Form, Input, Select, DatePicker } from 'antd'
+import React, { useMemo, useCallback, useState, useEffect } from 'react'
+import { Button, Modal, ModalProps, Form, Input, Select, DatePicker, message } from 'antd'
+import { useToken } from '@usedapp/core'
+import Bignumber from 'bignumber.js'
+import { TEN_POW } from '@funcblock/dapp-sdk'
+import moment from 'moment'
+import { useTranslation } from 'react-i18next'
+import { STAKING_WHITELIST, TOKENS } from '../../../constants/tokens'
+import { usePoolFactory } from '../../../hooks/pool/usePool'
+import { useCreatePoolShow } from '../../../store/index'
+
+const { Option } = Select
 
 export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
+  const { t } = useTranslation()
   const [form] = Form.useForm()
+  const { poolType, poolMeta, hide } = useCreatePoolShow()
+
+  const [stakingToken, setStakingToken] = useState(poolMeta.stakingToken)
+  const [rewardToken, setRewardToken] = useState(poolMeta.rewardToken)
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
+  const [amount, setAmount] = useState('')
+  const rewardTokenData = useToken(rewardToken)
+
+  const {
+    deployLoading,
+    onDeploy,
+    onApprove,
+    approveLoading,
+    onContribute,
+    contributeLoading,
+    isAllowed,
+    rewardBalance,
+  } = usePoolFactory(rewardToken)
+
+  const amountBN = useMemo(() => new Bignumber(amount).times(TEN_POW(18)), [amount])
+  const timeGap = useMemo(() => new Bignumber(endTime).minus(new Bignumber(startTime)), [endTime, startTime])
+  const rewardRate = useMemo(() => {
+    if (!(endTime && startTime)) {
+      return new Bignumber(0)
+    } else {
+      return amountBN.div(timeGap)
+    }
+  }, [amountBN, endTime, startTime, timeGap])
+
+  useEffect(() => {
+    setStakingToken(poolMeta.stakingToken)
+    setRewardToken(poolMeta.rewardToken)
+  }, [poolMeta])
+
+  const onSubmit = useCallback(async () => {
+    if (poolType === 1 && !(stakingToken && rewardToken && amount && endTime && startTime)) {
+      console.error('Please complete form')
+      return
+    }
+
+    if ((poolType === 2 || (poolType === 3 && poolMeta.status === 2)) && !(amount && startTime)) {
+      console.error('Please complete form')
+      return
+    }
+
+    if (!amount) {
+      console.error('Please complete form')
+      return
+    }
+
+    if (!isAllowed) {
+      await onApprove()
+    }
+
+    if (poolType === 1 && !rewardRate.gt(0)) {
+      message.error('Please set the correct time range')
+      return
+    }
+
+    if (poolType === 1 && stakingToken) {
+      await onDeploy({
+        stakingToken,
+        rewardToken,
+        rewardRate: rewardRate.toFixed(0),
+        amount: new Bignumber(rewardRate.toFixed(0)).times(timeGap).toString(),
+        startTime,
+      })
+    } else {
+      const currentAmount = new Bignumber(poolMeta.rewardRate).times(
+        new Bignumber(amount).div(poolMeta.rewardRate).toFixed(0)
+      )
+
+      await onContribute({
+        poolId: poolMeta.poolId!,
+        amount: new Bignumber(currentAmount).times(TEN_POW(18)).toString(),
+        startTime: startTime ? startTime : (Date.now() / 1000).toFixed(0),
+      })
+    }
+
+    window.setTimeout(hide, 400)
+  }, [
+    amount,
+    endTime,
+    hide,
+    isAllowed,
+    onApprove,
+    onContribute,
+    onDeploy,
+    poolMeta.poolId,
+    poolMeta.rewardRate,
+    poolMeta.status,
+    poolType,
+    rewardRate,
+    rewardToken,
+    stakingToken,
+    startTime,
+    timeGap,
+  ])
+
+  const rewardMax = useCallback(async () => {
+    if (isAllowed) {
+      setAmount(new Bignumber(rewardBalance).toFixed(0))
+      form.setFieldValue('amount', new Bignumber(rewardBalance).toFixed(0))
+    }
+  }, [form, isAllowed, rewardBalance])
 
   return (
-    <Modal {...props} footer={false} closeIcon={null} className="rounded-xl">
+    <Modal
+      visible={props.visible}
+      onCancel={(e) => {
+        props.onCancel?.(e)
+        form?.resetFields()
+      }}
+      footer={false}
+      closeIcon={null}
+      className="rounded-xl"
+      destroyOnClose
+    >
       <div className="p-6 rounded-xl">
         <div className="relative text-center text-[#1E1E1E] text-xl font-bold">
-          创建质押池
+          {poolType === 1 ? t('pool_btn_text') : poolType === 2 ? t('pool_restart_pool') : t('pool_append_pool')}
           <img
             src="/static/close.svg"
             className="absolute top-0 right-0 transform -translate-y-1/2 cursor-pointer"
@@ -17,34 +144,109 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
           />
         </div>
 
-        <Form form={form} layout="vertical" size="large">
-          <Form.Item label="质押币种">
-            <Select className="h-12 border-none rounded bg-light-white" placeholder="请选择" />
-          </Form.Item>
-          <Form.Item label="奖励币种">
-            <Input className="h-12 border-none rounded bg-light-white" placeholder="请输入" />
-          </Form.Item>
-          <Form.Item label="奖励总量">
-            <Input className="h-12 border-none rounded bg-light-white" placeholder="请输入" />
-          </Form.Item>
-          <Form.Item label="释放速率">
-            <Input className="h-12 border-none rounded bg-light-white" placeholder="请输入" />
-          </Form.Item>
-          <Form.Item label="开始时间">
-            <DatePicker
-              placeholder="请选择"
-              format="YYYY-MM-DD HH:mm:ss"
+        <Form form={form} layout="vertical" size="large" initialValues={poolMeta} preserve={false}>
+          <Form.Item name="stakingToken" label={t('pool_staking_currency')}>
+            <Select
+              key="stakingToken"
               className="h-12 border-none rounded bg-light-white"
+              placeholder={t('pool_select')}
+              disabled={poolType !== 1}
+              onChange={(e) => {
+                setStakingToken(e)
+              }}
+            >
+              {STAKING_WHITELIST.map((i) => (
+                <Option key={i} value={i}>
+                  {TOKENS[i]}
+                </Option>
+              ))}
+            </Select>
+            {/* <Input
+              key="stakingToken"
+              className="h-12 border-none rounded bg-light-white"
+              placeholder={t('pool_input')}
+              readOnly={poolType !== 1}
+              onChange={(e) => setStakingToken(e.target.value)}
+            /> */}
+          </Form.Item>
+          <Form.Item name="rewardToken" label={t('pool_reward_currency')}>
+            <Input
+              className="h-12 border-none rounded bg-light-white"
+              placeholder={t('pool_input')}
+              readOnly={poolType !== 1}
+              onChange={(e) => {
+                setRewardToken(e.target.value.length === 42 ? e.target.value : '')
+              }}
+              suffix={<div>{TOKENS[rewardToken] ?? rewardTokenData?.symbol ?? ''}</div>}
             />
           </Form.Item>
+          <Form.Item name="amount" label={t('pool_reward_amount')}>
+            <Input
+              className="h-12 border-none rounded bg-light-white"
+              placeholder={t('pool_input')}
+              onChange={(e) => setAmount(e.target.value)}
+              suffix={
+                <span className="text-primary text-sm font-bold cursor-pointer" onClick={rewardMax}>
+                  {isAllowed ? 'MAX' : ''}
+                </span>
+              }
+            />
+          </Form.Item>
+          {poolType !== 1 && (
+            <Form.Item name="rewardRate" label={t('pool_rate')}>
+              <Input className="h-12 border-none rounded bg-light-white" placeholder={t('pool_input')} disabled />
+            </Form.Item>
+          )}
+          {(poolType === 1 || poolMeta.status === 2) && (
+            <Form.Item name="startTime" label={t('pool_start_time')}>
+              <DatePicker
+                placeholder={t('pool_select')}
+                showTime
+                format="YYYY-MM-DD HH:mm:ss"
+                className="w-full h-12 border-none rounded bg-light-white"
+                disabledDate={(current) => {
+                  return current && current < moment().startOf('date')
+                }}
+                onChange={(e) => {
+                  if (e) {
+                    setStartTime((e.valueOf() / 1000).toFixed(0))
+                  }
+                }}
+              />
+            </Form.Item>
+          )}
+          {poolType === 1 && (
+            <Form.Item name="endTime" label={t('pool_end_time')}>
+              <DatePicker
+                placeholder={t('pool_select')}
+                showTime
+                format="YYYY-MM-DD HH:mm:ss"
+                className="w-full h-12 border-none rounded bg-light-white"
+                disabledDate={(current) => {
+                  return !startTime ? false : current < moment.unix(Number(startTime)).startOf('date')
+                }}
+                onChange={(e) => {
+                  if (e) {
+                    setEndTime((e.valueOf() / 1000).toFixed(0))
+                  }
+                }}
+              />
+            </Form.Item>
+          )}
         </Form>
 
         <div className="w-full flex justify-center gap-6 flex-wrap">
           <Button size="large" className="w-50 h-12 bg-gray rounded" onClick={props.onCancel}>
-            取消
+            {t('pool_cancel')}
           </Button>
-          <Button type="primary" size="large" className="w-50 h-12 rounded">
-            确定
+          <Button
+            type="primary"
+            size="large"
+            className="w-50 h-12 rounded"
+            loading={approveLoading || deployLoading || contributeLoading}
+            onClick={onSubmit}
+          >
+            {t('pool_confirm')}
           </Button>
         </div>
       </div>
