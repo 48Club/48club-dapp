@@ -19,7 +19,7 @@ export const PoolCardSection = () => {
   const { poolAddresses } = usePoolFactory()
 
   return (
-    <div className="flex flex-wrap gap-6 pt-0 mb-30 <sm:justify-center">
+    <div className="flex md:flex-wrap md:flex-row md:items-start flex-col items-stretch gap-6 pt-0 mb-30">
       {poolAddresses.map((pool, index) => (pool ? <PoolCard pool={pool} key={pool} id={index} /> : null))}
     </div>
   )
@@ -190,7 +190,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           </span>
         </div>
         <div className="mt-2 text-dark-gray text-sm">
-          {t('pool_rate')}: 1 block - {formatAmount(rate)}
+          {t('pool_rate')}: 1 block - {formatAmount(rate, 0, 8)}
         </div>
 
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
@@ -208,13 +208,13 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         {rewardTokenInfo.startTime && (
           <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
             <span>{t('pool_start_time')}:</span>
-            <span>{moment.unix(rewardTokenInfo.startTime).utc().format('YYYY/MM/DD HH:mm:ss')}</span>
+            <span>{moment.unix(rewardTokenInfo.startTime).format('YYYY/MM/DD HH:mm:ss')}</span>
           </div>
         )}
         {rewardTokenInfo.endTime && (
           <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
             <span>{t('pool_end_time')}:</span>
-            <span>{moment.unix(rewardTokenInfo.endTime).utc().format('YYYY/MM/DD HH:mm:ss')}</span>
+            <span>{moment.unix(rewardTokenInfo.endTime).format('YYYY/MM/DD HH:mm:ss')}</span>
           </div>
         )}
       </div>
