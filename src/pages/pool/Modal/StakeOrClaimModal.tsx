@@ -33,7 +33,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
   const { rewardTokenSymbol, rewardToken } = usePoolInfo(curAddress)
 
   const handleStakePool = useCallback(async () => {
-    if (!stakePoolLoading && amountBN.gt(0) && amountBN.lt(new BigNumber(stakeBalance?.toString() || ''))) {
+    if (!stakePoolLoading && amountBN.gt(0) && !amountBN.gt(new BigNumber(stakeBalance?.toString() || ''))) {
       await onStakePool(amountBN)
       hideModal(false)
       setAmount('')
