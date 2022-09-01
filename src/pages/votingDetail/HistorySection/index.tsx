@@ -46,7 +46,7 @@ export default function HistorySection() {
                       </span>
                     </div>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
-                      <span className="text-gray">{t('result')}</span>
+                      <span className="text-gray">{t('reason')}</span>
                       <span className="break-words text-right">
                         {i.reason}
                       </span>
