@@ -21,7 +21,7 @@ export default function HistorySection() {
         {voteRecords.length > 0 ? (
           <div>
             <div className="hidden md:grid justify-between pt-10 pb-4 text-gray"
-                 style={{ gridTemplateColumns: '51% 16.33% 16.33% 16.33%' }}
+                 style={{ gridTemplateColumns: '30% 17.5% 17.5% 17.5% 17.5% ' }}
             >
               <span className="flex">{t('address')}</span>
               <span>{t('result')}</span>
