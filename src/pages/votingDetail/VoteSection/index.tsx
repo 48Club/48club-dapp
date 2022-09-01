@@ -65,8 +65,8 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
       <Input
         placeholder={t("placeholder_reason")}
         className="h-12 rounded font-medium text-sm text-light-black"
-        value=""
-        onBlur={(e) => setReason(e.target.value)}
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}
       />
       <Button
         className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
