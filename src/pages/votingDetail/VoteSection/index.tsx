@@ -21,7 +21,7 @@ export default function VoteSection() {
   const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
   const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id)
   const [reason, setReason] = useState("")
-  
+  setReason("")
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
       return <ClaimRewardPanel id={id} myReward={myReward}
@@ -69,7 +69,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
         onChange={(e) => setReason(e.target.value)}
       />
       <Button
-        className={`bg-white h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
+        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 1)}
         disabled={!canVote || myVoted}
