@@ -72,6 +72,9 @@ export default function HistorySection() {
                       {i.support === '1' ? 'Approve' : 'Reject'}
                     </span>
                     <span className="break-words">
+                      {i.reason}
+                    </span>
+                    <span className="break-words">
                       {formatAmount(i.weight, 18)}
                     </span>
                     <span className="break-words">
