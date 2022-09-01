@@ -65,7 +65,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
       <Input
         placeholder={t("placeholder_reason")}
         className="h-12 rounded font-medium text-sm text-light-black"
-        value={reason}
+        value=""
         onChange={(e) => setReason(e.target.value)}
       />
       <Button
