@@ -1,7 +1,7 @@
 import { CheckCircleTwoTone, CloseCircleTwoTone, MinusCircleTwoTone } from '@ant-design/icons'
 import { Button, Spin, Tooltip } from 'antd'
 import Label from 'components/Label'
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import useGov from '../../../hooks/gov/useGov'
 import { useParams } from 'react-router-dom'
@@ -20,7 +20,8 @@ export default function VoteSection() {
   const { myStakeBalance } = useStakeInfo()
   const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
   const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id)
-
+  const [reason, setReason] = useState("")
+  
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
       return <ClaimRewardPanel id={id} myReward={myReward}
@@ -50,8 +51,8 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
   const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
-  const onSubmit = useCallback(async (id, support) => {
-    await onVote(id, support)
+  const onSubmit = useCallback(async (id, support, reason) => {
+    await onVote(id, support, reason)
     setTimeout(reloadVoteRecords, 1000)
   }, [onVote, reloadVoteRecords])
 
@@ -60,6 +61,13 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
   return <Spin spinning={!voteRecords}>
     <div className="flex flex-col justify-center items-stretch">
       <div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
+      
+      <Input
+        placeholder={t("placeholder_reason")}
+        className="h-12 rounded font-medium text-sm text-light-black"
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}
+      />
       <Button
         className={`bg-white h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
@@ -76,6 +84,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
       >
         {t('reject_vote')}
       </Button>
+      
     </div>
   </Spin>
 }
