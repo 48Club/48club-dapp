@@ -48,6 +48,9 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
   const { myVotes } = useGovDetailInfo(id)
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
+  
+  const [reason, setReason] = useState("")
+  
   const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
   const onSubmit = useCallback(async (id, support, reason) => {
     await onVote(id, support, reason)
@@ -56,7 +59,6 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
 
-  const [reason, setReason] = useState("")
   
   return <Spin spinning={!voteRecords}>
     <div className="flex flex-col justify-center items-stretch">
@@ -71,7 +73,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
       <Button
         className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
-        onClick={() => !myVoted && onSubmit(id, 1)}
+        onClick={() => !myVoted && onSubmit(id, 1, reason)}
         disabled={!canVote || myVoted}
       >
         {t('approve_vote')}
@@ -79,7 +81,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
       <Button
         className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '0' && 'border-primary'}`}
         icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
-        onClick={() => !myVoted && onSubmit(id, 0)}
+        onClick={() => !myVoted && onSubmit(id, 0, reason)}
         disabled={!canVote || myVoted}
       >
         {t('reject_vote')}
