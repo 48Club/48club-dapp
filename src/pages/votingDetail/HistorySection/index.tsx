@@ -25,6 +25,7 @@ export default function HistorySection() {
             >
               <span className="flex">{t('address')}</span>
               <span>{t('result')}</span>
+              <span>{t('reason')}</span>
               <span>KOGE</span>
               <span>{t('block_number')}</span>
             </div>
@@ -42,6 +43,12 @@ export default function HistorySection() {
                       <span className="text-gray">{t('result')}</span>
                       <span className="break-words text-right">
                         {i.support === '1' ? 'Approve' : 'Reject'}
+                      </span>
+                    </div>
+                    <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
+                      <span className="text-gray">{t('result')}</span>
+                      <span className="break-words text-right">
+                        {i.reason}
                       </span>
                     </div>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
