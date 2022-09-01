@@ -21,7 +21,6 @@ export default function VoteSection() {
   const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
   const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id)
   const [reason, setReason] = useState("")
-  setReason("")
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
       return <ClaimRewardPanel id={id} myReward={myReward}
