@@ -50,5 +50,6 @@
   "op1": "赞成",
   "op2": "反对",
   "result_tip1": "总票数少于 ",
-  "result_tip2": "总票数："
+  "result_tip2": "总票数：",
+  "placeholder_reason": "理由"
 }
