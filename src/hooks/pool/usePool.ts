@@ -10,7 +10,7 @@ import {
 } from '@usedapp/core'
 import BigNumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
-import { useFarmingContract, useFarmingFactoryContract } from '../useContract'
+import { useFarmingContract, useFarmingFactoryContract, useOracleContract } from '../useContract'
 import useApprove from '../erc20/useApprove'
 
 export const usePoolFactory = (rewardToken?: string) => {
@@ -62,18 +62,20 @@ export const usePoolFactory = (rewardToken?: string) => {
   )
 
   const poolAddresses = useContractCalls(
-    Array(poolNum?.[0]?.toNumber() || 0).fill(1).map((item, index) => ({
-      address: farmingFactoryContract.address,
-      abi: farmingFactoryContract.interface,
-      method: 'pools',
-      args: [index],
-    }))
+    Array(poolNum?.[0]?.toNumber() || 0)
+      .fill(1)
+      .map((item, index) => ({
+        address: farmingFactoryContract.address,
+        abi: farmingFactoryContract.interface,
+        method: 'pools',
+        args: [index],
+      }))
   )
 
   const { approve: onApprove, loading: approveLoading } = useApprove(rewardToken, farmingFactoryContract.address)
 
   return {
-    poolAddresses:poolAddresses?.map(item => item?.[0]) ?? [],
+    poolAddresses: poolAddresses?.map((item) => item?.[0]) ?? [],
     onDeploy,
     deployLoading: deployState.status === 'Mining',
     onContribute,
@@ -223,21 +225,20 @@ export const usePoolInfo = (poolTokenAddress: string) => {
   }
 }
 
-export const stakingList = [
-  {
-    text: 'KOGE',
-    token: '0x2B7BFE79eC36653b84A43E86AfF704B91E9f072f',
-  },
-  {
-    text: 'WBNB',
-    token: '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
-  },
-  {
-    text: 'Pancake KOGE/BNB LP',
-    token: '0xfcd08643A6390C465D8b12C42C0B4AFc291EAC12',
-  },
-  {
-    text: 'Test LP',
-    token: '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E'
+export const useOracle = (...tokens: string[]) => {
+  const oracleContract = useOracleContract()
+  const results = useContractCalls(
+    tokens.map((token) => ({
+      abi: oracleContract.interface,
+      address: oracleContract.address,
+      method: 'kogePrice',
+      args: [],
+    }))
+  )
+
+  const kogePrices = useMemo(() => results?.map((res) => res?.[0]?.toString()), [results])
+
+  return {
+    kogePrices,
   }
-]
+}
