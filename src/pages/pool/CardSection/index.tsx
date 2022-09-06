@@ -107,7 +107,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       .div(allAmount ?? 0)
       .div(new Bignumber(kogePrices?.[0] ?? 0))
       .div(TEN_POW(18))
-
+      .times(100)
   }, [rewardTokenInfo, kogePrices, allAmount])
 
   const claimHandler = useCallback(async () => {
@@ -183,7 +183,11 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         </span>
       </div>
       <div className="pt-8 pb-6 border-b border-solid">
-        <div className="flex justify-between items-center gap-2 text-sm">
+        <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+          <span className="font-bold text-base">{t('APR')}:</span>
+          <span className="font-bold text-base">{formatAmount(apr, undefined, 8)}%</span>
+        </div>
+        <div className="mt-2 flex justify-between items-center gap-2 text-sm">
           <span className="text-dark-gray">
             {t('pool_total_amount')}: {formatAmount(allAmount, 18)} {TOKENS[rewardToken] ?? rewardTokenSymbol}
           </span>
@@ -217,12 +221,6 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           <span>{t('pool_my_stake')}:</span>
           <span>
             {formatAmount(stakeAmount, 18)} {TOKENS[stakeToken] ?? stakeTokenSymbol}
-          </span>
-        </div>
-        <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
-          <span>{t('APR')}:</span>
-          <span>
-            {formatAmount(apr, undefined, 8)}
           </span>
         </div>
         {rewardTokenInfo.startTime && (
