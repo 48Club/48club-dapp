@@ -104,11 +104,11 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       .times(24)
       .times(365)
       .times(new Bignumber(kogePrices?.[1] ?? 0))
-      .div(allAmount ?? 0)
+      .div(totalStakeAmount ?? 0)
       .div(new Bignumber(kogePrices?.[0] ?? 0))
       .div(TEN_POW(18))
       .times(100)
-  }, [rewardTokenInfo, kogePrices, allAmount])
+  }, [rewardTokenInfo, kogePrices, totalStakeAmount])
 
   const claimHandler = useCallback(async () => {
     if (new Bignumber(earnedAmount).gt(0) && !claimLoading) {
