@@ -6,7 +6,7 @@ import moment from 'moment'
 import { TEN_POW, formatAmount } from '@funcblock/dapp-sdk'
 import { useBlockMeta, useTokenBalance, useEthers, getExplorerAddressLink, BSC } from '@usedapp/core'
 import { TOKENS } from '../../../constants/tokens'
-import { usePool, usePoolFactory, usePoolInfo } from '../../../hooks/pool/usePool'
+import { usePool, usePoolFactory, usePoolInfo, useOracle } from '../../../hooks/pool/usePool'
 import {
   useStakeShow,
   useStakeOrClaim,
@@ -95,6 +95,20 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       return
     }
   }, [rewardTokenInfo])
+
+  // rewardRate*3600*24*365*rewardTokenPrice/pool.totalSupply/stakingTokenPrice/1e18
+  const { kogePrices } = useOracle(stakeToken, rewardToken)
+  const apr = useMemo(() => {
+    return new Bignumber(rewardTokenInfo?.rewardRate?.toString() ?? 0)
+      .times(3600)
+      .times(24)
+      .times(365)
+      .times(new Bignumber(kogePrices?.[1] ?? 0))
+      .div(allAmount ?? 0)
+      .div(new Bignumber(kogePrices?.[0] ?? 0))
+      .div(TEN_POW(18))
+
+  }, [rewardTokenInfo, kogePrices, allAmount])
 
   const claimHandler = useCallback(async () => {
     if (new Bignumber(earnedAmount).gt(0) && !claimLoading) {
@@ -203,6 +217,12 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           <span>{t('pool_my_stake')}:</span>
           <span>
             {formatAmount(stakeAmount, 18)} {TOKENS[stakeToken] ?? stakeTokenSymbol}
+          </span>
+        </div>
+        <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+          <span>{t('APR')}:</span>
+          <span>
+            {formatAmount(apr, 18)}
           </span>
         </div>
         {rewardTokenInfo.startTime && (

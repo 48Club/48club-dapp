@@ -232,7 +232,7 @@ export const useOracle = (...tokens: string[]) => {
       abi: oracleContract.interface,
       address: oracleContract.address,
       method: 'kogePrice',
-      args: [],
+      args: [token],
     }))
   )
 

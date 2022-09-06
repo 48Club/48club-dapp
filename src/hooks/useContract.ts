@@ -6,7 +6,7 @@ import Nft_ABI from './abi/Nft.json'
 import Staking_ABI from './abi/Staking.json'
 import Farming_ABI from './abi/FarmingPool.json'
 import FarmingFactory_ABI from './abi/FarmingPoolFactory.json'
-import Oracle from './abi/Oracle.json'
+import Oracle_ABI from './abi/Oracle.json'
 import { GovernanceAddress, NftAddress, StakingAddress, FarmingFactoryAddress, OracleAddress } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { READONLY_RPC_URL } from '../constants/env'
@@ -48,5 +48,6 @@ export function useFarmingFactoryContract() {
 }
 
 export function useOracleContract() {
-  return useMemo(() => new Contract(OracleAddress, Oracle), [])
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(OracleAddress, Oracle_ABI, provider), [provider])
 }
