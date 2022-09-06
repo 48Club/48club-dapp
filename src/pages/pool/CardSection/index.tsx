@@ -6,7 +6,7 @@ import moment from 'moment'
 import { TEN_POW, formatAmount } from '@funcblock/dapp-sdk'
 import { useBlockMeta, useTokenBalance, useEthers, getExplorerAddressLink, BSC } from '@usedapp/core'
 import { TOKENS } from '../../../constants/tokens'
-import { usePool, usePoolFactory, usePoolInfo } from '../../../hooks/pool/usePool'
+import { usePool, usePoolFactory, usePoolInfo, useOracle } from '../../../hooks/pool/usePool'
 import {
   useStakeShow,
   useStakeOrClaim,
@@ -96,6 +96,26 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
     }
   }, [rewardTokenInfo])
 
+  // rewardRate*3600*24*365*rewardTokenPrice/pool.totalSupply/stakingTokenPrice/1e18
+  const { kogePrices } = useOracle(stakeToken, rewardToken)
+  const apr = useMemo(() => {
+    return new Bignumber(rewardTokenInfo?.rewardRate?.toString() ?? 0)
+      .times(3600)
+      .times(24)
+      .times(365)
+      .times(new Bignumber(kogePrices?.[1] ?? 0))
+      .div(totalStakeAmount ?? 0)
+      .div(new Bignumber(kogePrices?.[0] ?? 0))
+      .times(100)
+  }, [rewardTokenInfo, kogePrices, totalStakeAmount])
+  console.log(
+    `apr: ${apr} \n`,
+    `rate: ${rewardTokenInfo?.rewardRate?.toString()} \n`,
+    `rewardTokenPrice: ${kogePrices?.[1]} \n`,
+    `stakeTokenPrice: ${kogePrices?.[0]} \n`,
+    `totalSupply: ${totalStakeAmount}`
+  )
+
   const claimHandler = useCallback(async () => {
     if (new Bignumber(earnedAmount).gt(0) && !claimLoading) {
       try {
@@ -169,7 +189,11 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         </span>
       </div>
       <div className="pt-8 pb-6 border-b border-solid">
-        <div className="flex justify-between items-center gap-2 text-sm">
+        <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
+          <span className="font-bold text-base">{t('APR')}:</span>
+          <span className="font-bold text-base">{formatAmount(apr, undefined, 8)}%</span>
+        </div>
+        <div className="mt-2 flex justify-between items-center gap-2 text-sm">
           <span className="text-dark-gray">
             {t('pool_total_amount')}: {formatAmount(allAmount, 18)} {TOKENS[rewardToken] ?? rewardTokenSymbol}
           </span>

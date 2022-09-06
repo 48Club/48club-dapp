@@ -38,3 +38,7 @@ export const FarmingFactoryAddress = {
   [ChainId.BSCTestnet]: '0xE088b760c249cf8AcdE5395645c0ef535b0101C8',
 }[CHAIN_ID]
 
+export const OracleAddress = {
+  [ChainId.BSC]: '0xbf60Ab5D72C6157b987C7A7D3fF98df2c3cF9277',
+  [ChainId.BSCTestnet]: '0x3b7cDCd358b7324Bf46168e4f41d540B720532f8',
+}[CHAIN_ID]
