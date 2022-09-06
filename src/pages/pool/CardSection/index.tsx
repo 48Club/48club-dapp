@@ -106,7 +106,6 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       .times(new Bignumber(kogePrices?.[1] ?? 0))
       .div(totalStakeAmount ?? 0)
       .div(new Bignumber(kogePrices?.[0] ?? 0))
-      .div(TEN_POW(18))
       .times(100)
   }, [rewardTokenInfo, kogePrices, totalStakeAmount])
   console.log(
