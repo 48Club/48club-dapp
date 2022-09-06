@@ -222,7 +222,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
           <span>{t('APR')}:</span>
           <span>
-            {formatAmount(apr, 18)}
+            {formatAmount(apr)}
           </span>
         </div>
         {rewardTokenInfo.startTime && (
