@@ -6,7 +6,7 @@ import useNftInfo, { INFTInfo } from '../../../hooks/nft/useNftInfo'
 import { useEthers } from '@usedapp/core'
 import { shorten } from '@funcblock/dapp-sdk'
 import { useTranslation } from 'react-i18next'
-import { SendOutlined } from '@ant-design/icons'
+import { SendOutlined, EditOutlined } from '@ant-design/icons'
 import useNft from '../../../hooks/nft/useNft'
 
 export default function ListSection() {
@@ -120,14 +120,18 @@ function NftItem({
               <img
                 src={nft.image}
                 alt=""
-                className="h-20 w-full object-contain transform hover:scale-105 transition duration-240"
+                className="h-50 w-full object-cover transform hover:scale-105 transition duration-240"
               />
             </div>
             {account === nft.owner && (
               <div className="absolute block top-7 right-7 flex flex-col gap-2">
-                <img className="w-8 h-8 cursor-pointer" src={edit} alt="" onClick={() => onEdit(nft)} />
+                <EditOutlined
+                  className="w-8 h-8 flex items-center justify-center cursor-pointer text-light-black bg-white bg-opacity-20 rounded"
+                  style={{ fontSize: '16px' }}
+                  onClick={() => onEdit(nft)}
+                />
                 <SendOutlined
-                  className="w-8 h-8 flex items-center justify-center cursor-pointer text-white bg-white bg-opacity-20 rounded"
+                  className="w-8 h-8 flex items-center justify-center cursor-pointer text-light-black bg-white bg-opacity-20 rounded"
                   style={{ fontSize: '16px' }}
                   onClick={() => onSend?.(nft)}
                 />
