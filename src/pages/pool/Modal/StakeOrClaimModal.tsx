@@ -49,6 +49,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
       }
       hideModal(false)
       setAmount('')
+      setMax(false)
     }
   }, [amountBN, hideModal, isMax, onWithdraw, onWithdrawAll, stakeAmount])
 
@@ -102,6 +103,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
             className="h-12 border-none rounded bg-light-white font-500"
             onChange={(e) => {
               setAmount(e.target.value)
+              setMax(false)
             }}
             placeholder={
               currentType === 1

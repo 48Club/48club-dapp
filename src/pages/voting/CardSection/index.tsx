@@ -45,6 +45,7 @@ function Card({ item }) {
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
       <div className="flex flex-col md:flex-row-reverse md:mb-2">
         <Tag type={state} className="min-w-16 h-7" />
+        <div className="mb-2 mt-2 text-base leading-6 font-medium text-light-black">#{item.proposalId}</div>
         <div className="mb-2 mt-4 text-base leading-6 font-medium text-yellow md:flex-1 md:mt-0 md:mb-0">
           {t('author')}: {shorten(item.proposer)}
         </div>
