@@ -37,11 +37,11 @@ export default function Header() {
       </Menu.Item>
       <Menu.Item>
         <a className="text-black opacity-75 hover:text-primary"
-           href={t('app_header_menu_docs_title')}
+           href="https://docs.bnb48.club"
            target="_blank"
            rel="noopener noreferrer"
         >
-          {t('app_header_menu_whitepaper_title')}
+          {t('app_header_menu_docs_title')}
         </a>
       </Menu.Item>
     </Menu>
