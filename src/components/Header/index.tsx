@@ -37,11 +37,7 @@ export default function Header() {
       </Menu.Item>
       <Menu.Item>
         <a className="text-black opacity-75 hover:text-primary"
-           href={
-             language === 'en'
-               ? 'https://drive.google.com/file/d/1RZxJamk3dK2w-4e4TI98uXe1bCLd2Vz1/view?usp=sharing'
-               : 'https://drive.google.com/file/d/1NFZiOoILO59LemFn2-_LHMD7c3nDBHla/view?usp=sharing'
-           }
+           href={t('app_header_menu_docs_title')}
            target="_blank"
            rel="noopener noreferrer"
         >
