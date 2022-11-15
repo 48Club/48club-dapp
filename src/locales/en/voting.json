@@ -4,7 +4,7 @@
   "create_proposal": "New Proposal",
   "filter_time": "Filtering time",
   "filter_status": "Proposal Status",
-  "filter_related": "Related to me",
+  "filter_related": "Proposed by me",
   "filter_claimable": "Claimable",
   "end_time": "Still to finish",
   "total_reward": "Total reward",
