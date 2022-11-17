@@ -83,10 +83,25 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
         </div>
       </>
     case 'Active':
+
+      let CardSection = <><CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
+        Not Voted
+      </div></>
+      if (info.myVotes?.gt(0)) {
+        CardSection = <> <CheckCircleTwoTone twoToneColor='#08C849' className="w-3.5 h-3.5 mr-1" />
+          <div className="text-xs leading-5 text-dark-gray">
+            Voted
+          </div></>
+      }
       return <div className="flex items-center">
-        <ClockCircleFilled className="w-3.5 h-3.5 mr-1 text-dark-gray" />
-        <div className="text-xs leading-5 text-dark-gray">
-          {t('end_time')}: {moment.unix(info.voteEnd).fromNow()}
+        <div className="flex items-center">
+          {CardSection}
+        </div>
+        <div className="flex items-center">
+          <ClockCircleFilled className="w-3.5 h-3.5 mr-1 text-dark-gray" />
+          <div className="text-xs leading-5 text-dark-gray">
+            {t('end_time')}: {moment.unix(info.voteEnd).fromNow()}
+          </div>
         </div>
       </div>
     default:
