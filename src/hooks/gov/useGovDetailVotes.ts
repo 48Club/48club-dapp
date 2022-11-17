@@ -12,7 +12,13 @@ export default function useGovDetailVotes(proposalId: string) {
     const events = await govContractReadonly.queryFilter(filter, START_BLOCK_NUMBER)
     const rows = events.map(i => ({
       proposalId: i.args?.proposalId?.toString(),
-      reason: i.args?.reason?.toString(),
+      reason: (() => {
+        try {
+          return i.args?.reason?.toString()
+        } catch (error) {
+          return ''
+        }
+      })(),
       support: i.args?.support?.toString(),
       voter: i.args?.voter?.toString(),
       weight: i.args?.weight?.toString(),
