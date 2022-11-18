@@ -29,6 +29,9 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
     exitLoading,
   } = usePool(curAddress || '')
   const stakeBalance = useTokenBalance(stakeToken, account)
+
+  console.log(curAddress, stakeToken, account, stakeBalance)
+
   const stakeAmount = useTokenBalance(curAddress, account)
   const { rewardTokenSymbol, rewardToken } = usePoolInfo(curAddress)
 
@@ -108,11 +111,11 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
             placeholder={
               currentType === 1
                 ? `${t('pool_balance')}: ${new BigNumber(stakeBalance?.toString() ?? '')
-                    .div(TEN_POW(18))
-                    .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
+                  .div(TEN_POW(18))
+                  .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
                 : `${t('pool_staking_amount')}: ${new BigNumber(stakeAmount?.toString() ?? '')
-                    .div(TEN_POW(18))
-                    .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
+                  .div(TEN_POW(18))
+                  .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
             }
             suffix={
               <span className="text-primary text-sm font-bold cursor-pointer" onClick={stakeMax}>

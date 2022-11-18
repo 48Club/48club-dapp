@@ -14,7 +14,7 @@ export const RPC_URLS = {
 
 export const READONLY_RPC_URL = {
   ...RPC_URLS,
-  [BSC.chainId]: 'https://erigon-bsc.bnb48.club',
+  [BSC.chainId]: 'https://rpc-bsc.bnb48.club/erigon/',
 }[CHAIN_ID]
 
 console.log('IS_PRODUCTION', IS_PRODUCTION)
