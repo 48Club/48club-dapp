@@ -18,6 +18,7 @@ jobs:
       - name: Install npm dependencies
         run: |
           mv .package.json package.json
+          mv .yarn.lock yarn.lock
           yarn install
       - name: Run build task
         run: yarn build
