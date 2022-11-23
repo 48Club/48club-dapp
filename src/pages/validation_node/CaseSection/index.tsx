@@ -5,20 +5,12 @@ import "./index.less";
 
 const REVIEW_ITEMS = [
   {
-    id: 2,
+    id: 1,
     title: "BNB48Club",
     content:
       "https://www.bnbchain.world/en/staking/validator/bva1ygrhjdjfyn2ffh5ha5llf5g6l3wxjt29hz9q4s",
     image_url: "https://dex-bin.bnbstatic.com/static/images/bnb-chain-h.svg",
-  },
-  {
-    id: 1,
-    title: "BNB48Club",
-    content:
-      "https://kava.mintscan.io/validators/kavavaloper1nhcvgj0j7mrvrat3dfhudpypaqn00eaf2dh0gp",
-    image_url:
-      "https://img-oss.bnb48.club/oss/logo-partner-kava.svg",
-  },
+  }
 ];
 
 export default function CaseSection() {
