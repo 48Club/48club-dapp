@@ -35,7 +35,7 @@ export default function ListSection() {
   return (
     <div className="pb-20">
       <div className="mt-10 shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
-        <span className="text-sm leading-5 mb-2 text-light-black">{t('filter_related')}</span>
+        <span className="text-sm leading-5 mb-2 text-light-black">{t('filter_my_casting')}</span>
         <Switch checked={related} className="filter-switch w-full h-12" onChange={setRelated} />
       </div>
       <div className="mt-0 md:mt-16 flex flex-col md:flex-row md:flex-wrap w-full">
