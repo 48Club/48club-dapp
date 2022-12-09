@@ -57,7 +57,6 @@ export const PARTNER_URLS = [
   'logo-partner-binance-smart-chain.svg',
   'logo-partner-dodo.svg',
   'logo-partner-kava.svg',
-  'logo-partner-swingby.svg',
   'logo-partner-mathwallet.svg',
   'logo-partner-roostoo.svg',
   'logo-partner-12.jpeg',
@@ -66,5 +65,4 @@ export const PARTNER_URLS = [
   'mayor-capital.svg',
   '/static/logo1.png',
   '/static/cnm.png',
-  'https://sheepdex.org/logo.svg',
 ]
