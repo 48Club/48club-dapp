@@ -5,6 +5,11 @@ import './index.less'
 
 const TUTORIAL_ITEMS = [
   {
+    event_title: '2017-09-17',
+    event_content: '时值94之后，币安频繁上币，一名自称「员外」的网友联合微信群的BNB较大额持仓者们创立了「币安上线币种简介」电报群(即俱乐部的前身，现在的铂金会)用于交流新币种信息',
+    event_content_en: 'Right after 94, Binance frequently listed coins. Ian created this group "币安上线币种简介" meaning "Introduction of Binance-Listed coins" i.e. the prototype of BNB48 Club',
+  },
+  {
     event_title: '2018-05-20',
     event_content: '千总从大洋彼岸回国考察区块链行业，与Gui进行了会面，两位大佬交流了行业看法，会面始终在愉快的氛围中进行。',
     event_content_en: 'BNB48 Club Koge bot went live and users could use it to mine Koge tokens.',
@@ -193,6 +198,21 @@ const TUTORIAL_ITEMS = [
     event_title: '2022-03-27',
     event_content: '链上DAO进行Beta测试',
     event_content_en: 'Beta test of on-chain DAO',
+  },
+  {
+    event_title: '2022-09-13',
+    event_content: 'BNB48 挖矿池上线',
+    event_content_en: 'BNB48 farming goes online',
+  },
+  {
+    event_title: '2022-12-08',
+    event_content: '币安要求BNB48按照其要求停止向koge用户提供gas折扣，BNB48发起54号提案决定是否服从。投票结果为否。',
+    event_content_en: 'Binance asks BNB48 to stop gas discount for KOGE users. BNB48 starts Proposal#54 to decide, and the DAO says no.',
+  },
+  {
+    event_title: '2022-12-20',
+    event_content: 'BNB48 决议改名为48 Club',
+    event_content_en: 'BNB48 rebrands to 48 Club',
   },
 ]
 

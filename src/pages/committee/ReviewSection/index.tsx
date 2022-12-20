@@ -3,7 +3,7 @@ import { Col, Row } from 'antd'
 import ReviewListCard from './ReviewListCard'
 import './index.less'
 import { useTranslation } from 'react-i18next'
-import { COMMITTEE_LIST } from '../../../constants/bnb48'
+import { COMMITTEE_LIST } from '../../../constants/48club'
 
 export default function ReviewSection() {
   const { t } = useTranslation()

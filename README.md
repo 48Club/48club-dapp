@@ -1,4 +1,4 @@
-# BNB48Club DAPP
+# 48 Club DAPP
 
 ## References
 

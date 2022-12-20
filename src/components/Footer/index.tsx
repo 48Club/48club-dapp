@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './index.less'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
-import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TWITTER_URL } from '../../constants/bnb48'
+import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TWITTER_URL } from '../../constants/48club'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -22,13 +22,13 @@ export default function Footer() {
                 <img
                   className="app-logo"
                   src={appLogo}
-                  alt="BNB48 Club"
+                  alt="48 Club"
                 />
                 <div className="copyright">
                   {t('app_og_description')}
                   <br />
                   <br />
-                  © 2020 BNB48 Club®
+                  © 2022 48 Club®
                 </div>
                 <div className="security">
                   <LockOutlined />
@@ -85,7 +85,7 @@ export default function Footer() {
                   <li>
                     <a
                       className="app-button"
-                      href="https://docs.bnb48.club"
+                      href="https://docs.48.club"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

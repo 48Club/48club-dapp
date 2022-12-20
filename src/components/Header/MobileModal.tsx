@@ -32,7 +32,7 @@ export default function MobileModal(props: { visible: boolean, oncancel: () => v
     >
       <div className="modal-header">
         <div className="logo-container">
-          <img className="logo-app" src={appLogo} alt="BNB48Club" />
+          <img className="logo-app" src={appLogo} alt="48 Club" />
         </div>
         <CloseOutlined onClick={props.oncancel} />
       </div>

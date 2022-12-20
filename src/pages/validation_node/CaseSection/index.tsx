@@ -6,7 +6,7 @@ import "./index.less";
 const REVIEW_ITEMS = [
   {
     id: 1,
-    title: "BNB48Club",
+    title: "48 Club",
     content:
       "https://www.bnbchain.world/en/staking/validator/bva1ygrhjdjfyn2ffh5ha5llf5g6l3wxjt29hz9q4s",
     image_url: "https://dex-bin.bnbstatic.com/static/images/bnb-chain-h.svg",

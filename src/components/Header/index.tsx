@@ -37,7 +37,7 @@ export default function Header() {
       </Menu.Item>
       <Menu.Item>
         <a className="text-black opacity-75 hover:text-primary"
-           href="https://docs.bnb48.club"
+           href="https://docs.48.club"
            target="_blank"
            rel="noopener noreferrer"
         >

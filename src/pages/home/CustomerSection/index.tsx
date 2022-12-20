@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import './index.less'
 import { useTranslation } from 'react-i18next'
-import { PARTNER_URLS } from '../../../constants/bnb48'
+import { PARTNER_URLS } from '../../../constants/48club'
 
 
 export default function CustomerSection() {

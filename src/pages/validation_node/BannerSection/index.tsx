@@ -13,7 +13,7 @@ export default function BannerSection() {
           <Col xs={24} md={24}>
             <div className="section-content">
               <div className="section-title">
-                BNB48 Club®
+                48 Club®
                 <br />
                 {t('app_header_menu_node_title')}
               </div>

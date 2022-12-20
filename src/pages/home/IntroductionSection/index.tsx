@@ -25,7 +25,7 @@ export default function CustomerSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              BNB48 Club® Token
+              48 Club® Token
             </a>
           </div>
         </div>

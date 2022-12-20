@@ -7,7 +7,7 @@
   "casting_nft": "铸造48er NFT",
   "view_more": "查看更多",
   "create_koge_nft": "铸造新的 48er NFT",
-  "nft_description": "持有48er NFT方可在BNB48 DAO发起提案；随着总铸造量的增加，铸造需要销毁的KOGE也会增加。",
+  "nft_description": "持有48er NFT方可在48 DAO发起提案；随着总铸造量的增加，铸造需要销毁的KOGE也会增加。",
   "select_create_count": "请选择创建数量",
   "create_single_nft": "创建单个NFT (ERC-721)",
   "create_multiple_nfts": "创建多个NFT (ERC-1155)",
