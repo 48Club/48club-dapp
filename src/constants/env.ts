@@ -1,7 +1,7 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
 export let CHAIN_ID = 56 as ChainId
-if (window.location.hostname !== 'www.bnb48.club') {
+if (window.location.hostname !== 'www.48.club') {
   CHAIN_ID = 97 as ChainId
 }
 
