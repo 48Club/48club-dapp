@@ -26,9 +26,12 @@ export default function CustomerSection() {
                   <Col xs={12} md={6} key={`partner-logo-${url}`}>
                     <div className="customer-list-card">
                       <img src={
-                        (url.startsWith('/static') || url.startsWith('http')) ?
+                        url
+                        /* (url.startsWith('/static') || url.startsWith('http')) ?
                           url :
-                          `https://img-oss.bnb48.club/oss/${url}`} alt="合作伙伴" />
+                          `https://www.48.club/static/${url}`
+                        */
+                      } alt="合作伙伴" />
                     </div>
                   </Col>
                 ))
