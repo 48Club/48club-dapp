@@ -1,7 +1,7 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
 export let CHAIN_ID = 56 as ChainId
-if (window.location.hostname !== 'www.bnb48.club') {
+if (window.location.hostname !== 'www.48.club') {
   CHAIN_ID = 97 as ChainId
 }
 
@@ -14,7 +14,7 @@ export const RPC_URLS = {
 
 export const READONLY_RPC_URL = {
   ...RPC_URLS,
-  [BSC.chainId]: 'https://rpc-bsc.bnb48.club/erigon/',
+  [BSC.chainId]: 'https://rpc-bsc.48.club/erigon/',
 }[CHAIN_ID]
 
 console.log('IS_PRODUCTION', IS_PRODUCTION)
