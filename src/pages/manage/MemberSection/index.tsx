@@ -54,7 +54,7 @@ export default function MemberSection() {
               Mominator008
             </span>
             <span className="text-base text-dark-gray font-medium mb-8">
-              dominator008@bnb48.club
+              dominator008@48.club
             </span>
             <div className="flex flex-row items-center">
               <img src="/static/telegram.svg" alt="" className="w-4 mr-2" />
@@ -75,7 +75,7 @@ export default function MemberSection() {
               Mominator008
             </span>
             <span className="text-base text-dark-gray font-medium mb-8">
-              dominator008@bnb48.club
+              dominator008@48.club
             </span>
             <div className="flex flex-row items-center">
               <img src="/static/telegram.svg" alt="" className="w-4 mr-2" />

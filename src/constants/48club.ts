@@ -47,7 +47,7 @@ export const COMMITTEE_LIST = [
 ]
 
 
-export const TWITTER_URL = 'https://twitter.com/bnb48club'
+export const TWITTER_URL = 'https://twitter.com/48club_official'
 export const GITHUB_URL = 'https://github.com/48Club'
 export const DISCORD_URL = 'https://discord.gg/DDeeWYdCyJ'
 export const MEDIUM_URL = 'https://medium.com/48-club-publish'
