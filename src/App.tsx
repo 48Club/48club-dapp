@@ -27,8 +27,8 @@ export default function App() {
     <BrowserRouter>
       <Layout>
         <Header />
-        <div>test</div>
-        <div>{t('app_head_title')}</div>
+        {/* <div>test</div>
+        <div>{t('app_head_title')}</div> */}
         <div className="pt-8">
           <Switch>
             <Route exact path="/" component={Home} />
