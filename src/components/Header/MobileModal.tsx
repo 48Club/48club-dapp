@@ -92,7 +92,7 @@ export default function MobileModal(props: { visible: boolean, oncancel: () => v
                target="_blank"
                rel="noopener noreferrer"
             >
-              {t('app_header_menu_whitepaper_title')}
+              {t('app_header_menu_docs_title')}
             </a>
           </Menu.Item>
         </Menu>
