@@ -46,7 +46,7 @@
   "submit": "提案",
   "please_input": "请输入",
   "single_choice": "单选",
-  "seven_days": "7 日",
+  "n_days": " 日",
   "op1": "赞成",
   "op2": "反对",
   "result_tip1": "总票数少于 ",
