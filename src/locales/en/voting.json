@@ -46,7 +46,7 @@
   "submit": "Propose",
   "please_input": "Please input",
   "single_choice": "Single choice",
-  "seven_days": "7 Days",
+  "n_days": " Days",
   "op1": "Option1: Approve",
   "op2": "Option2: Reject",
   "result_tip1": "votes less than ",
