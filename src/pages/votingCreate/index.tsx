@@ -66,7 +66,7 @@ export default function VotingCreate() {
         </div>
         <div className="flex flex-col mt-12 md:w-1/2">
           <span className="text-sm font-medium mb-2 text-light-black">{t('voting_period')}</span>
-          <Input value=3 {t('n_days').toString()} className="h-12 border-none rounded text-sm text-light-black bg-light-white" disabled />
+          <Input value={"3"+t('n_days').toString()} className="h-12 border-none rounded text-sm text-light-black bg-light-white" disabled />
         </div>
       </div>
 
