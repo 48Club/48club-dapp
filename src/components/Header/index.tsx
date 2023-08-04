@@ -9,7 +9,8 @@ import { Dropdown, Menu } from 'antd'
 import { useEthers, useTransactions } from '@usedapp/core'
 import { shorten } from '@funcblock/dapp-sdk'
 import Loader from '../Loader'
-import { CHAIN_ID } from '../../constants/env'
+import { CHAIN_ID_HEX } from '../../constants/env'
+import Cookies from 'js-cookie'
 
 export default function Header() {
   const { t } = useTranslation()
@@ -37,9 +38,9 @@ export default function Header() {
       </Menu.Item>
       <Menu.Item>
         <a className="text-black opacity-75 hover:text-primary"
-           href="https://docs.48.club"
-           target="_blank"
-           rel="noopener noreferrer"
+          href="https://docs.48.club"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {t('app_header_menu_docs_title')}
         </a>
@@ -57,19 +58,19 @@ export default function Header() {
           </Link>
           <div className="hidden md:flex flex-row items-center">
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/staking') ? 'text-primary' : 'text-black'}`}
-                  to={'/staking'}>
+              to={'/staking'}>
               {t('nav-staking')}
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/nft') ? 'text-primary' : 'text-black'}`}
-                  to={'/nft'}>
+              to={'/nft'}>
               {t('nav-nft')}
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/voting') ? 'text-primary' : 'text-black'}`}
-                  to={'/voting'}>
+              to={'/voting'}>
               {t('nav-voting')}
             </Link>
             <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/pool') ? 'text-primary' : 'text-black'}`}
-                  to={'/pool'}>
+              to={'/pool'}>
               {t('nav-farm')}
             </Link>
             <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
@@ -103,19 +104,42 @@ export default function Header() {
     </div>
   )
 }
-
+let once = false
 function Web3Status() {
   const { t } = useTranslation()
   const { transactions } = useTransactions()
-  const { activateBrowserWallet, error, account } = useEthers()
-  const pendingCount = transactions.filter(i => !i.receipt).length
+  const { library, chainId, activateBrowserWallet, error, account } = useEthers()
 
+  if (!once) {
+    once = true;
+    (async () => {
+      // add cookie (rejected)
+      if (Cookies.get('rejected-change-rpc') !== 'true') {
+        await library?.provider.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: CHAIN_ID_HEX,
+            rpcUrls: ["https://1gwei.48.club"],
+            chainName: "48Club 1Gwei Privacy",
+            nativeCurrency: { name: "BNB", decimals: 18, symbol: "BNB" },
+            blockExplorerUrls: ["https://bscscan.com"],
+            iconUrls: ["https://raw.githubusercontent.com/48Club/48club-dapp/master/public/static/favicon/favicon-32x32.png"]
+          }]
+        }).catch((error) => {
+          if (error.code === 4001) {
+            Cookies.set('rejected-change-rpc', 'true', { path: '' })
+          }
+        });
+      }
+    })();
+  }
+  const pendingCount = transactions.filter(i => !i.receipt).length
   const activate = useCallback(async () => {
     try {
       if (window.ethereum && window.ethereum.request) {
         window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x' + CHAIN_ID.toString(16) }],
+          params: [{ chainId: CHAIN_ID_HEX }],
         })
       }
     } catch (e) {
