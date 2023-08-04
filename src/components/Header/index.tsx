@@ -109,7 +109,6 @@ function Web3Status() {
   const { t } = useTranslation()
   const { transactions } = useTransactions()
   const { library, chainId, activateBrowserWallet, error, account } = useEthers()
-  const pendingCount = transactions.filter(i => !i.receipt).length
   if (!once) {
     once = true;
     (async () => {
@@ -133,6 +132,7 @@ function Web3Status() {
       }
     })();
   }
+  const pendingCount = transactions.filter(i => !i.receipt).length
   const activate = useCallback(async () => {
     try {
       if (window.ethereum && window.ethereum.request) {
