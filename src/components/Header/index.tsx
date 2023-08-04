@@ -109,6 +109,7 @@ function Web3Status() {
   const { t } = useTranslation()
   const { transactions } = useTransactions()
   const { library, chainId, activateBrowserWallet, error, account } = useEthers()
+
   if (!once) {
     once = true;
     (async () => {
