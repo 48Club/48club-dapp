@@ -108,28 +108,32 @@ let once = false
 function Web3Status() {
   const { t } = useTranslation()
   const { transactions } = useTransactions()
-  const { library, chainId, activateBrowserWallet, error, account } = useEthers()
-
+  const { library, activateBrowserWallet, error, account } = useEthers()
+  const wallet_addEthereumChain = {
+    method: "wallet_addEthereumChain",
+    params: [{
+      chainId: CHAIN_ID_HEX,
+      rpcUrls: ["https://1gwei.48.club"],
+      chainName: "48Club 1Gwei Privacy",
+      nativeCurrency: { name: "BNB", decimals: 18, symbol: "BNB" },
+      blockExplorerUrls: ["https://bscscan.com"],
+      iconUrls: ["https://raw.githubusercontent.com/48Club/48club-dapp/master/public/static/favicon/favicon-32x32.png"]
+    }]
+  }
   if (!once) {
     once = true;
     (async () => {
-      // add cookie (rejected)
       if (Cookies.get('rejected-change-rpc') !== 'true') {
-        await library?.provider.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-            chainId: CHAIN_ID_HEX,
-            rpcUrls: ["https://1gwei.48.club"],
-            chainName: "48Club 1Gwei Privacy",
-            nativeCurrency: { name: "BNB", decimals: 18, symbol: "BNB" },
-            blockExplorerUrls: ["https://bscscan.com"],
-            iconUrls: ["https://raw.githubusercontent.com/48Club/48club-dapp/master/public/static/favicon/favicon-32x32.png"]
-          }]
-        }).catch((error) => {
-          if (error.code === 4001) {
-            Cookies.set('rejected-change-rpc', 'true', { path: '' })
-          }
-        });
+        if (library?.provider?.request) {
+          console.log('request 0');
+          await library.provider.request(wallet_addEthereumChain).catch((error) => {
+            if (error.code === 4001) {
+              Cookies.set('rejected-change-rpc', 'true', { path: '' })
+            }
+          });
+        } else if (window.ethereum && window.ethereum.request) {
+          window.ethereum.request(wallet_addEthereumChain)
+        }
       }
     })();
   }
