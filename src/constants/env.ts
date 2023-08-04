@@ -1,10 +1,13 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
-export let CHAIN_ID = 56 as ChainId
-if (window.location.hostname !== 'www.48.club') {
-  CHAIN_ID = 97 as ChainId
+export let CHAIN_ID = ChainId.BSC
+
+const hostnames = { 'www.48.club': true, 'localhost': true }
+if (hostnames[window.location.hostname] !== true) {
+  CHAIN_ID = ChainId.BSCTestnet as ChainId
 }
 
+export let CHAIN_ID_HEX = '0x' + CHAIN_ID.toString(16);
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const RPC_URLS = {
