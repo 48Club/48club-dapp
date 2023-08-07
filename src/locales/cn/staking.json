@@ -1,5 +1,5 @@
 {
-  "staking_desc": "质押KOGE获得DAO 投票权，票数立刻生效；质押后随时可以申请解除质押，解除质押3天后可以提现。",
+  "staking_desc": "质押KOGE获得DAO投票权，立刻生效；质押后随时可以申请解除质押，解除质押需等待数日方可以提现。",
   "staking_summary_total": "总供应量",
   "staking_summary_staking": "总质押量",
   "staking_summary_own": "个人持仓比例(已废弃)",
