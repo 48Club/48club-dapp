@@ -19,6 +19,7 @@ import NFTCreate from 'pages/nftCreate'
 import Pool from 'pages/pool'
 import StakeModal from './components/Modal/StakeModal'
 import UnStakeModal from './components/Modal/UnStakeModal'
+import Validator from 'pages/validator'
 
 export default function App() {
   const { t } = useTranslation()
@@ -43,6 +44,8 @@ export default function App() {
             <Route exact path="/voting/create" component={VotingCreate} />
             <Route exact path="/voting/detail/:id" component={VotingDetail} />
             <Route exact path="/pool" component={Pool}></Route>
+
+            <Route exact path="/validator" component={Validator}></Route>
             <Route>
               <Redirect to="/" />
             </Route>
