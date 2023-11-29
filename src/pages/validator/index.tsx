@@ -79,7 +79,7 @@ export default function NFT() {
                 <div className="mt-10 shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
                 </div>
                 <div className="mt-0 md:mt-16 flex flex-col md:flex-row md:flex-wrap w-full">
-                    <Table dataSource={dataSource} rowKey="miner">
+                    <Table dataSource={dataSource} rowKey="miner" className="w-full">
                         <Table.Column className="w-auto" title="Validator" dataIndex="miner" key="miner" />
                         <Table.Column className="w-auto" title="Reward" dataIndex="reward" key="reward" />
                         <Table.Column className="w-auto" title="RewardFromPuissant" dataIndex="rewardFromPuissant" key="rewardFromPuissant" />
@@ -88,6 +88,6 @@ export default function NFT() {
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
