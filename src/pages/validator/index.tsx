@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import { DatePicker, Table, Input } from 'antd'
 import moment from "moment"
 import fetch from 'node-fetch';
@@ -12,19 +12,22 @@ export default function NFT() {
         blockCount: number,
     }
 
-    const validatorsList = {
-        "0x72b61c6014342d914470ec7ac2975be345796c2b": "48Club",
-        "0xa6f79b60359f141df90a0c745125b131caaffd12": "Avengers",
-        "0xd1d6bf74282782b0b3eb1413c901d6ecf02e8e28": "Feynman",
-        "0x0bac492386862ad3df4b666bc096b0505bb694da": "Claude Shannon",
-        "0xb218c5d6af1f979ac42bc68d98a5a0d796c6ab01": "Turing",
-        "0x4396e28197653d0c244d95f8c1e57da902a72b4e": "Alps",
-        "0x9bb832254baf4e8b4cc26bd2b52b31389b56e98b": "Stake2me",
-        "0xe2d3a739effcd3a99387d015e260eefac72ebea1": "MathWallet",
-        "0x7ae2f5b9e386cd1b50a4550696d957cb4900f03a": "fuji",
-    }
+    const validatorsList = useMemo(() => {
+        return {
+            "0x72b61c6014342d914470ec7ac2975be345796c2b": "48Club",
+            "0xa6f79b60359f141df90a0c745125b131caaffd12": "Avengers",
+            "0xd1d6bf74282782b0b3eb1413c901d6ecf02e8e28": "Feynman",
+            "0x0bac492386862ad3df4b666bc096b0505bb694da": "Claude Shannon",
+            "0xb218c5d6af1f979ac42bc68d98a5a0d796c6ab01": "Turing",
+            "0x4396e28197653d0c244d95f8c1e57da902a72b4e": "Alps",
+            "0x9bb832254baf4e8b4cc26bd2b52b31389b56e98b": "Stake2me",
+            "0xe2d3a739effcd3a99387d015e260eefac72ebea1": "MathWallet",
+            "0x7ae2f5b9e386cd1b50a4550696d957cb4900f03a": "fuji",
+        }
+    }, [])
 
-    const queryData = async (dateString: string) => {
+
+    const queryData = useCallback(async (dateString: string) => {
         var response = await fetch('https://www.48.club/api/v1/query?date=' + dateString)
         var data = Object.values(await response.json()) as apiDataT[]
         data = data.filter((item) => {
@@ -34,18 +37,18 @@ export default function NFT() {
             item.miner = validatorsList[item.miner]
         })
         return data
-    }
+    }, [validatorsList])
 
     const [dataSource, setDataSource] = useState([] as apiDataT[])
 
     const reloadDataSource = useCallback(async (dateString) => {
         setDataSource([] as apiDataT[])
         setDataSource(await queryData(dateString));
-    }, [dataSource])
+    }, [queryData])
 
     useEffect(() => {
         reloadDataSource(moment().format('YYYY-MM-DD'))
-    }, [])
+    }, [reloadDataSource])
 
 
     return (
@@ -61,8 +64,7 @@ export default function NFT() {
                             <DatePicker
                                 defaultValue={moment()}
                                 disabledDate={(current) => {
-                                    {/* 限制选择的日期只能是最近一周的日期 */ }
-                                    return current && current > moment().endOf('day') || current < moment().subtract(7, 'days')
+                                    return current > moment().endOf('day') || current < moment().subtract(7, 'days')
                                 }}
                                 className="w-full"
                                 onChange={(date, dateString) => {
