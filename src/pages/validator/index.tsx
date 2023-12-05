@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react'
-import { DatePicker, Table, Input } from 'antd'
+import { DatePicker, Table } from 'antd'
 import moment from "moment"
 import fetch from 'node-fetch';
 
@@ -10,6 +10,7 @@ export default function NFT() {
         reward: number,
         rewardFromPuissant: number,
         blockCount: number,
+        percentage: string,
     }
 
     const validatorsList = useMemo(() => {
@@ -31,10 +32,14 @@ export default function NFT() {
         var response = await fetch('https://www.48.club/api/v1/query?date=' + dateString)
         var data = Object.values(await response.json()) as apiDataT[]
         data = data.filter((item) => {
+            if (item.rewardFromPuissant !== 0 && validatorsList[item.miner] === undefined) {
+                console.log(item)
+            }
             return item.rewardFromPuissant !== 0 && validatorsList[item.miner] !== undefined
         })
         data.forEach((item) => {
             item.miner = validatorsList[item.miner]
+            item.percentage = (item.rewardFromPuissant / item.reward * 100).toFixed(2) + '%'
         })
         return data
     }, [validatorsList])
@@ -81,11 +86,12 @@ export default function NFT() {
                 <div className="mt-10 shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
                 </div>
                 <div className="mt-0 md:mt-16 flex flex-col md:flex-row md:flex-wrap w-full">
-                    <Table dataSource={dataSource} rowKey="miner" className="w-full">
-                        <Table.Column className="w-auto" title="Validator" dataIndex="miner" key="miner" />
-                        <Table.Column className="w-auto" title="Reward" dataIndex="reward" key="reward" />
-                        <Table.Column className="w-auto" title="RewardFromPuissant" dataIndex="rewardFromPuissant" key="rewardFromPuissant" />
-                        <Table.Column className="w-auto" title="BlockCount" dataIndex="blockCount" key="blockCount" />
+                    <Table dataSource={dataSource} rowKey="miner" className="w-full" bordered={true} >
+                        <Table.Column className="w-auto" title="Validator" dataIndex="miner" key="miner" sorter={(a: apiDataT, b: apiDataT) => a.miner.localeCompare(b.miner)} />
+                        <Table.Column className="w-auto" title="Reward" dataIndex="reward" key="reward" sorter={(a: apiDataT, b: apiDataT) => a.reward - b.reward} />
+                        <Table.Column className="w-auto" title="RewardFromPuissant" dataIndex="rewardFromPuissant" key="rewardFromPuissant" sorter={(a: apiDataT, b: apiDataT) => a.rewardFromPuissant - b.rewardFromPuissant} />
+                        <Table.Column className="w-auto" title="Percentage" dataIndex="percentage" key="percentage" sorter={(a: apiDataT, b: apiDataT) => parseFloat(a.percentage) - parseFloat(b.percentage)} />
+                        <Table.Column className="w-auto" title="BlockCount" dataIndex="blockCount" key="blockCount" sorter={(a: apiDataT, b: apiDataT) => a.blockCount - b.blockCount} />
                     </Table>
                 </div>
             </div>
