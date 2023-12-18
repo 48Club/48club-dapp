@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
@@ -13,6 +13,8 @@ export default function SummarySection() {
     }
     return myStakeBalance.times(100).div(totalSupply)
   }, [totalSupply, myStakeBalance])
+
+  console.log(balancePercentage, 'balancePercentage')
 
   return (
     <div className="pt-4 w-auto overflow-y-visible mb-20">

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const rotate = keyframes`
@@ -25,10 +24,10 @@ const StyledSVG = styled.svg<{ size: string, stroke: string | undefined }>`
  * need ...rest for layered styles on top
  */
 export default function Loader({
-                                 size = '16px',
-                                 stroke,
-                                 ...rest
-                               }: {
+  size = '16px',
+  stroke,
+  ...rest
+}: {
   size?: string,
   stroke?: string,
 }) {

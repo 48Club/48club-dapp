@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import HeaderSection from './HeaderSection'
 import { FilterSection } from './FilterSection'
 import { PoolCardSection } from './CardSection'
@@ -15,8 +14,8 @@ export default function Pool() {
       <FilterSection />
       <PoolCardSection />
 
-      <CreatePoolModal visible={isShow} onCancel={() => hide()} />
-      <StakeOrClaimModal visible={stakeShow} onCancel={() => setStakeShow(false)} />
+      <CreatePoolModal open={isShow} onCancel={() => hide()} />
+      <StakeOrClaimModal open={stakeShow} onCancel={() => setStakeShow(false)} />
     </div>
   )
 }

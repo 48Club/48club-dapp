@@ -1,13 +1,13 @@
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Input, Modal } from 'antd'
 import Label from 'components/Label'
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+//
+// import { useTranslation } from 'react-i18next'
 
 import './index.less'
 
 export default function StandardSection() {
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
 
   const modalHeader = (
     <div className="flex flex-row px-4 justify-between py-5">
@@ -34,7 +34,7 @@ export default function StandardSection() {
 
       <Modal
         title={modalHeader}
-        visible={false}
+        open={false}
         footer={null}
         onOk={() => {
         }}

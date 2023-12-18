@@ -1,9 +1,15 @@
+/** @type {import('tailwindcss').Config} */
+
+
 const primaryColor = "#FFC801";
 const secondaryColor = "#E9E9E9";
 
-module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  important: true,
+
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     colors: {
       primary: primaryColor,
@@ -81,10 +87,11 @@ module.exports = {
         '<2xl': { 'raw': '(max-width: 1279.9px)' },
         '@2xl': { 'raw': '(min-width: 1536px)' },
       },
-    },
-  },
-  variants: {
-    extend: {},
+    }
   },
   plugins: [],
-};
+  corePlugins: {
+    preflight: false
+  }
+}
+

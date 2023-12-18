@@ -1,4 +1,3 @@
-import React from 'react'
 import { Col, Row } from 'antd'
 import './index.less'
 import { useTranslation } from 'react-i18next'
@@ -33,9 +32,9 @@ export default function BannerSection() {
                   <a
                     className="button"
                     href={
-                       language === 'en'
-                          ? 'https://drive.google.com/file/d/1RZxJamk3dK2w-4e4TI98uXe1bCLd2Vz1/view?usp=sharing'
-                          : 'https://drive.google.com/file/d/1NFZiOoILO59LemFn2-_LHMD7c3nDBHla/view?usp=sharing'
+                      language === 'en'
+                        ? 'https://drive.google.com/file/d/1RZxJamk3dK2w-4e4TI98uXe1bCLd2Vz1/view?usp=sharing'
+                        : 'https://drive.google.com/file/d/1NFZiOoILO59LemFn2-_LHMD7c3nDBHla/view?usp=sharing'
                     }
                     target="_blank"
                     rel="noopener noreferrer"

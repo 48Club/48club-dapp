@@ -16,25 +16,25 @@ export default function useERC20Contract(address?: string) {
 }
 
 export function useStakingContract() {
-  return useMemo(() => new Contract(StakingAddress, Staking_ABI), [])
+  return useMemo(() => new Contract(StakingAddress as string, Staking_ABI), [])
 }
 
 export function useStakingContractReadonly() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
-  return useMemo(() => new Contract(StakingAddress, Staking_ABI, provider), [provider])
+  return useMemo(() => new Contract(StakingAddress as string, Staking_ABI, provider), [provider])
 }
 
 export function useGovernanceContractReadonly() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
-  return useMemo(() => new Contract(GovernanceAddress, Governance_ABI, provider), [provider])
+  return useMemo(() => new Contract(GovernanceAddress as string, Governance_ABI, provider), [provider])
 }
 
 export function useNftContract() {
-  return useMemo(() => new Contract(NftAddress, Nft_ABI), [])
+  return useMemo(() => new Contract(NftAddress as string, Nft_ABI), [])
 }
 
 export function useGovernanceContract() {
-  return useMemo(() => new Contract(GovernanceAddress, Governance_ABI), [])
+  return useMemo(() => new Contract(GovernanceAddress as string, Governance_ABI), [])
 }
 
 export function useFarmingContract(address: string) {
@@ -44,10 +44,10 @@ export function useFarmingContract(address: string) {
 
 export function useFarmingFactoryContract() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
-  return useMemo(() => new Contract(FarmingFactoryAddress, FarmingFactory_ABI, provider), [provider])
+  return useMemo(() => new Contract(FarmingFactoryAddress as string, FarmingFactory_ABI, provider), [provider])
 }
 
 export function useOracleContract() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
-  return useMemo(() => new Contract(OracleAddress, Oracle_ABI, provider), [provider])
+  return useMemo(() => new Contract(OracleAddress as string, Oracle_ABI, provider), [provider])
 }

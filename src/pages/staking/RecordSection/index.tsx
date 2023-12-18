@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
 import { formatAmount, shorten } from '@funcblock/dapp-sdk'
 import BigNumber from 'bignumber.js'
 import { useStakingContractReadonly } from '../../../hooks/useContract'
 import { START_BLOCK_NUMBER } from '../../../constants/contracts'
+import { Spin } from 'antd'
 
 function Row({ data }: { data: any }) {
   return (
@@ -32,10 +33,15 @@ export default function RecordSection() {
   const { t } = useTranslation()
 
   const [records, setRecords] = useState<any[]>([])
-  const stakingContractReadonly = useStakingContractReadonly()
+  const stakingContractReadonly = useStakingContractReadonly();
+
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     (async () => {
+      setLoading(true)
       const stakedFilter = stakingContractReadonly.filters.Staked(null, null)
+      console.log(stakedFilter, 'stakedFilter')
       const stakedEvents = await stakingContractReadonly.queryFilter(stakedFilter, START_BLOCK_NUMBER)
       const unstakedFilter = stakingContractReadonly.filters.Unstaked(null, null)
       const unstakedEvents = await stakingContractReadonly.queryFilter(unstakedFilter, START_BLOCK_NUMBER)
@@ -46,6 +52,7 @@ export default function RecordSection() {
         amount: new BigNumber(i.args?.amount.toString()),
       }))
       setRecords(rows.sort((a, b) => b.blockNumber - a.blockNumber).slice(0, 20))
+      setLoading(false)
     })()
   }, [stakingContractReadonly])
 
@@ -59,16 +66,25 @@ export default function RecordSection() {
           <div className="flex-1 text-gray">{t('amount')}</div>
           <div className="flex-1 text-gray hidden md:block">{t('blocknumber')}</div>
         </div>
-        {records.length > 0 ? (
-          <>
-            {records.map((i) => <Row key={i.blockNumber} data={i} />)}
-          </>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-16">
-            <img src="/static/staking-no-records.png" className="mb-6" alt="" />
-            <span className="text-base text-gray">{t('no_records')}</span>
-          </div>
-        )}
+        {
+          loading ?
+            <div className='w-full h-[200px] flex justify-center items-center'>
+              <Spin size="large" />
+            </div>
+            :
+            (
+              records.length > 0 ? (
+                <>
+                  {records.map((i) => <Row key={i.blockNumber} data={i} />)}
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-16">
+                  <img src="/static/staking-no-records.png" className="mb-6" alt="" />
+                  <span className="text-base text-gray">{t('no_records')}</span>
+                </div>
+              )
+            )
+        }
       </div>
     </div>
   )

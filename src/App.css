@@ -1,0 +1,142 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+div,
+input,
+button {
+  border-width: 0;
+  border-style: solid;
+  box-sizing: border-box;
+}
+
+.hide-tabs-bottom-line .ant-tabs-nav::before {
+  border: none;
+}
+
+.explorer-wrap .color-text-white.ant-tabs .ant-tabs-tab {
+  color: white;
+}
+
+.explorer-table-menu-type .ant-tabs-nav-list .ant-tabs-tab {
+  padding: 0;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.no-border {
+  border: 1px solid transparent;
+  border-radius: 4px !important;
+}
+
+.table-pagination-btn .ant-pagination-item,
+.table-pagination-btn .ant-pagination-prev,
+.table-pagination-btn .ant-pagination-next {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  line-height: 28px;
+  margin-right: 12px;
+  border-radius: 4px;
+}
+
+.table-pagination-btn .ant-pagination-prev .ant-pagination-item-link,
+.table-pagination-btn .ant-pagination-next .ant-pagination-item-link {
+  border-radius: 4px;
+}
+
+.check-rouded-full .ant-checkbox-inner {
+  border-radius: 999px;
+  border: 1px solid red;
+}
+
+.check-rouded-full .ant-checkbox-inner,
+.ant-checkbox-inner,
+.check-rouded-full .ant-checkbox-checked::after {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 999px;
+}
+
+.check-rouded-full .ant-checkbox-wrapper-checked .check-label-text {
+  color: #ffc800;
+}
+
+.diy-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+  /* background: rgba(217, 217, 217, .2); */
+  border-radius: 99px;
+}
+
+.diy-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9;
+  border-radius: 99px;
+}
+
+.checkbox-center > span {
+  display: flex;
+  align-items: center;
+}
+.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  color: #3f3f3f;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled) {
+  border-color: transparent;
+  color: #1e1e1e;
+}
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  border-color: transparent;
+  color: #1e1e1e;
+  opacity: 0.8;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled).border-btn {
+  border: 1px solid #1e1e1e;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled).border-btn {
+  border: 1px solid #acacac;
+}
+
+.ant-modal .ant-modal-content {
+  padding: 0;
+}
+
+.miner-address-detail-copy.ant-tooltip .ant-tooltip-inner {
+  padding: 12px;
+  padding-bottom: 1px;
+}
+.token-seleted-list.ant-select-dropdown {
+  border-radius: 8px;
+  /* Shadow 1 */
+  box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.06);
+}
+
+.token-seleted-list.ant-select-dropdown .ant-select-item {
+  padding: 0;
+}
+
+
+.alert-model-wrap .ant-modal-confirm.ant-modal .ant-modal-body {
+  padding: 20px;
+}
+
+.alert-model-wrap .ant-btn-primary {
+  background: #ffc801;
+  color: #1e1e1e;
+}
+.alert-model-wrap .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background: #ffc801;
+  opacity: .8;
+}
+
+.table-pagination-btn .ant-pagination-item, .table-pagination-btn .ant-pagination-prev, .table-pagination-btn .ant-pagination-next {
+  width: unset;
+  min-width: unset;
+  padding: 0 4px;
+}

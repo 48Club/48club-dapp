@@ -1,5 +1,3 @@
-import { NavLink } from 'react-router-dom'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
 import { useCreatePoolShow } from '../../../store'
@@ -24,10 +22,9 @@ export default function HeaderSection() {
         <div className="flex flex-col">
           <span className="font-bold text-2xl leading-7 mb-4 text-light-black">{t('pool_banner')}</span>
           <span className="text-base leading-6 mb-5 text-dark-gray">{t('pool_banner_desc')}</span>
-
           <Button
             type="primary"
-            className="min-w-30 h-10 text-sm font-medium rounded text-light-black"
+            className="min-w-30 h-10 text-sm font-medium rounded bg-yellow text-light-black"
             onClick={() => showCreate(1)}
             style={{ maxWidth: 'max-content' }}
           >

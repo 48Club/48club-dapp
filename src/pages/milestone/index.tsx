@@ -1,4 +1,3 @@
-import React from 'react'
 import TutorialSection from './TutorialSection'
 import BannerSection from './BannerSection'
 

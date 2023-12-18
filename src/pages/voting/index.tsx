@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import CardSection from './CardSection'
 import FilterSection from './FilterSection'
 import HeaderSection from './HeaderSection'

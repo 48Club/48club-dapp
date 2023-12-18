@@ -1,5 +1,5 @@
 import { DatePicker, Select, Switch } from 'antd'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GovInfoFilterContext, GovSetFilterContext } from '../../../hooks/gov/useGov'
 import './index.less'
@@ -49,7 +49,7 @@ export default function FilterSection() {
       <div className="flex md:flex-1 md:justify-between">
         <div className="flex flex-col w-full mr-6 md:w-80">
           <span className="text-sm leading-5 mb-2 text-light-black">
-          {t('filter_status')}
+            {t('filter_status')}
           </span>
           <Select
             defaultValue={status}
@@ -60,7 +60,7 @@ export default function FilterSection() {
           </Select>
         </div>
         <div className="shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
-          <span className="text-sm leading-5 mb-2 text-light-black">
+          <span className="text-sm leading-5 mb-2 whitespace-nowrap text-light-black">
             {t('filter_related')}
           </span>
           <Switch
@@ -69,7 +69,7 @@ export default function FilterSection() {
             onChange={setRelated}
           />
         </div>
-        <div className="shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
+        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_claimable')}
           </span>

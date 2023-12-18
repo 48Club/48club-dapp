@@ -1,6 +1,6 @@
 import { Button, Input, Select } from 'antd'
 import Back from 'components/Back'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import useNftInfo from '../../hooks/nft/useNftInfo'
 import useGov from '../../hooks/gov/useGov'
 import useGovInfo from '../../hooks/gov/useGovInfo'
@@ -10,12 +10,12 @@ import useApprove from '../../hooks/erc20/useApprove'
 import { GovernanceAddress, KogeAddress } from '../../constants/contracts'
 import { useEthers, useTokenAllowance } from '@usedapp/core'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 const { TextArea } = Input
 
 export default function VotingCreate() {
-  const history = useHistory()
+  const nav = useNavigate()
   const { account } = useEthers()
   const { onPropose, proposeLoading } = useGov()
   const { minDeposit, reward } = useGovInfo()
@@ -34,7 +34,7 @@ export default function VotingCreate() {
       return
     }
     await onPropose(nft, amountBN.toString(), desc)
-    history.push('/voting')
+    nav('/voting')
   }, [nft, desc, amountBN, onPropose, history])
 
   return (
@@ -66,7 +66,7 @@ export default function VotingCreate() {
         </div>
         <div className="flex flex-col mt-12 md:w-1/2">
           <span className="text-sm font-medium mb-2 text-light-black">{t('voting_period')}</span>
-          <Input value={"3"+t('n_days').toString()} className="h-12 border-none rounded text-sm text-light-black bg-light-white" disabled />
+          <Input value={"3" + t('n_days').toString()} className="h-12 border-none rounded text-sm text-light-black bg-light-white" disabled />
         </div>
       </div>
 
@@ -91,21 +91,23 @@ export default function VotingCreate() {
       <div className="w-full mt-12 mb-20">
         {
           !allowance.gt(0) && (
-            <Button className="h-12 rounded w-full rounded mb-6"
-                    type="primary"
-                    onClick={approve}
-                    loading={approveLoading}
+            <Button className="h-12 rounded w-full mb-6  bg-yellow"
+              type="primary"
+              onClick={approve}
+              loading={approveLoading}
             >
               {t('approve')}
             </Button>
           )
         }
-        <Button className="h-12 rounded w-full rounded" onClick={onSubmit}
-                type="primary"
-                loading={proposeLoading}
-                disabled={!minDeposit?.lte(amountBN) || !allowance.gt(0)}>
-          {t('submit')}
-        </Button>
+        <div className='h-12'>
+          <Button className="h-12 rounded w-full" onClick={onSubmit}
+            type="primary"
+            loading={proposeLoading}
+            disabled={!minDeposit?.lte(amountBN) || !allowance.gt(0)}>
+            {t('submit')}
+          </Button>
+        </div>
       </div>
     </div>
   )

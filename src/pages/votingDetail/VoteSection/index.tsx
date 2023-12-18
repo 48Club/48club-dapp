@@ -1,7 +1,7 @@
 import { CheckCircleTwoTone, CloseCircleTwoTone, MinusCircleTwoTone } from '@ant-design/icons'
 import { Button, Input, Spin, Tooltip } from 'antd'
 import Label from 'components/Label'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import useGov from '../../../hooks/gov/useGov'
 import { useParams } from 'react-router-dom'
@@ -16,20 +16,20 @@ import useGovDetailClaims from '../../../hooks/gov/useGovDetailClaims'
 export default function VoteSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { myCanVote, state, myReward } = useGovDetailInfo(id)
+  const { myCanVote, state, myReward } = useGovDetailInfo(id as string)
   const { myStakeBalance } = useStakeInfo()
-  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id)
-  const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id)
+  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id as string)
+  const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id as string)
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
       return <ClaimRewardPanel id={id} myReward={myReward}
-                               claimRecords={claimRecords} reloadClaimRecords={reloadClaimRecords} />
+        claimRecords={claimRecords} reloadClaimRecords={reloadClaimRecords} />
     }
     if (state === 'Invalid' || state === 'Refunded') {
       return <InvalidPanel id={id} state={state} />
     }
     return <ActionPanel id={id} canVote={myCanVote && myStakeBalance?.gt(0)}
-                        voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} />
+      voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} />
   }
 
   return (
@@ -42,28 +42,28 @@ export default function VoteSection() {
   )
 }
 
-function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
+function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }: any) {
   const { onVote } = useGov()
   const { account } = useEthers()
   const { myVotes } = useGovDetailInfo(id)
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
-  
+
   const [reason, setReason] = useState("")
-  
-  const myVoted = voteRecords?.find(i => i.voter === account && i.proposalId === id)
-  const onSubmit = useCallback(async (id, support, reason) => {
+
+  const myVoted = voteRecords?.find((i: any) => i.voter === account && i.proposalId === id)
+  const onSubmit = useCallback(async (id: any, support: any, reason: any) => {
     await onVote(id, support, reason)
     setTimeout(reloadVoteRecords, 1000)
   }, [onVote, reloadVoteRecords])
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
 
-  
+
   return <Spin spinning={!voteRecords}>
     <div className="flex flex-col justify-center items-stretch">
       <div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
-      
+
       <Input
         placeholder={t("placeholder_reason")}
         className="h-12 rounded font-medium text-sm text-light-black"
@@ -86,17 +86,17 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }) {
       >
         {t('reject_vote')}
       </Button>
-      
+
     </div>
   </Spin>
 }
 
 
-function ClaimRewardPanel({ id, myReward, claimRecords, reloadClaimRecords }) {
+function ClaimRewardPanel({ id, myReward, claimRecords, reloadClaimRecords }: any) {
   const { onClaim } = useGov()
   const { t } = useTranslation()
   const { account } = useEthers()
-  const myClaim = claimRecords?.find(i => i.caller === account)
+  const myClaim = claimRecords?.find((i: any) => i.caller === account)
 
   const onSubmit = useCallback(async () => {
     await onClaim(id)
@@ -125,7 +125,7 @@ function ClaimRewardPanel({ id, myReward, claimRecords, reloadClaimRecords }) {
 }
 
 
-function InvalidPanel({ id, state }) {
+function InvalidPanel({ id, state }: any) {
   const { onRefund } = useGov()
   const { t } = useTranslation()
 
@@ -140,7 +140,7 @@ function InvalidPanel({ id, state }) {
         >
           <div className="mr-1">{t('close')}</div>
           <Tooltip className="opacity-50" placement="top"
-                   title="Closing invalid proposal will be rewarded">
+            title="Closing invalid proposal will be rewarded">
             <HelpCircle size={16} />
           </Tooltip>
         </Button>

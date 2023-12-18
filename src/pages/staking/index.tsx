@@ -1,4 +1,3 @@
-import React from 'react'
 import StakingSection from './StakingSection'
 import RecordSection from './RecordSection'
 import SummarySection from './SummarySection'

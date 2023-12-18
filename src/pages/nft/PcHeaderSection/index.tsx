@@ -1,16 +1,15 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
-import React from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import useNftInfo from '../../../hooks/nft/useNftInfo'
 
 export default function PcHeaderSection() {
-  let history = useHistory()
+  const nav = useNavigate()
   const { totalSupply, myBalance } = useNftInfo()
 
   const createNFT = () => {
-    let path = `/nft/create`
-    history.push(path)
+    const path = `/nft/create`
+    nav(path)
   }
 
   const { t } = useTranslation()
@@ -24,7 +23,7 @@ export default function PcHeaderSection() {
           <div>{`${t('my_casting')} ${myBalance} ${t('piece')}`}</div>
         </div>
         <div className="w-40">
-          <Button className="h-12 text-sm w-full text-light-black bg-yellow rounded" onClick={createNFT}>
+          <Button type="primary" className="h-12 text-sm w-full text-light-black bg-yellow rounded" onClick={createNFT}>
             {t('casting_nft')}
           </Button>
         </div>

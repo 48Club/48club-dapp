@@ -1,6 +1,5 @@
-import React from 'react'
 
-export default function Label(props) {
+export default function Label(props: { text: string }) {
   const { text } = props
   return (
     <div className="flex flex-row items-center">
