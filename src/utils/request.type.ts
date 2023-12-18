@@ -52,6 +52,7 @@ export type TransferDataProps = {
     input_decode: {
         amt: number;
         op: string;
+        to: string;
     }
 }
 

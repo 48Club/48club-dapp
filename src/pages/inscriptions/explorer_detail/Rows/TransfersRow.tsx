@@ -6,23 +6,23 @@ export type TransfersRowDataProps = TransferDataProps & {
     amount: number;
 }
 
-const TransfersRow:React.FC<{
+const TransfersRow: React.FC<{
     data: TransfersRowDataProps
 }> = ({ data }) => {
 
     return (
         <div onClick={() => window.open(`https://bscscan.com/tx/${data.tx_hash}`)} className="cursor-pointer hover:bg-[#f4f4f4] py-4 flex flex-row justify-between items-center border-t border-gray text-[14px]">
             <div className="w-[240px] flex items-center cursor-pointer">
-            {data?.input_decode?.op}
+                {data?.input_decode?.op}
             </div>
             <div className="w-[240px] flex items-center cursor-pointer">
-            {data?.amount}
+                {data?.amount}
             </div>
             <div className="w-[240px] underline text-[#A9A9A9]">
-            {shorten(data.from)}
+                {shorten(data.from)}
             </div>
             <div className="w-[240px] underline text-[#A9A9A9]">
-            {shorten(data.to)}
+                {shorten(data.input_decode.to)}
             </div>
             <div className="w-[240px] flex justify-end items-center">
                 <span className=" underline mr-[8px]">{data.block_at ? moment(data.block_at * 1000).format("YYYY-MM-DD HH:mm:ss") : '-'}</span>
