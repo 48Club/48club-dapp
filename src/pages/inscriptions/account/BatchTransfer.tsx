@@ -159,7 +159,7 @@ const BatchTransfer: React.FC = () => {
                     <span>{currentTick?.amount ? (currentTick?.amount - +amount) : '-'}</span>
                 </p>
             </div>
-            <Button loading={state.status === "Mining" || state.status === "PendingSignature"} onClick={betchTransfer} disabled={chooseMyWallet === false || !hasOkMoney} type="primary" className="mt-[24px] h-[48px] disabled:hover:h-[48px] disabled:h-[48px] no-border bg-yellow disabled:border-none disabled:bg-[#E9E9E9] disabled:text-[#1E1E1E]" block>{chooseMyWallet ? (hasOkMoney ? "Betch Transfer" : "Invalid Balance") : 'Not Your Wallet'}</Button>
+            <Button loading={state.status === "Mining" || state.status === "PendingSignature"} onClick={betchTransfer} disabled={chooseMyWallet === false || !hasOkMoney} type="primary" className="mt-[24px] h-[48px] disabled:hover:h-[48px] disabled:h-[48px] no-border bg-yellow disabled:border-none disabled:bg-[#E9E9E9] disabled:text-[#1E1E1E]" block>{chooseMyWallet ? (hasOkMoney ? "Batch Transfer" : "Invalid Balance") : 'Not Your Wallet'}</Button>
         </div>
 
     </div>
