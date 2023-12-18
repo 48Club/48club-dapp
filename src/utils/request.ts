@@ -18,11 +18,14 @@ export const requestTimeConfig = {
 
 axios.interceptors.request.use(request => {
     const data = request.data;
-    if(data.page !== undefined) {
-        data.page_size = pageSize;
-        data.page -= 1;
+    if (data) {
+        if (data.page !== undefined) {
+            data.page_size = pageSize;
+            data.page -= 1;
+        }
+        request.data = new URLSearchParams(request.data)
     }
-    request.data = new URLSearchParams(request.data)
+
     return request;
 })
 

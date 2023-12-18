@@ -1,7 +1,6 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import { DatePicker, Table } from 'antd'
 import moment from "moment"
-// import fetch from 'node-fetch';
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -28,6 +27,7 @@ export default function NFT() {
         }
     }, [])
 
+    const [dataSource, setDataSource] = useState([] as apiDataT[])
 
     const queryData = useCallback(async (dateString: string) => {
         const response = await axios.get('https://www.48.club/api/v1/query?date=' + dateString);
@@ -43,19 +43,12 @@ export default function NFT() {
             item.miner = validatorsList[item.miner]
             item.percentage = (item.rewardFromPuissant / item.reward * 100).toFixed(2) + '%'
         })
-        return data
+        setDataSource(data)
     }, [validatorsList])
 
-    const [dataSource, setDataSource] = useState([] as apiDataT[])
-
-    const reloadDataSource = useCallback(async (dateString: string) => {
-        setDataSource([] as apiDataT[])
-        setDataSource(await queryData(dateString));
-    }, [queryData])
-
     useEffect(() => {
-        reloadDataSource(moment().format('YYYY-MM-DD'))
-    }, [reloadDataSource])
+        queryData(moment().format('YYYY-MM-DD'))
+    }, [])
 
 
     return (
@@ -75,8 +68,8 @@ export default function NFT() {
                                 }}
                                 className="w-full"
                                 onChange={(date, dateString) => {
-                                    reloadDataSource(dateString)
                                     console.log(dateString);
+                                    queryData(dateString)
                                 }}
                             />
                         </div>
