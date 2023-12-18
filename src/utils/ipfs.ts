@@ -1,5 +1,7 @@
 import * as ipfsClient from 'ipfs-http-client'
 
+import { Buffer } from 'buffer';
+
 const projectId = '26MNz6wshb1eYqdOAjnosI5wxDQ'
 const projectSecret = '132c5ee9fb42557194239e861abc24ae'
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64')

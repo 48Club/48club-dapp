@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import { DatePicker, Table } from 'antd'
 import moment from "moment"
-import fetch from 'node-fetch';
-
+// import fetch from 'node-fetch';
+import axios from 'axios'
+import dayjs from 'dayjs'
 
 export default function NFT() {
     type apiDataT = {
@@ -13,7 +14,7 @@ export default function NFT() {
         percentage: string,
     }
 
-    const validatorsList = useMemo(() => {
+    const validatorsList: any = useMemo(() => {
         return {
             "0x72b61c6014342d914470ec7ac2975be345796c2b": "48Club",
             "0xa6f79b60359f141df90a0c745125b131caaffd12": "Avengers",
@@ -29,8 +30,9 @@ export default function NFT() {
 
 
     const queryData = useCallback(async (dateString: string) => {
-        var response = await fetch('https://www.48.club/api/v1/query?date=' + dateString)
-        var data = Object.values(await response.json()) as apiDataT[]
+        const response = await axios.get('https://www.48.club/api/v1/query?date=' + dateString);
+
+        let data = Object.values(response.data) as apiDataT[]
         data = data.filter((item) => {
             if (item.rewardFromPuissant !== 0 && validatorsList[item.miner] === undefined) {
                 console.log(item)
@@ -46,7 +48,7 @@ export default function NFT() {
 
     const [dataSource, setDataSource] = useState([] as apiDataT[])
 
-    const reloadDataSource = useCallback(async (dateString) => {
+    const reloadDataSource = useCallback(async (dateString: string) => {
         setDataSource([] as apiDataT[])
         setDataSource(await queryData(dateString));
     }, [queryData])
@@ -67,9 +69,9 @@ export default function NFT() {
                         </div>
                         <div className="w-40">
                             <DatePicker
-                                defaultValue={moment()}
+                                defaultValue={dayjs()}
                                 disabledDate={(current) => {
-                                    return current > moment().endOf('day') || current < moment().subtract(7, 'days')
+                                    return current > dayjs().endOf('day') || current < moment().subtract(7, 'days')
                                 }}
                                 className="w-full"
                                 onChange={(date, dateString) => {

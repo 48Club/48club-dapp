@@ -1,4 +1,3 @@
-import React from 'react'
 import moment from 'moment'
 import CryptocurrencyTimelineCard from '../../../components/CryptocurrencyTimelineCard'
 import './index.less'

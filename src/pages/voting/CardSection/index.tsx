@@ -1,7 +1,7 @@
 import { CheckCircleTwoTone, ClockCircleFilled, CloseCircleTwoTone } from '@ant-design/icons'
 import Tag from 'components/Tag'
 import { NavLink } from 'react-router-dom'
-import React, { useContext, useMemo } from 'react'
+import { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatAmount, shorten } from '@funcblock/dapp-sdk'
 import { useEthers } from '@usedapp/core'
@@ -24,7 +24,13 @@ export default function CardSection() {
   )
 }
 
-function Card({ item }) {
+let CardSectioNode = <>
+  <CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
+    Not Voted
+  </div>
+</>
+
+function Card({ item }: { item: any }) {
   const { t } = useTranslation()
   const info = useGovDetailInfo(item.proposalId)
   const { state, voteStart, proposer } = info
@@ -40,6 +46,7 @@ function Card({ item }) {
   }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item])
 
   const ntitle = (item?.ntitle) === '' ? item?.description : (item?.ntitle)
+
 
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
@@ -83,19 +90,15 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
         </div>
       </>
     case 'Active':
-
-      let CardSection = <><CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
-        Not Voted
-      </div></>
       if (info.myVotes?.gt(0)) {
-        CardSection = <> <CheckCircleTwoTone twoToneColor='#08C849' className="w-3.5 h-3.5 mr-1" />
+        CardSectioNode = <> <CheckCircleTwoTone twoToneColor='#08C849' className="w-3.5 h-3.5 mr-1" />
           <div className="text-xs leading-5 text-dark-gray">
             Voted
           </div></>
       }
       return <div className="flex items-center">
         <div className="flex items-center">
-          {CardSection}
+          {CardSectioNode}
         </div>
         <div className="flex items-center">
           <ClockCircleFilled className="w-3.5 h-3.5 mr-1 text-dark-gray" />

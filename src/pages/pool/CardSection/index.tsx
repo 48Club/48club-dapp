@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useEffect } from 'react'
+import { useCallback, useMemo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Bignumber from 'bignumber.js'
 import { Tag, Button, message, Tooltip } from 'antd'
@@ -42,9 +42,9 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
     onExit,
     exitLoading,
   } = usePool(pool)
-  const [_, setStakeShow] = useStakeShow()
+  const [, setStakeShow] = useStakeShow()
   const { setCurrentType, setCurAddress } = useStakeOrClaim()
-  const { list, setList } = useRewardTokenSymbolList()
+  const { setList } = useRewardTokenSymbolList()
   const { rewardTokenInfo, earnedAmount, rewardTokenSymbol, rewardToken } = usePoolInfo(pool)
   const { timestamp } = useBlockMeta()
   const { showCreate } = useCreatePoolShow()
@@ -149,12 +149,11 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
 
   return (
     <div
-      className={`relative w-90 flex-col py-10 px-8 shadow rounded-xl bg-white ${
-        (filterDetail.status === -1 || filterDetail.status === finishStatus) &&
-        (filterDetail.stakeAddress === stakeToken || filterDetail.stakeAddress === '')
+      className={`relative w-90 flex-col py-10 px-8 shadow rounded-xl bg-white ${(filterDetail.status === -1 || filterDetail.status === finishStatus) &&
+          (filterDetail.stakeAddress === stakeToken || filterDetail.stakeAddress === '')
           ? ''
           : 'hidden'
-      }`}
+        }`}
     >
       <Tag
         color={finishStatus === 0 ? '#EF2B2B' : finishStatus === 1 ? '#08C849' : '#B9817D'}
@@ -168,7 +167,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       </div>
       <div className="flex flex-col items-center mt-8 font-bold text-lg">
         <span>
-          {t('pool_pledge')} {TOKENS[stakeToken] ?? stakeTokenSymbol}
+          {t('pool_pledge')} {TOKENS?.[stakeToken] ?? stakeTokenSymbol}
         </span>
         <span className="cursor-pointer">
           {t('pool_reward')}{' '}
@@ -184,7 +183,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
               </a>
             }
           >
-            {TOKENS[rewardToken] ?? rewardTokenSymbol}
+            {TOKENS?.[rewardToken] ?? rewardTokenSymbol}
           </Tooltip>
         </span>
       </div>
@@ -195,7 +194,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         </div>
         <div className="mt-2 flex justify-between items-center gap-2 text-sm">
           <span className="text-dark-gray">
-            {t('pool_total_amount')}: {formatAmount(allAmount, 18)} {TOKENS[rewardToken] ?? rewardTokenSymbol}
+            {t('pool_total_amount')}: {formatAmount(allAmount, 18)} {TOKENS?.[rewardToken] ?? rewardTokenSymbol}
           </span>
           <span
             className="text-primary underline underline-primary cursor-pointer"
@@ -220,13 +219,13 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
           <span>{t('pool_total_stake')}:</span>
           <span>
-            {formatAmount(totalStakeAmount, 18)} {TOKENS[stakeToken] ?? stakeTokenSymbol}
+            {formatAmount(totalStakeAmount, 18)} {TOKENS?.[stakeToken] ?? stakeTokenSymbol}
           </span>
         </div>
         <div className="mt-2 flex justify-between items-center text-dark-gray text-sm">
           <span>{t('pool_my_stake')}:</span>
           <span>
-            {formatAmount(stakeAmount, 18)} {TOKENS[stakeToken] ?? stakeTokenSymbol}
+            {formatAmount(stakeAmount, 18)} {TOKENS?.[stakeToken] ?? stakeTokenSymbol}
           </span>
         </div>
         {rewardTokenInfo.startTime && (
@@ -244,13 +243,13 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
       </div>
       <div className="py-6 flex justify-between items-center text-sm">
         <span className="">
-          {t('pool_my_reward')}: {formatAmount(earnedAmount, 18)} {TOKENS[rewardToken] ?? rewardTokenSymbol}
+          {t('pool_my_reward')}: {formatAmount(earnedAmount, 18)} {TOKENS?.[rewardToken] ?? rewardTokenSymbol}
         </span>
         <div className="flex items-center gap-1">
-          <Button type="primary" size="small" loading={claimLoading} onClick={claimHandler}>
+          <Button type="primary" className='bg-yellow' size="small" loading={claimLoading} onClick={claimHandler}>
             {t('pool_claim')}
           </Button>
-          <Button type="primary" size="small" loading={exitLoading} onClick={exitHandler}>
+          <Button type="primary" className='bg-yellow' size="small" loading={exitLoading} onClick={exitHandler}>
             {t('pool_exit')}
           </Button>
         </div>
@@ -263,7 +262,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
               type="primary"
               loading={stakePoolLoading || approveLoading}
               size="large"
-              className="h-12 flex-1 rounded"
+              className="h-12 flex-1 rounded bg-yellow"
               onClick={handleApprove}
             >
               {isAllowed ? t('pool_pledge') : 'Approve'}
@@ -272,7 +271,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
               <Button
                 size="large"
                 disabled={!stakeAmount?.gt(0)}
-                className="h-12 flex-1 rounded"
+                className="h-12 flex-1 rounded bg-yellow"
                 onClick={handleWithdraw}
               >
                 {t('pool_unpledge')}
@@ -284,7 +283,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
             type="primary"
             danger
             size="large"
-            className="h-12 flex-1 rounded"
+            className="h-12 flex-1 rounded bg-yellow"
             disabled={!account}
             onClick={() => {
               showCreate(2, {

@@ -28,7 +28,7 @@ export default function useGovInfo() {
   const govContractReadonly = useGovernanceContractReadonly()
   useEffect(() => {
     (async () => {
-      let titles = await (await fetch('/static/voting.title.json')).json()
+      const titles = await (await fetch('/static/voting.title.json')).json()
       const createdFilter = govContractReadonly.filters.ProposalCreated(null, null)
       const events = await govContractReadonly.queryFilter(createdFilter, START_BLOCK_NUMBER)
       const rows = events.map(i => ({
@@ -38,7 +38,7 @@ export default function useGovInfo() {
         startTime: i.args?.startTime?.toNumber(),
         endTime: i.args?.endTime?.toNumber(),
         ntitle: (() => {
-          let _tmp_id = i.args?.proposalId?.toString()
+          const _tmp_id = i.args?.proposalId?.toString()
           if (titles[_tmp_id]) {
             return titles[_tmp_id]
           }

@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useCallback } from 'react'
-import { Button, Modal, ModalProps, Input } from 'antd'
+import { useState, useMemo, useCallback } from 'react'
+import { Button, Modal, Input } from 'antd'
 import BigNumber from 'bignumber.js'
 import { useTokenBalance, useEthers } from '@usedapp/core'
 import { useTranslation } from 'react-i18next'
@@ -8,14 +8,14 @@ import { usePool, usePoolInfo } from '../../../hooks/pool/usePool'
 import { useStakeOrClaim, useStakeShow } from '../../../store'
 import { TOKENS } from '../../../constants/tokens'
 
-export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
+export const StakeOrClaimModal = (props: { open: boolean, onCancel: () => void }) => {
   const { t } = useTranslation()
   const { currentType, curAddress } = useStakeOrClaim()
   const [amount, setAmount] = useState('')
   const [isMax, setMax] = useState(false)
   const amountBN = useMemo(() => new BigNumber(amount).times(TEN_POW(18)), [amount])
   const { account } = useEthers()
-  const [_, hideModal] = useStakeShow()
+  const [, hideModal] = useStakeShow()
   const {
     stakePoolLoading,
     onStakePool,
@@ -25,7 +25,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
     withdrawLoading,
     onWithdrawAll,
     withdrawAllLoading,
-    onExit,
+    // onExit,
     exitLoading,
   } = usePool(curAddress || '')
   const stakeBalance = useTokenBalance(stakeToken, account)
@@ -81,7 +81,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
           <div className="flex-1 flex flex-col gap-3">
             <span>{t('pool_staking_currency')}</span>
             <Input
-              value={TOKENS[stakeToken] ?? stakeTokenSymbol ?? ''}
+              value={TOKENS?.[stakeToken] ?? stakeTokenSymbol ?? ''}
               readOnly
               size="large"
               className="h-12 border-none rounded bg-light-white"
@@ -90,7 +90,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
           <div className="flex-1 flex flex-col gap-3">
             <span>{t('pool_reward_currency')}</span>
             <Input
-              value={TOKENS[rewardToken] ?? rewardTokenSymbol}
+              value={TOKENS?.[rewardToken] ?? rewardTokenSymbol}
               readOnly
               size="large"
               className="h-12 border-none rounded bg-light-white"
@@ -112,10 +112,10 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
               currentType === 1
                 ? `${t('pool_balance')}: ${new BigNumber(stakeBalance?.toString() ?? '')
                   .div(TEN_POW(18))
-                  .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
+                  .toString()} ${TOKENS?.[stakeToken] ?? stakeTokenSymbol}`
                 : `${t('pool_staking_amount')}: ${new BigNumber(stakeAmount?.toString() ?? '')
                   .div(TEN_POW(18))
-                  .toString()} ${TOKENS[stakeToken] ?? stakeTokenSymbol}`
+                  .toString()} ${TOKENS?.[stakeToken] ?? stakeTokenSymbol}`
             }
             suffix={
               <span className="text-primary text-sm font-bold cursor-pointer" onClick={stakeMax}>
@@ -142,7 +142,7 @@ export const StakeOrClaimModal = (props: Pick<ModalProps, 'visible' | 'onCancel'
               disabled={!amountBN.gt(0) || !new BigNumber(stakeAmount?.toString() ?? '').gt(0)}
               type="primary"
               size="large"
-              className="w-50 h-12 rounded"
+              className="w-50 h-12 rounded bg-yellow"
               onClick={handleWithdraw}
               loading={withdrawLoading || withdrawAllLoading || exitLoading}
             >

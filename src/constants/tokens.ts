@@ -1,7 +1,12 @@
 import { ChainId } from '@usedapp/core'
 import { CHAIN_ID } from './env'
 
-export const TOKENS = {
+
+type PropsOrUndefined = {
+  [key in string]: string;
+} | undefined;
+
+export const TOKENS: PropsOrUndefined = {
   [ChainId.BSC]: {
     '0xe6DF05CE8C8301223373CF5B969AFCb1498c5528': 'KOGE',
 //   '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c': 'WBNB',
@@ -13,10 +18,10 @@ export const TOKENS = {
     '0xfcd08643A6390C465D8b12C42C0B4AFc291EAC12': 'Pancake KOGE/BNB V2 LP',
     '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E': 'Test LP',
   },
-}[CHAIN_ID]
+}[CHAIN_ID as number]
 
 
-export const STAKING_WHITELIST = {
+export const STAKING_WHITELIST: string[] | undefined = {
   [ChainId.BSC]: [
     '0xe6DF05CE8C8301223373CF5B969AFCb1498c5528',
 //    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
@@ -28,7 +33,7 @@ export const STAKING_WHITELIST = {
     '0xfcd08643A6390C465D8b12C42C0B4AFc291EAC12',
     '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E',
   ],
-}[CHAIN_ID]
+}[CHAIN_ID as number]
 
 
 export default TOKENS

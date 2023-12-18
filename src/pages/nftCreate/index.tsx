@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PictureOutlined } from "@ant-design/icons";
 import { Button, Input, Upload } from "antd";
 import Back from "components/Back";
@@ -7,9 +8,9 @@ import useNft from "../../hooks/nft/useNft";
 import useNftInfo from "../../hooks/nft/useNftInfo";
 import { formatAmount } from "@funcblock/dapp-sdk";
 import ipfs from "../../utils/ipfs";
-import { useHistory, useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
-function getBase64(file) {
+function getBase64(file: any) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -28,11 +29,11 @@ const { TextArea } = Input;
 
 export default function NFTCreate() {
   const { t } = useTranslation();
-  const history = useHistory();
+  const nav = useNavigate();
   const query = useQuery();
   const [activeItemOfCount, setActiveItemOfCount] = useState(0);
-  const [activeItemOfCustomize, setActiveItemOfCustomize] = useState(0);
-  const [previewVisible, setPrebiewVisible] = useState(false);
+  // const [activeItemOfCustomize, setActiveItemOfCustomize] = useState(0);
+  const [previewOpen, setPrebiewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<any[]>([]);
   const [uploadLoading, setUploadLoading] = useState(false);
@@ -57,7 +58,7 @@ export default function NFTCreate() {
               new File(
                 [file],
                 editingNTF.name.replace(/\s?/g, "") ||
-                  (Math.random() * 10000).toString(),
+                (Math.random() * 10000).toString(),
                 {
                   type: "image/jpeg",
                 }
@@ -68,26 +69,26 @@ export default function NFTCreate() {
     }
   }, [editingNTF, name, desc, fileList]);
 
-  const handlePreview = async (file) => {
+  const handlePreview = async (file: any) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file);
     }
 
-    setPrebiewVisible(true);
+    setPrebiewOpen(true);
     setPreviewImage(file.url || file.preview);
   };
   const exitPreview = () => {
-    setPrebiewVisible(false);
+    setPrebiewOpen(false);
   };
 
-  const beforeUpload = (file) => {
+  const beforeUpload = (file: any) => {
     console.log(file);
     setFileList([file]);
     handlePreview(file);
     return false;
   };
 
-  const onRemove = (file) => {
+  const onRemove = (file: any) => {
     const index = fileList.indexOf(file);
     const newList = fileList.slice();
     newList.splice(index, 1);
@@ -121,7 +122,7 @@ export default function NFTCreate() {
       setFileList([]);
     }
 
-    history.push("/nft");
+    nav("/nft");
   };
 
   return (
@@ -185,7 +186,7 @@ export default function NFTCreate() {
             {t("upload_nft_file")}
           </span>
           <div className="flex flex-col bg-light-white w-full items-center px-12 justify-center py-24">
-            {previewVisible ? (
+            {previewOpen ? (
               <img
                 onClick={exitPreview}
                 alt="example"
@@ -207,7 +208,7 @@ export default function NFTCreate() {
                   fileList={fileList}
                   maxCount={1}
                 >
-                  <Button className="h-10 mt-4 w-38 text-sm text-light-black bg-yellow">
+                  <Button type="primary" className="h-10 mt-4 w-38 text-sm text-light-black bg-yellow">
                     {t("upload_image")}
                   </Button>
                 </Upload>
@@ -264,7 +265,7 @@ export default function NFTCreate() {
         )}
         {!isAllowed && (
           <Button
-            className="flex items-center justify-center h-12 text-sm rounded font-medium mt-6 mb-6 w-full"
+            className="flex items-center bg-yellow justify-center h-12 text-sm rounded font-medium mt-6 mb-6 w-full"
             type="primary"
             onClick={onApprove}
             loading={approveLoading}
@@ -273,15 +274,17 @@ export default function NFTCreate() {
           </Button>
         )}
 
-        <Button
-          className="flex items-center justify-center h-12 text-sm rounded font-medium mt-6 mb-20 w-full"
-          type="primary"
-          onClick={handleUpload}
-          loading={uploadLoading}
-          disabled={!isAllowed || fileList.length < 1}
-        >
-          {t("submit_nft")}
-        </Button>
+        <div className="h-12 mb-20">
+          <Button
+            className="flex items-center justify-center h-12 text-sm rounded font-medium mt-6 mb-20 w-full"
+            type="primary"
+            onClick={handleUpload}
+            loading={uploadLoading}
+            disabled={!isAllowed || fileList.length < 1}
+          >
+            {t("submit_nft")}
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from 'react'
 import HeaderSection from './HeaderSection'
 import ManageSection from './ManageSection'
 import MemberSection from './MemberSection'

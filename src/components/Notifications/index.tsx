@@ -1,10 +1,11 @@
 import { TransactionResponse } from '@ethersproject/providers'
-import { getExplorerTransactionLink, Notification, useNotifications } from '@usedapp/core'
-import React, { ReactElement } from 'react'
+import { getExplorerTransactionLink, useNotifications } from '@usedapp/core'
+import { ReactElement } from 'react'
 import { CheckCircle, CheckSquare, Clock, ExternalLink, XCircle } from 'react-feather'
 import { TransactionReceipt } from '@ethersproject/abstract-provider'
 
-const notificationContent: { [key in Notification['type']]: { title: string; icon: ReactElement } } = {
+// Notification['type']
+const notificationContent: { [key in any]: { title: string; icon: ReactElement } } = {
   transactionFailed: { title: 'Transaction failed', icon: <XCircle size={28} /> },
   transactionStarted: { title: 'Transaction started', icon: <Clock size={28} /> },
   transactionSucceed: { title: 'Transaction succeed', icon: <CheckCircle size={28} /> },

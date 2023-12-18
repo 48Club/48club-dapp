@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
 import { useParams } from 'react-router-dom'
@@ -8,7 +7,7 @@ import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
 export default function HistorySection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { voteRecords } = useGovDetailVotes(id)
+  const { voteRecords } = useGovDetailVotes(id as string)
 
   if (!voteRecords) {
     return null
@@ -21,7 +20,7 @@ export default function HistorySection() {
         {voteRecords.length > 0 ? (
           <div>
             <div className="hidden md:grid justify-between pt-10 pb-4 text-gray"
-                 style={{ gridTemplateColumns: '40% 10% 30% 10% 10% ' }}
+              style={{ gridTemplateColumns: '40% 10% 30% 10% 10% ' }}
             >
               <span className="flex">{t('address')}</span>
               <span>{t('result')}</span>

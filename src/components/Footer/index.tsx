@@ -1,4 +1,3 @@
-import React from 'react'
 import { Col, Row } from 'antd'
 import { LockOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
@@ -10,7 +9,8 @@ import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TWITTER_URL } from '../../constant
 export default function Footer() {
   const { t } = useTranslation()
 
-  const language = localStorage.getItem('language')
+  // const language = localStorage.getItem('language')
+
   return (
     <footer className="app-footer">
       <div className="seperator" />

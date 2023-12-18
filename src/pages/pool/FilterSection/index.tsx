@@ -1,4 +1,3 @@
-import React from 'react'
 import { DatePicker, Select, Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { usePoolFilter } from '../../../store'
@@ -9,7 +8,7 @@ const { Option } = Select
 
 export const FilterSection = () => {
   const { t } = useTranslation()
-  const { filterDetail, setFilterDetail } = usePoolFilter()
+  const { setFilterDetail } = usePoolFilter()
 
   const optionList = [
     {
@@ -30,8 +29,8 @@ export const FilterSection = () => {
     },
   ]
 
-  const stakingOptions = STAKING_WHITELIST.map((i) => ({
-    label: TOKENS[i],
+  const stakingOptions = STAKING_WHITELIST?.map((i) => ({
+    label: TOKENS?.[i],
     value: i,
   })).concat([
     {
@@ -75,8 +74,8 @@ export const FilterSection = () => {
             setFilterDetail((detail) => ({ ...detail, stakeAddress: e }))
           }}
         >
-          {stakingOptions.map((item) => (
-            <Option className="h-10 flex items-center" key={item.label} value={item.value}>
+          {stakingOptions?.map((item) => (
+            <Option className="h-10 flex items-center " key={item.label} value={item.value}>
               {item.label}
             </Option>
           ))}

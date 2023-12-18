@@ -1,4 +1,3 @@
-import React from 'react'
 import './index.less'
 
 export default function CaseListCard(props: { item: any }) {

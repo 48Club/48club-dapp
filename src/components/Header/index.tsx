@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
@@ -49,9 +49,10 @@ export default function Header() {
   )
 
   const [showResponsiveMenu, setShowResponsiveMenu] = useState(false)
+
   return (
-    <div className="py-4 fixed w-full bg-white items-center" style={{ borderBottom: '4px solid #ffc800', zIndex: 20 }}>
-      <div className="flex flex-row justify-between mx-4 md:mx-auto max-w-6xl <xl:px-4">
+    <div className="fixed flex w-full bg-white items-center" style={{ borderBottom: '4px solid #ffc800', zIndex: 20, height: 70 }}>
+      <div className="flex w-full flex-row justify-between mx-4 md:mx-auto max-w-6xl <xl:px-4">
         <div className="flex flex-row items-center">
           <Link to={'/'}>
             <img alt={''} src={appLogo} className="h-3 md:h-5 mr-3" />
@@ -73,7 +74,11 @@ export default function Header() {
               to={'/pool'}>
               {t('nav-farm')}
             </Link>
-            <Dropdown overlay={menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
+            <Link className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/inscriptions') ? 'text-primary' : 'text-black'}`}
+              to={'/inscriptions'}>
+              {t('inscriptions')}
+            </Link>
+            <Dropdown dropdownRender={() => menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
             </Dropdown>
           </div>
@@ -88,7 +93,7 @@ export default function Header() {
             <div className="cursor-pointer opacity-75 hover:text-primary ml-2 pl-2 border-l" onClick={() => setLanguage('en')} style={{ color: language === 'en' ? '#FFC801' : 'black' }}>EN</div>
           </div>
         </div>
-        <div className="block md:hidden">
+        <div className="flex items-center justify-center md:hidden">
           {
             showResponsiveMenu
               ? (
@@ -98,7 +103,7 @@ export default function Header() {
                 <MenuOutlined onClick={() => setShowResponsiveMenu(true)} />
               )
           }
-          {<MobileModal visible={showResponsiveMenu} oncancel={() => setShowResponsiveMenu(false)} />}
+          {<MobileModal open={showResponsiveMenu} oncancel={() => setShowResponsiveMenu(false)} />}
         </div>
       </div>
     </div>
@@ -108,7 +113,7 @@ let once = false
 function Web3Status() {
   const { t } = useTranslation()
   const { transactions } = useTransactions()
-  const { library, activateBrowserWallet, error, account } = useEthers()
+  const { library, activateBrowserWallet, account } = useEthers()
   const wallet_addEthereumChain = {
     method: "wallet_addEthereumChain",
     params: [{
@@ -124,9 +129,10 @@ function Web3Status() {
     once = true;
     (async () => {
       if (Cookies.get('rejected-change-rpc') !== 'true') {
-        if (library?.provider?.request) {
+        const _library = library as any;
+        if (_library?.provider?.request) {
           console.log('request 0');
-          await library.provider.request(wallet_addEthereumChain).catch((error) => {
+          await _library.provider.request(wallet_addEthereumChain).catch((error: any) => {
             if (error.code === 4001) {
               Cookies.set('rejected-change-rpc', 'true', { path: '' })
             }
@@ -151,7 +157,6 @@ function Web3Status() {
     }
     setTimeout(activateBrowserWallet, 1000)
   }, [activateBrowserWallet])
-
   if (account) {
     return (
       <div className="px-4 bg-primary rounded py-2" onClick={activate}>

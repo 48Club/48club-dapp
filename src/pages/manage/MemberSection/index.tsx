@@ -1,13 +1,13 @@
 import { CloseOutlined, EllipsisOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Input, Modal, Popconfirm } from 'antd'
 import Label from 'components/Label'
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+// import React from 'react'
+// import { useTranslation } from 'react-i18next'
 
 import './index.less'
 
 export default function MemberSection() {
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
   const list = [1, 2, 3]
   const modalHeader = (
     <div className="flex flex-row px-4 justify-between py-5">
@@ -47,7 +47,7 @@ export default function MemberSection() {
           <EllipsisOutlined className="text-2xl text-light-black" />
         </Popconfirm>
       </div>
-      {list.map((item) => {
+      {list.map(() => {
         return (
           <div className="flex flex-col w-full bg-another-white p-6 mb-10 rounded-xl shadow">
             <span className="font-bold text-2xl text-light-black mb-2">
@@ -68,7 +68,7 @@ export default function MemberSection() {
       <span className="mb-6 font-medium text-light-black text-base block">
         KOGE质押量变更，不符合资格理事名单
       </span>
-      {list.map((item) => {
+      {list.map(() => {
         return (
           <div className="flex flex-col w-full bg-pink p-6 mb-10 rounded-xl shadow relative">
             <span className="font-bold text-2xl text-light-black mb-2">
@@ -94,7 +94,7 @@ export default function MemberSection() {
       </div>
       <Modal
         title={modalHeader}
-        visible={false}
+        open={false}
         footer={null}
         onOk={() => {
         }}

@@ -1,5 +1,4 @@
 import Tag from 'components/Tag'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
@@ -12,7 +11,7 @@ export default function HeaderSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
   const { proposals } = useGovInfo()
-  const { proposer, voteEnd, voteStart, state, totalReward } = useGovDetailInfo(id)
+  const { proposer, voteEnd, voteStart, state, totalReward } = useGovDetailInfo(id as string)
   const detail = proposals?.find(i => i.proposalId === id)
   const ntitle = (detail?.ntitle) === '' ? (detail?.description.slice(0, 20)) : (detail?.ntitle)
 
@@ -29,7 +28,7 @@ export default function HeaderSection() {
           <Tag type={state} />
         </div>
         <div className="w-full mb-4 text-base text-dark-gray pb-6 border-b border-gray text-left md:pb-8 md:border-none md:mb-0 break-word break-all">
-          {detail?.description.split('\n').map((item, index) => (index === 0) ? item : [<br key={index} />, item])}
+          {detail?.description.split('\n').map((item: any, index: number) => (index === 0) ? item : [<br key={index} />, item])}
         </div>
         <div className="w-full md:flex md:justify-between">
           <div className="flex flex-row justify-between py-2 text-sm w-full md:flex-col md:w-auto md:py-0">

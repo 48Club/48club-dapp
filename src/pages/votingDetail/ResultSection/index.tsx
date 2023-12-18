@@ -1,6 +1,5 @@
 import { CheckCircleFilled, CloseCircleFilled, FrownFilled, SmileFilled } from '@ant-design/icons'
 import Label from 'components/Label'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { useParams } from 'react-router-dom'
@@ -11,7 +10,7 @@ import { Spin } from 'antd'
 export default function ResultSection() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { againstVotes, forVotes, state, quorum, totalStakeAtStart, loading } = useGovDetailInfo(id)
+  const { againstVotes, forVotes, state, quorum, totalStakeAtStart, loading } = useGovDetailInfo(id as string)
   const quorumBN = new BigNumber(quorum).div(TEN_POW(4)).times(totalStakeAtStart)
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
@@ -26,12 +25,12 @@ export default function ResultSection() {
             {state === 'Invalid' && <FrownFilled className="text-base text-gray mr-2.5" />}
             {state === 'Refunded' && <FrownFilled className="text-base text-gray mr-2.5" />}
             <span className="text-sm text-dark-gray">
-            {
-              t(state?.toLowerCase())}. {(state === 'Invalid' || state === 'Refunded') ?
-              <span>{t('result_tip1')}{formatAmount(quorumBN, 18)} KOGE</span> :
-              <span>{t('result_tip2')}{formatAmount(forVotes + againstVotes, 0)} KOGE. Quorum: {formatAmount(quorumBN, 18)} KOGE</span>
-            }
-          </span>
+              {
+                t(state?.toLowerCase())}. {(state === 'Invalid' || state === 'Refunded') ?
+                  <span>{t('result_tip1')}{formatAmount(quorumBN, 18)} KOGE</span> :
+                  <span>{t('result_tip2')}{formatAmount(forVotes + againstVotes, 0)} KOGE. Quorum: {formatAmount(quorumBN, 18)} KOGE</span>
+              }
+            </span>
           </div>
           <div className="flex flex-col mt-8">
             <div className="flex flex-row justify-between">

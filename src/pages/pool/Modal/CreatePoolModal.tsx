@@ -1,5 +1,5 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react'
-import { Button, Modal, ModalProps, Form, Input, Select, DatePicker, message } from 'antd'
+import { useMemo, useCallback, useState, useEffect } from 'react'
+import { Button, Modal, Form, Input, Select, DatePicker, message } from 'antd'
 import { useToken } from '@usedapp/core'
 import Bignumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
@@ -11,7 +11,7 @@ import { useCreatePoolShow } from '../../../store/index'
 
 const { Option } = Select
 
-export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>) => {
+export const CreatePoolModal = (props: { open: boolean, onCancel: () => void }) => {
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const { poolType, poolMeta, hide } = useCreatePoolShow()
@@ -123,9 +123,9 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
 
   return (
     <Modal
-      visible={props.visible}
-      onCancel={(e) => {
-        props.onCancel?.(e)
+      open={props.open}
+      onCancel={() => {
+        props.onCancel?.()
         form?.resetFields()
       }}
       footer={false}
@@ -155,9 +155,9 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
                 setStakingToken(e)
               }}
             >
-              {STAKING_WHITELIST.map((i) => (
+              {STAKING_WHITELIST?.map((i) => (
                 <Option key={i} value={i}>
-                  {TOKENS[i]}
+                  {TOKENS?.[i]}
                 </Option>
               ))}
             </Select>
@@ -177,7 +177,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
               onChange={(e) => {
                 setRewardToken(e.target.value.length === 42 ? e.target.value : '')
               }}
-              suffix={<div>{TOKENS[rewardToken] ?? rewardTokenData?.symbol ?? ''}</div>}
+              suffix={<div>{TOKENS?.[rewardToken] ?? rewardTokenData?.symbol ?? ''}</div>}
             />
           </Form.Item>
           <Form.Item name="amount" label={t('pool_reward_amount')}>
@@ -205,7 +205,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
                 format="YYYY-MM-DD HH:mm:ss"
                 className="w-full h-12 border-none rounded bg-light-white"
                 disabledDate={(current) => {
-                  return current && current < moment().startOf('date')
+                  return (current && current < moment().startOf('date'))
                 }}
                 onChange={(e) => {
                   if (e) {
@@ -242,7 +242,7 @@ export const CreatePoolModal = (props: Pick<ModalProps, 'visible' | 'onCancel'>)
           <Button
             type="primary"
             size="large"
-            className="w-50 h-12 rounded"
+            className="w-50 h-12 rounded bg-yellow"
             loading={approveLoading || deployLoading || contributeLoading}
             onClick={onSubmit}
           >

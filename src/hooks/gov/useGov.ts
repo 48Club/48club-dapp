@@ -1,10 +1,10 @@
 import { createContext, useCallback } from 'react'
-import { useContractFunction, useEthers } from '@usedapp/core'
+import { useContractFunction } from '@usedapp/core'
 import { useGovernanceContract } from '../useContract'
 
 
 export default function useGov() {
-  const { account } = useEthers()
+  // const { account } = useEthers()
   const govContract = useGovernanceContract()
   const { send: propose, state: proposeState } = useContractFunction(govContract, 'propose', { transactionName: 'Propose' })
   const { send: vote, state: voteState } = useContractFunction(govContract, 'castVote', { transactionName: 'Vote' })
@@ -16,17 +16,17 @@ export default function useGov() {
     await propose(tokenId, deposit, description)
   }, [propose])
 
-  const onVote = useCallback(async (proposalId, support: 0 | 1, reason: string = '') => {
+  const onVote = useCallback(async (proposalId: any, support: 0 | 1, reason: string = '') => {
     console.info('Vote', proposalId, support, reason)
     await vote(proposalId, support, reason)
   }, [vote])
 
-  const onClaim = useCallback(async (proposalId) => {
+  const onClaim = useCallback(async (proposalId: any) => {
     console.info('Claim', proposalId)
     await claim(proposalId)
   }, [claim])
 
-  const onRefund = useCallback(async (proposalId) => {
+  const onRefund = useCallback(async (proposalId: any) => {
     console.info('Refund', proposalId)
     await refund(proposalId)
   }, [refund])

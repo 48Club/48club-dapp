@@ -1,5 +1,4 @@
 import Back from 'components/Back'
-import React from 'react'
 import HeaderSection from './HeaderSection'
 import ResultSection from './ResultSection'
 import VoteSection from './VoteSection'

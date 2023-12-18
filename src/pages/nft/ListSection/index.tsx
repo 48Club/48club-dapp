@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { Skeleton, Switch, Modal, Input, Button } from 'antd'
-import { useHistory } from 'react-router-dom'
-import edit from '../../../assets/images/icon/edit.svg'
+import { useNavigate } from 'react-router-dom'
 import useNftInfo, { INFTInfo } from '../../../hooks/nft/useNftInfo'
 import { useEthers } from '@usedapp/core'
 import { shorten } from '@funcblock/dapp-sdk'
@@ -12,11 +11,11 @@ import useNft from '../../../hooks/nft/useNft'
 export default function ListSection() {
   const { myNFTs, NFTs } = useNftInfo()
   const { transferLoading, onTransfer } = useNft()
-  const history = useHistory()
+  const nav = useNavigate()
 
   const editNft = ({ id }: INFTInfo) => {
     const path = `/nft/create?edit=true&id=${id.toString()}`
-    history.push(path)
+    nav(path)
   }
   const { t } = useTranslation()
   const [related, setRelated] = useState(false)
@@ -51,7 +50,7 @@ export default function ListSection() {
           />
         ))}
       </div>
-      <Modal visible={show} footer={false} destroyOnClose>
+      <Modal open={show} footer={false} destroyOnClose>
         <div className="p-6 rounded-xl">
           <div className="relative pt-4 text-center text-[#1E1E1E] text-xl font-bold">
             Send NFT

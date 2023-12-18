@@ -1,5 +1,5 @@
 import { Button, Input, Tooltip } from 'antd'
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
@@ -37,7 +37,7 @@ export default function StakingSection() {
     if (!inputBN.gt(0) || !decimals) {
       return
     }
-    let func = [openStakeModal, openUnstakeModal, onWithdraw][activeItem]
+    const func = [openStakeModal, openUnstakeModal, onWithdraw][activeItem]
     await func(inputBN.times(TEN_POW(decimals)))
   }, [onWithdraw, inputBN, decimals, activeItem, openStakeModal, openUnstakeModal])
 
@@ -73,8 +73,8 @@ export default function StakingSection() {
                 {
                   !canWithdraw && (
                     <Tooltip placement="bottom"
-                             className="ml-1"
-                             title={withdrawMoment ? `Withdrawable: ${withdrawMoment.format('YYYY-MM-DD HH:mm')}` : undefined}
+                      className="ml-1"
+                      title={withdrawMoment ? `Withdrawable: ${withdrawMoment.format('YYYY-MM-DD HH:mm')}` : undefined}
                     >
                       <HelpCircle size={16} />
                     </Tooltip>
@@ -95,39 +95,39 @@ export default function StakingSection() {
         <div className="flex-1 flex flex-col px-6 mb-20">
           <div className="flex flex-row mt-10 mb-6">
             <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 0 ? 'border-yellow' : 'border-transparent'}`}
-                 onClick={() => setActiveItem(0)}>
+              onClick={() => setActiveItem(0)}>
               {t('staking')}
             </div>
             <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 1 ? 'border-yellow' : 'border-transparent'}`}
-                 onClick={() => setActiveItem(1)}>
+              onClick={() => setActiveItem(1)}>
               {t('unstake')}
             </div>
             <div className={`py-2 px-4 font-medium text-base text-center rounded border-2 cursor-pointer ${activeItem === 2 ? 'border-yellow' : 'border-transparent'}`}
-                 onClick={() => setActiveItem(2)}>
+              onClick={() => setActiveItem(2)}>
               {t('withdraw')}
             </div>
           </div>
           <div className="flex flex-row justify-between h-12">
             <Input suffix={<span className="text-base text-primary cursor-pointer" onClick={onSetMax}>MAX</span>}
-                   placeholder={`${t('balance')}: ${formatAmount(currentBalance, decimals)} KOGE`}
-                   className="h-12 mb-6 text-base mr-6 bg-white"
-                   value={input}
-                   onChange={(e) => setInput(e.target.value)} />
+              placeholder={`${t('balance')}: ${formatAmount(currentBalance, decimals)} KOGE`}
+              className="h-12 mb-6 text-base mr-6 bg-white"
+              value={input}
+              onChange={(e) => setInput(e.target.value)} />
             {
               !allowance.gt(0) ? (
-                <Button className="h-12 rounded" onClick={approve} loading={approveLoading}>
+                <Button className="h-12 rounded border-btn" onClick={approve} loading={approveLoading}>
                   Approve
                 </Button>
               ) : (
                 <Tooltip placement="top"
-                         title={
-                           (activeItem === 1 && account && !canUnstake) ? `Unlock Time: ${unlockMoment?.format('YYYY-MM-DD HH:mm')}` : undefined
-                         }>
+                  title={
+                    (activeItem === 1 && account && !canUnstake) ? `Unlock Time: ${unlockMoment?.format('YYYY-MM-DD HH:mm')}` : undefined
+                  }>
                   <Button type="primary"
-                          className="h-full rounded"
-                          onClick={onSubmit}
-                          loading={withdrawLoading}
-                          disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake) || (activeItem === 2 && !canWithdraw)}>
+                    className="h-full rounded"
+                    onClick={onSubmit}
+                    loading={withdrawLoading}
+                    disabled={withdrawLoading || !inputBN.gt(0) || (activeItem === 1 && !canUnstake) || (activeItem === 2 && !canWithdraw)}>
                     {t('confirm')}
                   </Button>
                 </Tooltip>

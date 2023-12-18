@@ -1,4 +1,3 @@
-import React from 'react'
 import { MailOutlined } from '@ant-design/icons'
 import './index.less'
 

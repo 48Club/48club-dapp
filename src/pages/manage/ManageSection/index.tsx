@@ -1,6 +1,5 @@
 import { Button } from 'antd'
 import Label from 'components/Label'
-import React from 'react'
 
 export default function Manage() {
   const list = [1, 2, 3]
@@ -8,7 +7,7 @@ export default function Manage() {
     <div className="">
       <Label text="理事会成员管理内容" />
       <div className="shadow mt-6 w-full rounded-lg px-6 mb-20">
-        {list.map((item) => {
+        {list.map(() => {
           return (
             <div className="flex flex-col border-b border-gray pt-6">
               <div className="flex flex-row justify-between mb-4 text-sm">
