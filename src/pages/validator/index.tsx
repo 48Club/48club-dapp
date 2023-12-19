@@ -24,6 +24,13 @@ export default function NFT() {
             "0x9bb832254baf4e8b4cc26bd2b52b31389b56e98b": "Stake2me",
             "0xe2d3a739effcd3a99387d015e260eefac72ebea1": "MathWallet",
             "0x7ae2f5b9e386cd1b50a4550696d957cb4900f03a": "fuji",
+            "0x2465176C461AfB316ebc773C61fAEe85A6515DAA": "TW Staking",
+            "0xea0A6E3c511bbD10f4519EcE37Dc24887e11b55d": "Defibit",
+            "0xBe807Dddb074639cD9fA61b47676c064fc50D62C": "Certik",
+            "0x685B1ded8013785d6623CC18D214320b6Bb64759": "Namelix",
+            "0xc2Be4EC20253B8642161bC3f444F53679c1F3D47": "Tiollo",
+            "0xEe01C3b1283AA067C58eaB4709F85e99D46de5FE": "Glorin",
+
         }
     }, [])
 
@@ -32,7 +39,7 @@ export default function NFT() {
     const queryData = useCallback(async (dateString: string) => {
         const response = await axios.get('https://www.48.club/api/v1/query?date=' + dateString);
 
-        let data = Object.values(response.data) as apiDataT[]
+        let data = Object.values(response) as apiDataT[]
         data = data.filter((item) => {
             if (item.rewardFromPuissant !== 0 && validatorsList[item.miner] === undefined) {
                 console.log(item)
