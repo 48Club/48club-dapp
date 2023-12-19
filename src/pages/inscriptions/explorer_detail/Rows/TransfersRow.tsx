@@ -19,10 +19,20 @@ const TransfersRow: React.FC<{
                 {data?.amount}
             </div>
             <div className="w-[240px] underline text-[#A9A9A9]">
-                {shorten(data.from)}
+                <span onClick={(e) => {
+                    e.stopPropagation()
+                    window.open(`${window.location.origin}/inscriptions/account?address=${data.from}`)
+                }} className=" cursor-pointer py-[20px] hover:text-black">
+                    {shorten(data.from)}
+                </span>
             </div>
-            <div className="w-[240px] underline text-[#A9A9A9]">
-                {shorten(data.input_decode.to)}
+            <div className="w-[240px] underline py-[20px] text-[#A9A9A9]">
+                <span onClick={(e) => {
+                    e.stopPropagation()
+                    window.open(`${window.location.origin}/inscriptions/account?address=${data.input_decode.to}`)
+                }} className=" cursor-pointer hover:text-black">
+                    {shorten(data?.input_decode?.to)}
+                </span>
             </div>
             <div className="w-[240px] flex justify-end items-center">
                 <span className=" underline mr-[8px]">{data.block_at ? moment(data.block_at * 1000).format("YYYY-MM-DD HH:mm:ss") : '-'}</span>

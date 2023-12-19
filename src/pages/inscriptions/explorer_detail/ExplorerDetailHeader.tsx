@@ -117,7 +117,7 @@ const ExplorerDetailHeader: React.FC<{
 
                 <p className="w-full flex flex-col md:flex-row md:items-center justify-between mt-[24px]">
                     <span className=" leading-[20px] text-[#A9A9A9]">Limit per Mint</span>
-                    <span className=" leading-[20px] text-[#1E1E1E]">{detail.lim}</span>
+                    <span className=" leading-[20px] text-[#1E1E1E]">{parseData.lim}</span>
                 </p>
                 <p className="w-full flex flex-col md:flex-row md:items-center justify-between mt-[24px]">
                     <span className=" leading-[20px] text-[#A9A9A9]">Max Supply</span>

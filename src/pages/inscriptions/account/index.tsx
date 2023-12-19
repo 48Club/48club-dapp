@@ -6,6 +6,7 @@ import inscriptionsApi from "@/utils/request";
 import { AccountToken, AccountTokenProps } from "@/constants/inscriptions";
 import { decimalsToStr } from "@/utils";
 import { useEthers } from "@usedapp/core";
+import useUrlState from '@ahooksjs/use-url-state';
 
 const Account = () => {
 
@@ -15,13 +16,16 @@ const Account = () => {
         localHashList
     } = useInscriptionsLocalHashList()
 
+    const [urlState, setUrlState] = useUrlState({ address: '' })
+
     const { account } = useEthers()
 
-    const search = async (text:string=searchText) => {
+    const search = async (text: string = searchText) => {
         setLoading(true)
         const tickHashList = AccountToken.map(hash => hash.tick_hash);
         const localTickHash = localHashList.map(hash => hash.tick_hash);
         const hashList = Array.from(new Set([...tickHashList, ...localTickHash]));
+        setUrlState({ address: text })
         inscriptionsApi.getUserBalances({
             address: text,
             tick_hash: hashList
@@ -36,14 +40,19 @@ const Account = () => {
                     }
                     const dataItem = res.data.wallet.find((i) => i.tick_hash === tick_hash)
                     let newItem: SearchResultList = {} as SearchResultList;
-                    if(dataItem && _basicItem) {
+                    if (_basicItem) {
                         newItem = {
                             ..._basicItem,
+                            balance: 0
+                        }
+                    }
+                    if (dataItem) {
+                        newItem = {
+                            ...newItem,
                             ...dataItem,
                         }
                     }
-                    
-                    if(newItem?.balance && newItem?.decimals !== undefined) {
+                    if (newItem?.balance && newItem?.decimals !== undefined) {
                         newItem.amount = decimalsToStr(newItem.balance, newItem?.decimals)
                     }
                     return newItem
@@ -74,10 +83,18 @@ const Account = () => {
     }, [localHashList])
 
     useEffect(() => {
-        if(account?.startsWith('0x') && searchText === '') {
-            console.log('1', account)
-            setSearchText(account)
-            search(account)
+        if (urlState.address && searchText === '') {
+            setSearchText(urlState.address)
+            search(urlState.address)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (searchText === '') {
+            if (account?.startsWith('0x') && searchText === '') {
+                setSearchText(account)
+                search(account)
+            }
         }
     }, [account])
 

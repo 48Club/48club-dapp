@@ -1,8 +1,8 @@
 import { Space, Tabs } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useEthers } from "@usedapp/core";
 import { useInscriptionsSearchState } from "@/store";
+import useUrlState from "@ahooksjs/use-url-state";
 
 const tabList = [
     {
@@ -46,20 +46,20 @@ const Inscriptions = () => {
 
     const [tabKey, setTabKey] = useState("")
 
-    const { account } = useEthers()
+    const [, setUrlState] = useUrlState({ address: '' })
 
-    const { searchText, setSearchText } = useInscriptionsSearchState()
-
+    const { setSearchText } = useInscriptionsSearchState()
 
     useEffect(() => {
         const localList = local.pathname.split(',');
         const tabKey = localList[localList.length - 1];
-        if(tabKey === '/inscriptions') {
+        if (tabKey === '/inscriptions') {
             setTabKey("explorer")
             return;
         }
         const currentKey = tabList.find(tab => tabKey.indexOf(tab.key) !== -1);
-        if(currentKey) {
+        if (currentKey) {
+            setUrlState({})
             setTabKey(currentKey.key);
         }
     }, [local.pathname])
@@ -70,7 +70,7 @@ const Inscriptions = () => {
             return;
         }
         setTabKey(key);
-        if(key !== 'account' && searchText === account) {
+        if (key !== 'account') {
             setSearchText('')
         }
         nav(`/inscriptions/${key}`)
