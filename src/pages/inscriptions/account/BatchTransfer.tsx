@@ -73,12 +73,12 @@ const BatchTransfer: React.FC = () => {
           "p":"${currentTick.protocol}",
           "op":"transfer",
           "tick-hash":"${currentTick.tick_hash}",
-          "to":"${enterAddress}",
+          "to":"${enterAddress.replace(/ /g, '')}",
           "amt":"${strToDecimals(+amount, currentTick.decimals)}"
         }`
         console.log(str.replace(/\s*/g, ''), 'str')
         sendTransaction({
-            to: enterAddress,
+            to: enterAddress.replace(/ /g, ''),
             value: utils.toWei(0, 'ether'),
             data: utils.stringToHex(str.replace(/\s*/g, '')),
         })
