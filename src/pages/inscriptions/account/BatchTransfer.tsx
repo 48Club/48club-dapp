@@ -58,12 +58,12 @@ const BatchTransfer: React.FC = () => {
 
     const betchTransfer = () => {
         console.log(betchTransferState, currentTick, 'betchTransferState')
-        if(currentTick === undefined || currentTick?.amount === undefined) {
+        if (currentTick === undefined || currentTick?.amount === undefined) {
             message.error("Please select a token")
             return;
         }
 
-        if(currentTick?.amount - +amount < 0 || +amount <= 0) {
+        if (currentTick?.amount - +amount < 0 || +amount <= 0) {
             message.error("Invalid Balance")
             return;
         }
@@ -73,12 +73,12 @@ const BatchTransfer: React.FC = () => {
           "p":"${currentTick.protocol}",
           "op":"transfer",
           "tick-hash":"${currentTick.tick_hash}",
-          "to":"${enterAddress}",
+          "to":"${enterAddress.replace(/ /g, '')}",
           "amt":"${strToDecimals(+amount, currentTick.decimals)}"
         }`
         console.log(str.replace(/\s*/g, ''), 'str')
         sendTransaction({
-            to: account,
+            to: enterAddress.replace(/ /g, ''),
             value: utils.toWei(0, 'ether'),
             data: utils.stringToHex(str.replace(/\s*/g, '')),
         })
