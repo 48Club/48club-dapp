@@ -174,3 +174,21 @@ export const useInscriptionsBetchTransferState = () => {
     setSelectedToken,
   };
 };
+
+
+export type InscriptonsEffectDataProps = {
+  border: string,
+  lv: string,
+  tick_hash: string
+}
+
+const inscriptionsEffectData = atom<InscriptonsEffectDataProps[]>([] as InscriptonsEffectDataProps[]);
+
+export const useInscriptionsEffectData = () => {
+  const [effectData, setEffectData] = useAtom(inscriptionsEffectData);
+
+  return {
+    effectData,
+    setEffectData
+  }
+}

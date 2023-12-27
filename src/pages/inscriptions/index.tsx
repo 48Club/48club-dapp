@@ -46,19 +46,19 @@ const Inscriptions = () => {
 
     const [tabKey, setTabKey] = useState("")
 
-    const [, setUrlState] = useUrlState({ address: '' })
+    const [, setUrlState] = useUrlState({address: ''})
 
     const { setSearchText } = useInscriptionsSearchState()
 
     useEffect(() => {
         const localList = local.pathname.split(',');
         const tabKey = localList[localList.length - 1];
-        if (tabKey === '/inscriptions') {
+        if(tabKey === '/inscriptions') {
             setTabKey("explorer")
             return;
         }
         const currentKey = tabList.find(tab => tabKey.indexOf(tab.key) !== -1);
-        if (currentKey) {
+        if(currentKey) {
             setUrlState({})
             setTabKey(currentKey.key);
         }
@@ -70,7 +70,7 @@ const Inscriptions = () => {
             return;
         }
         setTabKey(key);
-        if (key !== 'account') {
+        if(key !== 'account') {
             setSearchText('')
         }
         nav(`/inscriptions/${key}`)

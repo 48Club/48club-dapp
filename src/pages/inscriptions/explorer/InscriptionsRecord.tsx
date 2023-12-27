@@ -10,7 +10,9 @@ import moment from "moment";
 import { shorten } from "@funcblock/dapp-sdk";
 import { ExplorerDataProps } from "@/utils/request.type";
 
-import oldIcon from '@/assets/images/old.png'
+import bnb48 from '@/assets/images/avatar.svg'
+import { useInscriptionsEffectData } from "@/store";
+import { getStaticUrl } from "@/App";
 
 type TabTypeKey = "0" | "1" | "2";
 type TabTypeItem = {
@@ -37,32 +39,14 @@ const tabTypeList: TabTypeItem[] = [
     },
 ]
 
-const effectData = {
-    icon: oldIcon,
-    lv: <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_1937_1568)">
-            <path d="M5.65876 12.1758C5.55669 12.249 5.43966 12.2986 5.31611 12.3211C5.19255 12.3436 5.06554 12.3384 4.94424 12.3059C4.82293 12.2734 4.71034 12.2144 4.61459 12.1331C4.51883 12.0518 4.44229 11.9504 4.39048 11.836C4.26594 11.5611 4.05843 11.3322 3.7971 11.1813C3.53576 11.0304 3.23373 10.9652 2.93344 10.9949C2.80848 11.0072 2.68234 10.9916 2.56412 10.9493C2.4459 10.9069 2.33854 10.8389 2.24976 10.7501C2.16099 10.6613 2.09301 10.554 2.05073 10.4357C2.00844 10.3175 1.99291 10.1914 2.00524 10.0664C2.03483 9.76607 1.96959 9.46402 1.81868 9.20269C1.66777 8.94135 1.43878 8.73385 1.16388 8.60936C1.04948 8.55755 0.947992 8.48101 0.866736 8.38525C0.785479 8.28949 0.726474 8.17691 0.693971 8.0556C0.661468 7.93429 0.656277 7.80729 0.678772 7.68373C0.701267 7.56018 0.750887 7.44315 0.824058 7.34108C0.999795 7.09583 1.0943 6.80169 1.0943 6.49998C1.0943 6.19827 0.999795 5.90413 0.824058 5.65888C0.750887 5.55681 0.701267 5.43978 0.678772 5.31623C0.656277 5.19267 0.661468 5.06567 0.693971 4.94436C0.726474 4.82305 0.785479 4.71046 0.866736 4.61471C0.947992 4.51895 1.04948 4.44241 1.16388 4.3906C1.43873 4.26606 1.66767 4.05855 1.81853 3.79722C1.96939 3.53588 2.03459 3.23386 2.00498 2.93356C1.99268 2.8086 2.00826 2.68247 2.05057 2.56425C2.09289 2.44603 2.16089 2.33866 2.2497 2.24989C2.3385 2.16111 2.44588 2.09313 2.56411 2.05085C2.68234 2.00857 2.80848 1.99303 2.93344 2.00536C3.23376 2.03495 3.53581 1.96971 3.79715 1.8188C4.05849 1.6679 4.26598 1.4389 4.39048 1.164C4.44229 1.0496 4.51883 0.948114 4.61459 0.866858C4.71034 0.785601 4.82293 0.726596 4.94424 0.694093C5.06554 0.66159 5.19255 0.656399 5.31611 0.678894C5.43966 0.701389 5.55669 0.751009 5.65876 0.82418C5.90401 0.999917 6.19814 1.09442 6.49986 1.09442C6.80157 1.09442 7.09571 0.999917 7.34096 0.82418C7.44303 0.751009 7.56005 0.701389 7.68361 0.678894C7.80716 0.656399 7.93417 0.66159 8.05548 0.694093C8.17679 0.726596 8.28937 0.785601 8.38513 0.866858C8.48089 0.948114 8.55743 1.0496 8.60924 1.164C8.73377 1.43886 8.94128 1.66779 9.20262 1.81865C9.46395 1.96951 9.76598 2.03471 10.0663 2.0051C10.1912 1.99281 10.3174 2.00838 10.4356 2.05069C10.5538 2.09301 10.6612 2.16102 10.75 2.24982C10.8387 2.33862 10.9067 2.446 10.949 2.56423C10.9913 2.68246 11.0068 2.8086 10.9945 2.93356C10.9649 3.23389 11.0301 3.53594 11.181 3.79727C11.3319 4.05861 11.5609 4.2661 11.8358 4.3906C11.9502 4.44241 12.0517 4.51895 12.133 4.61471C12.2142 4.71046 12.2732 4.82305 12.3057 4.94436C12.3382 5.06567 12.3434 5.19267 12.3209 5.31623C12.2984 5.43978 12.2488 5.55681 12.1757 5.65888C11.9999 5.90413 11.9054 6.19827 11.9054 6.49998C11.9054 6.80169 11.9999 7.09583 12.1757 7.34108C12.2488 7.44315 12.2984 7.56018 12.3209 7.68373C12.3434 7.80729 12.3382 7.93429 12.3057 8.0556C12.2732 8.17691 12.2142 8.28949 12.133 8.38525C12.0517 8.48101 11.9502 8.55755 11.8358 8.60936C11.561 8.7339 11.332 8.94141 11.1812 9.20274C11.0303 9.46408 10.9651 9.7661 10.9947 10.0664C11.007 10.1914 10.9915 10.3175 10.9491 10.4357C10.9068 10.5539 10.8388 10.6613 10.75 10.7501C10.6612 10.8388 10.5538 10.9068 10.4356 10.9491C10.3174 10.9914 10.1912 11.0069 10.0663 10.9946C9.76595 10.965 9.4639 11.0302 9.20256 11.1812C8.94123 11.3321 8.73373 11.5611 8.60924 11.836C8.55743 11.9504 8.48089 12.0518 8.38513 12.1331C8.28937 12.2144 8.17679 12.2734 8.05548 12.3059C7.93417 12.3384 7.80716 12.3436 7.68361 12.3211C7.56005 12.2986 7.44303 12.249 7.34096 12.1758C7.09571 12 6.80157 11.9055 6.49986 11.9055C6.19814 11.9055 5.90401 12 5.65876 12.1758Z" fill="url(#paint0_linear_1937_1568)" />
-            <path d="M9.05814 4.7086C9.12881 4.63768 9.22404 4.59665 9.32412 4.59401C9.4242 4.59137 9.52146 4.62731 9.59577 4.6944C9.67008 4.76149 9.71574 4.85459 9.7233 4.95442C9.73086 5.05425 9.69974 5.15316 9.63638 5.23068L9.6096 5.26032L6.30032 8.5696C6.23207 8.63784 6.14095 8.67835 6.04456 8.68329C5.94818 8.68824 5.85338 8.65727 5.7785 8.59638L5.74886 8.5696L3.9104 6.7314C3.83939 6.66078 3.79827 6.56555 3.79555 6.46544C3.79284 6.36533 3.82874 6.26801 3.89582 6.19365C3.9629 6.11928 4.05601 6.07357 4.15587 6.06598C4.25573 6.0584 4.35468 6.08952 4.43222 6.1529L4.46186 6.17968L6.02446 7.74202L9.05814 4.70886V4.7086Z" fill="white" />
-        </g>
-        <defs>
-            <linearGradient id="paint0_linear_1937_1568" x1="2.03098" y1="2.8437" x2="11.781" y2="10.1562" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#1DA9F8" />
-                <stop offset="0.626678" stop-color="#93D8FF" />
-                <stop offset="1" stop-color="#6FCBFF" />
-            </linearGradient>
-            <clipPath id="clip0_1937_1568">
-                <rect width="13" height="13" fill="white" />
-            </clipPath>
-        </defs>
-    </svg>
-}
-
 const Row: React.FC<{
     data: ExplorerDataProps;
     tabType: string
 }> = ({ data, tabType }) => {
 
     const nav = useNavigate()
+
+    const { effectData } = useInscriptionsEffectData()
 
     // const [openRecap, setOpenRecap] = useState(false)
 
@@ -121,18 +105,39 @@ const Row: React.FC<{
     const progress = ((data.minted / data.max) * 100).toFixed(2)
 
 
+    const curentData = effectData.find(d => d.tick_hash === data.tick_hash);
+
+    let effectDatasParam = {
+        avatarIcon: bnb48,
+        lvIcon: '',
+        borderIcon: ""
+    };
+    if (curentData) {
+        effectDatasParam = {
+            borderIcon: getStaticUrl("border", curentData.border),
+            lvIcon: getStaticUrl("lv", curentData.lv),
+            avatarIcon: getStaticUrl("avatar", curentData.tick_hash)
+        }
+    }
+
     return (
         <div onClick={() => nav(`/inscriptions/explorer/detail/${data.tick_hash}`)} className="cursor-pointer hover:bg-[#f4f4f4] py-4 flex flex-row justify-between items-center border-t border-gray text-[14px]">
             <div className="w-[200px] flex items-center text-[#E2B201] text-[16px] font-[400] leading-[20px]">
                 <div className="w-[28px] h-[28px] rounded-full relative">
-                    <img className="w-full h-full" src={effectData.icon} alt="" />
-                    <div className="absolute bottom-0 w-[13px] h-[13px] right-0">
-                        {effectData.lv}
-                    </div>
+                    <img className="w-full h-full" src={effectDatasParam.avatarIcon} alt="" />
+                    {
+                        effectDatasParam.borderIcon && <img className="w-[42px] translate-x-[-50%] translate-y-[-50%] h-[42px] absolute left-[50%] top-[50%]" src={effectDatasParam.borderIcon} alt="" />
+                    }
                 </div>
                 <div className="ml-[6px]">
-                    {data.tick} <span className="ml-[8px] px-[6px] h-[17px] leading-[17px] font-[400] bg-[rgba(217,217,217,.4)] text-[10px] rounded-full text-[#1E1E1E]">{tabType}</span>
-                    <div className="text-black opacity-70 text-[12px] font-[400] "><Typography.Paragraph className="m-[0_!important]" copyable={{ text: data.tick_hash }}>{shorten(data.tick_hash)}</Typography.Paragraph> </div>
+                    <div className="flex items-center">
+                        <span className="font-[700]">{data.tick}</span>
+                        {
+                            effectDatasParam.lvIcon && <img className="w-[14px] h-[14px] mx-[2px]" src={effectDatasParam.lvIcon} alt="" />
+                        }
+                        <span className="ml-[8px] px-[6px] h-[17px] leading-[17px] font-[400] bg-[rgba(217,217,217,.4)] text-[10px] rounded-full text-[#1E1E1E]">{tabType.toLocaleUpperCase()}</span>
+                    </div>
+                    <div className="text-[#A9A9A9] opacity-70 text-[12px] font-[400] "><Typography.Paragraph className="m-[0_!important] explorer-copy-color" copyable={{ text: data.tick_hash }}>{shorten(data.tick_hash)}</Typography.Paragraph> </div>
                 </div>
             </div>
             <div className="w-[230px]">
@@ -257,6 +262,11 @@ const Inscriptions = () => {
 
     // const { run, cancel } = useRequest(getInscriptionsData, requestTimeConfig);
 
+    useEffect(() => {
+        setPage(1);
+    }, [tableMenuKey, tabType])
+
+    
     useEffect(() => {
         getInscriptionsData(true)
     }, [page, tableMenuKey, tabType])

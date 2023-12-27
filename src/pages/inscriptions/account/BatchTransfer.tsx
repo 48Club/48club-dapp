@@ -30,7 +30,7 @@ const BatchTransfer: React.FC = () => {
         } else {
             return {} as SearchResultList;
         }
-    }, [result])
+    }, [result, betchTransferState])
 
     const addressListValue = useMemo(() => {
         if (addressStrList) {
@@ -58,12 +58,12 @@ const BatchTransfer: React.FC = () => {
 
     const betchTransfer = () => {
         console.log(betchTransferState, currentTick, 'betchTransferState')
-        if (currentTick === undefined || currentTick?.amount === undefined) {
+        if(currentTick === undefined || currentTick?.amount === undefined) {
             message.error("Please select a token")
             return;
         }
 
-        if (currentTick?.amount - +amount < 0 || +amount <= 0) {
+        if(currentTick?.amount - +amount < 0 || +amount <= 0) {
             message.error("Invalid Balance")
             return;
         }
@@ -73,12 +73,12 @@ const BatchTransfer: React.FC = () => {
           "p":"${currentTick.protocol}",
           "op":"transfer",
           "tick-hash":"${currentTick.tick_hash}",
-          "to":"${enterAddress.replace(/ /g, '')}",
+          "to":"${enterAddress}",
           "amt":"${strToDecimals(+amount, currentTick.decimals)}"
         }`
         console.log(str.replace(/\s*/g, ''), 'str')
         sendTransaction({
-            to: enterAddress.replace(/ /g, ''),
+            to: account,
             value: utils.toWei(0, 'ether'),
             data: utils.stringToHex(str.replace(/\s*/g, '')),
         })
@@ -90,9 +90,9 @@ const BatchTransfer: React.FC = () => {
         }
     }, [state.status])
 
-    const chooseMyWallet = searchText === account;
+    const chooseMyWallet = searchText?.toUpperCase() === account?.toUpperCase();
 
-    const hasOkMoney = currentTick?.amount ? (currentTick?.amount - +amount >= 0) : false;
+    const hasOkMoney = currentTick?.amount && amount !== '' ? (currentTick?.amount - +amount >= 0) : false;
 
     return <div className="w-full mt-[24px] md:mt-0 md:ml-[24px] shadow py-[32px]">
         <div className="px-[32px]">

@@ -18,8 +18,8 @@ export const requestTimeConfig = {
 
 axios.interceptors.request.use(request => {
     const data = request.data;
-    if (data) {
-        if (data.page !== undefined) {
+    if(data) {
+        if(data.page !== undefined) {
             data.page_size = pageSize;
             data.page -= 1;
         }

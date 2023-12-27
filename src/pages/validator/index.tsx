@@ -1,6 +1,7 @@
-import { useState, useCallback, useEffect, useMemo } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import { DatePicker, Table } from 'antd'
 import moment from "moment"
+// import fetch from 'node-fetch';
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -24,12 +25,6 @@ export default function NFT() {
             "0x9bb832254baf4e8b4cc26bd2b52b31389b56e98b": "Stake2me",
             "0xe2d3a739effcd3a99387d015e260eefac72ebea1": "MathWallet",
             "0x7ae2f5b9e386cd1b50a4550696d957cb4900f03a": "fuji",
-            "0x2465176c461afb316ebc773c61faee85a6515daa": "TW Staking",
-            "0xea0a6e3c511bbd10f4519ece37dc24887e11b55d": "Defibit",
-            "0xbe807dddb074639cd9fa61b47676c064fc50d62c": "Certik",
-            "0x685b1ded8013785d6623cc18d214320b6bb64759": "Namelix",
-            "0xc2be4ec20253b8642161bc3f444f53679c1f3d47": "Tiollo",
-            "0xee01c3b1283aa067c58eab4709f85e99d46de5fe": "Glorin",
         }
     }, [])
 
@@ -38,7 +33,7 @@ export default function NFT() {
     const queryData = useCallback(async (dateString: string) => {
         const response = await axios.get('https://www.48.club/api/v1/query?date=' + dateString);
 
-        let data = Object.values(response) as apiDataT[]
+        let data = Object.values(response.data) as apiDataT[]
         data = data.filter((item) => {
             if (item.rewardFromPuissant !== 0 && validatorsList[item.miner] === undefined) {
                 console.log(item)
