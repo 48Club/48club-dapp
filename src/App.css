@@ -162,3 +162,15 @@ button {
 .party-item {
   box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.05);
 }
+
+
+.anticon svg {
+  color: white;
+}
+
+
+@media (max-width: 767px) {
+  .ant-tabs >.ant-tabs-nav .ant-tabs-nav-wrap {
+    justify-content: start !important;
+  }
+}
