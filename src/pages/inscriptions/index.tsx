@@ -79,7 +79,7 @@ const Inscriptions = () => {
     return <div className="w-full mb-[80px] md:mb-[120px] explorer-wrap">
         <div className="w-full h-[46px] bg-[black] fixed top-[70px] z-[19]">
             <div className="px-4 max-w-6xl mx-auto ">
-                <Tabs activeKey={tabKey} className="color-text-white hide-tabs-bottom-line" onChange={tabKeyChange} centered items={tabList} tabBarStyle={{ height: 46, marginBottom: 2 }} tabBarGutter={24} defaultActiveKey="1"></Tabs>
+                <Tabs activeKey={tabKey} className="color-text-white right-move-icon hide-tabs-bottom-line" onChange={tabKeyChange} centered items={tabList} tabBarStyle={{ height: 46, marginBottom: 2 }} tabBarGutter={24} defaultActiveKey="1"></Tabs>
             </div>
         </div>
         <div className="h-[46px]"></div>
