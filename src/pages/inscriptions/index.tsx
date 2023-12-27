@@ -10,11 +10,11 @@ const tabList = [
         key: 'explorer',
         hash: 'explorer',
     },
-    // {
-    //     label: "Marketplace",
-    //     key: 'marketplace',
-    //     hash: 'marketplace'
-    // },
+    {
+        label: "Marketplace",
+        key: 'marketplace',
+        hash: 'marketplace'
+    },
     {
         label: "Account",
         key: 'account',
