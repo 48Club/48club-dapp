@@ -245,7 +245,8 @@ const Inscriptions = () => {
             tick_hash: '', status: +tableMenuKey, page, protocol: tabType
         }
         inscriptionsApi.getInscriptionsList(enterVal ? {
-            tick_hash: enterVal
+            ...param,
+            tick_hash: enterVal,
         } : param).then((res) => {
             setLoading(false)
             if (res.code === 0) {
@@ -345,7 +346,7 @@ const Inscriptions = () => {
                                             return <Row tabType={tabType} key={i.tick_hash} data={i} />
                                         })}
                                         <div key="pagination" className="justify-center md:flex hidden mt-[32px]">
-                                            <Pagination pageSize={pageSize} showSizeChanger={false} className="table-pagination-btn" defaultCurrent={1} total={total} />
+                                            <Pagination pageSize={pageSize} onChange={setPage} showSizeChanger={false} className="table-pagination-btn" defaultCurrent={1} total={total} />
                                         </div>
                                     </>
                                 ) : (
