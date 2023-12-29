@@ -107,16 +107,16 @@ const Row: React.FC<{
 
     const curentData = effectData.find(d => d.tick_hash === data.tick_hash);
 
-    let effectDatasParam = {
+    let effectDatasParam: any = {
         avatarIcon: bnb48,
-        lvIcon: '',
-        borderIcon: ""
+        lvIcon: undefined,
+        borderIcon: undefined
     };
     if (curentData) {
         effectDatasParam = {
-            borderIcon: getStaticUrl("border", curentData.border),
-            lvIcon: getStaticUrl("lv", curentData.lv),
-            avatarIcon: getStaticUrl("avatar", curentData.tick_hash)
+            borderIcon: curentData.border ? getStaticUrl("border", curentData.border) : bnb48,
+            lvIcon: curentData.lv ? getStaticUrl("lv", curentData.lv) : undefined,
+            avatarIcon: curentData.tick_hash ? getStaticUrl("avatar", curentData.tick_hash) : undefined
         }
     }
 
