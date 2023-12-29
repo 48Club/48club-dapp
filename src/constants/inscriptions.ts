@@ -43,7 +43,7 @@ export const DEPLOY_MINERS: DeployMinersProps = [
   { name: "Certik", address: "0xBe807Dddb074639cD9fA61b47676c064fc50D62C" },
   { name: "BscScan", address: "0x70F657164e5b75689b64B7fd1fA275F334f28e18" },
   {
-    name: "0xD1d6bF74282782B0b3eb1413c901D6eCF02e8e28",
+    name: "Richard Feyman",
     address: "0xD1d6bF74282782B0b3eb1413c901D6eCF02e8e28",
     defaultChecked: true,
   },

@@ -122,16 +122,16 @@ const Row: React.FC<{
 
     return (
         <div onClick={() => nav(`/inscriptions/explorer/detail/${data.tick_hash}`)} className="cursor-pointer hover:bg-[#f4f4f4] py-4 flex flex-row justify-between items-center border-t border-gray text-[14px]">
-            <div className="w-[200px] flex items-center text-[#E2B201] text-[16px] font-[400] leading-[20px]">
+            <div className="min-w-[200px] flex items-center text-[#E2B201] text-[16px] font-[400] leading-[20px]">
                 <div className="w-[28px] h-[28px] rounded-full relative">
                     <img className="w-full h-full" src={effectDatasParam.avatarIcon} alt="" />
                     {
                         effectDatasParam.borderIcon && <img className="w-[42px] translate-x-[-50%] translate-y-[-50%] h-[42px] absolute left-[50%] top-[50%]" src={effectDatasParam.borderIcon} alt="" />
                     }
                 </div>
-                <div className="ml-[6px]">
+                <div className="ml-[6px] flex-1">
                     <div className="flex items-center">
-                        <span className="font-[700]">{data.tick}</span>
+                        <span className="font-[700] flex-1 w-0 text-ellipsis whitespace-nowrap overflow-hidden">{data.tick}</span>
                         {
                             effectDatasParam.lvIcon && <img className="w-[14px] h-[14px] mx-[2px]" src={effectDatasParam.lvIcon} alt="" />
                         }

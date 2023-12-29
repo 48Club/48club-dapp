@@ -149,10 +149,10 @@ export const Deploy: React.FC<{
   const [maxSupply, setMaxSupply] = useState<number>(21000000)
 
   const MinersTitleNode = <>
-    <div className='flex-1 overflow-x-scroll diy-scrollbar h-full flex items-center'>
+    <div className='flex-1 flex-wrap h-full flex items-center'>
       {
         minersNames.map(miner => {
-          return <Miner key={miner.address} miner={miner} delMiner={() => delMiner(miner)} />
+          return <Miner className='mb-[16px]' key={miner.address} miner={miner} delMiner={() => delMiner(miner)} />
         })
       }
     </div>
@@ -172,7 +172,7 @@ export const Deploy: React.FC<{
 
   const MinersNode = <>
     <Form.Item rules={[{ required: true }]} className='mb-[10px]' label={<>Miners <span className='ml-[12px] text-[12px] font-[400] text-[#E2B201]'>{miners.length} selected</span></>}>
-      <div onClick={() => setOpenMiners(!openMiners)} className='pl-[12px] cursor-pointer w-full flex bg-[#F9F9F9] items-center justify-between h-[48px] z-[2]'>
+      <div onClick={() => setOpenMiners(!openMiners)} className='pl-[12px] cursor-pointer w-full flex bg-[#F9F9F9] items-center justify-start py-[16px] pb-0 z-[2]'>
         {MinersTitleNode}
       </div>
     </Form.Item>
@@ -207,9 +207,9 @@ export const Deploy: React.FC<{
           </Form.Item>
           <Form.Item name="tick" rules={[{ required: true, message: "Please enter tick" }]} label="Tick">
             <Input
-              maxLength={6}
+              maxLength={16}
               className="h-12 border-none rounded bg-light-white"
-              placeholder={`Identifier of the BNB-48, like "eths"`}
+              placeholder={`Identifier of the token, like "fans"`}
             />
           </Form.Item>
           <Form.Item name="decimals" initialValue={8} rules={[{ required: true, message: "Please enter decimals" }]} label="Decimals">
@@ -218,7 +218,7 @@ export const Deploy: React.FC<{
               min={0}
               max={18}
               className="h-12 w-full border-none rounded bg-light-white"
-              placeholder={`Identifier of the BNB-48, like "fans"`}
+              placeholder={`Decimals of the token, 0~18`}
             />
           </Form.Item>
           <Form.Item name="totalSupply" initialValue={21000000} rules={[{ required: true }]} label="Total Supply">
@@ -244,7 +244,7 @@ export const Deploy: React.FC<{
             <div onClick={() => {
               setOpenMobileMiners(true);
               setOpenMiners(true)
-            }} className='pl-[12px] cursor-pointer w-full flex bg-[#F9F9F9] items-center justify-between h-[48px] z-[2]'>
+            }} className='pl-[12px] cursor-pointer w-full flex flex-wrap bg-[#F9F9F9] items-center justify-between pt-[16px] z-[2]'>
               {MinersTitleNode}
             </div>
           </Form.Item>

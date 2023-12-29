@@ -122,10 +122,16 @@ const SelectedToken = ({ onSearch }: any) => {
     }, [tabType, result])
 
     useEffect(() => {
+        console.log(betchTransferState, resultList)
         if (betchTransferState?.tick_hash === undefined && resultList.length > 0) {
             setSelectedToken(resultList[0])
+        } else if(betchTransferState?.tick_hash && resultList.length > 0) {
+            const select = resultList.find(r => r.tick_hash === betchTransferState?.tick_hash);
+            if(select === undefined) {
+                setSelectedToken(resultList[0])
+            }
         }
-    }, [resultList])
+    }, [resultList, betchTransferState])
 
     // const [options, setOptions] = useState<{ value: string; label: JSX.Element }[]>([]);
 
