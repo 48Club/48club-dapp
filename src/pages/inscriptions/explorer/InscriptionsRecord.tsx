@@ -1,5 +1,5 @@
 import Label from "@/components/Label";
-import { Input, Pagination, Radio, Spin, Tabs, Typography } from "antd";
+import { Button, Input, Pagination, Radio, Spin, Tabs, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -220,7 +220,7 @@ const Inscriptions = () => {
 
     // const [myDeployed, setMyDeployed] = useState(false)
 
-    // const nav = useNavigate()
+    const nav = useNavigate()
 
     const getInscriptionsData = async (loading: boolean) => {
         loading && setLoading(true)
@@ -278,10 +278,10 @@ const Inscriptions = () => {
         </div>
         <div className="flex items-center justify-between">
             <Label text="Inscriptions"></Label>
-            {/* <Button type="primary" onClick={() => setOpenDeploy(true)} className="w-[152px] md:block hidden text-[14px] font-[400] rounded-[4px] h-[40px] bg-yellow">Deploy</Button> */}
+            <Button type="primary" onClick={() => setOpenDeploy(true)} className="w-[152px] md:block hidden text-[14px] font-[400] rounded-[4px] h-[40px] bg-yellow">Deploy</Button>
         </div>
         <div className="items-center justify-between md:hidden flex my-[32px]">
-            {/* <Button type="primary" onClick={() => nav("/inscriptions/explorer/mobile/deploy")} className="w-[96px] text-[14px] font-[400] rounded-[4px] h-[40px] bg-yellow">Deploy</Button> */}
+            <Button type="primary" onClick={() => nav("/inscriptions/explorer/mobile/deploy")} className="w-[96px] text-[14px] font-[400] rounded-[4px] h-[40px] bg-yellow">Deploy</Button>
             <Input
                 placeholder="Enter"
                 className="w-[201px] h-[40px] bg-[#F9F9F9] no-border"

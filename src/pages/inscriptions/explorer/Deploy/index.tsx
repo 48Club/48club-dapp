@@ -1,6 +1,6 @@
 import { DEPLOY_MINERS, DeployMinersProps } from '@/constants/inscriptions';
 import { shorten } from '@funcblock/dapp-sdk';
-import { Button, Modal, Form, Input, Radio, Checkbox, message, InputNumber } from 'antd'
+import { Button, Modal, Form, Input, Radio, Checkbox, App as AntdApp, InputNumber } from 'antd'
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next'
 import Miner from '../Miner';
@@ -44,6 +44,7 @@ export const Deploy: React.FC<{
     help: ""
   })
 
+  const { message, modal } = AntdApp.useApp()
 
   const delMiner = (miner: DeployMinersProps[number]) => {
     const index = miners.findIndex(m => m === miner.address);
@@ -62,9 +63,43 @@ export const Deploy: React.FC<{
 
   const onSubmit = () => {
     form.validateFields({ validateOnly: true }).then(res => {
+      console.log(res, 'res')
+      if (account === undefined) {
+        modal.info({
+          title: "",
+          content: "Please Connect the Wallet First",
+          wrapClassName: "alert-model-wrap",
+          centered: true
+        })
+        return;
+      }
+      // if (isTrueChainId === false) {
+      //   modal.info({
+      //     title: "",
+      //     content: "Wrong Network",
+      //     wrapClassName: "alert-model-wrap",
+      //     centered: true
+      //   })
+      //   return;
+      // }
 
       if (res.miners.length <= 0) {
-        message.warning("Please select at least one Miner")
+        modal.error({
+          title: "Error",
+          content: "Please select at least one Miner",
+          wrapClassName: "alert-model-wrap",
+          centered: true
+        })
+        return;
+      }
+
+      if (/^[a-zA-Z0-9]+$/.test(res.tick) === false) {
+        modal.error({
+          title: "Error",
+          content: "Can only consist of uppercase and lowercase letters, and numbers. Maximum of 16 characters.",
+          wrapClassName: "alert-model-wrap",
+          centered: true
+        })
         return;
       }
 
@@ -86,12 +121,12 @@ export const Deploy: React.FC<{
         "op":"deploy",
         "tick":"${res.tick}",
         "decimals":"${res.decimals}",
-        "max":"${res.totalSupply}",
-        "lim":"${res.limitPerMint}",
+        "max":"${res.totalSupply * Math.pow(10, res.decimals)}",
+        "lim":"${res.limitPerMint * Math.pow(10, res.decimals)}",
         "miners":${JSON.stringify(res.miners)}
       }`
       console.log(str.replace(/\s*/g, ''), 'str')
-      
+
       sendTransaction({
         to: account,
         value: utils.toWei(0, 'ether'),
@@ -111,6 +146,7 @@ export const Deploy: React.FC<{
     }
   }, [state.status])
 
+  const [maxSupply, setMaxSupply] = useState<number>(21000000)
 
   const MinersTitleNode = <>
     <div className='flex-1 overflow-x-scroll diy-scrollbar h-full flex items-center'>
@@ -169,31 +205,37 @@ export const Deploy: React.FC<{
               <Radio.Button value="bnb-48" style={{ background: tabType === 'bnb-48' ? '#fff' : '#E9E9E9' }} className=" leading-[40px] flex-1 h-[40px] text-center no-border">BNB-48</Radio.Button>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="tick" rules={[{ required: true }]} label="Tick">
+          <Form.Item name="tick" rules={[{ required: true, message: "Please enter tick" }]} label="Tick">
             <Input
+              maxLength={6}
               className="h-12 border-none rounded bg-light-white"
               placeholder={`Identifier of the BNB-48, like "eths"`}
             />
           </Form.Item>
-          <Form.Item name="decimals" initialValue={8} rules={[{ required: true }]} label="Decimals">
+          <Form.Item name="decimals" initialValue={8} rules={[{ required: true, message: "Please enter decimals" }]} label="Decimals">
             <InputNumber
+              formatter={(value) => `${value}`.split('.')[0]}
               min={0}
               max={18}
               className="h-12 w-full border-none rounded bg-light-white"
               placeholder={`Identifier of the BNB-48, like "fans"`}
             />
           </Form.Item>
-          <Form.Item name="totalSupply" initialValue={21000000000} rules={[{ required: true }]} label="Total Supply">
+          <Form.Item name="totalSupply" initialValue={21000000} rules={[{ required: true }]} label="Total Supply">
             <InputNumber
-              type='number'
-              min={100000}
+              formatter={(value) => `${value}`.split('.')[0]}
+              min={1}
+              value={maxSupply}
+              onChange={(e: any) => setMaxSupply(e)}
               className="h-12 w-full border-none rounded bg-light-white"
               placeholder='21000000'
             />
           </Form.Item>
-          <Form.Item initialValue={10000000} validateStatus={fromErr.validateStatus as any} help={fromErr.help} name="limitPerMint" rules={[{ required: true }]} label="Limit per Mint">
+          <Form.Item initialValue={1000} validateStatus={fromErr.validateStatus as any} help={fromErr.help} name="limitPerMint" rules={[{ required: true }]} label="Limit per Mint">
             <InputNumber
-              min={100000}
+              formatter={(value) => `${value}`.split('.')[0]}
+              min={1}
+              max={maxSupply}
               className="h-12 w-full border-none rounded bg-light-white"
               placeholder='100000'
             />

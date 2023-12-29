@@ -1,5 +1,5 @@
 import { SearchResultList, useInscriptionsBetchTransferState } from "@/store";
-import { Button, Input, InputNumber, Space, Tooltip, Typography, message } from "antd";
+import { Button, Input, InputNumber, Space, Tooltip, Typography, App as AntdApp } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { InfoCircleOutlined } from '@ant-design/icons'
 import { useInscriptionsSearchState } from "@/store";
@@ -24,6 +24,8 @@ const BatchTransfer: React.FC = () => {
 
     const { account } = useEthers()
 
+    const { message, modal } = AntdApp.useApp()
+    
     const currentTick = useMemo(() => {
         if (result) {
             return result.find(res => res.tick_hash === betchTransferState?.tick_hash);
@@ -56,8 +58,28 @@ const BatchTransfer: React.FC = () => {
         }
     }, [enterAddress, amount])
 
+    
     const betchTransfer = () => {
         console.log(betchTransferState, currentTick, 'betchTransferState')
+        if (account === undefined) {
+            modal.info({
+                title: "",
+                content: "Please Connect the Wallet First",
+                wrapClassName: "alert-model-wrap",
+                centered: true
+            })
+            return;
+        }
+        // if (isTrueChainId === false) {
+        //     modal.info({
+        //         title: "",
+        //         content: "Wrong Network",
+        //         wrapClassName: "alert-model-wrap",
+        //         centered: true
+        //     })
+        //     return;
+        // }
+
         if (currentTick === undefined || currentTick?.amount === undefined) {
             message.error("Please select a token")
             return;
@@ -70,7 +92,7 @@ const BatchTransfer: React.FC = () => {
 
         const str = `data:,
         {
-          "p":"${currentTick.protocol}",
+          "p":"bnb-48",
           "op":"transfer",
           "tick-hash":"${currentTick.tick_hash}",
           "to":"${enterAddress.replace(/ /g, '')}",
@@ -92,7 +114,10 @@ const BatchTransfer: React.FC = () => {
 
     const chooseMyWallet = searchText?.toUpperCase() === account?.toUpperCase();
 
-    const hasOkMoney = currentTick?.amount && amount !== '' ? (currentTick?.amount - +amount >= 0) : false;
+    const hasOkMoney = currentTick?.amount ? (currentTick?.amount - +amount >= 0) : false;
+
+    const hasOkMoney2 = currentTick?.amount && amount !== '' ? (currentTick?.amount - +amount >= 0) : false;
+
 
     return <div className="w-full mt-[24px] md:mt-0 md:ml-[24px] shadow py-[32px]">
         <div className="px-[32px]">
@@ -159,7 +184,7 @@ const BatchTransfer: React.FC = () => {
                     <span>{currentTick?.amount ? (currentTick?.amount - +amount) : '-'}</span>
                 </p>
             </div>
-            <Button loading={state.status === "Mining" || state.status === "PendingSignature"} onClick={betchTransfer} disabled={chooseMyWallet === false || !hasOkMoney} type="primary" className="mt-[24px] h-[48px] disabled:hover:h-[48px] disabled:h-[48px] no-border bg-yellow disabled:border-none disabled:bg-[#E9E9E9] disabled:text-[#1E1E1E]" block>{chooseMyWallet ? (hasOkMoney ? "Batch Transfer" : "Invalid Balance") : 'Not Your Wallet'}</Button>
+            <Button loading={state.status === "Mining" || state.status === "PendingSignature"} onClick={betchTransfer} disabled={chooseMyWallet === false || !hasOkMoney2} type="primary" className="mt-[24px] h-[48px] disabled:hover:h-[48px] disabled:h-[48px] no-border bg-yellow disabled:border-none disabled:bg-[#E9E9E9] disabled:text-[#1E1E1E]" block>{chooseMyWallet ? (hasOkMoney2 ? "Batch Transfer" : "Invalid Balance") : 'Not Your Wallet'}</Button>
         </div>
 
     </div>

@@ -83,7 +83,7 @@ const inscriptionsApi = {
     },
     getUserBalances(param: {
         address: string;
-        tick_hash: string[];
+        tick_hash?: string[];
     }) {
         return this.post<any, RequestAccountBalanceProps>(`/bnb48_index/v1/account/balance`, param)
     }

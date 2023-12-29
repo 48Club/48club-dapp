@@ -3,6 +3,7 @@ import { CHAIN_ID } from './env'
 
 export const START_BLOCK_NUMBER = 16397000
 
+export const ZeroAddress = "0x0000000000000000000000000000000000000000";
 
 export const KogeAddress = {
   [ChainId.BSC]: '0xe6df05ce8c8301223373cf5b969afcb1498c5528',

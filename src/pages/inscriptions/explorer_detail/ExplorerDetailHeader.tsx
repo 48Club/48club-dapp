@@ -1,4 +1,4 @@
-import { Button, message } from "antd";
+import { Button, App as AntdApp } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Miner from "../explorer/Miner";
 import { useEffect, useMemo } from "react";
@@ -14,6 +14,8 @@ const ExplorerDetailHeader: React.FC<{
 }> = ({ detail }) => {
 
     const nav = useNavigate()
+
+    const { message, modal } = AntdApp.useApp()
 
     const { account } = useEthers()
 
@@ -36,6 +38,24 @@ const ExplorerDetailHeader: React.FC<{
     }
 
     const mint = () => {
+        if (account === undefined) {
+            modal.info({
+                title: "",
+                content: "Please Connect the Wallet First",
+                wrapClassName: "alert-model-wrap",
+                centered: true
+            })
+            return;
+        }
+        // if (isTrueChainId === false) {
+        //     modal.info({
+        //         title: "",
+        //         content: "Wrong Network",
+        //         wrapClassName: "alert-model-wrap",
+        //         centered: true
+        //     })
+        //     return;
+        // }
 
         const str = `data:,{
             "p":"${detail.protocol}",

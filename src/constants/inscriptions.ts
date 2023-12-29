@@ -96,18 +96,19 @@ export const DEPLOY_MINERS: DeployMinersProps = [
 ];
 
 export type AccountTokenProps = {
-    tick_hash: string;
-    tick: string;
-    decimals: number;
-    protocol: "bnb-48" | string;
+  tick_hash: string;
+  tick: string;
+  decimals: number;
+  protocol: "bnb-48" | string;
+  balance: number | string;
 };
 
 export const AccountToken: AccountTokenProps[] = [
-  {
-    tick: "fans",
-    protocol: "bnb-48",
-    decimals: 8,
-    tick_hash: "0xd893ca77b3122cb6c480da7f8a12cb82e19542076f5895f21446258dc473a7c2",
-  },
+  // {
+  //   tick: "fans",
+  //   protocol: "bnb-48",
+  //   decimals: 8,
+  //   tick_hash: "0xd893ca77b3122cb6c480da7f8a12cb82e19542076f5895f21446258dc473a7c2",
+  // },
 ];
 

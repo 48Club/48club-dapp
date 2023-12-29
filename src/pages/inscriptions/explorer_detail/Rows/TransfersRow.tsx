@@ -1,3 +1,4 @@
+import { ZeroAddress } from "@/constants/contracts";
 import { TransferDataProps } from "@/utils/request.type";
 import { shorten } from "@funcblock/dapp-sdk";
 import moment from "moment";
@@ -21,17 +22,19 @@ const TransfersRow: React.FC<{
             <div className="w-[240px] underline text-[#A9A9A9]">
                 <span onClick={(e) => {
                     e.stopPropagation()
-                    window.open(`${window.location.origin}/inscriptions/account?address=${data.from}`)
+                    const toAddress = data?.input_decode?.op === "mint" ? ZeroAddress : data.from;
+                    window.open(`${window.location.origin}/#/account?address=${toAddress}`)
                 }} className=" cursor-pointer py-[20px] hover:text-black">
-                    {shorten(data.from)}
+                    {data?.input_decode?.op === "mint" ? shorten(ZeroAddress) : shorten(data.from)}
                 </span>
             </div>
             <div className="w-[240px] underline py-[20px] text-[#A9A9A9]">
                 <span onClick={(e) => {
                     e.stopPropagation()
-                    window.open(`${window.location.origin}/inscriptions/account?address=${data.input_decode.to}`)
+                    const toAddress = data?.input_decode?.op === "mint" ? data.to : data?.input_decode?.to
+                    window.open(`${window.location.origin}/#/account?address=${toAddress}`)
                 }} className=" cursor-pointer hover:text-black">
-                    {shorten(data?.input_decode?.to)}
+                    {data?.input_decode?.op === "mint" ? shorten(data.to) :shorten(data?.input_decode?.to)}
                 </span>
             </div>
             <div className="w-[240px] flex justify-end items-center">

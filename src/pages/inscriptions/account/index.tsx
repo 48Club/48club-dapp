@@ -10,7 +10,7 @@ import useUrlState from '@ahooksjs/use-url-state';
 
 const Account = () => {
 
-    const { searchText, setSearchText, setResult, setLoading } = useInscriptionsSearchState()
+    const { searchText, setSearchText, searchTextHash, setResult, setLoading } = useInscriptionsSearchState()
 
     const {
         localHashList
@@ -22,44 +22,45 @@ const Account = () => {
 
     const search = async (text:string=searchText) => {
         setLoading(true)
-        const tickHashList = AccountToken.map(hash => hash.tick_hash);
-        const localTickHash = localHashList.map(hash => hash.tick_hash);
-        const hashList = Array.from(new Set([...tickHashList, ...localTickHash]));
+        // const tickHashList = AccountToken.map(hash => hash.tick_hash);
+        // const localTickHash = localHashList.map(hash => hash.tick_hash);
+        // const hashList = Array.from(new Set([...tickHashList, ...localTickHash]));
         setUrlState({address: text})
-        inscriptionsApi.getUserBalances({
+        inscriptionsApi.getUserBalances( searchTextHash ?{
             address: text,
-            tick_hash: hashList
-        }).then(res => {
-            console.log('resresrse', res)
+            tick_hash: [searchTextHash]
+        } : {address: (text || 'undefined') as string}).then(res => {
             setLoading(false)
             if (res.code === 0) {
-                const resultList = hashList.map(tick_hash => {
-                    let _basicItem: AccountBalanceLocalDataProps | AccountTokenProps | undefined = AccountToken.find(tick => tick.tick_hash === tick_hash)
-                    if (_basicItem === undefined) {
-                        _basicItem = localHashList.find(tick => tick.tick_hash === tick_hash)
+                // const resultList = hashList.map(tick_hash => {
+                //     const _basicItem: AccountTokenProps | undefined = AccountToken.find(tick => tick.tick_hash === tick_hash)
+                //     const dataItem = res.data.wallet.find((i) => i.tick_hash === tick_hash)
+                //     let newItem: SearchResultList = {} as SearchResultList;
+                //     if(_basicItem) {
+                //         newItem = {
+                //             ..._basicItem,
+                //             balance: 0
+                //         }
+                //     }
+                //     if(dataItem) {
+                //         newItem = {
+                //             ...newItem,
+                //             ...dataItem,
+                //         }
+                //     }
+                //     if(newItem?.balance && newItem?.decimals !== undefined) {
+                //         newItem.amount = decimalsToStr(newItem.balance, newItem?.decimals)
+                //     }
+                //     return newItem
+                // })
+                const walletList = res.data.wallet.map(item => {
+                    return {
+                        ...item,
+                        amount: decimalsToStr(item.balance, item?.decimals)
                     }
-                    const dataItem = res.data.wallet.find((i) => i.tick_hash === tick_hash)
-                    let newItem: SearchResultList = {} as SearchResultList;
-                    if(_basicItem) {
-                        newItem = {
-                            ..._basicItem,
-                            balance: 0
-                        }
-                    }
-                    if(dataItem) {
-                        newItem = {
-                            ...newItem,
-                            ...dataItem,
-                        }
-                    }
-                    if(newItem?.balance && newItem?.decimals !== undefined) {
-                        newItem.amount = decimalsToStr(newItem.balance, newItem?.decimals)
-                    }
-                    return newItem
                 })
-
-                console.log('eset', resultList)
-                setResult(resultList)
+                console.log('eset', walletList)
+                setResult(walletList)
             }
         }).then(() => setLoading(false))
     }
@@ -100,7 +101,7 @@ const Account = () => {
 
     return <div className="mt-[32px]">
         <ExplorerHeader onSearch={search} />
-        <AccountBody />
+        <AccountBody onSearch={search} />
     </div>
 }
 

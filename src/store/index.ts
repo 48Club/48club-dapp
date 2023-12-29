@@ -1,4 +1,4 @@
-import { AccountToken, AccountTokenProps } from "@/constants/inscriptions";
+import { AccountTokenProps } from "@/constants/inscriptions";
 import { AccountBalanceDataProps } from "@/utils/request.type";
 import { atom, useAtom } from "jotai";
 import { useCallback } from "react";
@@ -110,27 +110,26 @@ if(localAddStrList) {
   localAddList = JSON.parse(localAddStrList)
 }
 
-export type SearchResultList = AccountTokenProps & AccountBalanceLocalDataProps & { amount?: number; }
+export type SearchResultList = AccountTokenProps &
+  AccountBalanceLocalDataProps & { amount?: number };
 
-
+const inscriptionsSearchTextHash = atom<string>("");
 const inscriptionsSearchText = atom<string>('');
 
 const inscriptionsSearchLoading = atom(false)
-const inscriptonssSearchResult = atom<SearchResultList[]>([...AccountToken, ...localAddList].map((hash) => {
-  return {
-    ...hash,
-  };
-}))
+const inscriptonssSearchResult = atom<SearchResultList[]>([]);
 
 export const useInscriptionsSearchState = () => {
   const [searchText, setSearchText] = useAtom(inscriptionsSearchText);
   const [loading, setLoading] = useAtom(inscriptionsSearchLoading)
   const [result, setResult] = useAtom(inscriptonssSearchResult)
-  
+  const [searchTextHash, setSearchTextHash] = useAtom(inscriptionsSearchTextHash);
 
   return {
     setLoading,
     loading,
+    setSearchTextHash,
+    searchTextHash,
     setSearchText,
     searchText,
     setResult,

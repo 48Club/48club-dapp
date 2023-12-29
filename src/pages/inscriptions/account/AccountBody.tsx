@@ -2,11 +2,11 @@ import SelectedToken from "./SelectedToken";
 import BatchTransfer from "./BatchTransfer";
 
 
-const AccountBody = () => {
+const AccountBody = ({ onSearch }: any) => {
 
     return <div className="mt-[64px] flex">
         <div className="flex-1 w-[49%]">
-            <SelectedToken />
+            <SelectedToken onSearch={onSearch} />
         </div>
         <div className="md:block hidden w-[49%]">
             <BatchTransfer />
