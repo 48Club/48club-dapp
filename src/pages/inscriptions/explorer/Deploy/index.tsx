@@ -83,15 +83,15 @@ export const Deploy: React.FC<{
       //   return;
       // }
 
-      if (res.miners.length <= 0) {
-        modal.error({
-          title: "Error",
-          content: "Please select at least one Miner",
-          wrapClassName: "alert-model-wrap",
-          centered: true
-        })
-        return;
-      }
+      // if (res.miners.length <= 0) {
+      //   modal.error({
+      //     title: "Error",
+      //     content: "Please select at least one Miner",
+      //     wrapClassName: "alert-model-wrap",
+      //     centered: true
+      //   })
+      //   return;
+      // }
 
       if (/^[a-zA-Z0-9]+$/.test(res.tick) === false) {
         modal.error({
@@ -122,8 +122,8 @@ export const Deploy: React.FC<{
         "tick":"${res.tick}",
         "decimals":"${res.decimals}",
         "max":"${res.totalSupply * Math.pow(10, res.decimals)}",
-        "lim":"${res.limitPerMint * Math.pow(10, res.decimals)}",
-        "miners":${JSON.stringify(res.miners)}
+        "lim":"${res.limitPerMint * Math.pow(10, res.decimals)}"
+        ${res.miners.length > 0 ? `,"miners":${JSON.stringify(res.miners)}` : ''}
       }`
       console.log(str.replace(/\s*/g, ''), 'str')
 
