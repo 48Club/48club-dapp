@@ -26,13 +26,15 @@ const ExplorerDetailHeader: React.FC<{
 
     const miners = useMemo(() => {
         if (detail?.miners) {
-            const _minersStr = detail.miners.split(',');
-            const _miners = DEPLOY_MINERS.filter(miner => _minersStr.includes(miner.address));
+            const _minersStr = detail.miners.split(',').map(a => a.toLocaleLowerCase());
+            const _miners = DEPLOY_MINERS.filter(miner => _minersStr.includes(miner.address.toLocaleLowerCase()));
             return _miners;
         } else {
             return []
         }
     }, [detail])
+
+    console.log(detail.miners, 'detail')
 
     const openLink = (link: string) => {
         window.open(link, "_blank")
