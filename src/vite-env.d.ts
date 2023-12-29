@@ -8,6 +8,10 @@ declare module 'ipfs-http-client';
 
 declare module 'state'
 
+declare module 'uuid'
+
+declare module 'react-copy-to-clipboard'
+
 interface Window {
     ethereum?: {
       isMetaMask?: true
@@ -18,4 +22,3 @@ interface Window {
     }
     web3?: {}
   }
-  

@@ -8,6 +8,7 @@ import * as utils from "web3-utils";
 import { useEthers, useSendTransaction } from "@usedapp/core";
 import { decimalsToStr } from "@/utils";
 import { ExplorerDataProps } from "@/utils/request.type";
+import Copy from "@/components/Copy";
 
 const ExplorerDetailHeader: React.FC<{
     detail: ExplorerDataProps
@@ -111,6 +112,14 @@ const ExplorerDetailHeader: React.FC<{
                 <h1 className="text-[20px] font-[700] leading-[24px] text-[rgba(226,178,1,1)]">{detail.tick}</h1>
                 <span className="ml-[8px] text-[12px] md:text-[10px] leading-[12px] px-[6px] py-[4px] text-[#1E1E1E] bg-[rgba(217,217,217,0.4)] rounded-full">{detail.protocol}</span>
             </div>
+            <Copy className="ml-auto h-[40px] disabled:bg-[#eee] disabled:text-[#000] bg-[#FFC801]" text={`data:,{
+                            "p":"${detail.protocol}",
+                            "op":"mint",
+                            "tick-hash":"${param.id}",
+                            "amt":"${detail.lim}"
+                        }`.replace(/\s*/g, '')}>
+                <Button className=" h-[40px] disabled:bg-[#eee] disabled:text-[#000] bg-[#FFC801]">Copy Mint Data</Button>
+            </Copy>
         </div>
         <div className="mt-[32px] mb-[24px] flex items-center">
             <div className="flex-1 h-[12px] md:h-[9px] overflow-hidden rounded-full bg-[rgba(255,200,1,.2)]">
