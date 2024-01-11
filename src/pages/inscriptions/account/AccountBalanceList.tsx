@@ -70,10 +70,7 @@ const Row: React.FC<{
         {ItemNode}
       </div>
       <div
-        onClick={() => {
-          click()
-          nav('/inscriptions/account/mobile/betch')
-        }}
+        onClick={click}
         className="cursor-pointer md:hidden px-[10px] md:px-[20px] border transition-all border-transparent rounded-[4px] active:bg-[#f4f4f4] h-[56px] flex flex-row justify-between items-center text-[14px] md:text-[16px]"
       >
         {ItemNode}
