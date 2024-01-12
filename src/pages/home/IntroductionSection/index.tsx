@@ -24,12 +24,15 @@ export default function CustomerSection() {
               href="https://bscscan.com/token/0xe6df05ce8c8301223373cf5b969afcb1498c5528"
               target="_blank"
               rel="noopener noreferrer"
-            >
+              style={{
+                color: "#ffc800",
+                fontWeight: "bold",
+              }} >
               48 Club® Token
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
