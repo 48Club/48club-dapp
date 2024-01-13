@@ -86,7 +86,11 @@ const BatcHistory = () => {
                 ...i,
                 amount: decimalsToStr(i.input_decode.amt, data.decimals),
               }
-              if (compareAddress(addressVal, i.input_decode.to)) {
+              if (
+                compareAddress(addressVal, i.input_decode.to) ||
+                compareAddress(addressVal, i.from) ||
+                compareAddress(addressVal, i.to)
+              ) {
                 newData.push(item)
               }
 
