@@ -14,6 +14,7 @@ import { ZeroAddress } from '@/constants/contracts'
 import moment from 'moment'
 import { decimalsToStr } from '@/utils'
 import Empty from '@/components/Empty'
+import { compareAddress } from '@/utils/addresses'
 const { Column, ColumnGroup } = Table
 
 const MyTable = styled(Table)`
@@ -84,7 +85,9 @@ const BatcHistory = () => {
                 ...i,
                 amount: decimalsToStr(i.input_decode.amt, data.decimals),
               }
-              newData.push(item)
+              if (compareAddress(addressVal, i.from) || compareAddress(addressVal, i.to)) {
+                newData.push(item)
+              }
             })
           })
           setTransferRecords(newData)
@@ -96,7 +99,7 @@ const BatcHistory = () => {
 
   useEffect(() => {
     if (hash && account) {
-      getTransferList(hash, account)
+      getTransferList(hash, '0x7f5372735e5f5338582d1f32a586e4b423ad6999')
     }
   }, [hash, account])
   const change = (tx: any) => {
