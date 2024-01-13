@@ -77,7 +77,6 @@ const BatcHistory = () => {
         setLoading(false)
         if (res.code === 0) {
           const hasDatas = res.data.wallet.filter((i) => i.changes && i.changes.length > 0)
-          debugger
           const newData: any = []
           hasDatas.forEach((data) => {
             data.changes.forEach((i) => {
