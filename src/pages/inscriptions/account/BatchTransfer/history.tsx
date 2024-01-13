@@ -99,7 +99,7 @@ const BatcHistory = () => {
 
   useEffect(() => {
     if (hash && account) {
-      getTransferList(hash, '0x7f5372735e5f5338582d1f32a586e4b423ad6999')
+      getTransferList(hash, account)
     }
   }, [hash, account])
   const change = (tx: any) => {
