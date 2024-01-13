@@ -6,7 +6,6 @@ export const decimalsToStr = (num: number, decimals: number) => {
     return +ethers.utils.formatUnits(num.toString(), decimals).toString()
 }
 
-
 export const strToDecimals = (num: number, decimals: number) => {
     return +ethers.utils.parseUnits(num.toString(), decimals).toString()
 }
