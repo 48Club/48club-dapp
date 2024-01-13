@@ -93,12 +93,8 @@ const BatcHistory = () => {
               ) {
                 newData.push(item)
               }
-
-              newData.push(item)
             })
           })
-          debugger
-
           setTransferRecords(newData)
         }
         // console.log(res, 'transfer list')
