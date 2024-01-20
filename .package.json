@@ -17,6 +17,7 @@
     "@funcblock/dapp-sdk": "^0.2.0",
     "@reduxjs/toolkit": "1.5.1",
     "@usedapp/core": "^1.2.13",
+    "@usedapp/wallet-connect-v2-connector": "^1.0.4",
     "ahooks": "^3.7.8",
     "antd": "^5.12.2",
     "axios": "^1.6.2",
