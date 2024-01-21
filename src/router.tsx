@@ -28,6 +28,7 @@ import { Deploy } from './pages/inscriptions/explorer/Deploy'
 import AccountMobileBetch from './pages/inscriptions/account/AccountMobileBetch'
 import BatchTransferBox from './pages/inscriptions/account/BatchTransfer/index'
 import Recap from './pages/inscriptions/account/Recap'
+import WalletModal from './components/Modal/WalletModal'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const LayoutWrap = () => (
@@ -37,6 +38,7 @@ const LayoutWrap = () => (
       <Outlet />
       <StakeModal />
       <UnStakeModal />
+      <WalletModal />
       <NotificationsList />
     </div>
     <Footer />
