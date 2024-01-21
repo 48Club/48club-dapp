@@ -90,7 +90,7 @@ export default function WalletModal() {
       onCancel={closeModal}
       transitionName=""
       centered
-      mask={false}
+      mask={true}
       footer={null}
       width={320}
       closeIcon={null}
