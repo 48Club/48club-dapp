@@ -1,15 +1,16 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
-export let CHAIN_ID = ChainId.BSC
+// export let CHAIN_ID = ChainId.BSC
+export let CHAIN_ID = ChainId.BSCTestnet
 
 const hostnames: {
   [key in string]: true
-} = { 'www.48.club': true, 'bnb-48.vercel.app': true, 'localhost': true }
-if (hostnames[window.location.hostname] !== true) {
-  CHAIN_ID = ChainId.BSCTestnet as ChainId
-}
+} = { 'www.48.club': true, 'bnb-48.vercel.app': true, localhost: true }
+// if (hostnames[window.location.hostname] !== true) {
+//   CHAIN_ID = ChainId.BSCTestnet as ChainId
+// }
 
-export const CHAIN_ID_HEX = '0x' + CHAIN_ID.toString(16);
+export const CHAIN_ID_HEX = '0x' + CHAIN_ID.toString(16)
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const RPC_URLS = {

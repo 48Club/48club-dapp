@@ -164,7 +164,8 @@ function Web3Status() {
     params: [
       {
         chainId: CHAIN_ID_HEX,
-        rpcUrls: ['https://1gwei.48.club'],
+        rpcUrls: ['https://data-seed-prebsc-2-s2.binance.org:8545'],
+        // rpcUrls: ['https://1gwei.48.club'],
         chainName: '48Club 1Gwei Privacy',
         nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
         blockExplorerUrls: ['https://bscscan.com'],

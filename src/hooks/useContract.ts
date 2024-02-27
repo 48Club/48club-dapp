@@ -7,7 +7,18 @@ import Staking_ABI from './abi/Staking.json'
 import Farming_ABI from './abi/FarmingPool.json'
 import FarmingFactory_ABI from './abi/FarmingPoolFactory.json'
 import Oracle_ABI from './abi/Oracle.json'
-import { GovernanceAddress, NftAddress, StakingAddress, FarmingFactoryAddress, OracleAddress } from '../constants/contracts'
+
+import stakeinscription from './abi/stakeinscription.json'
+import WrappedABI from './abi/WrappedInscription.json'
+import {
+  GovernanceAddress,
+  NftAddress,
+  StakingAddress,
+  FarmingFactoryAddress,
+  OracleAddress,
+  wrappedAddress,
+  stakeInscription,
+} from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { READONLY_RPC_URL } from '../constants/env'
 
@@ -50,4 +61,14 @@ export function useFarmingFactoryContract() {
 export function useOracleContract() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(OracleAddress as string, Oracle_ABI, provider), [provider])
+}
+
+export function useWrappedContract() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(wrappedAddress as string, WrappedABI, provider), [provider])
+}
+
+export function useStakeInscriptionContract() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(stakeInscription as string, stakeinscription, provider), [provider])
 }
