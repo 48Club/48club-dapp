@@ -24,12 +24,6 @@ export default function CardSection() {
   )
 }
 
-let CardSectioNode = <>
-  <CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
-    Not Voted
-  </div>
-</>
-
 function Card({ item }: { item: any }) {
   const { t } = useTranslation()
   const info = useGovDetailInfo(item.proposalId)
@@ -90,6 +84,11 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
         </div>
       </>
     case 'Active':
+      let CardSectioNode = <>
+        <CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
+          Not Voted
+        </div>
+      </>
       if (info.myVotes?.gt(0)) {
         CardSectioNode = <> <CheckCircleTwoTone twoToneColor='#08C849' className="w-3.5 h-3.5 mr-1" />
           <div className="text-xs leading-5 text-dark-gray">
