@@ -8,6 +8,7 @@ type PropsOrUndefined = {
 
 export const TOKENS: PropsOrUndefined = {
   [ChainId.BSC]: {
+    '0xB0836DD99e3A68d70c593530548C982Ab7B95a4a': 'Pancake KOGE/bFans V2 LP',
     '0xe6DF05CE8C8301223373CF5B969AFCb1498c5528': 'KOGE',
 //   '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c': 'WBNB',
     '0x26De6C26DD5560C181011907d8F70C202C2a29D6': 'Pancake KOGE/BNB V2 LP',
