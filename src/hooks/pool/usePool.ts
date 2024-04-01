@@ -121,12 +121,7 @@ export const usePoolFactory = (rewardToken?: string) => {
         const startTimes = poolStartTimes?.[index]?.[0]
         const endTimes = poolEndTimes?.[index]?.[0]
 
-        if (!startTimes || !endTimes)
-          return {
-            coming: [],
-            ongoing: [],
-            finished: [],
-          }
+        if (!startTimes || !endTimes) return acc
         const startTime = new BigNumber(startTimes.toString())
         const endTime = new BigNumber(endTimes.toString())
         const currentTime = new BigNumber(curBlockTimestamp).div(1000)
