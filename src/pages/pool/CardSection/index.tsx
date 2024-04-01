@@ -16,11 +16,13 @@ import {
 } from '../../../store'
 
 export const PoolCardSection = () => {
-  const { poolAddresses } = usePoolFactory()
+  const { poolInfo } = usePoolFactory()
 
   return (
     <div className="flex md:flex-wrap md:flex-row md:items-start flex-col items-stretch gap-6 pt-0 mb-30">
-      {poolAddresses.map((pool, index) => (pool ? <PoolCard pool={pool} key={pool} id={index} /> : null))}
+      {poolInfo?.map((pool: any, index: number) =>
+        pool ? <PoolCard pool={pool.address} key={pool.address} id={index} /> : null
+      )}
     </div>
   )
 }
@@ -149,11 +151,12 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
 
   return (
     <div
-      className={`relative w-90 flex-col py-10 px-8 shadow rounded-xl bg-white ${(filterDetail.status === -1 || filterDetail.status === finishStatus) &&
-          (filterDetail.stakeAddress === stakeToken || filterDetail.stakeAddress === '')
+      className={`relative w-90 flex-col py-10 px-8 shadow rounded-xl bg-white ${
+        (filterDetail.status === -1 || filterDetail.status === finishStatus) &&
+        (filterDetail.stakeAddress === stakeToken || filterDetail.stakeAddress === '')
           ? ''
           : 'hidden'
-        }`}
+      }`}
     >
       <Tag
         color={finishStatus === 0 ? '#EF2B2B' : finishStatus === 1 ? '#08C849' : '#B9817D'}
@@ -246,10 +249,10 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           {t('pool_my_reward')}: {formatAmount(earnedAmount, 18)} {TOKENS?.[rewardToken] ?? rewardTokenSymbol}
         </span>
         <div className="flex items-center gap-1">
-          <Button type="primary" className='bg-yellow' size="small" loading={claimLoading} onClick={claimHandler}>
+          <Button type="primary" className="bg-yellow" size="small" loading={claimLoading} onClick={claimHandler}>
             {t('pool_claim')}
           </Button>
-          <Button type="primary" className='bg-yellow' size="small" loading={exitLoading} onClick={exitHandler}>
+          <Button type="primary" className="bg-yellow" size="small" loading={exitLoading} onClick={exitHandler}>
             {t('pool_exit')}
           </Button>
         </div>
