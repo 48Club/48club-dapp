@@ -7,14 +7,26 @@ import {
   useContractCalls,
   useToken,
   useTokenBalance,
+  useBlockMeta,
 } from '@usedapp/core'
 import BigNumber from 'bignumber.js'
 import { TEN_POW } from '@funcblock/dapp-sdk'
 import { useFarmingContract, useFarmingFactoryContract, useOracleContract } from '../useContract'
+import Farming_ABI from '../abi/FarmingPool.json'
 import useApprove from '../erc20/useApprove'
+import { Interface } from '@ethersproject/abi'
 
+export enum PoolSate {
+  Coming,
+  Ongoing,
+  Finished,
+}
+
+const FARM_INTERFACE = new Interface(Farming_ABI)
 export const usePoolFactory = (rewardToken?: string) => {
   const { account } = useEthers()
+  const { timestamp } = useBlockMeta()
+
   const farmingFactoryContract = useFarmingFactoryContract() as any
   const poolNum = useContractCall({
     abi: farmingFactoryContract.interface,
@@ -61,6 +73,8 @@ export const usePoolFactory = (rewardToken?: string) => {
     [contribute]
   )
 
+  const curBlockTimestamp = useMemo(() => (timestamp ? new Date(timestamp).getTime() : 0), [timestamp])
+
   const poolAddresses = useContractCalls(
     Array(poolNum?.[0]?.toNumber() || 0)
       .fill(1)
@@ -72,10 +86,82 @@ export const usePoolFactory = (rewardToken?: string) => {
       }))
   )
 
+  const poolAddress = poolAddresses?.map((item) => item?.[0]) ?? []
+
+  const poolStartTimes = useContractCalls(
+    poolAddress.length > 0
+      ? poolAddress.map((address) => {
+          return {
+            address,
+            abi: FARM_INTERFACE,
+            method: 'startTime',
+            args: [],
+          }
+        })
+      : []
+  )
+
+  const poolEndTimes = useContractCalls(
+    poolAddress.length > 0
+      ? poolAddress.map((address) => {
+          return {
+            address,
+            abi: FARM_INTERFACE,
+            method: 'endTime',
+            args: [],
+          }
+        })
+      : []
+  )
+
+  const poolInfos = useMemo(() => {
+    if (poolStartTimes.length <= 0 || poolEndTimes.length <= 0 || poolAddress.length <= 0) return []
+    const allPool = poolAddress.reduce(
+      (acc, address, index) => {
+        const startTimes = poolStartTimes?.[index]?.[0]
+        const endTimes = poolEndTimes?.[index]?.[0]
+
+        if (!startTimes || !endTimes)
+          return {
+            coming: [],
+            ongoing: [],
+            finished: [],
+          }
+        const startTime = new BigNumber(startTimes.toString())
+        const endTime = new BigNumber(endTimes.toString())
+        const currentTime = new BigNumber(curBlockTimestamp).div(1000)
+        const poolInfo = {
+          address: address,
+          startTime,
+          endTime,
+          status: PoolSate.Coming,
+        }
+        if (currentTime.lt(startTime)) {
+          acc.coming.push(poolInfo)
+        } else if (currentTime.gt(startTime) && currentTime.lt(endTime)) {
+          poolInfo.status = PoolSate.Ongoing
+          acc.ongoing.push(poolInfo)
+        } else if (currentTime.gt(endTime)) {
+          poolInfo.status = PoolSate.Finished
+          acc.finished.push(poolInfo)
+        }
+        return acc
+      },
+      {
+        coming: [],
+        ongoing: [],
+        finished: [],
+      }
+    )
+
+    return allPool.coming.concat(allPool.ongoing, allPool.finished)
+  }, [poolStartTimes, poolEndTimes, poolAddress, curBlockTimestamp])
+
   const { approve: onApprove, loading: approveLoading } = useApprove(rewardToken, farmingFactoryContract.address)
 
   return {
-    poolAddresses: poolAddresses?.map((item) => item?.[0]) ?? [],
+    poolAddresses: poolAddress,
+    poolInfo: poolInfos,
     onDeploy,
     deployLoading: deployState.status === 'Mining',
     onContribute,
