@@ -1,7 +1,7 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
-// export let CHAIN_ID = ChainId.BSC
-export let CHAIN_ID = ChainId.BSCTestnet
+export let CHAIN_ID = ChainId.BSC
+// export let CHAIN_ID = ChainId.BSCTestnet
 
 const hostnames: {
   [key in string]: true

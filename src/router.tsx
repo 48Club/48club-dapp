@@ -31,6 +31,7 @@ import Recap from './pages/inscriptions/account/Recap'
 import WalletModal from './components/Modal/WalletModal'
 import InscriptionsFarm from './pages/inscriptions/farm'
 import InscriptionsWrapped from './pages/inscriptions/wrapped'
+import Administrator from './pages/administrator'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const LayoutWrap = () => (
@@ -99,6 +100,10 @@ const routes = createBrowserRouter([
       {
         path: '/validator',
         element: <Validator />,
+      },
+      {
+        path: '/admin',
+        element: <Administrator />,
       },
       {
         path: '/inscriptions',

@@ -11,7 +11,7 @@ import {
   useTokenBalance,
 } from '@usedapp/core'
 import { Result } from '@ethersproject/abi'
-import { KogeAddress } from '@/constants/contracts'
+import { KogeAddress, wrappedToken } from '@/constants/contracts'
 import BigNumber from 'bignumber.js'
 import { useCallback, useEffect, useState } from 'react'
 import inscriptionsApi from '@/utils/request'
@@ -22,7 +22,7 @@ import * as utils from 'web3-utils'
 export const useWrapTokenInfo = () => {
   const warpContact = useWrappedContract()
   const { account } = useEthers()
-  const tokenBalance = useTokenBalance(KogeAddress, account)
+  const tokenBalance = useTokenBalance(wrappedToken, account)
   const [balance, decimals] = (useContractCalls([
     {
       address: warpContact.address,
@@ -37,10 +37,9 @@ export const useWrapTokenInfo = () => {
       args: [],
     },
   ]) ?? []) as Result
-
   return {
     kogeBalance: tokenBalance ? tokenBalance.toString() : undefined,
-    kogedecimals: 18,
+    kogedecimals: 8,
     ikogeBalance: balance ? balance.toString() : undefined,
     ikogedecimals: decimals ? decimals.toString() : undefined,
   }
@@ -48,34 +47,60 @@ export const useWrapTokenInfo = () => {
 
 export const useWrapAcitons = () => {
   const warpContact = useWrappedContract()
-  const { send: Warp, state: WarpState } = useContractFunction(warpContact, 'mint', {
+  const { send: Warp, state: WarpState } = useContractFunction(warpContact, 'warp', {
     transactionName: 'Warp',
   })
 
-  const { send: UnWarp, state: UnWarpState } = useContractFunction(warpContact, 'withdraw', {
+  const { send: UnWarp, state: UnWarpState } = useContractFunction(warpContact, 'unwarp', {
     transactionName: 'UnWarp',
   })
 
+  const { send: Multisend, state: multisendState } = useContractFunction(warpContact, 'multisend', {
+    transactionName: 'Multisend',
+  })
+
+  const { send: BfansToFans, state: BfansToFansState } = useContractFunction(warpContact, 'bfansToFans', {
+    transactionName: 'bfansToFans',
+  })
+
   const onWarp = useCallback(
-    async (amount: BigNumber) => {
+    async (tickhash: string, amount: BigNumber) => {
       console.info('Staking | stake', amount.toString())
-      await Warp(amount.toString())
+      await Warp(tickhash, amount.toString())
     },
     [Warp]
   )
+
+  const onMultisend = useCallback(
+    async (address: string[], value: string | number[]) => {
+      if (address.length != value.length) return
+      return await Multisend(address, value)
+    },
+    [Multisend]
+  )
   const unWarp = useCallback(
-    async (token: string, amount: BigNumber) => {
+    async (tickhash: string, amount: BigNumber) => {
       console.info('Staking | stake', amount.toString())
-      await UnWarp(token, amount.toString())
+      await UnWarp(tickhash, amount.toString())
     },
     [Warp]
+  )
+  const onbfanstofans = useCallback(
+    (haxh: string) => {
+      return BfansToFans(haxh)
+    },
+    [BfansToFans]
   )
 
   return {
     onWarp,
     unWarp,
-    warpLoading: WarpState.status === 'Mining',
-    unWarpLoading: UnWarpState.status === 'Mining',
+    onMultisend,
+    onbfanstofans,
+    warpLoading: WarpState.status === 'Mining' || WarpState.status === 'PendingSignature',
+    unWarpLoading: UnWarpState.status === 'Mining' || UnWarpState.status === 'PendingSignature',
+    multisendLoading: multisendState.status === 'Mining' || multisendState.status === 'PendingSignature',
+    BfansToFansLoading: BfansToFansState.status === 'Mining' || BfansToFansState.status === 'PendingSignature',
   }
 }
 

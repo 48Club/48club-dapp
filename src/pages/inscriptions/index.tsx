@@ -25,11 +25,7 @@ const tabList = [
     key: 'wrapped',
     hash: 'wrapped',
   },
-  {
-    label: 'Farm',
-    key: 'farm',
-    hash: 'farm',
-  },
+
   // {
   //     label: "Ecosystem",
   //     key: 'Ecosystem',

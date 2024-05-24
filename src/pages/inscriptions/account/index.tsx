@@ -40,27 +40,6 @@ const Account = () => {
       .then((res) => {
         setLoading(false)
         if (res.code === 0) {
-          // const resultList = hashList.map(tick_hash => {
-          //     const _basicItem: AccountTokenProps | undefined = AccountToken.find(tick => tick.tick_hash === tick_hash)
-          //     const dataItem = res.data.wallet.find((i) => i.tick_hash === tick_hash)
-          //     let newItem: SearchResultList = {} as SearchResultList;
-          //     if(_basicItem) {
-          //         newItem = {
-          //             ..._basicItem,
-          //             balance: 0
-          //         }
-          //     }
-          //     if(dataItem) {
-          //         newItem = {
-          //             ...newItem,
-          //             ...dataItem,
-          //         }
-          //     }
-          //     if(newItem?.balance && newItem?.decimals !== undefined) {
-          //         newItem.amount = decimalsToStr(newItem.balance, newItem?.decimals)
-          //     }
-          //     return newItem
-          // })
           const walletList = res.data.wallet.map((item) => {
             return {
               ...item,

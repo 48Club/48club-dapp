@@ -45,9 +45,15 @@ export const OracleAddress = {
   [ChainId.BSCTestnet]: '0x3b7cDCd358b7324Bf46168e4f41d540B720532f8',
 }[CHAIN_ID as number]
 
+export const wrappedToken = {
+  /// bfans
+  [ChainId.BSC]: '0x31dE513CA57256eac495a158f2Cd069B7f308564',
+  [ChainId.BSCTestnet]: '0x31dE513CA57256eac495a158f2Cd069B7f308564',
+}[CHAIN_ID as number]
+
 export const wrappedAddress = {
-  [ChainId.BSC]: '',
-  [ChainId.BSCTestnet]: '0xF847fB464Bf93511dD9E3af5E35f56C6b4De97eB',
+  [ChainId.BSC]: '0x83b16A2C9Bf52Ea03036E8617c9Dd13AE975f218',
+  [ChainId.BSCTestnet]: '0x83b16A2C9Bf52Ea03036E8617c9Dd13AE975f218',
 }[CHAIN_ID as number]
 
 export const stakeInscription = {
