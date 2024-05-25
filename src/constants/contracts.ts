@@ -3,11 +3,11 @@ import { CHAIN_ID } from './env'
 
 export const START_BLOCK_NUMBER = 16397000
 
-export const ZeroAddress = "0x0000000000000000000000000000000000000000";
+export const ZeroAddress = '0x0000000000000000000000000000000000000000'
 
 export const KogeAddress = {
   [ChainId.BSC]: '0xe6df05ce8c8301223373cf5b969afcb1498c5528',
-  [ChainId.BSCTestnet]: '0x2B7BFE79eC36653b84A43E86AfF704B91E9f072f',
+  [ChainId.BSCTestnet]: '0xAA2b984b64d178258c865ADef6a01e5272c30283',
 }[CHAIN_ID as number]
 
 export const StakingAddress = {
@@ -43,4 +43,20 @@ export const FarmingFactoryAddress = {
 export const OracleAddress = {
   [ChainId.BSC]: '0xbC4Fda8A6d6fA1Bb64510BAd3F511c1aa79B2E12',
   [ChainId.BSCTestnet]: '0x3b7cDCd358b7324Bf46168e4f41d540B720532f8',
+}[CHAIN_ID as number]
+
+export const wrappedToken = {
+  /// bfans
+  [ChainId.BSC]: '0x31dE513CA57256eac495a158f2Cd069B7f308564',
+  [ChainId.BSCTestnet]: '0x31dE513CA57256eac495a158f2Cd069B7f308564',
+}[CHAIN_ID as number]
+
+export const wrappedAddress = {
+  [ChainId.BSC]: '0x83b16A2C9Bf52Ea03036E8617c9Dd13AE975f218',
+  [ChainId.BSCTestnet]: '0x83b16A2C9Bf52Ea03036E8617c9Dd13AE975f218',
+}[CHAIN_ID as number]
+
+export const stakeInscription = {
+  [ChainId.BSC]: '',
+  [ChainId.BSCTestnet]: '0xC29C4320c6224efA87136cd9D2885bbBa090171f',
 }[CHAIN_ID as number]

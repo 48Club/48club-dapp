@@ -62,3 +62,19 @@ type RequestAccountBalanceWrap = {
 }
 
 export type RequestAccountBalanceProps = ResponseData<RequestAccountBalanceWrap>
+
+export type RequestWraporUnwrap = {
+  id: number
+  tick_hash: string
+  to: string
+  tx_hash: string
+  type: string
+  update_at: string
+  amt: string
+}
+
+type RequestWraporUnwraps = {
+  list: RequestWraporUnwrap[]
+}
+
+export type RequestWraporUnwrapProps = ResponseData<RequestWraporUnwraps>

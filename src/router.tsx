@@ -29,6 +29,9 @@ import AccountMobileBetch from './pages/inscriptions/account/AccountMobileBetch'
 import BatchTransferBox from './pages/inscriptions/account/BatchTransfer/index'
 import Recap from './pages/inscriptions/account/Recap'
 import WalletModal from './components/Modal/WalletModal'
+import InscriptionsFarm from './pages/inscriptions/farm'
+import InscriptionsWrapped from './pages/inscriptions/wrapped'
+import Administrator from './pages/administrator'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const LayoutWrap = () => (
@@ -99,6 +102,10 @@ const routes = createBrowserRouter([
         element: <Validator />,
       },
       {
+        path: '/admin',
+        element: <Administrator />,
+      },
+      {
         path: '/inscriptions',
         element: <Inscriptions />,
         children: [
@@ -137,6 +144,15 @@ const routes = createBrowserRouter([
           {
             path: '/inscriptions/account/recap/:hash',
             element: <Recap />,
+          },
+
+          {
+            path: '/inscriptions/farm',
+            element: <InscriptionsFarm />,
+          },
+          {
+            path: '/inscriptions/wrapped',
+            element: <InscriptionsWrapped />,
           },
         ],
       },
