@@ -134,8 +134,10 @@ const Wrapped = () => {
               </span>
             }
           />
-          <div className="pt-[24px] size-[24px]  cursor-pointer">
-            <ArrowDownOutlined size={40} onClick={() => setreversal(!reversal)} />
+          <div>
+            <div className="pt-[24px] size-[24px]  cursor-pointer flex">
+              <ArrowDownOutlined size={40} onClick={() => setreversal(!reversal)} />
+            </div>
           </div>
 
           <RowBetween className="mb-[6px]">
@@ -144,6 +146,7 @@ const Wrapped = () => {
             </Row>
             <div>Balance: {formatAmount(OutputBalance)}</div>
           </RowBetween>
+
           <div className="h-12 border-none rounded bg-[#e9e9e9] h-[48px] w-[100%] flex  items-center pl-[11px]">
             {input}
           </div>
