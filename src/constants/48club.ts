@@ -46,12 +46,10 @@ export const COMMITTEE_LIST = [
   },
 ]
 
-
 export const TWITTER_URL = 'https://twitter.com/48club_official'
 export const GITHUB_URL = 'https://github.com/48Club'
 export const DISCORD_URL = 'https://discord.gg/DDeeWYdCyJ'
 export const MEDIUM_URL = 'https://medium.com/48-club-publish'
-
 
 export const PARTNER_URLS = [
   '/static/logo-partner-binance-smart-chain.svg',
@@ -65,4 +63,5 @@ export const PARTNER_URLS = [
   '/static/logo-partner-mayor-capital.svg',
   '/static/logo-partner-bitfill.png',
   '/static/logo-partner-alpaca.png',
+  '/static/logo-hellodex.svg',
 ]

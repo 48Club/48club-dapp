@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.1 46.24">
+  <g>
+    <circle cx="25.05" cy="15" r="15"/>
+    <g>
+      <path d="m21.27,15.49v-.98l12.7-6.66v1.25l-11.35,5.88v.08l11.35,5.85v1.25l-12.7-6.66Z" style="fill: #fff; stroke: #fff; stroke-miterlimit: 10; stroke-width: .44px;"/>
+      <path d="m28.83,14.51v.98l-12.7,6.66v-1.25l11.38-5.85v-.08l-11.38-5.88v-1.25l12.7,6.66Z" style="fill: #fff; stroke: #fff; stroke-miterlimit: 10; stroke-width: .44px;"/>
+    </g>
+  </g>
+  <text transform="translate(0 42.99)" style="font-family: &apos;HarmonyOS_Sans_SC_Medium&apos;, &apos;HarmonyOS Sans SC Medium&apos;; font-size: 12px;"><tspan x="0" y="0">HelloD</tspan><tspan x="37.45" y="0" style="letter-spacing: 0em;">e</tspan><tspan x="43.97" y="0">x</tspan></text>
+</svg>
