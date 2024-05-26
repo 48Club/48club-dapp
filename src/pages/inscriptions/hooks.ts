@@ -72,7 +72,7 @@ export const useWrapAcitons = () => {
   )
 
   const onMultisend = useCallback(
-    async (address: string[], value: string | number[]) => {
+    async (address: string[], value: string[]) => {
       if (address.length != value.length) return
       return await Multisend(address, value)
     },
