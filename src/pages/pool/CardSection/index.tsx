@@ -17,11 +17,10 @@ import {
 
 export const PoolCardSection = () => {
   const { poolInfo } = usePoolFactory()
-
   return (
     <div className="flex md:flex-wrap md:flex-row md:items-start flex-col items-stretch gap-6 pt-0 mb-30">
-      {poolInfo?.map((pool: any, index: number) =>
-        pool ? <PoolCard pool={pool.address} key={pool.address} id={index} /> : null
+      {poolInfo?.map((pool: any) =>
+        pool ? <PoolCard pool={pool.address} key={pool.address} id={pool.poolid} /> : null
       )}
     </div>
   )
@@ -201,7 +200,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
           </span>
           <span
             className="text-primary underline underline-primary cursor-pointer"
-            onClick={() =>
+            onClick={() => {
               showCreate(3, {
                 stakingToken: stakeToken,
                 rewardToken,
@@ -210,7 +209,7 @@ function PoolCard({ pool, id }: { pool: string; id: number }) {
                 poolId: id,
                 status: finishStatus,
               })
-            }
+            }}
           >
             {t('pool_append')}
           </span>
