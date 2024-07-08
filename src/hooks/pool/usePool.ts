@@ -78,7 +78,7 @@ export const usePoolFactory = (rewardToken?: string) => {
   const poolAddresses = useContractCalls(
     Array(poolNum?.[0]?.toNumber() || 0)
       .fill(1)
-      .map((item, index) => ({
+      .map((_, index) => ({
         address: farmingFactoryContract.address,
         abi: farmingFactoryContract.interface,
         method: 'pools',
@@ -129,6 +129,7 @@ export const usePoolFactory = (rewardToken?: string) => {
           address: address,
           startTime,
           endTime,
+          poolid: index,
           status: PoolSate.Coming,
         }
         if (currentTime.lt(startTime)) {
