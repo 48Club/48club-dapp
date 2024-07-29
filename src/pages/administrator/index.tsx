@@ -1,16 +1,15 @@
 import inscriptionsApi from '@/utils/request'
 import type { TableColumnsType } from 'antd'
-import { Button, Radio, Table, message } from 'antd'
+import { Button, Form, Input, Modal, Radio, Table, message, App as AntdApp } from 'antd'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { decimalsToStr } from '@/utils'
 import moment from 'moment'
 import BigNumber from 'bignumber.js'
-import { useEthers, useSendTransaction, useTokenBalance } from '@usedapp/core'
-import * as utils from 'web3-utils'
-import { useWrappedContract } from '@/hooks/useContract'
+import { useEthers, useTokenBalance } from '@usedapp/core'
 import { useWrapAcitons } from '../inscriptions/hooks'
 import { wrappedAddress, wrappedToken } from '@/constants/contracts'
-import { BN, fromWei } from '@/utils/bn'
+import { BN } from '@/utils/bn'
+import { t } from 'i18next'
 interface DataType {
   key: React.Key
   tick_hash: string
@@ -57,8 +56,19 @@ const App = () => {
   const [loadinglist, setLoadingList] = useState(false)
   const [warpList, setwarpList] = useState<any[]>([])
   const [userBlance, setResult] = useState<any | undefined>()
-
+  const [typeModel, setTypeModel] = useState(false)
+  const [form] = Form.useForm()
+  const [submittable, setSubmittable] = useState<boolean>(false)
   const { onMultisend, onbfanstofans, multisendLoading, BfansToFansLoading } = useWrapAcitons()
+  const [btnLoading, setBtnLoading] = useState<boolean>(false)
+  const values = Form.useWatch([], form)
+
+  useEffect(() => {
+    form
+      .validateFields({ validateOnly: true })
+      .then(() => setSubmittable(true))
+      .catch(() => setSubmittable(false))
+  }, [form, values])
 
   const getData = () => {
     setLoadingList(true)
@@ -84,6 +94,7 @@ const App = () => {
   useEffect(() => {
     getData()
     getBlances()
+    setTypeModel(false)
   }, [menuType, account])
 
   const onSelectChange = (newSelectedRowKeys: any[]) => {
@@ -164,8 +175,17 @@ const App = () => {
     }
     try {
       const data = await onMultisend(address, value)
-      if (!data?.transactionHash) return
-      await inscriptionsApi.wrap_unwrapdelete({ ids, hash: data.transactionHash })
+      if (!data?.transactionHash) {
+        message.error('未能获取到交易hash 请手动处理')
+        return
+      }
+      const resdata = await inscriptionsApi.wrap_unwrapdelete({ ids, hash: data.transactionHash })
+
+      if (resdata.data.code === 0) {
+        message.success('请求已提交')
+      } else {
+        message.error('请求失败', resdata.data.msg)
+      }
     } catch (error) {
       console.log('error', error)
     }
@@ -198,14 +218,61 @@ const App = () => {
       const str = `data:application/json,
     ${JSON.stringify(data)}
     `
-      console.log('[str]:', str, chainId)
       const hexs = str.replace(/\s*/g, '')
       const tx = await onbfanstofans(hexs)
-      if (!tx?.transactionHash) return
-      await inscriptionsApi.wrap_unwrapdelete({ ids, hash: tx?.transactionHash })
+      if (!tx?.transactionHash) {
+        message.error('未能获取到交易hash 请手动处理')
+        return
+      }
+      const resdata = await inscriptionsApi.wrap_unwrapdelete({ ids, hash: tx?.transactionHash })
+
+      if (resdata.data.code == 0) {
+        message.success('交易已提交')
+      } else {
+        message.error('请求失败', resdata.data.msg)
+      }
     } catch (error) {
+      message.error(JSON.stringify(error))
       console.log('error', error)
     }
+  }
+
+  const delbtn = async () => {
+    const res = await form.validateFields({ validateOnly: true })
+    if (res.hash === undefined) return
+
+    const { ids } = selectedRowKeys.reduce(
+      (
+        acc: {
+          address: string[]
+          value: string[]
+          ids: string[]
+          total: BigNumber
+        },
+        key
+      ) => {
+        const list = warpList[key]
+        acc.address.push(list.to)
+        acc.value.push(list.amt)
+        acc.ids.push(list.id)
+        acc.total = acc.total.plus(list.amt)
+        return acc
+      },
+      { address: [], value: [], ids: [], total: BN(0) }
+    )
+    setBtnLoading(true)
+    try {
+      const resdata = await inscriptionsApi.wrap_unwrapdelete({ ids, hash: res.hash })
+      if (resdata.data.code === 0) {
+        message.success('请求已提交')
+        setTypeModel(false)
+      } else {
+        message.error('请求失败', resdata.data.msg)
+      }
+    } catch (error) {
+      message.error('请求失败 请手动处理')
+    }
+    setBtnLoading(false)
   }
 
   const onSubmit = async () => {
@@ -257,6 +324,16 @@ const App = () => {
             size="large"
             disabled={!account || !hasSelected}
             loading={multisendLoading || BfansToFansLoading}
+            className="md:w-40 w-[158px] h-12 text-[14px] rounded bg-yellow no-border mr-[24px]"
+            onClick={() => setTypeModel(true)}
+          >
+            删除
+          </Button>
+          <Button
+            type="primary"
+            size="large"
+            disabled={!account || !hasSelected}
+            loading={multisendLoading || BfansToFansLoading}
             className="md:w-40 w-[158px] h-12 text-[14px] rounded bg-yellow no-border"
             onClick={onSubmit}
           >
@@ -266,6 +343,42 @@ const App = () => {
       </div>
 
       <Table rowSelection={rowSelection} loading={loadinglist} columns={columns} dataSource={warpList} />
+
+      <Modal open={typeModel} footer={false} closeIcon={null} className="rounded-xl" destroyOnClose>
+        <div className="p-6 rounded-xl">
+          <div className="relative text-center text-[#1E1E1E] text-xl font-bold">
+            删除
+            <img
+              src="/static/close.svg"
+              className="absolute top-0 right-0 transform -translate-y-1/2 cursor-pointer"
+              alt=""
+              onClick={() => setTypeModel(false)}
+            />
+          </div>
+
+          <Form form={form} layout="vertical" size="large" preserve={false}>
+            <Form.Item name="hash" label="交易hash" rules={[{ required: true, message: '输入交易hash' }]}>
+              <Input className="h-12 border-none rounded bg-light-white" placeholder={'输入交易hash'} />
+            </Form.Item>
+          </Form>
+
+          <div className="w-full flex justify-center gap-6 flex-wrap">
+            <Button size="large" className="w-50 h-12 bg-gray rounded" onClick={() => setTypeModel(false)}>
+              {t('pool_cancel')}
+            </Button>
+            <Button
+              type="primary"
+              size="large"
+              className="w-50 h-12 rounded bg-yellow"
+              disabled={!submittable}
+              loading={btnLoading}
+              onClick={delbtn}
+            >
+              {t('pool_confirm')}
+            </Button>
+          </div>
+        </div>{' '}
+      </Modal>
     </div>
   )
 }
