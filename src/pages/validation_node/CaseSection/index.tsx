@@ -5,11 +5,44 @@ import "./index.less";
 const REVIEW_ITEMS = [
   {
     id: 1,
-    title: "48 Club",
+    title: "The48Club",
     content:
-      "https://www.bnbchain.world/en/staking/validator/bva1ygrhjdjfyn2ffh5ha5llf5g6l3wxjt29hz9q4s",
-    image_url: "https://dex-bin.bnbstatic.com/static/images/bnb-chain-h.svg",
-  }
+      "https://www.bnbchain.org/en/bnb-staking/validator/0xaACc290a1A4c89F5D7bc29913122F5982916de48",
+    image_url: 
+      "https://raw.githubusercontent.com/bnb-chain/bsc-validator-directory/main/mainnet/validators/0xaACc290a1A4c89F5D7bc29913122F5982916de48/logo.png",
+  },
+  {
+    id: 2,
+    title: "Turing",
+    content:
+      "https://www.bnbchain.org/en/bnb-staking/validator/0x0E3cf208F4141C41da86d52C5F2076b1aB310E8F",
+    image_url: 
+      "https://raw.githubusercontent.com/bnb-chain/bsc-validator-directory/main/mainnet/validators/0x0E3cf208F4141C41da86d52C5F2076b1aB310E8F/logo.png",
+  },
+  {
+    id: 3,
+    title: "Avengers",
+    content:
+      "https://www.bnbchain.org/en/bnb-staking/validator/0xa31A940ecFB4Cb9fE7884eB3C9a959Db79CbdC70",
+    image_url: 
+      "https://raw.githubusercontent.com/bnb-chain/bsc-validator-directory/main/mainnet/validators/0xa31A940ecFB4Cb9fE7884eB3C9a959Db79CbdC70/logo.png",
+  },
+  {
+    id: 4,
+    title: "Feynman",
+    content:
+      "https://www.bnbchain.org/en/bnb-staking/validator/0xdFeAcaffE5EAF47E442ef2ddAeAea2f21a6d3f91",
+    image_url: 
+      "https://raw.githubusercontent.com/bnb-chain/bsc-validator-directory/main/mainnet/validators/0xdFeAcaffE5EAF47E442ef2ddAeAea2f21a6d3f91/logo.png",
+  },
+  {
+    id: 5,
+    title: "Shannon",
+    content:
+      "https://www.bnbchain.org/en/bnb-staking/validator/0xB58ac55EB6B10e4f7918D77C92aA1cF5bB2DEd5e",
+    image_url: 
+      "https://raw.githubusercontent.com/bnb-chain/bsc-validator-directory/main/mainnet/validators/0xB58ac55EB6B10e4f7918D77C92aA1cF5bB2DEd5e/logo.png",
+  },
 ];
 
 export default function CaseSection() {
