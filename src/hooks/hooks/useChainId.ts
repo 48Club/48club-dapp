@@ -18,7 +18,7 @@ const useIsChainId = () => {
     const ethereum = window.ethereum as any
     if (ethereum && account) {
       if (Number(ethereum.networkVersion) !== BSC.chainId) {
-        switchChain('Default')
+        switchChain('Default', false)
       }
       chainChange(Number(ethereum.networkVersion))
       ethereum.on('chainChanged', chainChange)

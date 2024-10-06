@@ -5,6 +5,7 @@ import './index.less'
 import appLogo from '../../assets/images/icon/logo-app.svg'
 import { useTranslation } from 'react-i18next'
 import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TWITTER_URL } from '../../constants/48club'
+import { switchChain } from '@/constants/chain'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -129,6 +130,26 @@ export default function Footer() {
                     <a className="flex flex-row items-center" href={MEDIUM_URL} target="_blank" rel="noopener noreferrer">
                       <img className="social-icon" src="/static/icon-social-medium.png" alt="Medium" />
                       Medium
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="widget">
+                <div className="title">
+                  {t('add_48club_RPC_title')}
+                </div>
+                <ul>
+                  <li>
+                    <a className="flex flex-row items-center" onClick={() => { switchChain('0Ggei', true) }} rel="noopener noreferrer">
+                      <img className="social-icon" src="/static/chain.svg" alt="0Gwei" />
+                      0Gwei(Soul&gt;=48)
+                    </a>
+                  </li>
+                  <li>
+                    <a className="flex flex-row items-center" onClick={() => { switchChain('Default', true) }} rel="noopener noreferrer">
+                      <img className="social-icon" src="/static/chain.svg" alt="1Gwei" />
+                      1Gwei(Anyone)
                     </a>
                   </li>
                 </ul>

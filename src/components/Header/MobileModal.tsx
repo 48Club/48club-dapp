@@ -24,8 +24,10 @@ export default function MobileModal(props: { open: boolean, oncancel: () => void
       onCancel={props.oncancel}
       footer={null}
       maskClosable
-      maskStyle={{
-        height: '100%',
+      styles={{
+        mask: {
+          height: '100%',
+        },
       }}
       width="100%"
       wrapClassName="app-responsive-menu-modal-wrapper"

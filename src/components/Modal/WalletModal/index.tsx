@@ -5,9 +5,9 @@ import { useCallback, useEffect, useState } from 'react'
 import metamask from '@/assets/images/wallet/metamask.svg'
 import walletConnect from '@/assets/images/wallet/walletConnect.svg'
 import { styled } from 'styled-components'
-import { CHAIN_ID_HEX } from '@/constants/env'
 import { useEthers } from '@usedapp/core'
 import { LoadingOutlined } from '@ant-design/icons'
+import { switchChain } from '@/constants/chain'
 const WalletContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,14 +55,12 @@ export default function WalletModal() {
   const { activateBrowserWallet, account } = useEthers()
   const [isActive, setActive] = useState('')
 
+
   const activate = useCallback(
     async (type: string) => {
       try {
         if (window.ethereum && window.ethereum.request) {
-          await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: CHAIN_ID_HEX }],
-          })
+          switchChain('Default', false)
         }
       } catch (e) {
         console.error(e)
@@ -83,6 +81,7 @@ export default function WalletModal() {
       closeModal()
     }
   }, [account])
+
 
   return (
     <Modal

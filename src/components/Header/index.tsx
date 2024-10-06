@@ -73,41 +73,36 @@ export default function Header() {
           </Link>
           <div className="hidden md:flex flex-row items-center">
             <Link
-              className={`ml-5 font-medium hover:text-primary ${
-                location.pathname.startsWith('/staking') ? 'text-primary' : 'text-black'
-              }`}
+              className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/staking') ? 'text-primary' : 'text-black'
+                }`}
               to={'/staking'}
             >
               {t('nav-staking')}
             </Link>
             <Link
-              className={`ml-5 font-medium hover:text-primary ${
-                location.pathname.startsWith('/nft') ? 'text-primary' : 'text-black'
-              }`}
+              className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/nft') ? 'text-primary' : 'text-black'
+                }`}
               to={'/nft'}
             >
               {t('nav-nft')}
             </Link>
             <Link
-              className={`ml-5 font-medium hover:text-primary ${
-                location.pathname.startsWith('/voting') ? 'text-primary' : 'text-black'
-              }`}
+              className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/voting') ? 'text-primary' : 'text-black'
+                }`}
               to={'/voting'}
             >
               {t('nav-voting')}
             </Link>
             <Link
-              className={`ml-5 font-medium hover:text-primary ${
-                location.pathname.startsWith('/pool') ? 'text-primary' : 'text-black'
-              }`}
+              className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/pool') ? 'text-primary' : 'text-black'
+                }`}
               to={'/pool'}
             >
               {t('nav-farm')}
             </Link>
             <Link
-              className={`ml-5 font-medium hover:text-primary ${
-                location.pathname.startsWith('/inscriptions') ? 'text-primary' : 'text-black'
-              }`}
+              className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/inscriptions') ? 'text-primary' : 'text-black'
+                }`}
               to={'/inscriptions'}
             >
               {t('inscriptions')}
@@ -152,29 +147,12 @@ export default function Header() {
   )
 }
 
-let once = false
 function Web3Status() {
   const { t } = useTranslation()
   const { transactions } = useTransactions()
   const openwallet = useOpenModal(ApplicationModal.WALLET)
 
-  const { library, activateBrowserWallet, account, chainId, deactivate } = useEthers()
-  const wallet_addEthereumChain = {
-    method: 'wallet_addEthereumChain',
-    params: [
-      {
-        chainId: CHAIN_ID_HEX,
-        // rpcUrls: ['https://data-seed-prebsc-2-s2.binance.org:8545'],
-        rpcUrls: ['https://1gwei.48.club'],
-        chainName: '48Club 1Gwei Privacy',
-        nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
-        blockExplorerUrls: ['https://bscscan.com'],
-        iconUrls: [
-          'https://raw.githubusercontent.com/48Club/48club-dapp/master/public/static/favicon/favicon-32x32.png',
-        ],
-      },
-    ],
-  }
+  const { account, deactivate } = useEthers()
 
   const walletMenu = (
     <Menu className="bg-white">
@@ -184,24 +162,6 @@ function Web3Status() {
     </Menu>
   )
 
-  if (!once) {
-    once = true
-    ;(async () => {
-      if (Cookies.get('rejected-change-rpc') !== 'true') {
-        const _library = library as any
-        if (_library?.provider?.request) {
-          console.log('request 0')
-          await _library.provider.request(wallet_addEthereumChain).catch((error: any) => {
-            if (error.code === 4001) {
-              Cookies.set('rejected-change-rpc', 'true', { path: '' })
-            }
-          })
-        } else if (window.ethereum && window.ethereum.request) {
-          window.ethereum.request(wallet_addEthereumChain)
-        }
-      }
-    })()
-  }
 
   const pendingCount = transactions.filter((i) => !i.receipt).length
 

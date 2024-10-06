@@ -1,12 +1,10 @@
-import { BSC } from '@usedapp/core'
-
 export const ZeroAddress = '0x0000000000000000000000000000000000000000'
 
 const BNBChainId = 56
-export const BNB1geiChain: any = {
+export const BNB0geiChain: any = {
   chainId: '0x' + BNBChainId.toString(16),
-  chainName: BSC.chainName,
-  rpcUrls: ['https://1gwei.48.club'],
+  chainName: '48Club 0wei Privacy',
+  rpcUrls: ['https://0.48.club'],
   blockExplorerUrls: ['https://bscscan.com'],
   nativeCurrency: {
     name: 'BNB',
@@ -15,9 +13,9 @@ export const BNB1geiChain: any = {
   },
 }
 
-export const BNB3geiChain: any = {
+export const BNB1geiChain: any = {
   chainId: '0x' + BNBChainId.toString(16),
-  chainName: BSC.chainName,
+  chainName: '48Club 1Gwei Privacy',
   rpcUrls: ['https://rpc-bsc.48.club'],
   blockExplorerUrls: ['https://bscscan.com'],
   nativeCurrency: {
@@ -27,36 +25,48 @@ export const BNB3geiChain: any = {
   },
 }
 
-export const BNBDefaultChain: any = {
-  chainId: '0x' + BNBChainId.toString(16),
-  chainName: BSC.chainName,
-  rpcUrls: BSC.rpcUrl,
-  blockExplorerUrls: [BSC.blockExplorerUrl],
-  nativeCurrency: BSC.nativeCurrency,
+const rpcGasMap = {
+  '0Ggei': '0x1',
+  'Default': '0x3b9aca00',
 }
 
-export const switchChain = async (type: '1Ggei' | '3Ggei' | 'Default') => {
+export const switchChain = async (type: '0Ggei' | 'Default', force: boolean) => {
   let switchChainValue: any
-  if (type === '1Ggei') {
-    switchChainValue = BNB1geiChain
-  } else if (type === '3Ggei') {
-    switchChainValue = BNB3geiChain
+  if (type === '0Ggei') {
+    switchChainValue = BNB0geiChain
   } else {
-    switchChainValue = BNBDefaultChain
+    switchChainValue = BNB1geiChain
   }
 
   const ethereum = window.ethereum as any
-
   if (ethereum) {
     try {
-      await ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [
-          {
-            chainId: switchChainValue.chainId,
-          },
-        ],
-      })
+
+      const chainId = await ethereum.request({ method: 'eth_chainId' })
+
+      if (force) {
+        if (chainId == switchChainValue.chainId) {
+          let gasPrice = await ethereum.request({
+            "method": "eth_gasPrice",
+            "params": [],
+          })
+
+          if (rpcGasMap[type] !== gasPrice) {
+            console.log('need gas price:', rpcGasMap[type], ',current gas price:', gasPrice);
+            await ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [switchChainValue],
+            })
+          }
+        }
+      } else if (chainId == switchChainValue.chainId) {
+        return
+      } else {
+        await ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [switchChainValue],
+        })
+      }
     } catch (error) {
       await ethereum.request({
         method: 'wallet_addEthereumChain',
