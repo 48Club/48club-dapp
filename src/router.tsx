@@ -32,6 +32,7 @@ import WalletModal from './components/Modal/WalletModal'
 import InscriptionsFarm from './pages/inscriptions/farm'
 import InscriptionsWrapped from './pages/inscriptions/wrapped'
 import Administrator from './pages/administrator'
+import AddRpc from './pages/addRpc'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const LayoutWrap = () => (
@@ -104,6 +105,10 @@ const routes = createBrowserRouter([
       {
         path: '/admin',
         element: <Administrator />,
+      },
+      {
+        path: '/add_rpc/:upath',
+        element: <AddRpc />,
       },
       {
         path: '/inscriptions',
