@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 
 // 白名单 upath 列表
 const upathList = [
+    'hellodex',
     'math',
     'tp',
     'bitget',
