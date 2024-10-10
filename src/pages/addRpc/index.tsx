@@ -1,13 +1,14 @@
 import { BNB0geiChain } from "@/constants/chain";
 import { useParams } from "react-router";
 
-// 白名单 upath 列表
+// 白名单 upath 列表, a-z 排序
 const upathList = [
+    'bitget',
+    'four',
     'hellodex',
     'math',
+    'pancake',
     'tp',
-    'bitget',
-    'pancake'
 ]
 const AddRpc = () => {
     let { upath } = useParams()
