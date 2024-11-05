@@ -13,6 +13,7 @@ import moment from 'moment'
 import { useOpenModal } from '../../../state/application/hooks'
 import { ApplicationModal } from '../../../state/application/actions'
 import { HelpCircle } from 'react-feather'
+import { toWei } from 'web3-utils'
 
 export default function StakingSection() {
   const { account } = useEthers()
@@ -114,7 +115,7 @@ export default function StakingSection() {
               value={input}
               onChange={(e) => setInput(e.target.value)} />
             {
-              !allowance.gt(0) ? (
+              (!allowance.gte(new BigNumber(toWei(input, 'ether'))) && activeItem == 0) ? (
                 <Button className="h-12 rounded border-btn" onClick={approve} loading={approveLoading}>
                   Approve
                 </Button>
