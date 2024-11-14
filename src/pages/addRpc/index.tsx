@@ -6,6 +6,7 @@ const upathList = [
     'bitget',
     'four',
     'hellodex',
+    'lv',
     'math',
     'pancake',
     'tp',

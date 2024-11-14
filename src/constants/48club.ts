@@ -64,4 +64,5 @@ export const PARTNER_URLS = [
   '/static/logo-partner-bitfill.png',
   '/static/logo-partner-alpaca.png',
   '/static/logo-hellodex.svg',
+  '/static/tenarmor.jpg',
 ]
