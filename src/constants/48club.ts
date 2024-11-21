@@ -53,16 +53,17 @@ export const MEDIUM_URL = 'https://medium.com/48-club-publish'
 
 export const PARTNER_URLS = [
   '/static/logo-partner-binance-smart-chain.svg',
-  '/static/logo-partner-dodo.svg',
-  '/static/logo-partner-kava.svg',
+  '/static/logo-partner-pancake.svg',
   '/static/logo-partner-mathwallet.svg',
-  '/static/logo-partner-roostoo.svg',
+  '/static/logo-partner-tenarmor.png',
   '/static/logo-partner-12.jpeg',
   '/static/logo-partner-realsatoshi.png',
+  '/static/logo-partner-dodo.svg',
   '/static/logo-partner-defi-labs.svg',
-  '/static/logo-partner-mayor-capital.svg',
-  '/static/logo-partner-bitfill.png',
   '/static/logo-partner-alpaca.png',
+  '/static/logo-partner-roostoo.svg',
   '/static/logo-hellodex.svg',
-  '/static/logo-partner-tenarmor.png',
+  '/static/logo-partner-kava.svg',
+  '/static/logo-partner-bitfill.png',
+  '/static/logo-partner-mayor-capital.svg',
 ]
