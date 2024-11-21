@@ -7,7 +7,7 @@ const REVIEW_ITEMS = [{
   id: 1,
   title: 'home_page_activity_section_title_1',
   content: 'home_page_activity_section_content_1',
-  image_url: '/static/illustration-home-activity-1-updated.png',
+  image_url: '/static/illustration-home-activity-1.png',
 }, {
   id: 2,
   title: 'home_page_activity_section_title_2',
