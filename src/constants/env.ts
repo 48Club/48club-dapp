@@ -13,7 +13,7 @@ export const RPC_URLS = {
 
 export const READONLY_RPC_URL = {
   ...RPC_URLS,
-  [BSC.chainId]: 'https://rpc-bsc.48.club/erigon/',
+  [BSC.chainId]: 'https://fake-rpc.48.club/',
 }[CHAIN_ID]
 
 console.log('IS_PRODUCTION', IS_PRODUCTION)
