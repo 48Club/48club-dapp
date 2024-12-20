@@ -56,6 +56,7 @@ export const PARTNER_URLS = [
 
   '/static/logo-partner-pancake.png',
   '/static/logo-partner-four.png',
+  '/static/logo-partner-lista.svg',
 
   '/static/logo-partner-mathwallet.svg',
   '/static/logo-partner-tokenpocket.svg',
