@@ -58,6 +58,7 @@ export const PARTNER_URLS = [
   '/static/logo-partner-mathwallet.svg',
   '/static/logo-partner-tenarmor.png',
   '/static/logo-partner-hashdit.jpg',
+  '/static/logo-partner-rescuebox.jpg',
   '/static/logo-partner-12.jpeg',
   '/static/logo-partner-realsatoshi.png',
   '/static/logo-partner-dodo.svg',
