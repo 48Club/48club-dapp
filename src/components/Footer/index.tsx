@@ -141,17 +141,18 @@ export default function Footer() {
                 </div>
                 <ul>
                   <li>
-                    <a className="flex flex-row items-center" onClick={() => { switchChain('0Ggei', true) }} rel="noopener noreferrer">
-                      <img className="social-icon" src="/static/chain.svg" alt="0Gwei" />
-                      0Gwei(Soul&gt;=48)
+                    <a className="flex flex-row items-center" onClick={() => { switchChain('Default', true) }} rel="noopener noreferrer">
+                      <img className="social-icon" src="/static/chain.svg" alt="1Gwei" />
+                      https://rpc.48.club
                     </a>
                   </li>
                   <li>
-                    <a className="flex flex-row items-center" onClick={() => { switchChain('Default', true) }} rel="noopener noreferrer">
-                      <img className="social-icon" src="/static/chain.svg" alt="1Gwei" />
-                      1Gwei(Anyone)
+                    <a className="flex flex-row items-center" onClick={() => { switchChain('0Ggei', true) }} rel="noopener noreferrer">
+                      <img className="social-icon" src="/static/chain.svg" alt="0Gwei" />
+                      https://0.48.club (Soul&gt;=48)
                     </a>
                   </li>
+
                 </ul>
               </div>
             </Col>

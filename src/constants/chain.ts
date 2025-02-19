@@ -1,9 +1,9 @@
 export const ZeroAddress = '0x0000000000000000000000000000000000000000'
 
 const BNBChainId = 56
-export const BNB0geiChain: any = {
+export const BNB0gweiChain: any = {
   chainId: '0x' + BNBChainId.toString(16),
-  chainName: '48Club 0wei Privacy',
+  chainName: '48Club 0gwei MEV Protected',
   rpcUrls: ['https://0.48.club'],
   blockExplorerUrls: ['https://bscscan.com'],
   nativeCurrency: {
@@ -13,10 +13,10 @@ export const BNB0geiChain: any = {
   },
 }
 
-export const BNB1geiChain: any = {
+export const BNB1gweiChain: any = {
   chainId: '0x' + BNBChainId.toString(16),
-  chainName: '48Club 1Gwei Privacy',
-  rpcUrls: ['https://rpc-bsc.48.club'],
+  chainName: '48Club MEV Protected',
+  rpcUrls: ['https://rpc.48.club'],
   blockExplorerUrls: ['https://bscscan.com'],
   nativeCurrency: {
     name: 'BNB',
@@ -33,9 +33,9 @@ const rpcGasMap = {
 export const switchChain = async (type: '0Ggei' | 'Default', force: boolean) => {
   let switchChainValue: any
   if (type === '0Ggei') {
-    switchChainValue = BNB0geiChain
+    switchChainValue = BNB0gweiChain
   } else {
-    switchChainValue = BNB1geiChain
+    switchChainValue = BNB1gweiChain
   }
 
   const ethereum = window.ethereum as any
