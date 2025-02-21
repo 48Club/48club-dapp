@@ -1,4 +1,4 @@
-import { BNB0geiChain } from "@/constants/chain";
+import { BNB0gweiChain } from "@/constants/chain";
 import { useParams } from "react-router";
 
 // 白名单 upath 列表, a-z 排序
@@ -19,7 +19,7 @@ const AddRpc = () => {
             alert('Invalid upath')
             return
         }
-        let chain = BNB0geiChain
+        let chain = BNB0gweiChain
         chain.chainName = '48Club Privacy RPC'
         chain.rpcUrls = [`https://${upath}.rpc.48.club`]
         try {
