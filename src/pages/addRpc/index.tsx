@@ -1,24 +1,25 @@
 import { BNB0gweiChain } from "@/constants/chain";
 import { useParams } from "react-router";
 
-// 白名单 upath 列表, a-z 排序
-const upathList = [
-    'bitget',
-    'four',
-    'hellodex',
-    'lv',
-    'math',
-    'pancake',
-    'tp',
-]
+
 const AddRpc = () => {
     let { upath } = useParams()
     console.log(upath);
     onload = async () => {
-        if (!upathList.includes(upath || '')) {
-            alert('Invalid upath')
+        let dnsQuery = await fetch(`https://cloudflare-dns.com/dns-query?name=${upath}.rpc.48.club&type=A`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/dns-json'
+            }
+        }).then((response) => {
+            return response.json();
+        });
+
+        if (dnsQuery.Status !== 0 || !dnsQuery.Answer || dnsQuery.Answer.length === 0) {
+            alert('Invalid Request')
             return
         }
+
         let chain = BNB0gweiChain
         chain.chainName = '48Club Privacy RPC'
         chain.rpcUrls = [`https://${upath}.rpc.48.club`]
