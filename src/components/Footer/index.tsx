@@ -54,7 +54,7 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/validation_node">
+                    <Link to="/validation-node">
                       {t('app_header_menu_node_title')}
                     </Link>
                   </li>
