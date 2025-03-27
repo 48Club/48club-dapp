@@ -3,7 +3,7 @@ import { utils } from 'ethers'
 import { useCallback, useEffect, useState } from 'react'
 import { START_BLOCK_NUMBER } from '../../constants/contracts'
 
-export default function useGovDetailVotes(proposalId: string) {
+export default function useGovDetailVotes(proposalId: string, notInitRecords?: boolean) {
   const [voteRecords, setVoteRecords] = useState<any[] | undefined>(undefined)
   const govContractReadonly = useGovernanceContractReadonly()
   const reloadVoteRecords = useCallback(async () => {
@@ -28,6 +28,9 @@ export default function useGovDetailVotes(proposalId: string) {
   }, [govContractReadonly, proposalId])
 
   useEffect(() => {
+    if (notInitRecords) {
+      return
+    }
     reloadVoteRecords().catch(console.error)
   }, [reloadVoteRecords])
 

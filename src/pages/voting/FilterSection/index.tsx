@@ -9,8 +9,8 @@ const { Option } = Select
 
 export default function FilterSection() {
   const { t } = useTranslation()
-  const { setRelated, setTimeRanges, setClaimable, setStatus } = useContext(GovSetFilterContext)
-  const { related, status, claimable } = useContext(GovInfoFilterContext)
+  const { setRelated, setTimeRanges, setClaimable, setStatus, setVoted } = useContext(GovSetFilterContext)
+  const { related, status, claimable, voted } = useContext(GovInfoFilterContext)
   const optionList = [
     {
       label: t('all'),
@@ -67,6 +67,16 @@ export default function FilterSection() {
             checked={related}
             className="filter-switch w-full h-12"
             onChange={setRelated}
+          />
+        </div>
+        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6" style={{ flexShrink: 0 }}>
+          <span className="text-sm leading-5 mb-2 text-light-black">
+            {t('filter_voted')}
+          </span>
+          <Switch
+            checked={voted}
+            className="filter-switch w-full h-12"
+            onChange={setVoted}
           />
         </div>
         <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6" style={{ flexShrink: 0 }}>

@@ -8,9 +8,14 @@ import BigNumber from 'bignumber.js'
 import { Spin } from 'antd'
 
 export default function ResultSection() {
-  const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const { againstVotes, forVotes, state, quorum, totalStakeAtStart, loading } = useGovDetailInfo(id as string)
+  const info = useGovDetailInfo(id as string)
+  return <ResultSectionView info ={info} />
+}
+
+export const ResultSectionView = ({ info }: any) => {
+  const { t } = useTranslation()
+  const { againstVotes, forVotes, state, quorum, totalStakeAtStart, loading } = info
   const quorumBN = new BigNumber(quorum).div(TEN_POW(4)).times(totalStakeAtStart)
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
