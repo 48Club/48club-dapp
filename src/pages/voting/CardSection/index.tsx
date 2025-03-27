@@ -38,8 +38,8 @@ function Card({ item }: { item: any }) {
     const timeShow = !timeRanges.length || (moment.unix(voteStart).isAfter(timeRanges?.[0]) && moment.unix(voteStart).isBefore(timeRanges?.[1]))
     const releatedShow = !related || account === proposer
     const claimableShow = !claimable || item.claimable
-    const ifvoted = info.myVotes?.gt(0)
-    const votedShow = ifvoted === voted
+    const hasVoted = info.myVotes?.gt(0)
+    const votedShow = hasVoted === voted
     return statusShow && timeShow && releatedShow && claimableShow && votedShow
   }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item, info.myVotes])
 
@@ -74,9 +74,9 @@ function Card({ item }: { item: any }) {
         }
       </div>
       <div className='flex justify-end -mt-[27px] items-center'>
-        { info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
+        {info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
           {t('vote_result')}:
-          </div>
+        </div>
           <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
         }
         <div
@@ -84,9 +84,8 @@ function Card({ item }: { item: any }) {
           className="transition-transform duration-300 flex justify-end "
         >
           <svg
-            className={`w-4 h-4 transition-transform duration-300 ${
-              !showPanel ? "rotate-180" : "rotate-0"
-            }`}
+            className={`w-4 h-4 transition-transform duration-300 ${!showPanel ? "rotate-180" : "rotate-0"
+              }`}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -102,7 +101,7 @@ function Card({ item }: { item: any }) {
         <VoteSectionView info={info} proposalId={item.proposalId} notInitRecords={true} />
         <ResultSectionView info={info} />
       </div>)}
-      
+
     </NavLink>
   )
 }
