@@ -80,7 +80,7 @@ function Card({ item }: { item: any }) {
           <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
         }
         <div
-          onClick={handleShowPannel}
+          onClick={handleShowPanel}
           className="transition-transform duration-300 flex justify-end "
         >
           <svg
@@ -97,7 +97,7 @@ function Card({ item }: { item: any }) {
         </div>
       </div>
       {/* { info.myVotes?.gt(0) && (<div>{info.myVoteType === 1 ? 'Approve' : 'Reject'}</div>) } */}
-      {showPanel && (<div className="flex flex-col md:flex-row items-stretch mt-[10px]" onClick={handleVotePannel}>
+      {showPanel && (<div className="flex flex-col md:flex-row items-stretch mt-[10px]" onClick={handleVotePanel}>
         <VoteSectionView info={info} proposalId={item.proposalId} notInitRecords={true} />
         <ResultSectionView info={info} />
       </div>)}
