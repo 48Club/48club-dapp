@@ -70,7 +70,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: a
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
   // <Spin spinning={!voteRecords}>
-  return <Spin spinning={canVote === 'undefined'}>
+  return <Spin spinning={!voteRecords}>
     <div className="flex flex-col justify-center items-stretch">
       <div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
 
