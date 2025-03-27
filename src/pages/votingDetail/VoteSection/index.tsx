@@ -24,7 +24,7 @@ export default function VoteSection({ proposalId, notInitRecords }: props) {
   )
 }
 
-export function VoteSectionView({info, proposalId, notInitRecords} : any) {
+export function VoteSectionView({ info, proposalId, notInitRecords }: any) {
   const { t } = useTranslation()
   const id = proposalId
   const { myCanVote, state, myReward, myVotes } = info
@@ -55,7 +55,7 @@ export function VoteSectionView({info, proposalId, notInitRecords} : any) {
 
 function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: any) {
   const { onVote } = useGov()
-  const { account } = useEthers()
+  // const { account } = useEthers()
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
 
@@ -69,8 +69,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: a
   }, [onVote, reloadVoteRecords])
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
-  // <Spin spinning={!voteRecords}>
-  return <Spin spinning={!voteRecords}>
+  return <Spin spinning={!canVote}>
     <div className="flex flex-col justify-center items-stretch">
       <div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
 
