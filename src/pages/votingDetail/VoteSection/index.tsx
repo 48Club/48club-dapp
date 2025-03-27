@@ -4,7 +4,6 @@ import Label from 'components/Label'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import useGov from '../../../hooks/gov/useGov'
-import { useParams } from 'react-router-dom'
 import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import { HelpCircle } from 'react-feather'
@@ -13,12 +12,24 @@ import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
 import useGovDetailClaims from '../../../hooks/gov/useGovDetailClaims'
 
-export default function VoteSection() {
+interface props {
+  proposalId: string
+  notInitRecords?: boolean
+}
+export default function VoteSection({ proposalId, notInitRecords }: props) {
+  const info = useGovDetailInfo(proposalId as string)
+
+  return (
+    <VoteSectionView info={info} proposalId={proposalId} notInitRecords={notInitRecords} />
+  )
+}
+
+export function VoteSectionView({info, proposalId, notInitRecords} : any) {
   const { t } = useTranslation()
-  const { id } = useParams<{ id: string }>()
-  const { myCanVote, state, myReward } = useGovDetailInfo(id as string)
+  const id = proposalId
+  const { myCanVote, state, myReward, myVotes } = info
   const { myStakeBalance } = useStakeInfo()
-  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id as string)
+  const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id as string, notInitRecords)
   const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id as string)
   function getPanel() {
     if (state === 'Defeated' || state === 'Succeeded') {
@@ -29,7 +40,7 @@ export default function VoteSection() {
       return <InvalidPanel id={id} state={state} />
     }
     return <ActionPanel id={id} canVote={myCanVote && myStakeBalance?.gt(0)}
-      voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} />
+      voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} myVotes={myVotes} />
   }
 
   return (
@@ -42,25 +53,25 @@ export default function VoteSection() {
   )
 }
 
-function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords }: any) {
+function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: any) {
   const { onVote } = useGov()
   const { account } = useEthers()
-  const { myVotes } = useGovDetailInfo(id)
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
 
   const [reason, setReason] = useState("")
 
-  const myVoted = voteRecords?.find((i: any) => i.voter === account && i.proposalId === id)
+  // const myVoted = voteRecords?.find((i: any) => i.voter === account && i.proposalId === id)
+  const myVoted = myVotes?.gt(0)
   const onSubmit = useCallback(async (id: any, support: any, reason: any) => {
     await onVote(id, support, reason)
     setTimeout(reloadVoteRecords, 1000)
   }, [onVote, reloadVoteRecords])
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
-
-
-  return <Spin spinning={!voteRecords}>
+  console.log(canVote, 'canVote')
+  // <Spin spinning={!voteRecords}>
+  return <Spin spinning={canVote === 'undefined'}>
     <div className="flex flex-col justify-center items-stretch">
       <div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
 

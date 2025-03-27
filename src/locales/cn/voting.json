@@ -6,6 +6,7 @@
   "filter_status": "提案状态",
   "filter_related": "由我提案",
   "filter_claimable": "可领取",
+  "filter_voted": "我已投票",
   "end_time": "结束时间",
   "total_reward": "治理奖励",
   "start_time": "发起时间",

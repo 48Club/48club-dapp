@@ -1,7 +1,7 @@
 import { CheckCircleTwoTone, ClockCircleFilled, CloseCircleTwoTone } from '@ant-design/icons'
 import Tag from 'components/Tag'
 import { NavLink } from 'react-router-dom'
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatAmount, shorten } from '@funcblock/dapp-sdk'
 import { useEthers } from '@usedapp/core'
@@ -11,6 +11,8 @@ import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import useGovInfo from '../../../hooks/gov/useGovInfo'
 import { GovInfoFilterContext } from '../../../hooks/gov/useGov'
 import { TFunction } from 'i18next'
+import { ResultSectionView } from '../../votingDetail/ResultSection'
+import { VoteSectionView } from '../../votingDetail/VoteSection'
 
 export default function CardSection() {
   const { proposals } = useGovInfo()
@@ -28,20 +30,29 @@ function Card({ item }: { item: any }) {
   const { t } = useTranslation()
   const info = useGovDetailInfo(item.proposalId)
   const { state, voteStart, proposer } = info
-  const { status, related, claimable, timeRanges } = useContext(GovInfoFilterContext)
+  const { status, related, claimable, timeRanges, voted } = useContext(GovInfoFilterContext)
   const { account } = useEthers()
-
+  const [showPanel, setShowPanel] = useState(false)
   const show = useMemo(() => {
     const statusShow = status === 'all' || status === state
     const timeShow = !timeRanges.length || (moment.unix(voteStart).isAfter(timeRanges?.[0]) && moment.unix(voteStart).isBefore(timeRanges?.[1]))
     const releatedShow = !related || account === proposer
     const claimableShow = !claimable || item.claimable
-    return statusShow && timeShow && releatedShow && claimableShow
-  }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item])
+    const ifvoted = info.myVotes?.gt(0)
+    const votedShow = ifvoted === voted
+    return statusShow && timeShow && releatedShow && claimableShow && votedShow
+  }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item, info.myVotes])
 
   const ntitle = (item?.ntitle) === '' ? item?.description : (item?.ntitle)
-
-
+  const handleVotePannel = (e: any) => {
+    e.stopPropagation()
+    e.preventDefault()
+  }
+  const handleShowPannel = (e: any) => {
+    e.stopPropagation()
+    e.preventDefault()
+    setShowPanel(flag => !flag)
+  }
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
       <div className="flex flex-col md:flex-row-reverse md:mb-2">
@@ -62,6 +73,36 @@ function Card({ item }: { item: any }) {
           getVoteStatusDesc(t, info)
         }
       </div>
+      <div className='flex justify-end -mt-[27px] items-center'>
+        { info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
+          {t('vote_result')}:
+          </div>
+          <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
+        }
+        <div
+          onClick={handleShowPannel}
+          className="transition-transform duration-300 flex justify-end "
+        >
+          <svg
+            className={`w-4 h-4 transition-transform duration-300 ${
+              !showPanel ? "rotate-180" : "rotate-0"
+            }`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </div>
+      </div>
+      {/* { info.myVotes?.gt(0) && (<div>{info.myVoteType === 1 ? 'Approve' : 'Reject'}</div>) } */}
+      {showPanel && (<div className="flex flex-col md:flex-row items-stretch mt-[10px]" onClick={handleVotePannel}>
+        <VoteSectionView info={info} proposalId={item.proposalId} notInitRecords={true} />
+        <ResultSectionView info={info} />
+      </div>)}
+      
     </NavLink>
   )
 }
@@ -93,7 +134,8 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
         CardSectioNode = <> <CheckCircleTwoTone twoToneColor='#08C849' className="w-3.5 h-3.5 mr-1" />
           <div className="text-xs leading-5 text-dark-gray">
             Voted
-          </div></>
+          </div>
+        </>
       }
       return <div className="flex items-center">
         <div className="flex items-center">
