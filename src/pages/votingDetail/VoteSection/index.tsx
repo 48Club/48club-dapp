@@ -69,7 +69,6 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: a
   }, [onVote, reloadVoteRecords])
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
-  console.log(canVote, 'canVote')
   // <Spin spinning={!voteRecords}>
   return <Spin spinning={canVote === 'undefined'}>
     <div className="flex flex-col justify-center items-stretch">
