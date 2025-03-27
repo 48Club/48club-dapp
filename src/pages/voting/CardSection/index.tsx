@@ -44,7 +44,7 @@ function Card({ item }: { item: any }) {
   }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item, info.myVotes])
 
   const ntitle = (item?.ntitle) === '' ? item?.description : (item?.ntitle)
-  const handleVotePannel = (e: any) => {
+  const handleVotePanel = (e: any) => {
     e.stopPropagation()
     e.preventDefault()
   }
