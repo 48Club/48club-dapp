@@ -48,7 +48,7 @@ function Card({ item }: { item: any }) {
     e.stopPropagation()
     e.preventDefault()
   }
-  const handleShowPannel = (e: any) => {
+  const handleShowPanel = (e: any) => {
     e.stopPropagation()
     e.preventDefault()
     setShowPanel(flag => !flag)
