@@ -53,7 +53,6 @@ export default function useGovDetailInfo(proposalId: string) {
   const myCanVote = useMemo(() => {
     return state === 'Active'
   }, [state])
-
   return {
     loading: !proposalResult || !votesResult,
     proposer: proposalResult?.proposer.toString(),
@@ -70,5 +69,6 @@ export default function useGovDetailInfo(proposalId: string) {
     myCanVote,
     myReward: new BigNumber(rewardInfoResult?.claimableAmount.toString()),
     myVotes: new BigNumber(myVoteInfoResult?.[0].weight.toString()),
+    myVoteType: myVoteInfoResult?.[0].voteType
   }
 }

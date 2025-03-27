@@ -6,6 +6,7 @@
   "filter_status": "Proposal Status",
   "filter_related": "Proposed by me",
   "filter_claimable": "Claimable",
+  "filter_voted": "Voted",
   "end_time": "Still to finish",
   "total_reward": "Total reward",
   "start_time": "Start time",
