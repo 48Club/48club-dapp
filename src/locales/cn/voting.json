@@ -22,6 +22,7 @@
   "author": "提案人",
   "vote": "选择您的投票",
   "vote_result": "投票结果",
+  "interim_result": "投票进展",
   "vote_details": "投票信息",
   "approve_vote": "赞成",
   "reject_vote": "反对",
