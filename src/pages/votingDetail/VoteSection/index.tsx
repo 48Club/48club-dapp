@@ -80,7 +80,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
         onChange={(e) => setReason(e.target.value)}
       />
       <Button
-        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoteType === 1 && '!border-primary'}`}
+        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted && myVoteType === 1 && '!border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 1, reason)}
         disabled={!canVote || myVoted}
@@ -88,7 +88,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
         {t('approve_vote')}
       </Button>
       <Button
-        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${1 === 1 && '!border-primary'}`}
+        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted && myVoteType === 0 && '!border-primary'}`}
         icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 0, reason)}
         disabled={!canVote || myVoted}

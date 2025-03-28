@@ -79,7 +79,7 @@ function Card({ item }: { item: any }) {
       </div>
       <div className='flex justify-end -mt-[27px] items-center'>
         {info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
-          {t('vote_result')}:
+          {t('interim_result')}:
         </div>
           <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
         }

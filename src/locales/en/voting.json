@@ -22,6 +22,7 @@
   "author": "Proposer",
   "vote": "Vote",
   "vote_result": "Vote Result",
+  "interim_result": "Interim Result",
   "vote_details": "Voting details",
   "approve_vote": "Approve",
   "reject_vote": "Reject",
