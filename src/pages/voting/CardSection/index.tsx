@@ -39,7 +39,11 @@ function Card({ item }: { item: any }) {
     const releatedShow = !related || account === proposer
     const claimableShow = !claimable || item.claimable
     const hasVoted = info.myVotes?.gt(0)
-    const votedShow = hasVoted === voted
+    let votedShow = true
+    if (voted) {
+      votedShow = hasVoted === voted
+    }
+    
     return statusShow && timeShow && releatedShow && claimableShow && votedShow
   }, [status, state, timeRanges, voteStart, related, account, proposer, claimable, item, info.myVotes])
 
