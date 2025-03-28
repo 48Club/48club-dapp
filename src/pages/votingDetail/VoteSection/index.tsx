@@ -27,7 +27,7 @@ export default function VoteSection({ proposalId, notInitRecords }: props) {
 export function VoteSectionView({ info, proposalId, notInitRecords }: any) {
   const { t } = useTranslation()
   const id = proposalId
-  const { myCanVote, state, myReward, myVotes } = info
+  const { myCanVote, state, myReward, myVotes, myVoteType } = info
   const { myStakeBalance } = useStakeInfo()
   const { voteRecords, reloadVoteRecords } = useGovDetailVotes(id as string, notInitRecords)
   const { claimRecords, reloadClaimRecords } = useGovDetailClaims(id as string)
@@ -40,7 +40,7 @@ export function VoteSectionView({ info, proposalId, notInitRecords }: any) {
       return <InvalidPanel id={id} state={state} />
     }
     return <ActionPanel id={id} canVote={myCanVote && myStakeBalance?.gt(0)}
-      voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} myVotes={myVotes} />
+      voteRecords={voteRecords} reloadVoteRecords={reloadVoteRecords} myVotes={myVotes} myVoteType={myVoteType} />
   }
 
   return (
@@ -53,7 +53,7 @@ export function VoteSectionView({ info, proposalId, notInitRecords }: any) {
   )
 }
 
-function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: any) {
+function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myVoteType }: any) {
   const { onVote } = useGov()
   // const { account } = useEthers()
   const { myStakeBalance } = useStakeInfo()
@@ -80,7 +80,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: a
         onChange={(e) => setReason(e.target.value)}
       />
       <Button
-        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '1' && 'border-primary'}`}
+        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoteType === 1 && '!border-primary'}`}
         icon={<CheckCircleTwoTone twoToneColor="#08C849" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 1, reason)}
         disabled={!canVote || myVoted}
@@ -88,7 +88,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes }: a
         {t('approve_vote')}
       </Button>
       <Button
-        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${myVoted?.support === '0' && 'border-primary'}`}
+        className={`bg-white mt-6 h-12 text-light-black text-xl font-bold ${1 === 1 && '!border-primary'}`}
         icon={<CloseCircleTwoTone twoToneColor="#EF2B2B" className="align-baseline" />}
         onClick={() => !myVoted && onSubmit(id, 0, reason)}
         disabled={!canVote || myVoted}
