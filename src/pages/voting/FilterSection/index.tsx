@@ -39,15 +39,15 @@ export default function FilterSection() {
   ]
 
   return (
-    <div className="pt-4 w-auto mb-12 flex flex-col md:flex-row md:justify-between">
-      <div className="flex flex-col mb-6 md:mr-6 md:w-80">
+    <div className="pt-4 w-auto md:mb-6 flex flex-col md:flex-row md:justify-between">
+      <div className="flex flex-col mb-6 md:mr-6 md:w-80 md:flex-1">
         <span className="text-sm leading-5 mb-2 text-light-black">
           {t('filter_time')}
         </span>
         <RangePicker className="h-12 rounded border-none bg-light-white" onChange={setTimeRanges} />
       </div>
-      <div className="flex md:flex-1 md:justify-between">
-        <div className="flex flex-col w-full mr-4 md:w-80">
+      <div className="flex md:flex-none md:justify-between mb-6 md:w-40">
+        <div className="flex flex-col w-full mr-4 md:w-80 flex-">
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_status')}
           </span>
@@ -59,7 +59,9 @@ export default function FilterSection() {
             {optionList.map((item) => <Option className="h-10 flex items-center" key={item.label} value={item.value}>{item.label}</Option>)}
           </Select>
         </div>
-        <div className="shrink-0 w-20 flex flex-col md:w-24" style={{ flexShrink: 0 }}>
+      </div>
+      <div className="flex md:flex-1 md:justify-between mb-6">
+        <div className="shrink-0 w-20 flex flex-col md:w-24 flex-1" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 whitespace-nowrap text-light-black">
             {t('filter_related')}
           </span>
@@ -69,7 +71,7 @@ export default function FilterSection() {
             onChange={setRelated}
           />
         </div>
-        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-4 md:ml-6" style={{ flexShrink: 0 }}>
+        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6 flex-1" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_voted')}
           </span>
@@ -79,7 +81,7 @@ export default function FilterSection() {
             onChange={setVoted}
           />
         </div>
-        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-4 md:ml-6" style={{ flexShrink: 0 }}>
+        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6 flex-1" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_claimable')}
           </span>
