@@ -47,7 +47,7 @@ export default function FilterSection() {
         <RangePicker className="h-12 rounded border-none bg-light-white" onChange={setTimeRanges} />
       </div>
       <div className="flex md:flex-1 md:justify-between">
-        <div className="flex flex-col w-full mr-6 md:w-80">
+        <div className="flex flex-col w-full mr-4 md:w-80">
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_status')}
           </span>
@@ -69,7 +69,7 @@ export default function FilterSection() {
             onChange={setRelated}
           />
         </div>
-        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6" style={{ flexShrink: 0 }}>
+        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-4 md:ml-6" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_voted')}
           </span>
@@ -79,7 +79,7 @@ export default function FilterSection() {
             onChange={setVoted}
           />
         </div>
-        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-8 md:ml-6" style={{ flexShrink: 0 }}>
+        <div className="shrink-0 w-20 flex flex-col md:w-24 ml-4 md:ml-6" style={{ flexShrink: 0 }}>
           <span className="text-sm leading-5 mb-2 text-light-black">
             {t('filter_claimable')}
           </span>
