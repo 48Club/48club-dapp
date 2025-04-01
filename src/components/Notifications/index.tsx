@@ -53,8 +53,14 @@ interface FilteredNotification {
 export const NotificationsList = () => {
   const { notifications } = useNotifications()
   const filteredNotifications = notifications.filter(i => ['transactionSucceed', 'transactionFailed'].includes(i.type)) as FilteredNotification[]
+  for (let index = 0; index < filteredNotifications.length; index++) {
+    const element = filteredNotifications[index];
+    if (element.transactionName === 'Vote') {
+      element.transactionName = 'Vote Successful'
+    }
+  }
   return (
-    <div className="fixed right-0 top-0 pr-8 pb-2 mt-24">
+    <div className="fixed right-0 top-0 pr-8 pb-2 mt-24 bg-white">
       {filteredNotifications.map((notification) => (
         <NotificationElement
           key={notification.id}
