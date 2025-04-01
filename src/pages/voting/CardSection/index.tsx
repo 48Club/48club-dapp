@@ -1,6 +1,7 @@
 import { CheckCircleTwoTone, ClockCircleFilled, CloseCircleTwoTone } from '@ant-design/icons'
 import Tag from 'components/Tag'
 import { NavLink } from 'react-router-dom'
+import { Button } from 'antd'
 import { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatAmount, shorten } from '@funcblock/dapp-sdk'
@@ -59,10 +60,10 @@ function Card({ item }: { item: any }) {
   }
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
-      <div className="flex flex-col md:flex-row-reverse md:mb-2">
+      <div className="flex flex-col md:flex-row-reverse md:mb-2 items-center">
         <Tag type={state} className="min-w-16 h-7" />
-        <div className="mb-2 mt-2 text-base leading-6 font-medium text-light-black">#{item.proposalId}</div>
-        <div className="mb-2 mt-4 text-base leading-6 font-medium text-yellow md:flex-1 md:mt-0 md:mb-0">
+        <div className="mr-2 text-base leading-6 font-medium text-light-black">#{item.proposalId}</div>
+        <div className=" text-base leading-6 font-medium text-yellow md:flex-1 md:mt-0 md:mb-0">
           {t('author')}: {shorten(item.proposer)}
         </div>
       </div>
@@ -72,33 +73,37 @@ function Card({ item }: { item: any }) {
       <div className="break-words text-sm leading-5 mb-12 md:mb-9 text-dark-gray">
         {item.description.slice(0, 200)}
       </div>
-      <div className="mb-2 flex flex-col md:flex-row md:items-center">
-        {
-          getVoteStatusDesc(t, info)
-        }
-      </div>
-      <div className='flex justify-end -mt-[27px] items-center'>
-        {info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
-          {t('interim_result')}:
+      <div className='flex items-center justify-between'>
+        <div className=" flex flex-col md:flex-row md:items-center">
+          {
+            getVoteStatusDesc(t, info)
+          }
         </div>
-          <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
-        }
-        <div
-          onClick={handleShowPanel}
-          className="transition-transform duration-300 flex justify-end "
-        >
-          <svg
-            className={`w-4 h-4 transition-transform duration-300 ${!showPanel ? "rotate-180" : "rotate-0"
-              }`}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+        <Button className='flex justify-end items-center' onClick={handleShowPanel}>
+          <div className='flex justify-end items-center'>
+            {info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
+              {t('interim_result')}:
+            </div>
+              <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
+            }
+          </div>
+          
+          <div
+            className="transition-transform duration-300 flex justify-end "
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
-        </div>
+            <svg
+              className={`w-4 h-4 transition-transform duration-300 ${!showPanel ? "rotate-180" : "rotate-0"
+                }`}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+          </div>
+        </Button>
       </div>
       {/* { info.myVotes?.gt(0) && (<div>{info.myVoteType === 1 ? 'Approve' : 'Reject'}</div>) } */}
       {showPanel && (<div className="flex flex-col md:flex-row items-stretch mt-[10px]" onClick={handleVotePanel}>
