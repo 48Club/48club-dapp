@@ -86,10 +86,10 @@ const routes = createBrowserRouter([
         path: '/voting',
         element: <Voting />,
       },
-      {
-        path: '/voting/create',
-        element: <VotingCreate />,
-      },
+      // {
+      //   path: '/voting/create',
+      //   element: <VotingCreate />,
+      // },
       {
         path: '/voting/detail/:id',
         element: <VotingDetail />,

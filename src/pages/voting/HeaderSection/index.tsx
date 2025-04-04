@@ -21,11 +21,11 @@ export default function HeaderSection() {
             {t('review_all_proposal')}
           </span>
 
-          <NavLink to="/voting/create">
+          {/* <NavLink to="/voting/create">
             <Button className="h-10 text-sm font-medium w-full rounded text-light-black bg-gray">
               {t('create_proposal')}
             </Button>
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
     </div>
