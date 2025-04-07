@@ -53,5 +53,8 @@
   "op2": "Option2: Reject",
   "result_tip1": "votes less than ",
   "result_tip2": "Total votes: ",
-  "placeholder_reason": "Comment"
+  "placeholder_reason": "Comment",
+  "vote-refund-hint": "The proposal is invalid because it did not reach the required number of votes.",
+  "my_vote": "My voted",
+  "voted_hint": "You have participated in the vote: Please wait for the final voting results!"
 }

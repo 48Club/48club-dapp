@@ -74,17 +74,17 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
   const votedView = useMemo(() => {
     return (<div className='flex items-center flex-col'>
-      <div className='mb-[20px]'>
+      <div className='mb-[20px] flex items-center'>
         {
           myVoteType === 1 && (<CheckCircleFilled className={`mr-2.5 text-green text-base`} style={{ fontSize: '50px' }} />)
         }
         { myVoteType === 0 && (<CloseCircleFilled className="mr-2.5 text-red text-base" style={{ fontSize: '50px' }} />) }
-        
+        <div className='text-[24px]'>{ myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div>
       </div>
-      <div className='mb-[20px]'>My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
-      <div>请等待</div>
+      <div className='mb-[20px] text-center'>{t('my_vote')}: {formatAmount(myVotesBN, 18)} KOGE</div>
+      <div className='text-center'>{t('voted_hint')}</div>
     </div>)
-  }, [myVoted, myVoteType])
+  }, [myVoted, myVoteType, t])
   const notVotedView = useMemo(() => {
     return (<><div className="mb-2 text-center text-dark-gray">My {myVotes ? 'votes' : 'staking'}: {formatAmount(myVotesBN, 18)} KOGE</div>
 
@@ -177,21 +177,19 @@ function InvalidPanel({ id, state }: any) {
     }
   </div>
 }
-function RefundPanel({ id, state, myVotes }: any) {
-  const { onRefund } = useGov()
-  const { t } = useTranslation()
+function RefundPanel({ id, state, myVotes, }: any) {
   const myVotesBN = myVotes
   const isMyVoted = myVotes.gt(0)
-  console.log(isMyVoted, 'isMyVoted')
+  const { t } = useTranslation()
   const votedView = useMemo(() => {
     return (<div className='flex items-center flex-col'>
       <MinusCircleTwoTone className="md:pb-7" style={{ fontSize: '52px' }} twoToneColor="#A9A9A9" />
       <div className='mb-[20px]'>
-        投票：{formatAmount(myVotesBN, 18)} KOGE
+        {t('my_vote')}：{formatAmount(myVotesBN, 18)} KOGE
       </div>
-      <div>该投票无效，未达到有效票数</div>
+      <div className='text-center'>{t('vote-refund-hint')}</div>
     </div>)
-  }, [myVotesBN])
+  }, [myVotesBN, t])
   const notVotedView = useMemo(() => {
     return (<><MinusCircleTwoTone className="md:pb-7" style={{ fontSize: '52px' }} twoToneColor="#A9A9A9" />
     <div className="mb-4 text-lg font-bold">The proposal is invalid</div></>)
