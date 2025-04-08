@@ -8,6 +8,8 @@ import useGovDetailInfo from '../../../hooks/gov/useGovDetailInfo'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import { HelpCircle } from 'react-feather'
 import { useEthers } from '@usedapp/core'
+import { useOpenModal } from '@/state/application/hooks'
+import { ApplicationModal } from '@/state/application/actions'
 import useStakeInfo from '../../../hooks/staking/useStakeInfo'
 import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
 import useGovDetailClaims from '../../../hooks/gov/useGovDetailClaims'
@@ -61,6 +63,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
   const { account } = useEthers()
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
+  const openwallet = useOpenModal(ApplicationModal.WALLET)
 
   const [reason, setReason] = useState("")
 
@@ -113,11 +116,18 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
 
   </>)
   }, [myVotes, myVotesBN])
-  return <Spin spinning={!account}>
-    <div className="flex flex-col justify-center items-stretch">
-      {myVoted ? votedView : notVotedView}
+  const maskForNotConnect = useMemo(() => {
+    return <div className='absolute w-full h-full flex justify-center items-center'>
+      <div className='absolute w-full h-full bg-white opacity-70'></div>
+      <div className="px-4 bg-primary rounded py-2 relative z-10" onClick={openwallet}>
+        {t('connect_wallet')}
+      </div>
     </div>
-  </Spin>
+  }, [account])
+  return (<div className="flex flex-col justify-center items-stretch relative">
+    { myVoted ? votedView : notVotedView}
+    {!account && maskForNotConnect}
+</div>)
 }
 
 
