@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Contract } from '@ethersproject/contracts'
 import { ERC20Interface } from '@usedapp/core'
 import Governance_ABI from './abi/Governance.json'
+import Governance_new_ABI from './abi/GovernanceNew.json'
 import Nft_ABI from './abi/Nft.json'
 import Staking_ABI from './abi/Staking.json'
 import Farming_ABI from './abi/FarmingPool.json'
@@ -12,6 +13,7 @@ import stakeinscription from './abi/stakeinscription.json'
 import WrappedABI from './abi/WrappedInscription.json'
 import {
   GovernanceAddress,
+  GovernanceAddressNew,
   NftAddress,
   StakingAddress,
   FarmingFactoryAddress,
@@ -39,13 +41,19 @@ export function useGovernanceContractReadonly() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(GovernanceAddress as string, Governance_ABI, provider), [provider])
 }
-
+export function useGovernanceContractNewReadonly() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(GovernanceAddressNew as string, Governance_new_ABI, provider), [provider])
+}
 export function useNftContract() {
   return useMemo(() => new Contract(NftAddress as string, Nft_ABI), [])
 }
 
 export function useGovernanceContract() {
   return useMemo(() => new Contract(GovernanceAddress as string, Governance_ABI), [])
+}
+export function useGovernanceNewContract() {
+  return useMemo(() => new Contract(GovernanceAddressNew as string, Governance_new_ABI), [])
 }
 
 export function useFarmingContract(address: string) {

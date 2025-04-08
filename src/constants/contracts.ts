@@ -25,6 +25,11 @@ export const GovernanceAddress = {
   [ChainId.BSCTestnet]: '0xc7bC41894Fb8E87f23b7eFe0ee57DFc4F66b6782',
 }[CHAIN_ID as number]
 
+export const GovernanceAddressNew = {
+  [ChainId.BSC]: '0x548011bb876f5e9eee1a346ea54b9ef7a2ad53c8',
+  [ChainId.BSCTestnet]: '0xc7bC41894Fb8E87f23b7eFe0ee57DFc4F66b6782',
+}[CHAIN_ID as number]
+
 export const TStakingAddress = {
   [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
   [ChainId.BSCTestnet]: '0x929F65bc0fC681Dcc1420D030e374bAf5D14E40E',
