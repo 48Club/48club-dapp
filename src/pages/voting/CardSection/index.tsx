@@ -81,10 +81,10 @@ function Card({ item }: { item: any }) {
         </div>
         <Button className='flex justify-end items-center' onClick={handleShowPanel}>
           <div className='flex justify-end items-center'>
-            {info.myVotes?.gt(0) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
+            {!['Defeated', 'Succeeded', 'Refunded', 'Invalid'].includes(info.state) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
               {t('interim_result')}:
             </div>
-              <div className="text-xs leading-5 text-dark-gray">{info.myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div></>)
+              <div className="text-xs leading-5 text-dark-gray">{info.forVotes > info.againstVotes ? t('approve_vote') : t('reject_vote')}</div></>)
             }
           </div>
           

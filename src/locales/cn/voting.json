@@ -53,5 +53,8 @@
   "op2": "反对",
   "result_tip1": "总票数少于 ",
   "result_tip2": "总票数：",
-  "placeholder_reason": "理由"
+  "placeholder_reason": "理由",
+  "vote-refund-hint": "该投票无效，未达到有效票数",
+  "my_vote": "投票金额",
+  "voted_hint": "您已参与投票：请等待最终投票结果！"
 }

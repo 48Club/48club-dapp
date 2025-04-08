@@ -41,7 +41,7 @@ export const ResultSectionView = ({ info }: any) => {
             <div className="flex flex-row justify-between">
               <div className="flex flex-row">
                 <CheckCircleFilled className="mr-2.5 text-green text-base" />
-                <span className="text-black text-sm leading-6">{t('approve')}</span>
+                <span className="text-black text-sm leading-6">{t('approve_vote')}</span>
               </div>
               <span className="text-black text-sm">{formatAmount(forVotes, 0)} KOGE</span>
             </div>
@@ -57,7 +57,7 @@ export const ResultSectionView = ({ info }: any) => {
             <div className="flex flex-row justify-between">
               <div className="flex flex-row">
                 <CloseCircleFilled className="mr-2.5 text-red text-base" />
-                <span className="text-black text-sm leading-6">{t('reject')}</span>
+                <span className="text-black text-sm leading-6">{t('reject_vote')}</span>
               </div>
               <span className="text-black text-sm">{formatAmount(againstVotes, 0)} KOGE</span>
             </div>
