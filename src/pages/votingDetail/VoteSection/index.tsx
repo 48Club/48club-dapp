@@ -58,7 +58,7 @@ export function VoteSectionView({ info, proposalId, notInitRecords }: any) {
 
 function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myVoteType }: any) {
   const { onVote } = useGov()
-  // const { account } = useEthers()
+  const { account } = useEthers()
   const { myStakeBalance } = useStakeInfo()
   const { t } = useTranslation()
 
@@ -113,7 +113,7 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
 
   </>)
   }, [myVotes, myVotesBN])
-  return <Spin spinning={!canVote}>
+  return <Spin spinning={!account}>
     <div className="flex flex-col justify-center items-stretch">
       {myVoted ? votedView : notVotedView}
     </div>
