@@ -3,7 +3,6 @@ import { useGovernanceContract, useGovernanceContractReadonly, useGovernanceCont
 import BigNumber from 'bignumber.js'
 import { Result } from '@ethersproject/abi'
 import { useEffect, useMemo, useState } from 'react'
-import { TEN_POW } from '@funcblock/dapp-sdk'
 import { START_BLOCK_NUMBER } from '../../constants/contracts'
 
 export default function useGovInfo() {
@@ -26,7 +25,7 @@ export default function useGovInfo() {
   ]) ?? []) as Result[]
   const [records, setRecords] = useState<any[] | undefined>(undefined)
   const govContractReadonly = useGovernanceContractReadonly()
-  const govContracNewtReadonly = useGovernanceContractNewReadonly()
+  const govContractNewReadonly = useGovernanceContractNewReadonly()
   useEffect(() => {
     (async () => {
       const titles = await (await fetch('/static/voting.title.json')).json()
@@ -52,8 +51,8 @@ export default function useGovInfo() {
   }, [govContractReadonly])
   // useEffect(() => {
   //   (async () => {
-  //     const createdFilter = govContracNewtReadonly.filters.ProposalCreated(null, null)
-  //     const events = await govContracNewtReadonly.queryFilter(createdFilter, START_BLOCK_NUMBER)
+  //     const createdFilter = govContractReadonly.filters.ProposalCreated(null, null)
+  //     const events = await govContractReadonly.queryFilter(createdFilter, START_BLOCK_NUMBER)
   //     console.log(events, 'events')
   //     const rows = events.map(i => ({
   //       address: i.address?.toString(),
@@ -66,41 +65,18 @@ export default function useGovInfo() {
   //     }))
   //     setRecords(rows.reverse())
   //   })()
-  // }, [govContracNewtReadonly])
+  // }, [govContractReadonly])
 
-
-  const results = useContractCalls((records ?? []).flatMap(i => {
+  const rewardResults = useContractCalls((records ?? []).map(i => {
     const contract = i.proposalId > 165 ? govNewContract : govContract
-    return [
-      {
-        address: contract.address,
-        abi: contract.interface,
-        method: 'getClaimableRewardInfo',
-        args: [account, i.proposalId],
-      },
-      {
-        address: contract.address,
-        abi: contract.interface,
-        method: 'proposalVotes',
-        args: [i.proposalId],
-      },
-      {
-        address: contract.address,
-        abi: contract.interface,
-        method: 'state',
-        args: [i.proposalId],
-      },
-    ]
+    return {
+      address: contract.address,
+      abi: contract.interface,
+      method: 'getClaimableRewardInfo',
+      args: [account, i.proposalId],
+    }
   }) ?? []) as Result[]
-  const groupedResults: any[] = []
-  for (let i = 0; i < results.length; i += 3) {
-    groupedResults.push({
-      claimableRewardInfo: results[i],
-      votesResult: results[i + 1],
-      state: results[i + 2]
-    })
-  }
-  console.log(groupedResults, 'groupedResults', results.length)
+
   return {
     minDeposit: minDepositResult ? new BigNumber(minDepositResult[0].toString()) : undefined,
     reward: rewardResult ? new BigNumber(rewardResult[0].toString()) : undefined,
@@ -110,12 +86,8 @@ export default function useGovInfo() {
       }
       return records.map((i, index) => ({
         ...i,
-        claimable: new BigNumber(groupedResults[index]?.claimableRewardInfo?.claimableAmount?.toString() ?? 0).gt(0),
-        votesResult: groupedResults[index].votesResult,
-        againstVotes: new BigNumber(groupedResults[index].votesResult?.againstVotes.toString()).div(TEN_POW(18)).toNumber(),
-        forVotes: new BigNumber(groupedResults[index].votesResult?.forVotes.toString()).div(TEN_POW(18)).toNumber(),
-        state: groupedResults[index].state,
+        claimable: new BigNumber(rewardResults[index]?.claimableAmount?.toString() ?? 0).gt(0),
       }))
-    }, [records, groupedResults]),
+    }, [records, rewardResults]),
   }
 }
