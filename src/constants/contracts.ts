@@ -1,7 +1,8 @@
 import { ChainId } from '@usedapp/core'
 import { CHAIN_ID } from './env'
 
-export const START_BLOCK_NUMBER = 16397000
+// export const START_BLOCK_NUMBER = 16397000
+export const START_BLOCK_NUMBER = 49989989
 
 export const ZeroAddress = '0x0000000000000000000000000000000000000000'
 
@@ -27,7 +28,7 @@ export const GovernanceAddress = {
 
 export const GovernanceAddressNew = {
   [ChainId.BSC]: '0x548011bb876f5e9eee1a346ea54b9ef7a2ad53c8',
-  [ChainId.BSCTestnet]: '0xc7bC41894Fb8E87f23b7eFe0ee57DFc4F66b6782',
+  [ChainId.BSCTestnet]: '0x74a425Cbd98608a9a0129236F74402FAd4120Dcf',
 }[CHAIN_ID as number]
 
 export const TStakingAddress = {
