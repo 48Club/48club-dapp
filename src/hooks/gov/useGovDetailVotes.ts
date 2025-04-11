@@ -1,4 +1,4 @@
-import { useGovernanceContractReadonly } from '../useContract'
+import { useGovernanceContractReadonly, useGovernanceContractNewReadonly } from '../useContract'
 import { utils } from 'ethers'
 import { useCallback, useEffect, useState } from 'react'
 import { START_BLOCK_NUMBER } from '../../constants/contracts'
@@ -6,10 +6,12 @@ import { START_BLOCK_NUMBER } from '../../constants/contracts'
 export default function useGovDetailVotes(proposalId: string, notInitRecords?: boolean) {
   const [voteRecords, setVoteRecords] = useState<any[] | undefined>(undefined)
   const govContractReadonly = useGovernanceContractReadonly()
+  const govNewContractReadonly = useGovernanceContractNewReadonly()
   const reloadVoteRecords = useCallback(async () => {
     setVoteRecords(undefined)
-    const filter = govContractReadonly.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
-    const events = await govContractReadonly.queryFilter(filter, START_BLOCK_NUMBER)
+    const contract = +proposalId > 165 ? govNewContractReadonly : govContractReadonly
+    const filter = contract.filters.VoteCast(null, utils.hexlify(parseInt(proposalId)))
+    const events = await contract.queryFilter(filter, START_BLOCK_NUMBER)
     const rows = events.map(i => ({
       proposalId: i.args?.proposalId?.toString(),
       reason: (() => {
@@ -25,7 +27,7 @@ export default function useGovDetailVotes(proposalId: string, notInitRecords?: b
       blockNumber: i.blockNumber,
     }))
     setVoteRecords(rows)
-  }, [govContractReadonly, proposalId])
+  }, [govContractReadonly, proposalId, govNewContractReadonly])
 
   useEffect(() => {
     if (notInitRecords) {

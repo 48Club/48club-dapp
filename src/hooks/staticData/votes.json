@@ -1,0 +1,1487 @@
+[
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "165",
+      "proposer": "0x19BCd8D7e3eC33a908c2dCa289f6b8eb026749Be",
+      "startTime": 1743725852,
+      "endTime": 1744157852,
+      "ntitle": "",
+      "description": "提案：\n当前查询提案内容需要先查询编号再点击网页进行跳转后才能查看内容，为了便于大家查询历史内容，社区成员将处于已结束状态的提案同步更新到了google表格。申请将该google表格在48club群中的Pinned message区域便于需要的成员查询。附件：已更新的48 Club proposals文档。\nhttps://docs.google.com/spreadsheets/d/1Rv5UAohzAUzWVL4GTuCRkGB9XdGezErGo1XWd7obN6M/edit?usp=sharing\n\nProposal: \nThe current query proposal content needs to query the number first and then click on the webpage to jump to view the content. In order to facilitate everyone to query the historical content, the community members will be in the finished state of the proposal synchronous update to google form. Request to place the google form in the Pinned message section of the 48club group for members who need it. Attached: Updated 48 Club proposals document.\nhttps://docs.google.com/spreadsheets/d/1Rv5UAohzAUzWVL4GTuCRkGB9XdGezErGo1XWd7obN6M/edit?usp=sharing"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "164",
+      "proposer": "0xa810453caDe95B3B517B1985C8c04915dd73C2eb",
+      "startTime": 1743688823,
+      "endTime": 1744120823,
+      "ntitle": "",
+      "description": "優化提案155的增加提案點讚功能，開放給所有錢包參與，不需有投票資格也能點讚表示關注，藉此提升社群參與度。Enhance Proposal #155 (Adding a Like Feature) – Enable all wallets to like proposals without requiring a voting qualification, allowing broader community engagement and interest expression "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "163",
+      "proposer": "0x0011AECA35967E160DB7fBb288E109FC5ec76E11",
+      "startTime": 1743546003,
+      "endTime": 1743978003,
+      "ntitle": "",
+      "description": "提议 48Club 设立一个小型的撸毛基金，由社区成员负责筛选具有空投潜力的优质项目，并提交俱乐部审核，决定是否参与。对于需要资金投入的项目，由理事会指定人员负责交互；对于可免费参与的测试网项目，社区成员可自行参与。未来所得利润可用于回购 Koge。\n\nEstablish a small fund within 48Club, where community members are responsible for screening high-quality projects with airdrop potential and submitting them for club review to determine participation. For projects requiring financial investment, designated members of the council will handle the interaction. For free-to-participate testnet projects, community members can participate independently. Future profits generated can be used for Koge buybacks."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "162",
+      "proposer": "0xa810453caDe95B3B517B1985C8c04915dd73C2eb",
+      "startTime": 1743256466,
+      "endTime": 1743688466,
+      "ntitle": "",
+      "description": "顯示quorum進度條 - 在投票的主頁面顯示每項提案的投票門檻進度條，直觀呈現投票者對不同種類提案的關注度。\n\nDisplay Quorum Progress Bar – Show a progress bar for each proposal on the main voting page, providing a more intuitive way to visualize voter engagement across different types of proposals."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "161",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1743131319,
+      "endTime": 1743563319,
+      "ntitle": "",
+      "description": "关于NFT铸造规则调整的提案：由于KOGE价格上涨导致铸造成本增加，建议将原用于销毁的KOGE转为俱乐部收入，同时为新增NFT赋予专属权益，铸造消耗的KOGE仍可用于提案投票计数（注：此权益不适用于历史已铸造NFT）。\n\nProposal for Adjusting NFT Minting Rules: In light of rising KOGE prices increasing minting costs, it is proposed to redirect KOGE originally allocated for burning to club revenue while granting exclusive benefits to newly minted NFTs, with the KOGE spent on minting remaining eligible for proposal voting tally (Note: These benefits do not apply to historically minted NFTs)."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "160",
+      "proposer": "0x84431D2BE3B62822F0C74BFd410bfBF1Ce664b2F",
+      "startTime": 1743081255,
+      "endTime": 1743513255,
+      "ntitle": "",
+      "description": "建议聘请mer作为48宣传美工，加强推特，电报，微信的koge平面图、动态视频和表情包的输出，以及48club网站的美术设计。每月工资10koge，若koge上涨超100，按1000u为上限取等值koge。\n注：mer城主为马拉西亚专业画家。\nIt is recommended to hire Mer as the publicity artist of 48.club to strengthen the output of Koge's planar graphics, dynamic videos and emoticons on Twitter, Telegram and WeChat, as well as the art design of the 48.club website. The monthly salary is 10 Koge. If the value of Koge increases by more than 100, the equivalent amount of Koge will be taken with a ceiling of 1000 U.\n \nNote: Mer, the master of Mer City, is a professional painter from Malaysia."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "159",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1742966066,
+      "endTime": 1743398066,
+      "ntitle": "",
+      "description": "Remove Alpaca from the Partner Portfolio.\n\n从Partner Portfolio中移除Alpaca"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "158",
+      "proposer": "0x385Df340Fca6d3d49d7C0Bfb0177cF4fCce83707",
+      "startTime": 1742917901,
+      "endTime": 1743349901,
+      "ntitle": "",
+      "description": "提议：在48club页面增加”深夜模式 (Dark Mode)\"选项，来提升整体页面的体验感。 \n\nPropose: To enhance the 48club webpage experience by adding a \"Dark Mode\" option."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "157",
+      "proposer": "0xa810453caDe95B3B517B1985C8c04915dd73C2eb",
+      "startTime": 1742807119,
+      "endTime": 1743239119,
+      "ntitle": "",
+      "description": "優化投票功能 Optimizing the Voting Function. \n\n建議新增標題功能，更有效呈現預覽的提案內容。\nAdd a Title Feature – Allow proposals to have titles for a clearer and more effective preview of their content. "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "156",
+      "proposer": "0xa810453caDe95B3B517B1985C8c04915dd73C2eb",
+      "startTime": 1742373785,
+      "endTime": 1742805785,
+      "ntitle": "",
+      "description": "終止KOGE DOG電報機器人運營\n\n建議俱樂部發布最後一次正式公告終止KOGE DOG電報機器人運營。本提案通過後，俱樂部將通過推特、Telegram張貼公告，並在公布後的兩週正式終止KOGE DOG運營，請所有用戶儘快綁定 BSC 錢包地址。\n\n資產提現流程：\n· 已綁定 BSC 地址的用戶：俱樂部將處理餘額提現並轉入綁定的錢包。\n· 未綁定 BSC 地址的用戶：用戶需透過後續流程發起申請以取回資產。\n\n由俱樂部對用戶資產進行快照記錄，但後續提現流程可能有延遲，並且俱樂部將收取一定比例的手續費，此手續費的具體百分比將由理事會全權決定。\n\n\nTermination of KOGE DOG Telegram Bot Operations \n\nIt is proposed that 48club release a final official announcement terminating the operation of the KOGE DOG Telegram bot. Upon the proposal’s approval, 48club will post the announcement on Twitter and Telegram, and the KOGE DOG bot will be officially shut down two weeks after the announcement. All users are advised to bind their BSC wallet addresses as soon as possible.\n\nAsset Withdrawal Process:\n· Users with a bound BSC address: 48club will process balance withdrawals and transfer funds to the linked wallet.\n· Users without a bound BSC address: A separate request must be initiated through a later process to retrieve assets.\n\n48club will take a snapshot of user assets, but the subsequent withdrawal process may experience delays. Additionally, a service fee will be charged, with the percentage to be determined solely by the board of 48club. "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "155",
+      "proposer": "0xD3af12009be9cA7b807AB938B3b090F3b33582A6",
+      "startTime": 1741974127,
+      "endTime": 1742406127,
+      "ntitle": "",
+      "description": "优化 Voting Details 的评论区 – 增加点赞排序功能\n\n建议在Voting Details 的评论区增加点赞功能，让用户可以对有价值的评论表达支持，并按点赞数量排序，使高质量评论优先显示，提升讨论质量和用户体验。\n\nOptimize Voting Details Comments – Add Like-Based Sorting\n\nAdd a like feature to the Voting Details comment area, allowing users to support valuable comments. Sorting by likes will highlight high-quality discussions."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "154",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1741963873,
+      "endTime": 1742395873,
+      "ntitle": "",
+      "description": "limit reward of each farm to not more than equivalent of 100K USD quarterly at the point of allocation.\n\n限制单个Farm的奖金不超过每季度等值(以添加奖池时价格为准)10万美元。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "153",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1741704825,
+      "endTime": 1742136825,
+      "ntitle": "",
+      "description": "Please read https://telegra.ph/Proposal-Introducing-KOGE-Leveraged-Yield-Farming-LYF-on-Alpaca-03-11"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "152",
+      "proposer": "0xdc0DC36e966a2818d6Da2a95CF56bAbA6C5cd72b",
+      "startTime": 1741603350,
+      "endTime": 1742035350,
+      "ntitle": "",
+      "description": "提案增加48er挖矿池选项，拨付Koge 数量由理事会决定或另行提案。\nProposal adds a 48er farming pool . The reward of Koge to be allocated will be decided by the Council or next propose."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "151",
+      "proposer": "0x385Df340Fca6d3d49d7C0Bfb0177cF4fCce83707",
+      "startTime": 1741270821,
+      "endTime": 1741530021,
+      "ntitle": "",
+      "description": "提议：增加挖矿池选项如 KOGE/USDC。\n\nPropose : Increase the Farming option such as KOGE/USDC"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "150",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1741168558,
+      "endTime": 1741427758,
+      "ntitle": "",
+      "description": "Restrict 48Club Telegram chats to 48SP Token Holders only, by developing a dedicated 48SP bot."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "149",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1741103458,
+      "endTime": 1741362658,
+      "ntitle": "",
+      "description": "lower proposerRewardBPs from 800 to 480"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "148",
+      "proposer": "0xD3af12009be9cA7b807AB938B3b090F3b33582A6",
+      "startTime": 1740978077,
+      "endTime": 1741237277,
+      "ntitle": "",
+      "description": "提案：为了确保 Koge 质押者有充足的时间进行审议和决策，我们建议：\n\n1）延长提案投票期：将投票窗口从 3 天 延长至 5 天，以提供更充分的讨论和参与时间。\n\nTo ensure Koge stakers have adequate time for deliberation and decision-making, we propose:\n\n1）Extend the Proposal Voting Period: Extend the voting window from three to five days to allow for more thorough discussion and participation."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "147",
+      "proposer": "0x19BCd8D7e3eC33a908c2dCa289f6b8eb026749Be",
+      "startTime": 1740973859,
+      "endTime": 1741233059,
+      "ntitle": "",
+      "description": "提案:\n\n为确保高质量的提案获得更多的Koge奖励，同时鼓励大家积极提案或投票，我们建议：\n\n1、提高最低投票门槛：将最低投票数提高到总投票权的66.66%\n\n注:当前最低投票数为总投票权的48%\n\nproposal：\n\nTo ensure Koge rewards are allocated to high-quality proposals ,And encourage stakers to make proposals or vote,we propose:\n\n​1、Raise Minimum Voting Threshold: Increase the quorum to ​66.66% of total staking amount.\n\nNote: quorum is currently 48% of the total staking amount."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "146",
+      "proposer": "0x9A8A49501b7d5D32d05A54F53807f5acEBF0b74C",
+      "startTime": 1740965930,
+      "endTime": 1741225130,
+      "ntitle": "",
+      "description": "Proposal: Temporarily Disable the Proposal Submission Portal Until Voting Mechanisms Are Clarified"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "145",
+      "proposer": "0xC0a5E665006345059c95A8E9a3560Ec9C3ab11F6",
+      "startTime": 1740923110,
+      "endTime": 1741182310,
+      "ntitle": "",
+      "description": "提案：重新开放修改NFT头像入口，通过销毁0.48个koge 以更改NFT 头像\nProposal: Allow NFT Avatar Changes by Burning 0.48 KOGE"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "144",
+      "proposer": "0x9A8A49501b7d5D32d05A54F53807f5acEBF0b74C",
+      "startTime": 1740702712,
+      "endTime": 1740961912,
+      "ntitle": "",
+      "description": "Proposal: Co-branded Bank Card Partnership with Infini  (Free, Potential Rebates Included)"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "143",
+      "proposer": "0x8c9bcE7D9D7d5A2614F3BbC70398760c59939046",
+      "startTime": 1740688531,
+      "endTime": 1740947731,
+      "ntitle": "",
+      "description": "建议48Club招聘一名小编，负责在推特上与圈内人士互动，提升项目曝光度。我观察到币安和 OKX 的中文推特运营得非常出色，一些小型 meme 项目也有专门的冲推团队推广代币。Koge 本身价值很高，若能配合适当的宣发，币价有望进一步上涨。\n\nIt is suggested that 48Club hire a content editor to engage with industry insiders on Twitter and increase project exposure. I have observed that Binance and OKX have excellent Chinese Twitter operations, and some smaller meme projects have dedicated shilling teams to promote their tokens. Koge has substantial value, and with proper marketing, its price is likely to rise further."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "142",
+      "proposer": "0x84431D2BE3B62822F0C74BFd410bfBF1Ce664b2F",
+      "startTime": 1740665821,
+      "endTime": 1740925021,
+      "ntitle": "",
+      "description": "提案：建议在48.club平台增加投票奖励的一键领取所有投票奖励功能。目前领取奖励操作繁琐，用户体验不佳，且可能遗漏。\nProposal: It is recommended to add a function that allows users to claim all voting rewards with one click for the voting rewards on the 48.club platform. Currently, the operation of claiming rewards is cumbersome, resulting in a poor user experience, and there is a possibility of overlooking some rewards."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "141",
+      "proposer": "0xC0a5E665006345059c95A8E9a3560Ec9C3ab11F6",
+      "startTime": 1740648283,
+      "endTime": 1740907483,
+      "ntitle": "",
+      "description": "提案∶调整koge解除质押时间，由7天调整为3天。\nProposal: Adjust KOGE Unstaking Period from 7 Days to 3 Days**"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "140",
+      "proposer": "0x385Df340Fca6d3d49d7C0Bfb0177cF4fCce83707",
+      "startTime": 1740584112,
+      "endTime": 1740843312,
+      "ntitle": "",
+      "description": "提案：提高主群及付费 Koge 群的挖矿奖励\n\n目前，主群（https://t.me/cn_48club）及付费 Koge 群的挖矿奖励较低，每次聊天仅获得 0.0001 - 0.0002 Koge，即使 Koge 价格为 40 USDT，实际收益仍然有限，难以有效激励用户互动。\n\n为提升社群活跃度，建议将主群及付费群的挖矿奖励统一提升至 0.0003 - 0.0005 Koge/次，确保奖励更具吸引力，同时避免奖励过低影响社群发展。希望管理团队考虑调整，以促进社区健康成长。\n\n\nProposal: Increase Mining Rewards for the Main and Paid Koge Groups\n\nMining rewards in the main group (https://t.me/en_48club) and paid Koge groups are currently low, averaging 0.0001 - 0.0002 Koge per message. Even with Koge priced at 40 USDT, the actual earnings remain minimal, providing little incentive for active participation.\n\nTo boost engagement, increasing rewards to 0.0003 - 0.0005 Koge per message would make interactions more rewarding while maintaining balanced distribution. A moderate increase can enhance community activity and support long-term growth. Hope the management team considers this adjustment."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "139",
+      "proposer": "0x2164D118329b03677710127d7878a57Db2b1edc5",
+      "startTime": 1740579612,
+      "endTime": 1740838812,
+      "ntitle": "提议社区群组标题更改为KOGE价格",
+      "description": "提议社区群组标题更改为KOGE\n\n社区群组标题应当显示俱乐部代币(KOGE)价格而不是BNB价格"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "138",
+      "proposer": "0x9A8A49501b7d5D32d05A54F53807f5acEBF0b74C",
+      "startTime": 1740405168,
+      "endTime": 1740664368,
+      "ntitle": "",
+      "description": "Proposal: Terminate KOGE Chat Mining"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "137",
+      "proposer": "0xDaaCC8f93bE406B4381970a22Ea3c4934603e303",
+      "startTime": 1740396327,
+      "endTime": 1740655527,
+      "ntitle": "",
+      "description": "向ZKasino项目受害者空投Koge。此提案的主要目标是提升Koge在社区的知名度，推广品牌。空投额度为本次提案者的收益。目前能够联系到的受害者有100人以上，空投足够分散不会造成抛压，此后提案者也会用收入回购koge。\n\nAirdrop Koge to ZKasino Victims. The primary goal of this proposal is to increase Koge's visibility in the community and promote the brand. The airdrop amount will come from the proposer’s earnings. Currently, there are over 100 identified victims, ensuring sufficient distribution without causing selling pressure. Additionally, the proposer will use future earnings to buy back Koge."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "136",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1740391317,
+      "endTime": 1740650517,
+      "ntitle": "",
+      "description": "Display avatar of the NFT in front of each proposal\n在每个提案前面显示提案NFT的头像"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "135",
+      "proposer": "0xAd0dC9b5bf4308Cc26C1d44E1BEB2d30c43Bca1b",
+      "startTime": 1740389088,
+      "endTime": 1740648288,
+      "ntitle": "",
+      "description": "提议把lp质押里的koge数量计算展示，也给与投票权和奖励。该提议可能在技术实现过程略显麻烦，同时需要把lp质押规则和koge治理质押规则修改保持一致。\nIt is proposed to calculate and display the amount of Koge in the LP pledge, and also give voting rights and rewards. This proposal may be a bit troublesome in the technical implementation process, and the LP stake rules need to be modified to be consistent with the Koge governance stake rules."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "134",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1740387102,
+      "endTime": 1740646302,
+      "ntitle": "",
+      "description": "Longer voting period of a proposal to 7 days, instead of 3 days for now."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "133",
+      "proposer": "0x84431D2BE3B62822F0C74BFd410bfBF1Ce664b2F",
+      "startTime": 1740363870,
+      "endTime": 1740623070,
+      "ntitle": "",
+      "description": "这个月已经十几个提案了，社区热度高涨。为兼顾提案质量和热度，建议：\n1. nfter每月提案数量控制在1个以内（如果不需要改合约）\n2.如提案不通过，奖励给2%，提案通过维持现有8%（如果不需要改合约）\n\n如需修改合约，建议后台管理员先手工管理。\n\nTo balance the quality and popularity of the proposals, the following suggestions are put forward:\nThe number of proposals per month for nfter should be controlled within 1 (if there is no need to modify the contract).\nIf a proposal is not approved, a 2% reward will be given, and if a proposal is approved, the existing 8% reward will be maintained (if there is no need to modify the contract).\nIf it is necessary to modify the contract, it is recommended that the back-end administrators manage it manually first."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "132",
+      "proposer": "0xC0a5E665006345059c95A8E9a3560Ec9C3ab11F6",
+      "startTime": 1740324933,
+      "endTime": 1740584133,
+      "ntitle": "",
+      "description": "鉴于最近提案较多且频繁，大部分提案未经club成员充分讨论即发起投票，导致无效提案较多，且大多数不可行，消耗社区注意力。因此，为提升提案质量，特作如下调整：\n1.所有提案需在GOV群组公开讨论3-7天，才能进入投票。（建议开发群组bot 用于意向提案，达到一定附议人数再进入正式提案）\n2.若提案最终投票支持率＜20%，则没收提案所投入koge。\n3.限制每个nft提案频率至每周1次或每月3次。\n————————————————-\n\nGovernance Process Optimization to Improve Proposal Quality\nBackground  \nRecent frequent proposals, often lacking sufficient discussion among club members, have led to numerous low-quality or unfeasible initiatives. These consume community attention and resources. To address this, the following adjustments are proposed:  \n\n---\n\nProposed Solutions\n1. Mandatory Discussion Period & Bot-Assisted Filtering\n- All proposals must undergo public discussion in the GOV channel for 3-7 days before voting.  \n  - Implementation Tool: Develop a tele bot to manage proposals:  \n    - Members submit draft proposals via the bot.   \n    - Only proposals meeting thresholds proceed to formal voting.  \n\n2. Penalty for Low-Support Proposals\n- If a proposal receives <20% support in the final vote:  \n  - Conditional Penalty: Depending on current contract capabilities, explore forfeiting a portion of the proposer’s  $KOGE .  \n\n3. Proposal Frequency Limits\n- Per-Address Limits:  \n  - Each address may submit ≤1 proposal per week and  ≤3 proposals per month.  "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "131",
+      "proposer": "0x38527fE5DC5Ae265bC148967e7115362ce62088E",
+      "startTime": 1740296463,
+      "endTime": 1740555663,
+      "ntitle": "",
+      "description": "提议：建议将俱乐部部分收益从加密市场分散至传统金融领域，以实现资产多元化配置。这不仅有助于降低市场波动带来的风险，还能抓住不同资产类别的增长机会，提高整体投资回报率。\n\n理由：\n1. 加密资产波动较大，长期风险较高 —— 由于加密市场价格剧烈波动，其资产价值存在较大不确定性，长期持有可能面临较高风险。\n2. 区块链技术虽具颠覆性，但应用范围有限 —— 尽管区块链是一项伟大的创新，但目前它仍然仅解决了部分特定问题，无法完全替代传统金融体系。\n3. 拓展投资领域有助于推动创新 —— 资金流向其他行业不仅能促进更多创新科技的发展，还可能带来可观的投资回报，进一步增强俱乐部的财务稳健性。\n\n实施方案：\n1. 设立基金或BVI公司 作为投资主体，确保资金管理的合规性与专业化。\n2. 每月固定比例（待定）分配至传统金融投资，实现资金的长期稳健增长。\n3. 投资决策方式：可委托专业机构进行管理，或由俱乐部内部讨论后决定，集中配置至相对稳定的投资类别。\n\nProposal: I propose reallocating a portion of the club’s revenue from the cryptocurrency market to traditional financial investments. This diversified approach will help mitigate market volatility risks while capturing potential returns from various asset classes, enhancing overall investment stability and profitability.\n\nRationale:\n1. High volatility of crypto assets poses long-term risks – Due to the extreme price fluctuations in the cryptocurrency market, asset values remain highly uncertain, increasing long-term risk exposure.\n2. Blockchain technology is transformative but has limited applications – While blockchain is an innovative breakthrough, its current use cases remain focused on solving specific problems and cannot fully replace traditional financial systems.\n3. Expanding investment horizons fosters innovation – Allocating funds to other industries not only supports technological advancements but also presents opportunities for substantial returns, strengthening the club’s financial foundation.\n\nImplementation Plan:\n1. Establish an investment fund or a BVI company to ensure structured and compliant asset management.\n2. Allocate a fixed percentage (to be determined) of monthly club revenue to traditional financial investments for long-term stability.\n3. Investment decision-making – The club can either entrust professional institutions for asset management or collectively decide on stable investment categories through internal discussions."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "130",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1740232073,
+      "endTime": 1740491273,
+      "ntitle": "",
+      "description": "提议将原先提案俱乐部定期向Farm和Vote注入koge的规定，改为等值bnb（以上季度财报统计当期koge价格折算），以此来减少俱乐部的koge支出。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "129",
+      "proposer": "0xdc0DC36e966a2818d6Da2a95CF56bAbA6C5cd72b",
+      "startTime": 1740226613,
+      "endTime": 1740485813,
+      "ntitle": "",
+      "description": "提案单次奖励拨付1000枚Koge予节点开发维护团队.\n\n虽然节点维护团队虽已有固定酬劳，近期Club收入增加，建议应对节点维护团队背后的辛勤贡献予以激励表彰。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "128",
+      "proposer": "0xD3af12009be9cA7b807AB938B3b090F3b33582A6",
+      "startTime": 1740137589,
+      "endTime": 1740396789,
+      "ntitle": "",
+      "description": "提案：修改 minDeposit\n1. minDeposit 从 14.8 KOGE 降至 4.8 KOGE。\n\n若 提案 #127 未通过，本修改无效。\n\nProposal: Modifying minDeposit\n1. minDeposit, from 14.8 KOGE to 4.8 KOGE.\n\nIf Proposal #127 is not approved, this change will be void."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "127",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1740121827,
+      "endTime": 1740381027,
+      "ntitle": "",
+      "description": "Some Modification to Voting Contract:\n1. Max Reward, from 1000 KOGE to 480 KOGE. 1000 KOGE is too much at current price.\n2. Min Reward, from 480 Koge to 48 KOGE. Same reason.\n3. Refund Trigger Reward, from 48 KOGE to 4.8 KOGE. Refund reward should not bigger than proposer minDeposit (14.8 for now)"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "126",
+      "proposer": "0x7f5372735e5F5338582D1F32A586E4b423Ad6999",
+      "startTime": 1740092737,
+      "endTime": 1740351937,
+      "ntitle": "",
+      "description": "48Core Portfolio Adjustment Proposal\n—Add AAVE back to 48Core portfolio\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "125",
+      "proposer": "0x84431D2BE3B62822F0C74BFd410bfBF1Ce664b2F",
+      "startTime": 1740033322,
+      "endTime": 1740292522,
+      "ntitle": "",
+      "description": "48 Club 会员积分交易量优化建议方案\n一、基于现有积分体系的分析\n48 Club 的 48 Soul Point 积分计算已涵盖多种参与方式，但交易量维度尚未直接体现。目前持有 48er NFT 固定 480 分、钱包中 KOGE 取余额与 48 较小值、质押 KOGE 按余额计分、质押 BNB 乘以 24、委托 govBNB 乘以 12 等规则，主要侧重于资产持有和质押情况。\n二、参考币安 VIP 体系的交易量考量因素\n币安 VIP 等级与 30 日交易量、资产规模等紧密相关。对于 48 Club，可引入类似机制，如在特定交易对（如 KOGE/BNB、48SP/BNB 等）上的累计交易量纳入积分计算。设定不同交易量区间对应不同积分权重，例如，月交易量 100 - 500 枚 KOGE 可增加 50 - 200 积分，500 - 1000 枚增加 200 - 500 积分等，且积分随交易量递增，递增方式可以是线性也可以是非线性，后续可以讨论提案。\n三、本次表决内容\n本次表决是否同意将交易量纳入积分方案，以便逐步推进落实，具体细则后续再定。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "124",
+      "proposer": "0x38527fE5DC5Ae265bC148967e7115362ce62088E",
+      "startTime": 1740006708,
+      "endTime": 1740265908,
+      "ntitle": "",
+      "description": "为了确保 koge 与 48 俱乐部的健康发展，建议将俱乐部添加挖矿池的速度调至原来的 50%\n\nTo ensure the sustainable development of koge and the 48 Club, it is proposed to adjust the rate of the club’s adding mining pool to 50% of its current pace."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "123",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1739766725,
+      "endTime": 1740025925,
+      "ntitle": "",
+      "description": "关于社区福利-理事会的提案\n\n48Club一路走来，成绩看得见。现提案给社区的理事们（现官网显示9位）送社区福利，每人每年度预算控制在48KOGE，用于包括但不限于节假日礼物，纪念日礼品等福利。\n以此为契机，后续进一步部署开展49Club周边服务。\n\n\nProposal on Community Benefits for the Council\n\n48 Club has made significant progress, and the results are evident. This proposal aims to provide community benefits to the council members (currently 9 members listed on the official website), with an annual budget of 48 KOGE per person, to be used for purposes including but not limited to holiday gifts and commemorative gifts.\nThis initiative will serve as a starting point for further development and deployment of 48 Club's peripheral services."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "122",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1739202735,
+      "endTime": 1739461935,
+      "ntitle": "",
+      "description": "48Core Portfolio Adjustment Proposal\nRemove AAVE/UNI/CRV\nRemove USDT/BNB"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "121",
+      "proposer": "0x84431D2BE3B62822F0C74BFd410bfBF1Ce664b2F",
+      "startTime": 1737688407,
+      "endTime": 1737947607,
+      "ntitle": "",
+      "description": "48 Club VIP 等级设置提案\n值此新春佳节来临之际，恭祝 Koge holder 兄弟姐妹们新春快乐，新的一年赚赚赚，身体健康，蛇年大吉！\n为了提升 48 Club 用户的活跃度与忠诚度，提升交易量，提议参照币安设置 Koge VIP 等级，以此提升交易量和 holder 福利，助力 Koge Club 早日上币安。\n一、VIP 等级设置\n设置 Koge VIP 等级为 5 级，分别为 VIP1 - VIP5。\n二、升级条件\nVIP1：保持现状，Stake 500 koge 或持有 koge NFT，根据地址判断。\nVIP2：持有 koge 1,000 以上，同时 koge 每月累计交易额达到 100,000 USDT 以上。\nVIP3：地址 koge 3,000 以上，同时 koge 每月累计交易额达到 300,000 USDT 以上。\nVIP4：地址 koge 10,000 以上，同时 koge 每月累计交易额达到 500,000 USDT 以上。\nVIP5：地址 koge 30,000 以上，同时 koge 每月累计交易额达到 1,000,000 USDT 以上。\n三、权益\n专属周边：koge VIP 周边，等级不同，周边用品不同。VIP1 每年可获得 1 次精品周边产品；VIP2 及以上每年可获得多次周边产品。\n专属沟通机会：VIP5 维持 1 年，可与 koge 俱乐部理事会沟通，行程费用等由俱乐部承担。\n四、预期效果\n通过设置 VIP 等级，激发用户交易、参与活动等积极性，有效提升平台交易量，增强用户对平台的归属感和忠诚度，为早日上币安奠定坚实基础。\n五、实施条件\n需实施统计 VIP 的功能。前期系统未上线时，可由申请人提交证明，安排专人审核确认 。后续待技术成熟，将通过系统自动统计和判定 VIP 等级。\n\n48 Club VIP Level Setting Proposal\nAs the Spring Festival approaches, I sincerely wish all Koge holders a happy New Year. May you make a fortune, stay healthy, and have a prosperous Year of the Snake!\nIn order to enhance the activity and loyalty of 48 Club users and boost trading volume, it is proposed to set up Koge VIP levels by referring to Binance, aiming to increase trading volume, improve holders' benefits, and help Koge Club be listed on Binance at an early date.\nI. VIP Level Setting\nSet Koge VIP levels to 5 levels, namely VIP1 - VIP5.\nII. Upgrade Conditions\nVIP1: Maintain the current status. Stake 500 koge or hold koge NFT, judged by the address.\nVIP2: Hold more than 1,000 koge, and the monthly cumulative trading volume of koge reaches more than 100,000 USDT.\nVIP3: The address holds more than 3,000 koge, and the monthly cumulative trading volume of koge reaches more than 300,000 USDT.\nVIP4: The address holds more than 10,000 koge, and the monthly cumulative trading volume of koge reaches more than 500,000 USDT.\nVIP5: The address holds more than 30,000 koge, and the monthly cumulative trading volume of koge reaches more than 1,000,000 USDT.\nIII. Rights and Interests\nExclusive Peripherals: There are koge VIP - themed peripherals, with different levels corresponding to different peripheral products. VIP1 can receive 1 high - quality peripheral product per year; VIP2 and above can receive multiple peripheral products per year.\nExclusive Communication Opportunity: If VIP5 status is maintained for 1 year, the user can communicate with the Koge Club Council, and the club will bear the travel expenses, etc.\nIV. Expected Effects\nBy setting up VIP levels, it can stimulate users' enthusiasm for trading and participating in activities, effectively increase the platform's trading volume, enhance users' sense of belonging and loyalty to the platform, and lay a solid foundation for being listed on Binance at an early date.\nV. Implementation Conditions\nIt is necessary to implement the function of VIP statistics. Before the system is launched, applicants can submit certificates, and dedicated personnel will review and confirm. Later, when the technology is mature, the VIP levels will be automatically counted and determined by the system.\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "120",
+      "proposer": "0xE0Dc46562D77FEe3746B6B643E97892348c86a1a",
+      "startTime": 1736555572,
+      "endTime": 1736814772,
+      "ntitle": "",
+      "description": "将RPC Cashback服务产生的BNB自动转换为KOGE并提供用户可视化领取的提案\nProposal to Automatically Convert RPC Cashback BNB into KOGE and Enable a User Claim Mechanism\n\n\n背景：\n自从 48Club Puissant Builder 推出 RPC Cashback 服务后，已为用户和项目方返还了接近 100 个 BNB。对于普通用户而言，这部分返还往往比较难察觉，可能只是被认为是一种“交易滑点补偿”，并不会激发强烈的感激或认同感。但实际上，这项服务为整个社区和用户都带来了极大价值。\n\n问题与动机：\n\t•\t普通用户不易注意到自己所获得的 BNB 返还，无法真正体会到该服务带来的好处。\n\t•\t长期来看，用户对 RPC Cashback 的认知和参与度不足，不利于 48Club Puissant Builder RPC 的推广和用户积累。\n\n提案内容：\n\t1.\t项目方现金返还维持现状\n\t•\t对于项目方的 Cashback BNB 保持不变，依然直接返还给项目方。\n\t2.\t普通用户自动转换为 KOGE\n\t•\t部署新合约，将普通用户应获得的 Cashback BNB 全部自动购买 KOGE。\n\t•\t在前端页面提供一个“领取”入口，让用户可以随时查看并领取自己的 KOGE。\n\t3.\t未被领取的 KOGE 处理\n\t•\t如果用户长时间未领取，则这些 KOGE 依然保存在合约地址，潜在地起到通缩作用。\n\n预期效果：\n\t•\t提升用户认可度与参与度：用户在前端界面看到自己可领取的 KOGE，将能直观感受到返还机制的好处，激发更多积极性与忠诚度。\n\t•\t促进 48Club 及 KOGE 曝光：自动购买并发放 KOGE，可为 KOGE 带来增量需求，并加强 48Club 与 KOGE 的关联和影响力。\n\t•\t扩大 48Club RPC 用户量：更直观、更有吸引力的现金返还机制，有望为 48Club RPC 带来更多新用户。\n\t•\t潜在销毁机制：未被领取的 KOGE 长期锁定，起到一定的销毁作用。\n\n\nBackground:\nSince the launch of 48Club Puissant Builder’s RPC Cashback service, nearly 100 BNB have been returned to users and project teams in total. However, for regular users, the cashback may go unnoticed and is often seen simply as a “slippage compensation,” which dilutes their appreciation of the actual value provided by this service.\n\nProblem & Motivation:\n\t•\tRegular users find it difficult to track the BNB they receive through cashback, limiting their perception of the benefit.\n\t•\tIn the long run, low user awareness and engagement with RPC Cashback may hinder the growth of 48Club Puissant Builder’s RPC user base.\n\nProposal Details:\n\t1.\tNo Change for Project Teams\n\t•\tThe current structure of sending BNB cashback directly to project teams remains the same.\n\t2.\tAutomatic Conversion to KOGE for Regular Users\n\t•\tDeploy a new smart contract that automatically uses the BNB cashback intended for regular users to purchase KOGE.\n\t•\tIntegrate a front-end page where users can view and claim their KOGE at any time.\n\t3.\tUnclaimed KOGE Handling\n\t•\tUnclaimed KOGE remains within the contract address if users do not claim it over time, potentially serving as a deflationary mechanism.\n\nExpected Outcomes:\n\t•\tEnhanced User Appreciation & Engagement: By making the KOGE allocation visible and claimable in the front end, users will better realize the benefits of the cashback mechanism, thus increasing loyalty.\n\t•\tIncreased Exposure for 48Club & KOGE: Automatically purchasing and distributing KOGE will create additional demand for KOGE and strengthen the synergy between 48Club and the KOGE ecosystem.\n\t•\tGrowth of 48Club RPC User Base: A more transparent and appealing cashback structure is likely to attract new users to 48Club RPC.\n\t•\tPotential Deflation Mechanism: Unclaimed KOGE could effectively reduce supply over time, possibly contributing to the token’s value."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "119",
+      "proposer": "0x84431D2BE3B62822F0C74BFd410bfBF1Ce664b2F",
+      "startTime": 1736306122,
+      "endTime": 1736565322,
+      "ntitle": "",
+      "description": "Trump was elected as the President of the United States, and BTC became a mainstream investment asset. The infrastructure of blockchain has become the most important battleground in finance. It is proposed to establish a 48-base investment portfolio to focus on the foundation.\n1. Important emerging L1 positions: such as SOL, SUI, TON\n2. Important basic functions: such as Link, PYTH\n3. Ballast assets: such as BTC, USDC\n\nIt is proposed that the initial capital is 1 million US dollars, the initial asset list, and the assets are configured at 100,000 US dollars each\nSOL, SUI, TON, Link, PYTH, BTC, USDC"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "118",
+      "proposer": "0x38527fE5DC5Ae265bC148967e7115362ce62088E",
+      "startTime": 1736267542,
+      "endTime": 1736526742,
+      "ntitle": "",
+      "description": "为了庆祝元旦、农历新年、一姐再次入群、KOGE上币安Alpha 等喜事。更重要是为了活跃群组气氛，吸引更多币圈爱好者加入俱乐部。提议，为活跃群成员空投koge，拟定规则如下：\n\n1. 铂金群活跃成员每人获得空投10koge。\n2. 普通群活跃成员每人获得空投5koge。\n3. 铂金群活跃成员也可以领取普通群空投。但英文和中文普通群只能领一份。\n4. 活跃成员定义： 在2025年1月29日农历新年前2周，至少活跃发言和参与群讨论三天。\n5. 活跃发言定义：不能骂人、发广告、转发新闻、发无意义的话语。每天至少5句。\n6. 总空投量上限1000 koge， 按照入群时间，先到先得。\n7. 群成员必须自主绑定bsc钱包地址以获得空投。 \n8. 48俱乐部拥有最终解释权。\n\n\nTo celebrate New Year's Day, Lunar New Year, the rejoining of \"He Yi\" in the group, and KOGE being listed on Binance Alpha, and more importantly to enhance group engagement and attract more crypto enthusiasts to join the club, it is proposed to airdrop KOGE to active group members based on the following rules:\n\n1. Platinum Group Active Members: Each will receive an airdrop of 10 KOGE.\n2. Regular Group Active Members: Each will receive an airdrop of 5 KOGE.\n3. Dual Eligibility for Platinum Group Members: Active members of the Platinum Group can also claim the airdrop for Regular Groups. However, only one claim is allowed between the English and Chinese Regular Groups.\n4. Definition of Active Members: Members who participate in group discussions and actively post for at least three days within the two weeks leading up to Lunar New Year's Eve on January 29, 2025.\n5. Definition of Active Posts: Posts must not include insults, advertisements, forwarded news, or meaningless messages. Members are required to make at least five meaningful posts per day.\n6. Total Airdrop Cap: The total airdrop amount is capped at 1,000 KOGE and will be distributed on a first-come, first-served basis based on the order of group joining.\n7. Wallet Binding Requirement: Members must bind their BSC wallet address independently to receive the airdrop.\n8. Final Interpretation: 48 Club reserves the right of final interpretation for this activity.\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "117",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1736101295,
+      "endTime": 1736360495,
+      "ntitle": "",
+      "description": "Gradual buyback and burn of 8,228 KOGE in Q1 2025.\n\nCombined with the 22,000 KOGE allocated for voting incentives and liquidity pools as per the previous proposal, the total KOGE burn this quarter will reach 30,228 KOGE."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "116",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1735992514,
+      "endTime": 1736251714,
+      "ntitle": "",
+      "description": "结合2024年各季度财务报表及32号提案，现提议将Farm奖励由原先的KOGE，改为适当比例的BNB，减少KOGE销毁方式。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "115",
+      "proposer": "0x7f5372735e5F5338582D1F32A586E4b423Ad6999",
+      "startTime": 1735868009,
+      "endTime": 1736127209,
+      "ntitle": "",
+      "description": "Propose restarting the farm pool by KOGE/BNB Pancake（V2）LP and KOGE/USDT Pancake（V2）LP"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "114",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1734718445,
+      "endTime": 1734977645,
+      "ntitle": "",
+      "description": "Proposal to establish a 48Partners Portfolio with the following criteria:\n\t•\tEligible projects must be strategic partners of 48Club.\n\t•\tThey must have issued their own coin/token and be listed on Binance.\n\t•\tThe partnership with 48Club must still be ongoing.\n\nInitial Investment:\n\t•\t$500,000 USD\n\nInitial Portfolio Assets:\n\t•\tCAKE\n\t•\tLISTA\n\t•\tALPACA"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "113",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1734507387,
+      "endTime": 1734766587,
+      "ntitle": "",
+      "description": "48Core Portfolio中现已有$USDT、$PAXG、$BTC、$ETH、$BNB、$MKR、$UNI、$AAVE、$CRV、$TON十种代币，现提议将$BNB挪出48Core Portfolio，给其他代币腾位置。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "112",
+      "proposer": "0x7f5372735e5F5338582D1F32A586E4b423Ad6999",
+      "startTime": 1734446277,
+      "endTime": 1734705477,
+      "ntitle": "",
+      "description": "Add $CAKE(Pancake) as 48 Core Portfolio Constituent Asset\n提议增加$CAKE为48 Core Portfolio 成份资产"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "111",
+      "proposer": "0x459E82d4c35C8D541CF4EcFB037C63A6a51cbd25",
+      "startTime": 1731882031,
+      "endTime": 1732141231,
+      "ntitle": "",
+      "description": "关于限制免Gas费“非正常交易”的提案 Restrict Misuse of Gas-Free Transactions\n\nZH:\n随着48Club于数月前推出48 Soul Point（48SP）以拓展Koge/NFT等48Club资产持有者的权益，同时开展免Gas费活动，近期我们观察到一种不正常的现象：大量类似“fake phishing”的交易充斥48Club相关节点的区块链网络。这些交易通过低成本方式滥用免Gas费政策，具体行为包括：\n1. 利用多账户存放48SP，规避限制以获得更多发送能力。\n2. 生成大批量低价值甚至恶意的免Gas费交易（如区块#44062830、#44063432、#44063617等均出现数十页标记为“fake phishing transaction”的交易记录）。\n\n这种行为不仅损害了BNB Chain的链上数据价值，也对48Club的品牌声誉构成潜在威胁。\n\n提案核心内容：\n\n1. 优化免Gas费交易的算法判断机制：\n本提案认为，48SP的免Gas费政策应聚焦于具备实际交易目的的合法交易，尽量避免为恶意或无效交易提供免费上链服务。\n建议：由管理团队研究并制定具体的算法规则与判断标准，以有效过滤此类“非正常交易”。\n\n2. 限制每区块免Gas费交易数量，平衡用户权益：\n为进一步规范免Gas费政策并保障公平性，本提案建议对每个区块中的免Gas费交易进行以下限制：\n总体限制：单个区块免Gas费交易不超过100笔。\n账户限制：结合区块内交易发送者的数量（sender_count），动态决定每个发送者可免费发送的交易数量，公式为 max(1, floor(100 / sender_count))。\n示例：若当前区块内有50个发送者，则每个发送者可发送最多2笔免Gas费交易。\n\n提案目标：\n1. 减少“fake phishing”等低质量交易对网络的干扰，保护48Club及BNB Chain的整体数据价值。\n2. 通过平衡发送者的交易权利，提升免Gas费政策的公平性，维护48Club用户体验与声誉。\n\n我们相信，通过合理的算法调整和限制策略，能够更有效地发挥48SP政策的正向作用，为用户创造更高价值，同时保护链上生态的健康发展。\n\nEN:\nWith the launch of 48 Soul Point (48SP) a few months ago to expand the benefits of holding Koge/NFT and other 48Club-related assets, alongside the introduction of a gas-free transaction policy, we have observed a concerning trend. A large number of transactions resembling “fake phishing” are flooding the blockchain network across 48Club-related nodes. These transactions exploit the gas-free policy through low-cost abuse, with specific behaviors including:\n1.\tUsing multiple accounts to store 48SP, circumventing limitations and gaining increased transaction capacity.\n2.\tGenerating large volumes of low-value or malicious gas-free transactions, as evident in blocks #44062830, #44063432, and #44063617, which contain dozens of pages of transactions marked as “fake phishing transactions.”\n\nThis behavior not only undermines the value of on-chain data on the BNB Chain but also poses a potential threat to the reputation of 48Club.\n\nCore Proposals\n\n1. Optimize the Algorithm for Identifying Gas-Free Transactions\n\nThe gas-free policy for 48SP should focus on supporting legitimate transactions with clear purposes, while minimizing free on-chain access for malicious or invalid transactions.\nRecommendation: The management team should develop specific algorithmic rules and criteria to effectively filter out such abnormal transactions.\n\n2. Limit the Number of Gas-Free Transactions per Block to Ensure Fairness\n\nTo further regulate the gas-free policy and ensure fairness among users, this proposal recommends implementing the following restrictions on gas-free transactions per block:\nOverall Limit: Cap the total number of gas-free transactions per block at 100.\nPer Sender Limit: Dynamically determine the maximum number of transactions each sender can perform per block based on the total number of senders (sender_count) in the block, calculated using the formula:\nmax(1, floor(100 / sender_count)).\n\tExample: If there are 50 senders in a block, each sender would be allowed a maximum of 2 gas-free transactions.\n\nGoals of the Proposal\n\n1.\tReduce the disruption caused by low-quality transactions, such as “fake phishing” transactions, to protect the value of on-chain data on the BNB Chain and ensure the healthy growth of 48Club.\n2.\tEnhance fairness in the gas-free policy by balancing the transaction rights of all users, thereby safeguarding the user experience and reputation of 48Club.\n\nThrough reasonable algorithmic adjustments and strategic transaction limitations, we believe this proposal will help maximize the positive impact of the 48SP policy, create greater value for users, and preserve the health and integrity of the blockchain ecosystem."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "110",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1729071309,
+      "endTime": 1729330509,
+      "ntitle": "",
+      "description": "Start KOGE/USDT lp farm\n开设 KOGE/USDT 流动性挖矿"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "109",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1729068516,
+      "endTime": 1729327716,
+      "ntitle": "",
+      "description": "关于减少提案奖励池奖励KOGE的提案\n\n通过回看俱乐部财报数据，虽然俱乐部一直有在回购KOGE，但KOGE持有量是在减少的，俱乐部现主要KOGE支出有提案投票奖励，Farm提供流动性奖励。\n本着可持续发展及盘活KOGE交易市场愿景，特提案将提案奖励池调整至每次提案投票奖励为480KOGE。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "108",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1728756792,
+      "endTime": 1729015992,
+      "ntitle": "",
+      "description": "Add UNI as 48 Core Portfolio Constituent Asset\n提议增加UNI为48 Core Portfolio 成份资产"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "107",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1728756663,
+      "endTime": 1729015863,
+      "ntitle": "",
+      "description": "Add TON as 48 Core Portfolio Constituent Asset\n提议增加TON为48 Core Portfolio 成份资产"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "106",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1728275653,
+      "endTime": 1728534853,
+      "ntitle": "",
+      "description": "Add EURI as 48 Core Portfolio Constituent Asset\n提议增加EURI为48 Core Portfolio 成份资产\n注：Eurite (EURI) 是一种 1:1 欧元支持的稳定币，受欧洲经济区加密资产市场监管局 (MiCA) 监管，旨在增加48 Core Portfolio稳定币类资产，抵御风险。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "105",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1728229343,
+      "endTime": 1728488543,
+      "ntitle": "",
+      "description": "Add AAVE as 48 Core Portfolio Constituent Asset\n提议增加AAVE为48 Core Portfolio 成份资产"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "104",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1727779736,
+      "endTime": 1728038936,
+      "ntitle": "",
+      "description": "关于空投LISTA的提案\n\n基于社区X上发布的信息及历史提案，现对此次空投LISTA进行基础规则提案：\n1、以10月1日(UTC+0)为快照结束时间，回溯48天的Soul分数，平均分数符合Gold Member（即大于等于100）标准的地址，纳入空投池。\n2、空投结合实际情况对符合分数的地址进行平均分配，但不限制理事会对女巫行为的处理权力，可将刷分地址排除在空投之外。\n3、若有补充，可投票时说明及社群反馈，由理事会商议。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "103",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1727775320,
+      "endTime": 1728034520,
+      "ntitle": "",
+      "description": "Propose to reduce minDeposit from 48 to 14.8 KOGE for DAO proposer, making it a little bit more attractive\n\n提案将DAO提案者最小存款从48 KOGE 降低到14.8 KOGE，藉此提高提案收益的吸引力。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "102",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1727141068,
+      "endTime": 1727400268,
+      "ntitle": "",
+      "description": "关于空投LISTA的提案\n\n基于社区X上发布的信息及历史提案，现对此次空投LISTA进行基础规则提案：\n1、以10月1日(UTC+0)为快照结束时间，回溯48天的Soul分数，按快照次数计算得平均值，分数大于100的地址，纳入此次空投池。\n2、为规避本次空投刷分影响，同时适当照顾大户与小散权益，空投按阶梯分值比例分配。\n头部地址（大于4.8万分的）享48%的代币数量，按分值比例分配；剩余52%代币，也按分值比例分配给其他满足分数地址。\n3、若有补充，可投票时说明及社群反馈，由理事会商议。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "101",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1723825738,
+      "endTime": 1724084938,
+      "ntitle": "",
+      "description": "48Club社区空投应以48SoulPoint为基准，理事会执行时应当对每次空投活动设立参与门槛并公示空投总量，对满足门槛的社区成员平均分配，不应在门槛之上根据48SP分数多寡区分空投数量。\n\n以7.30 收到的68万枚LISTA token为例，应当待48 Soul Point 充分快照至有足够数据进行48天历史数据回溯时，设置最低48SP要求，并对满足要求的钱包地址平均空投。允许视情况拆分为多次空投。\n\n该方法应当默认适用于未来可能发生的所有类似性质的社区空投。 "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "100",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1720807151,
+      "endTime": 1721066351,
+      "ntitle": "",
+      "description": "Allow 48Club delegators to send 0gwei txs\n允许质押给48Club验证节点的钱包发送0gwei交易"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "99",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1720704841,
+      "endTime": 1720964041,
+      "ntitle": "",
+      "description": "Propose-Stop bFans Reward\nTo protect the rights of KOGE holders, propose to stop the  farm 'Put in Pancake KOGE/bFans V2 LP Reward KOGE'"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "98",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1720424705,
+      "endTime": 1720683905,
+      "ntitle": "",
+      "description": "Add PAXG to 48 Core Portfolio"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "97",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1716184282,
+      "endTime": 1716443482,
+      "ntitle": "",
+      "description": "资金拨付请求： 理事会请求拨付100万 U 用于EVM mev解决方案的研究与投资。 详情请咨询理事会。\nFund request: The committee asks for approval of 1M USDT for EVM compatible MEV solution research and investment. Please consult committee for details."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "92",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1710087378,
+      "endTime": 1710346578,
+      "ntitle": "",
+      "description": "提议：利用91号提案节省的资金开设新的KOGE LP农场\n\n根据91号提案的节省，我们提议将这部分资金用于开设新的KOGE LP农场。新的LP奖励将分配给位于不同的DEX或不同的资产交易对的LP，以增加KOGE的流动性的多样性。\n\n这一举措旨在促进KOGE在不同交易平台上的流通，进一步提升其市场表现和生态发展。\n\nProposal: Establishing New KOGE LP Farms with Funds Saved from Proposal 91\n\nBased on the savings from Proposal 91, we propose utilizing this portion of funds to establish new KOGE LP farms. The LP rewards from these new farms should be allocated to LP tokens from different DEXs or different asset trading pairs, enriching the diversity of liquidity of KOGE.\n\nThis initiative aims to promote the circulation of KOGE on various trading platforms, further enhancing its market performance and ecosystem development. "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "89",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1707026674,
+      "endTime": 1707285874,
+      "ntitle": "",
+      "description": "Optimizing Farm Reward Mechanism\nProposal: In the Farm, the 'Put in KOGE，Reward WBNB' initiative suggests discontinuing yield distribution once the proposal is approved. The reason for this change is the lack of liquidity impact from a single coin.\n\n优化Farm奖励机制\n提议：Farm中“投入KOGE奖励WBNB”项目，自提案通过后不再提供收益，原因：单币没有提供流动性作用。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "88",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1705750296,
+      "endTime": 1706009496,
+      "ntitle": "",
+      "description": "持续将 BNB-48 协议下的热门铭文资产纳入 48Club 俱乐部资产\n\n提案目的： 通过定期将 BNB-48 协议下的热门铭文资产纳入 48Club 俱乐部资产，促进协议生态发展，同时为俱乐部成员提供更多的数字资产选择，通过合理的管理机制确保成员分享到俱乐部自身协议生态中资产的增值。\n\n提案内容：\n\nBNB-48 协议由48Club主导，适配任何区块链，首发BSC，是一个基于区块链技术的数字资产铭文协议。该协议已经在币安Web3钱包中提交dApp，并取得了一定的知名度和用户基础。\n\n提议俱乐部定期选择 BNB-48 协议下的热门铭文品种纳入俱乐部资产。此举既对协议生态进行支持，又通过合理的管理机制确保成员分享到俱乐部协议生态中资产的增值。\n\n具体筛选标准与纳入细则将由理事会全权操作。建议综合考察持币人数、交易频率、社区知名度等指标，并确保所使用资金控制在季度盈利中适当的比例，择时购入，避免对市场造成不必要的波动。\n\nContinued Inclusion of Popular Inscriptions under the BNB-48 Protocol into 48Club Assets\n\nProposal Purpose:\nTo regularly incorporate popular inscriptions under the BNB-48 protocol into 48Club assets, fostering the development of the protocol's ecosystem. Simultaneously, providing more digital asset choices for 48Club members and ensuring, through a sensible management mechanism, that members share in the appreciation of assets within the club's own protocol ecosystem.\n\nProposal Content:\n\nThe BNB-48 protocol, led by 48Club, is adaptable to any blockchain and is a blockchain-based digital asset inscription protocol. The protocol has gained recognition and a user base, with the dApp already submitted to the Binance Web3 wallet.\n\nIt is proposed that 48Club regularly selects popular inscription varieties under the BNB-48 protocol for inclusion in the club's assets. This not only supports the protocol's ecosystem but also ensures, through a reasonable management mechanism, that members share in the appreciation of assets within the club's own protocol ecosystem.\n\nSpecific screening criteria and inclusion details will be fully operated by the Board of Directors. It is recommended to comprehensively assess indicators such as the number of token holders, trading frequency, community visibility, etc. Also, ensuring that the funds used are controlled within an appropriate proportion of quarterly profits, purchased at opportune times to avoid unnecessary market fluctuations."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "71",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1691654526,
+      "endTime": 1691913726,
+      "ntitle": "",
+      "description": "Add funds equivalent to 16666.67 US dollars to 48 core portfolio\n追加等值16666.67 美元资金至48基础持仓"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "78",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1699718840,
+      "endTime": 1699978040,
+      "ntitle": "",
+      "description": "Proposal for Regular Stipend to Committee Member Mars\n\nIt is with utmost respect and recognition of the valuable contributions made by Committee Member Mars to the 48Club’s BSC Node Open Source Project that we propose the establishment of a regular stipend. The BSC Node Open Source Project, diligently maintained by Mars over the past two years, has yielded remarkably positive outcomes for both the club and the BNB community.\n\nThe growing accumulation of pending content for the BSC Geth upstream project has considerably increased the workload beyond the scope and capacity of general community volunteer contributors. This trend is expected to persist. As the scope of work expands, there is a compelling reason to believe that the 48Club may attract more development resources from the community. To prevent developers from misunderstanding the club's intentions as solely seeking voluntary labor, it becomes necessary to institute appropriate stipends.\n\nThe proposition of a stipend for Mars is a means of recognizing the sustained commitment and efforts required for the continued success and growth of the 48Club's projects. This measure will not only incentivize sustained dedication but also facilitate the attraction and retention of skilled contributors to our community initiatives.\n\nHere is 48Club github page for reference: https://github.com/48Club\n\nYour thoughtful consideration of this proposal is sincerely appreciated."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "85",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1703605200,
+      "endTime": 1703864400,
+      "ntitle": "",
+      "description": "关于向48er NFT持有者空投BNB-48铭文 $fans 的提案 (重发)\n\n提案内容为，在BSC区块高度34848000的快照时，对持有48er NFT的钱包地址进行空投，每个地址将获得10 $fans。对于单一地址持有多个48er NFT的情况，将采用不重复发放的原则。\n\n48er NFT的详细介绍如下：流通量为44枚，铸造地板价为786.85Koge，约合$6700。\n\n$fans的信息可以在以下链接中查阅俱乐部网页 Inscriptions 部分，这是根据BNB-48协议部署的第一个铭文。\n\nBSC区块高度34848000对应的UTC时间预计为Dec 31, 2023，周日，22:58:50。\n\nProposal for Airdrop of BNB-48 Inscription $fans to 48er NFT Holders\n\nThe proposal suggests an airdrop to wallet addresses holding 48er NFTs based on the snapshot at BSC block height 34848000. Each address is set to receive 10 $fans. In cases where a single address holds multiple 48er NFTs, distribution will be non-repetitive.\n\nDetails about 48er NFTs are as follows: circulating supply of 44, minting floor price at 786.85Koge, approximately $6700.\n\nFor information on $fans, please refer to 48Club homepage inscriptions section. This is the first inscription deployed according to the BNB-48 protocol.\n\nThe UTC time corresponding to BSC block height 34848000 is approximately Dec 31, 2023, Sunday, 22:58:50.\n\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "84",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1703333620,
+      "endTime": 1703592820,
+      "ntitle": "",
+      "description": "Proposal for Airdrop of BNB-48 Inscription $fans to 48er NFT Holders\n\nThe proposal suggests an airdrop to wallet addresses holding 48er NFTs based on the snapshot at BSC block height 34848000. Each address is set to receive 10 $fans. In cases where a single address holds multiple 48er NFTs, distribution will be non-repetitive.\n\nDetails about 48er NFTs are as follows: circulating supply of 44, minting floor price at 786.85Koge, approximately $6700.\n\nFor information on $fans, please refer to 48Club homepage inscriptions section. This is the first inscription deployed according to the BNB-48 protocol.\n\nThe UTC time corresponding to BSC block height 34848000 is approximately Dec 31, 2023, Sunday, 22:58:50.\n\n关于向48er NFT持有者空投BNB-48铭文 $fans 的提案\n\n提案内容为，在BSC区块高度34848000的快照时，对持有48er NFT的钱包地址进行空投，每个地址将获得10 $fans。对于单一地址持有多个48er NFT的情况，将采用不重复发放的原则。\n\n48er NFT的详细介绍如下：流通量为44枚，铸造地板价为786.85Koge，约合$6700。\n\n$fans的信息可以在以下链接中查阅俱乐部网页 Inscriptions 部分，这是根据BNB-48协议部署的第一个铭文。\n\nBSC区块高度34848000对应的UTC时间预计为Dec 31, 2023，周日，22:58:50。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "82",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1702923227,
+      "endTime": 1703182427,
+      "ntitle": "",
+      "description": "把验证节点地址的fans铭文收归公有\n\n在fans铭文的铸造过程中，有人把to地址搞错了，错误地mint到了48Club验证节点地址 0x72b61c6014342d914470eC7aC2975bE345796c2b 里，数量为1577枚。可在 https://bnb-48.vercel.app/inscriptions/explorer 查询。\n\n该地址控制权在节点技术团队。提议把该1577枚收归俱乐部公有资产，用于市场推广，俱乐部福利等用途。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "64",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1683864365,
+      "endTime": 1684123565,
+      "ntitle": "",
+      "description": "熊市48送温暖，提案收益一起分。\n\n不知不觉，熊市来了，借此机会给大家送福利，本次提案个人收益大家一起分。\n\n一为大家熟悉质押投票流程，二为了解本人代购流程，特发起此活动。凡在本提案下投票的koge持有者，可凭投票信息联系48Club中@Doctor119领取活动奖励。\n活动奖励内容：\n1、原价1799元的Onekey Touch硬件钱包，koge支付五折即可代购，限一台，或等价京东卡；\n1、原价599元的Onekey Classic硬件钱包，koge支付五折即可代购，限三台，或等价京东卡；\n2、原价一百元京东E卡，koge支付0.48koge即可领取，限八人。\n\n提案投票数达到有效票数即可联系@Doctor119领取活动奖励，先到先得，需提供投票交互地址等相关信息已便查验资格，每人凭投票信息仅可领取一次活动奖励。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "79",
+      "proposer": "0x2164D118329b03677710127d7878a57Db2b1edc5",
+      "startTime": 1701664639,
+      "endTime": 1701923839,
+      "ntitle": "",
+      "description": "关于提高社区开发成员积极性的提案\n\n由于 48Club 业务生态体系的完善，开发团队面临的问题也会越来越多，任何审计都有可能遗漏的问题，我提议\n\n1. 针对于社区反馈的 BUG, 根据性质给予首位反馈的用户进行奖励;\n2. 对于 48Club 开源项目做出贡献的用户(BUG 修复, 新特性贡献);\n\n奖励(由 48Club 俱乐部赞助)具体金额由 48Club 理事或开发团队讨论后给予发放。\n\n\n社区将牢记每一份来自社区成员的贡献，并且会奖励每一位贡献者。\n\n-----------------------------------------------------------\n\nProposal on increasing the enthusiasm of community development members\n\nAs the 48Club business ecosystem improves, the development team will face more and more problems. Any audit may miss problems. I propose\n\n1. For bugs reported by the community, rewards will be given to the first user to provide feedback according to the nature;\n2. Users who contribute to the 48Club open source project (bug fixes, new feature contributions);\n\nThe specific amount of the reward (sponsored by 48Club) will be distributed after discussion by the 48Club directors or development team.\n\n\nThe community will remember every contribution from community members and will reward every contributor."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "69",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1691391814,
+      "endTime": 1691651014,
+      "ntitle": "",
+      "description": "Add $MKR into \"48Club Core Portfolio\" targets\n增加 $MKR 到 『48Club 基础持仓』 投资标的"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "74",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1697088970,
+      "endTime": 1697348170,
+      "ntitle": "",
+      "description": "To live within one's means.\n\nLately, the blockchain has been facing challenging times. To ensure sustainability, I propose that the club caps the annual yield of the farm pool at 5% or less. Currently, in the existing dual-coin farm pools, the annual yield is around 7%, which is considerably higher than Binance staking. Keeping the farm's annual yield within the range of 5% or even 3% is also reasonable.\nWith this proposal, we also hope to encourage token holders to take action.\n\n量入为出\n\n近来区块链的日子着实不好过，为可持续发展，提议俱乐部将farm奖池的年化收益控制在5%以内。\n现有双币farm池中，年化收益为7%左右，相比币安理财高了不少，将farm年化收益控制在5%乃至3%以内，也是合理的。\n通过此提案，也想让持币人动起来。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "57",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1672229480,
+      "endTime": 1672488680,
+      "ntitle": "",
+      "description": "Propose to extend https://www.bnb48.club/voting/detail/47 that allow to \"burn\" asset, as recorded in LitePaper, by putting them into 48 Club Voting incentive pool instead of really burning.\n\n建议扩展 https://www.bnb48.club/voting/detail/47 允许“销毁”资产，如 LitePaper 中所记录的那样，通过将资产放入 48 俱乐部投票激励池而不是真正销毁。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "68",
+      "proposer": "0x2164D118329b03677710127d7878a57Db2b1edc5",
+      "startTime": 1690307175,
+      "endTime": 1690566375,
+      "ntitle": "",
+      "description": "关于铂金会成员网络加速服务的更新提议\n\n因为服务商存在倍率问题，实际仅可使用 2G 左右，不能满足日常中度使用。\n\n提议将铂金会成员账户的日显示流量从 10G 修改为 48G，并且无论节点倍率如何变更，确保铂金会成员日流量可以实际使用不低于 10G，下限即 [10G * 倍率 = 账户显示流量]\n\nYou can get translated at https://translate.google.com\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "35",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1665082796,
+      "endTime": 1665687596,
+      "ntitle": "",
+      "description": "Burn 40,909 Koge\n销毁 40909 Koge\n\nfrom previously exited koge liquidity\n资金来自此前撤出的KOGE流动性资产"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "39",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1665415300,
+      "endTime": 1666020100,
+      "ntitle": "",
+      "description": "关于增加minReward 的提案\n\n提高minReward，调整原48为480 KOGE。\n\n前一提案有错误 不是minDeposit 是 minReward\n\nProposal to increase the amount of minReward\n\nIncrease the amount of minReward 48 KOGE to 480 KOGE.\n\nIgnore previous proposal, not minDeposit but minReward"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "31",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1663167972,
+      "endTime": 1663772772,
+      "ntitle": "",
+      "description": "开设Biswap lp 挖矿\nOpen Biswap lp mining"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "61",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1680089711,
+      "endTime": 1680348911,
+      "ntitle": "",
+      "description": "I propose to generalize the case described in proposals 32 and 47, allowing the injection of funds into any future airdrops, distributions, rewards or similar events initiated by the 48Club towards no specific targets, to be considered as a burning action as described in the LitePaper.\n\n我提议对第32号和第47号提案的情况进行一般化，即将向未来48Club发起的任何无特定对象的空投、分发、奖励等事件注入资金的行为视为LitePaper中所描述的销毁行为。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "51",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1670172485,
+      "endTime": 1670431685,
+      "ntitle": "",
+      "description": "BSC Proposal 13\nShould BNB48 vote for it ?\n\nhttps://telegra.ph/BSC-Gov-Proposal-13-12-04"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "43",
+      "proposer": "0x2164D118329b03677710127d7878a57Db2b1edc5",
+      "startTime": 1667554647,
+      "endTime": 1668159447,
+      "ntitle": "",
+      "description": "允许 BNB48 Club 开发团队在一定范围内自由调整拒绝打包的交易类型\n\n\nBNB48 Club 开发团队对 RPC 服务进行了扩展，目前满足特定条件的用户可以使用 RPC 服务发起更低价格的交易，\n最初的目的是为了让用户支付更少的手续费来进行交易，但是近期发现此功能被滥用，导致验证节点打包速度变慢。\n\n\n为了保证交易的打包速度，减少验证节点 Slash 的风险，给予 delegators 稳定的收益，我提议“允许 BNB48 Club 开发团队在一定范围内自由调整拒绝打包的交易类型”。\n\n\nYou can get translated at https://translate.google.com"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "46",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1668591644,
+      "endTime": 1669196444,
+      "ntitle": "",
+      "description": "blacklist FTX hacker address from BNB48 validator code\n\n在BNB48驗證節點代碼中將FTX黑客地址拉黑"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "48",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1669185770,
+      "endTime": 1669790570,
+      "ntitle": "",
+      "description": "Wie kümmert man sich um Benutzer von Minderheitensprachen?\nDieser Artikel wurde mit Google Translate aus dem Chinesischen ins Deutsche übersetzt.\nWenn ein Vorschlag in einer kleinen Sprache veröffentlicht wird, was zu Missverständnissen bei den Wählern führt, und der Vorschlag angenommen wird, was sollte getan werden?"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "45",
+      "proposer": "0x7f5372735e5F5338582D1F32A586E4b423Ad6999",
+      "startTime": 1668194605,
+      "endTime": 1668799405,
+      "ntitle": "",
+      "description": "About asset reserve\n\nLearning from the FTX incident, BNB48Club should complete an asset reserve in  Bitcoin at least 50 pcs within 12 months after the adoption of this proposal,and disclose the Bitcoin numbers in its quarterly financial report.\nAfter this , should send Bitcoin to cold wallet.\n\n关于资产储备的警示\n\n根据业界FTX事件的教训，BNB48Club应在本提案通过后12个月内完成至少50枚BTC的资产储备，并在季度财报中体现BTC持有数量。资产储备的BTC应存放至冷钱包。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "52",
+      "proposer": "0xB9A19aa00a72bf9Ef3Da38F19A1e550945d81a41",
+      "startTime": 1670300554,
+      "endTime": 1670559754,
+      "ntitle": "",
+      "description": "100koge到处转有点烦人，要不设置一下需要stake才能享受gas费打折。\nit’s annoying that always transferring 100koge.suggest that only stake 100koge can enjoy discount "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "36",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1665285604,
+      "endTime": 1665890404,
+      "ntitle": "",
+      "description": "关于增加质押投票奖池注入KOGE的提案\n\n\n\n提高奖池注入KOGE数量，调整原最大拨款480KOGE为1000KOGE。\n\n提案原因：1、社区成员反馈投票收益问题；2、链上质押投票活力不足。\n\n依现行提案奖励机制，计算最大投票收益。\n计算条件：每次拨款金额最大数量480KOGE，4.8KOGE提案发起人注入；现总质押量为1843922KOGE，设每次提案全体投票。\n得：每千koge质押约收益0.250298koge，折合市价换算约0.007259bnb；每万koge质押收益约2.5029779koge，折合市价换算约0.072586bnb。\n与Farm收益无法相比，特提此案，望大家讨论通过。\n\nProposal to increase the amount of KOGE injected into the staking voting pool.\n\nIncrease the amount of KOGE injected into the prize pool, and adjust the original maximum allocation of 480 KOGE to 1000 KOGE."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "16",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1655285787,
+      "endTime": 1655890587,
+      "ntitle": "",
+      "description": "币市无情，BNB48Club有爱\n \n       为后续周边活动的开展，拟定制一批bnb48club银币，48克，48枚。咨询定制成型价格需约450~500一枚（带包装），合计人民币约两万一千六百元~两万四千元，可通过koge支付，多退少补。现提案申请专项专款用于银币周边定制。\nRequest Custom Bnb48club Silver Coins，Application for appropriation."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "50",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1669345795,
+      "endTime": 1669950595,
+      "ntitle": "",
+      "description": "Proposal to shorten voting time to 72 hours"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "55",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1670912200,
+      "endTime": 1671171400,
+      "ntitle": "",
+      "description": "Change Club name\n\n\"BNB48\" subtly implies a secret relationship with Binance which we don't have.\n\nMaybe it's a good idea to remove \"bnb\" in order to avoid further misunderstanding.\n\nThere are some apparent choices like \"48 Club\" or \"Koge Club\", but before what the new name should be, shall we change the name?"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "18",
+      "proposer": "0x2164D118329b03677710127d7878a57Db2b1edc5",
+      "startTime": 1656686329,
+      "endTime": 1657291129,
+      "ntitle": "",
+      "description": "NFT 资料变更费率变更/功能完善\n\n1. 48er NFT 信息支持修改, 但是目前费率为 48KOGE 每次, 修改代价较大, 提案费率修改\n\n    48KOGE -> 0.48 KOGE\n\n\n2. 支持 NFT 用户在网页 https://www.bnb48.club/nft 进行交互编辑 NFT 交互, 简化IPFS和合约交互的繁杂步骤\n\n\n此功能目前可以使用合约 setTokenURI 函数进行交互, 交互后将会替换 NFT 的 name、description 和 image 信息 \n\n-----------------------------------------------------\n# Google Translate\n\nNFT data change rate change / function improvement\n\n1. 48er NFT information supports modification, but the current rate is 48KOGE each time, the modification cost is relatively large, and the application rate modification\n\n     48KOGE -> 0.48KOGE\n\n\n2. Support NFT users to interactively edit NFT interaction on the webpage https://www.bnb48.club/nft, simplifying the complicated steps of IPFS and contract interaction\n\n\nThis function can currently be interacted with the contract setTokenURI function, which will replace the name, description and image information of the NFT after interaction"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "40",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1666376793,
+      "endTime": 1666981593,
+      "ntitle": "",
+      "description": "紧急修复\n网友反馈，根据按照此前提案修改后的Voting参数，系统提案奖池952为提案发起人盈亏平衡线，过于接近最大值1000，提案人承受亏损概率过高。\n\n建议通过适当调高发起人提成 (4.8%->8%)来缓解此问题。新规则下，系统提案奖池接近552 为提案人的盈亏平衡线，亏损概率大大降低。\n\n保留提案人一定的亏损可能性，旨在一定程度上减少“提案挖矿”现象。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "56",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1671203130,
+      "endTime": 1671462330,
+      "ntitle": "",
+      "description": "Given that we are gonna change the club name, shall we use \"48 Club\" to replace \"BNB48 Club\" ?\n\nVote \"Approve\"  if you prefer \"48 Club\" to any other options\nVote \"Reject\" if you don't like \"48 Club\" or you think there are other equal choices.\n\nIf this proposal is passed, we will start the migration to new name \"48 Club\", otherwise we will turn to seek other names."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "26",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1662653046,
+      "endTime": 1663257846,
+      "ntitle": "",
+      "description": "New burning\n新的“销毁”方式\n\nAs we have a Farm product now, I suggest a new method of burning bought KOGE :  set up a farm rewarding KOGE to KOGE stakers.\n\nParameters TBD.\n\n鉴于我们拥有了新的链上工具（自定义农场），我提议一种新的\"销毁\"方式，即使用回购的KOGE开设矿池，奖励给愿意主动锁定可流通性的KOGE质押者。\n\n具体矿池的金额待议。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "37",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1665367856,
+      "endTime": 1665972656,
+      "ntitle": "",
+      "description": "关于增加minDeposit的提案\n\n提高minDeposit，调整原4.80为48 KOGE。\n\nProposal to increase the amount of minDeposit\n\nIncrease the amount of minDeposit 4.8 KOGE to 48 KOGE."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "23",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1660901821,
+      "endTime": 1661506621,
+      "ntitle": "",
+      "description": "闲着找点事干 当个俱乐部周边志愿者\n\n\n\n提议设俱乐部周边志愿者席位，拟BNB48Club热心成员@Doctor为俱乐部周边志愿者，主要组织周边活动，参与周边制作、派发等工作。\n具体周边活动细则待活动提出，通过俱乐部理事会商议或提案确定公示执行。\n\nIt is proposed to set up volunteer seats around the club, propose @Doctor to be the volunteer around the club, mainly organizing peripheral activities and participating in peripheral production and distribution.\n\nThe detailed rules of the surrounding activities will be put forward by the activities, and will be publicized and implemented through the discussion or proposal of the club Council."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "12",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1651999504,
+      "endTime": 1652604304,
+      "ntitle": "",
+      "description": "Provide funds and start a Koge lp farming | 提供資金開設 Koge LP 流動性挖礦\n\nThe liquidity of Koge on the market has always been insufficient, and the supply of Koge has been further reduced after the initialization of DAO Staking. This not only limits the enthusiasm of new users to invest in Koge, but also makes it difficult for the Club to use the profit(BNB) to buy back Koge.\n\nIt is suggested here that the Club should build its own LP farming, and use part of the profit to reward users who provide liquidity in the Koge trading pair.\n\nIncluding:\n1. Implement an lp farming project.\n2. Authorize selected LP into farming qualifications as needed.\n3. Regularly allocate profit into the farming prize pool.\n4. The Club will not participate this farming with its own lp.\n\n市面上Koge流動性一直不足，DAO Staking退出後更是進一步縮減了Koge 供應量。這不僅限制了新用戶投資Koge的熱情，對俱樂部使用盈利的BNB回購Koge也造成了困難。\n\n在此建議，俱樂部打造自己的LP farming，使用部分盈利獎勵在Koge交易對提供流動性的用戶。\n\n具體包括：\n1. 實現一個lp farming 項目。\n2. 根據需要將選定的lp納入farming資格。\n3. 定期將盈利注入farming 獎池。\n4. 俱樂部承諾不使用自有lp參與farming。\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "34",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1664514148,
+      "endTime": 1665118948,
+      "ntitle": "",
+      "description": "我想搞点事\n\n\n    个人空闲时间较多，平时可以提供给大家一些代购服务，现申请冠名BNB48CLUB代购商店等字样在社群中广而告之，特发起社区提案表决。\n代购业务主要涉及硬件钱包、储值卡等，可通过koge担保交易代付完成交易，具体内容群组详谈。\n\nI have a lot of free time, and I can usually provide you with some purchasing services. Now I apply to be named BNB48CLUB purchasing shop  to be advertised in the community, and I hereby launch a community proposal vote.\nThe agent purchase business mainly involves hardware wallets, stored value cards, etc. The transaction can be completed through the koge guarantee agent payment, and the specific content will be discussed in detail in groups."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "19",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1657370361,
+      "endTime": 1657975161,
+      "ntitle": "",
+      "description": "BNB48 Farming parameters\n\n\nBased on https://www.bnb48.club/voting/detail/12, we've started the development of the farm.\n\nHereby I would like to propose the parameters for the first farm.\n\nToken to stake: Koge-WBNB lp on pancake swap v2, https://bscscan.com/token/0x26de6c26dd5560c181011907d8f70c202c2a29d6\nToken to earn: WBNB, https://bscscan.com/token/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c\nReward: 180 WBNB\nDuration: 90 days.\nEmission Rate:  7e-5 WBNB / block, i.e. around 2 WBNB per day.\n基于已经投票通过的提案 https://www.bnb48.club/voting/detail/12，农场的开发已经進入日程。\n\n在此給出第一個挖礦池的参数：\n\n质押的代币：Koge-WBNB lp on pancake swap v2，https://bscscan.com/token/0x26de6c26dd5560c181011907d8f70c202c2a29d6\n挖出的代幣：WBNB，https://bscscan.com/token/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c\n奖励分配：180 WBNB\n時長：90 天。\n排放率：7e-5 WBNB / block，即大約每天釋放2 WBNB。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "20",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1658049135,
+      "endTime": 1658653935,
+      "ntitle": "",
+      "description": "闲着找点事干\n\n\n提议设俱乐部周边志愿者席位，拟BNB48Club热心成员@Doctor为俱乐部周边志愿者，主要组织周边活动，参与周边制作、派发等工作。     \n      具体周边活动细则待活动提出，通过俱乐部理事会商议或提案确定公示执行。\n\nIt is proposed to set up volunteer seats around the club, propose @Doctor to be the volunteer around the club, mainly organizing peripheral activities and participating in peripheral production and distribution.\n\nThe detailed rules of the surrounding activities will be put forward by the activities, and will be publicized and implemented through the discussion or proposal of the club Council."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "27",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1662714811,
+      "endTime": 1663319611,
+      "ntitle": "",
+      "description": "俱乐部灵活投资提案-001\n提议使用俱乐部资产购入50000枚ALPACA代币。\n1、平均交易价格不应高于0.3U每枚，\n2、如提案通过七天后仍未完成交易，则中断执行不再继续。\nIt is proposed to purchase 50000 Alpaca tokens using Club assets.\n1.The average transaction price should not be higher than 0.3u per piece,\n2.If the transaction is not completed seven days after the proposal is passed, the execution will be suspended and will not be continued."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "29",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1662906205,
+      "endTime": 1663511005,
+      "ntitle": "",
+      "description": "建议规定使用公共资金二级市场投资单次不超过15000美元\n同一个币的两次投资不小于90天间隔\n\nIt is recommended that the use of public funds to invest in the secondary market does not exceed $15,000 at a time\nTwo investments of the same coin should not be less than 90 days apart"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "28",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1662904177,
+      "endTime": 1663508977,
+      "ntitle": "",
+      "description": "把公共资金从信标链撤回到智能链\nBEP-1051 由多签钱包原生质押\n提高资金去中心化安全程度\n\nWithdraw public funds from the beacon chain to the smart chain\nBEP-1051 Native staking by multisig wallets\nImprove the security of decentralization of funds"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "7",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1649693427,
+      "endTime": 1650298227,
+      "ntitle": "",
+      "description": "提案投票赞成与否时提供评论选项，增加大家的投票参与感。\n如：赞成，评论：这是个好提案…\n反对,评论：不应该这么做…因为… \n\n评论字数做一定控制，评论不上链。\n若为保障安全，不改动页面，可将提案转发至群公告，供大家参与评论。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "10",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1651052741,
+      "endTime": 1651657541,
+      "ntitle": "",
+      "description": "关于聊天挖矿的调整建议提案\n 随着社区的发展，聊天挖矿现已部署到了越来越多的TG群组中，特别是币安中文群这样的专业币圈交流群中，为提高koge曝光度打下了一定的基础。\n但在聊天挖矿部署到多个群后，明显发现官方bnb48群组出矿的几率明显下降。\n 特提议，在广而告之的基础上，一定程度上也要保障下官方群组的出矿频率，官方群组出矿率比其他群组高48%。出矿频率可适度增加，但单次出矿金额减小。\n 另bnb48_bot部署到非bnb48官方群组中，有条件的，title备注类似‘bnb48 bot’字样，便于引导新人加入bnb48官方群组。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "21",
+      "proposer": "0x2164D118329b03677710127d7878a57Db2b1edc5",
+      "startTime": 1659047564,
+      "endTime": 1659652364,
+      "ntitle": "",
+      "description": "提议 DAO 站点支持 WalletConnect 方式链接钱包\n\n完善此功能后, 可以通过扫码或者复制 wc 开头的字符串到钱包内完成授权\n\n目前站点仅支持 web3 react 方式授权, 此功能局限于浏览器插件或者钱包内置浏览器\n\n相关文档: https://docs.walletconnect.com\n\ndemo: https://example.walletconnect.org\n\n\n------------------------------------------------\n# google translate\nPropose DAO site to support WalletConnect method to link wallet\n\nAfter improving this function, you can complete the authorization by scanning the code or copying the string starting with wc into the wallet\n\nCurrently the site only supports web3 react authorization, this function is limited to browser plug-ins or wallet built-in browsers\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "2",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1648396978,
+      "endTime": 1649001778,
+      "ntitle": "",
+      "description": "Adjust BSC validator commission to around 4.8%\n\n调整验证节点费率至4.8%\n\nPropose to adjust BSC validator commission to 4.8%"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "8",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1649997122,
+      "endTime": 1650601922,
+      "ntitle": "",
+      "description": "Authorize the committee of validator commission adjustment\n允许理事会在一定范围内自由调节节点手续费\nApplicable for BSC/Kava and other validators in the future\n适用于BSC节点、Kava节点以及未来的其他节点服务。\nMin commission rate: could be as low as needed\nMax commission rate: should not exceed all other active validators\n费率下限：不做限制\n费率上限：不得调整至比其他活跃节点中费率最高者更高。\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "5",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1648738751,
+      "endTime": 1649343551,
+      "ntitle": "",
+      "description": "俱乐部提供KOGE流动性 回购了很多吧 都是解锁的"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "13",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1652376045,
+      "endTime": 1652980845,
+      "ntitle": "",
+      "description": "Reward validator stakers\nTake snapshots of validator stakers and airdrop koge to reward them regularly.\n奖励验证节点质押者\n定期对节点质押者地址进行快照，并空投koge提高积极性。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "91",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1709179141,
+      "endTime": 1709438341,
+      "ntitle": "",
+      "description": "提议终止质押lp挖取WBNB的farm，保留质押lp挖取KOGE的farm。这样进一步促进俱乐部持有的KOGE进入实质性流通\n\nThe proposal suggests terminating the farming of WBNB by staking LP tokens while preserving the farming of KOGE by staking LP tokens. This approach aims to further facilitate the substantial circulation of KOGE held by the community."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "93",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1710689772,
+      "endTime": 1710948972,
+      "ntitle": "",
+      "description": "Stake bFans/Koge lp earn Koge\n\nWe propose to launch the 48Club Farm, allowing users to stake bFans/Koge LP tokens on PancakeSwap's V2 LP token and earn Koge rewards, following the successful mapping of bnb-48 fans inscriptions to bFans tokens.\n\nIn accordance with the recommendations of Proposals 90 and 92, the committee will allocate reward funds, not exceeding an equivalent of 60 BNB per month.\n\n\n我们提议开设48Club Farm，允许用户质押bFans/Koge在PancakeSwap的V2 LP token，并获得Koge奖励，这是在bnb-48 fans铭文成功映射为bFans代币后的一项Koge 流动性激励。\n\n根据90号和92号提案的意见，理事会将拨付奖励资金，每月不超过等额60 BNB。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "90",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1709024053,
+      "endTime": 1709283253,
+      "ntitle": "",
+      "description": "60 BNB/month, the monthly savings achieved after the passage of Proposal 89, hereby I suggest to allocate into the bnb-48 Inscription Protocol ecosystem. This fund will be utilized for various purposes, including but not limited to $fans $iKoge staking.\n\n提议将89号提案通过后节省的每月60 BNB 资金投入 bnb-48 铭文协议生态，用于包括但不限于$fans $iKoge 质押奖励等用途。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "96",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1715854194,
+      "endTime": 1716113394,
+      "ntitle": "",
+      "description": "资金拨付请求： 理事会请求拨付100万 U 用于EVM mev解决方案的研究与投资。 详情请咨询理事会。\nFund request: The committee asks for approval of 1M USDT for EVM compatible MEV solution research and investment.  Please consult committee for details."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "94",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1712339322,
+      "endTime": 1712598522,
+      "ntitle": "",
+      "description": "0gas至少应该有48koge才能用，10 koge太少了"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "75",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1697520194,
+      "endTime": 1697779394,
+      "ntitle": "",
+      "description": "Proposal to Further Convert Club's BNB Income into Other Token Reserves\n\nAs of the current moment, the Club's investment portfolio includes USD*, BTC, ETH, MKR, and CRV. According to the balance sheet, there remains a significant amount of BNB in total assets.\nIn line with the principle of not putting all our eggs in one basket, I am putting forward a proposal: Each quarter, 40% of the BNB income generated by 48Club nodes will be converted into BTC, and 8% of the BNB income will be converted into ETH reserves. These conversions will be disclosed in the quarterly asset reports.\n\n关于进一步将俱乐部的BNB收入转换为其他代币储备的提案\n\n截至目前俱乐部投资标的列表已有USD*、BTC、ETH、MKR、CRV，根据资产负债表显示，总资产BNB还是有很多。\n继续本着鸡蛋不能放在一个篮子里的考量，特发起提案：将48Club节点每季度40%的BNB收入转换为BTC，8%的BNB收入转换为ETH储备，并纳入季度资产报表公布。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "95",
+      "proposer": "0x3D19577724004e495FC0434cF19D5E77978C48F9",
+      "startTime": 1713016114,
+      "endTime": 1713275314,
+      "ntitle": "",
+      "description": "关于开展推进48Club与Alpaca Finance融合提案\n\n基于社群成员建议：申请48Club展开与Alpaca Finance的融合工作，双方可以整合技术产品及相关资源，促进双方业务发展。\n现提案看看大家的意见，若提案通过，由俱乐部推进相关工作。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "81",
+      "proposer": "0x3CB5ed017E884a60b4fb0ce8d494504c9A2D8029",
+      "startTime": 1702875423,
+      "endTime": 1703134623,
+      "ntitle": "",
+      "description": "近期铭文市场火热，48club当然不会缺席。BNB-48协议作为BSC链上的优质铭文，建议对铂金会成员进行无差别空投，数量（不低于人均一个）不是重点，关键在态度。相信俱乐部成员会用koge投票来表明大家对FANS的支持，共同在铭文赛道上大干一场。\nRecently, the Ordinals market has been booming, and 48club naturally won't be absent. As a high-quality protocol on the BSC chain, the BNB-48 protocol suggests a indiscriminate airdrop to platinum club members. The quantity (not less than one per person) is not the focus; the key is the attitude. We believe that club members will use Koge voting to express everyone's support for FANS, and work together to make a splash in the runestone arena."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "77",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1698998357,
+      "endTime": 1699257557,
+      "ntitle": "",
+      "description": "Proposal for Community-Funded Customized Co-Branded Hardware Wallets\n\nDuring this virtual currency bull market, we propose that the community raises funds to customize a batch of hardware wallets for various community purposes, including promotion, events, rewards, and sales, among others. For instance:\n1. Prizes for group activities.\n2. Participation rewards in voting (participants with 480 or more votes qualify for a lottery).\n3. Club members receive appropriate subsidies for wallet purchases.\n4. Other scenarios, etc.\n\nThe customizable hardware wallet models available are as follows:\n1. Onekey Classic: $599 per unit, with a minimum order of 100 units, offering a 5% discount, and it can connect to a mobile phone via Bluetooth.\n2. Onekey Mini: $199 per unit, with a minimum order of 80 units, and no discounts apply. It must be used in conjunction with a PC.\nPayments can be made in virtual currencies.\n\n是否出资定制联名硬件钱包的提案\n\n值此虚拟货币小牛期间，提案社区出资定制一批硬件钱包，可用于社区宣传、活动、奖励以及销售等场景。\n例如：\n1、群活动奖品；\n2、参与投票奖品（投票数满480参与抽奖）；\n3、俱乐部适当补贴下会员购买；\n4、其他场景等。\n可定制硬件钱包型号有：\n1、onekey classic 599元/台，100台起订，95折，可蓝牙连接手机使用。\n2、onekey mini 199元/台，80台起订，美丽不打折，需与PC端配合使用。\n可虚拟货币支付。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "87",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1705311916,
+      "endTime": 1705571116,
+      "ntitle": "",
+      "description": "关于向48铂金会员空投BNB-48铭文 $fans 的提案\n\n在BSC区块高度35348488的快照时，对48铂金会员的钱包地址进行空投，每个地址将获得5 $fans。\n\n对于单一地址关联多个铂金会员的情况，将采用不重复发放的原则。\n\n对于已经满足48er NFT持仓空投条件的地址，将不发放本次空投。\n\n对于没有绑定有效钱包地址的链下铂金会员，将不发放本次空投。\n\n铂金会员身份说明详见\nhttps://docs.48.club/dao/koge-token/platinum-benefit\n\n$fans的信息可以在以下链接中查阅俱乐部网页 Inscriptions 部分，这是根据BNB-48协议部署的第一个铭文。\n\nBSC区块高度35348488对应的UTC时间预计为 Thu Jan 18 2024 09:08:59"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "86",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1703612533,
+      "endTime": 1703871733,
+      "ntitle": "",
+      "description": "关于向48铂金会员空投BNB-48铭文 $fans 的提案\n\n提案内容为，在BSC区块高度34848000的快照时，对48铂金会员的钱包地址进行空投，每个地址将获得15 $fans。\n\n对于单一地址关联多个铂金会员的情况，将采用不重复发放的原则。\n\n对于已经满足48er NFT持仓空投条件的地址，将不发放本次空投。\n\n对于没有绑定有效钱包地址的链下铂金会员，将不发放本次空投。\n\n铂金会员身份说明详见\nhttps://docs.48.club/dao/koge-token/platinum-benefit\n\n$fans的信息可以在以下链接中查阅俱乐部网页 Inscriptions 部分，这是根据BNB-48协议部署的第一个铭文。\n\nBSC区块高度34848000对应的UTC时间预计为Dec 31, 2023，周日，22:58:50。\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "73",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1693974099,
+      "endTime": 1694233299,
+      "ntitle": "",
+      "description": "KOGE有礼交易提案\n\n为促进koge链上交易，现提议发起\"koge有礼交易\"活动。\n具体细则可由俱乐部理事会商榷推出。\n\n链上交易温馨提醒：使用 https://1gwei.48.club  RPC，轻松摆脱链上抢跑。\n\nIn order to promote transactions koge, it is now proposed to launch the \"koge gifted transaction\" activity.\nSpecific details can be discussed and introduced by the club board of directors.\n\nReminder for transactions: Use https://1gwei.48.club RPC to easily get rid of rushing."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "70",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1691416533,
+      "endTime": 1691675733,
+      "ntitle": "",
+      "description": "Expand the original investment target USDT of 48Club's basic holdings to \"USD and its stablecoins that already have spot trading pairs on the main website of binance.com\"\n\n将48Club 基础持仓的原投资标的USDT拓展为“已在binance.com主站有现货交易对的美元及其稳定币”"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "83",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1702955605,
+      "endTime": 1703214805,
+      "ntitle": "",
+      "description": "向KOGE持有者空投fans代币\n\n1. 资金来源：俱乐部控制的地址已经持有的fans代币，或以自由资金收购。\n\n2.空投对象：对bnb-48协议有突出贡献的社区开发者、议员(48er NFT持有者)、铂金俱乐部会员、一般KOGE 持有者（DAO Staker）。请注意48Farm 挖矿不计入空投资格，因为已经享受了5%-7%的年化超额收益。\n\n其中，社区开发者名单由理事会拟定；议员以48er持仓名单为准；铂金俱乐部会员以KOGE持仓量门槛为准，具体规则请参考俱乐部文档，以链下钱包（Telegram余额）获取铂金俱乐部资格的，需要在电报登记BSC钱包地址才能参加，否则视为主动放弃。\n\n3. 空投金额：开发者、议员、铂金会员、其他KOGE持有者获得空投数量依次递减。具体金额由理事会决议实施。其中同一钱包地址可以以不同原因获得多次空投，但不以同一原因获得多次空投。例如，社区开发者同时持有48er NFT代币，可以获得两种空投；持有多个48er NFT代币，只能获得一次该种空投；无论是否有资格领取议员空投获铂金空投，均可领取给一般KOGE持有者/质押者的空投。\n\n4. 如果资金不足，像一般DAO staker与KOGE持有者的空投可能以抽奖形式举行。\n\n5. 所有持仓快照提前通过 @48club_official  公布快照高度。\n\n6. 授权理事会可在本决议通过后酌情处理规则变动，无需另行投票表决。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "80",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1702133950,
+      "endTime": 1702393150,
+      "ntitle": "",
+      "description": "Fee is better than free\n\n近期铭文概念火热，为避免不必要的资源浪费，现提议更改该规则：\n原地址持有1-10个KOGE就能使用RPC：https://1gwei.48.club gas费打折服务的，调整为该地址需支付1koge才能使用gas费打折服务。\n该调整一是为了避免了人们盲目跟风，二是给真正需要的人提供更好的服务，三是让48club有所回报得以更好的发展。\n\nThe concept of inscriptions has been gaining popularity recently. To avoid unnecessary resource wastage, a proposal is now made to modify the following rule:\n\nThe original rule allowed users with 1-10 KOGE in their address to use the RPC (https://1gwei.48.club) gas fee discount service. The proposed adjustment is to change this requirement to having 1 koge payment for the address to access the gas fee discount service.\n\nThis adjustment serves three purposes: firstly, to prevent people from blindly following trends; secondly, to provide better services to those who truly need them; and thirdly, to enable 48club to give back and facilitate better development.\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "76",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1697805174,
+      "endTime": 1698064374,
+      "ntitle": "",
+      "description": "Subscribe to Premium Plan for @48club_official twitter account\nIt may cost around 120 USD annually, subject to Elon's own opinion"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "72",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1691692269,
+      "endTime": 1691951469,
+      "ntitle": "",
+      "description": "Add $CRV into \"48Club Core Portfolio\" holdings and add fund equivalent to 16666.67 USD to the portfolio\nLatest holding list: USD* BTC ETH MKR CRV(to be decided)  \n\n增加 $CRV   『48Club 基础持仓』 投资标的，并注资等值16666.67 美元\n截止目前的投资标的列表：USD* BTC ETH MKR CRV(本次治理目标)  "
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "65",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1687685457,
+      "endTime": 1687944657,
+      "ntitle": "",
+      "description": "关于48club灵魂代币的提议\n    现提议48club推出类似币安灵魂代币(BAB)的NFT，优化现行1gwei的koge持仓条件，持有该NFT用于替代原地址需持有1~10koge的要求。这么做可以让更多的人了解到48club，另外灵魂代币可用于后续合作项目方空投的资格验证等功能。\n\n    币安灵魂代币具有不能转让、不能交易特点，48club灵魂代币也采用该模式。花费1koge铸造1枚48灵魂代币，满足使用1gwei的基本条件。铸造所耗koge，纳入社区收入，用于社区的发展建设。广阔天地，祝48club大有可为。\n\nIt is proposed that 48club introduce NFTs similar to Binance's Soul Token (BAB), optimizing the current koge holding requirements for 1 gwei. Holding this NFT will serve as an alternative to the original address's requirement of holding 1-10koge. By this, more people can discover the 48club. Additionally, the Soul Token can be used for qualification verification for future cooperative project airdrops.\n\nBinance's Soul Token possesses characteristics of non-transferability and non-tradability, which 48club's Soul Token will also adopt. By spending 1 koge, one can mint a 48 Soul Token, satisfying the basic condition of using 1 gwei. The koge consumed in the minting process will contribute to the community's income，be used for community development and construction. With a vast world ahead, I wish 48club great success."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "66",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1689944016,
+      "endTime": 1690203216,
+      "ntitle": "",
+      "description": "提议设立48Club基础持仓 (48Club Core Portfolio)，选取若干除BNB以外的主流Crypto资产类别，其中稳定币不超过一种。\n\n首期投入等值50000 USD 的资金，平均投入BTC ETH USDT。\n\n后续授权理事会：\n1. 每季度可一次性新增资金若干，金额不超过当季俱乐部净资产增幅的10%。\n2. 对价格变化导致的资产比例失衡进行再平衡，操作后各资产占比应当回归平均。\n3. 增加或剔除资产种类。\n\nProposal for Establishing 48Club Core Portfolio:\n\nWe propose creating a core portfolio for 48Club, consisting of several mainstream Crypto assets, excluding BNB, with a maximum of one stablecoin.\n\nThe initial investment will be $50,000 USD, evenly distributed among BTC, ETH, and USDT.\n\nSubsequent authorizations for the Comittee:\n\n1. Quarterly, the club may add a one-time investment, not exceeding 10% of the club's net asset increase for that quarter.\n2. Rebalancing the asset allocation in case of imbalances caused by price fluctuations, ensuring that each asset returns to its average proportion after the operation.\n3. Adding or removing asset from authorized assets list."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "30",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1663167888,
+      "endTime": 1663772688,
+      "ntitle": "",
+      "description": "俱乐部在Biswap提供Koge流动性\nThe Club Provide Koge liquidity at Biswap"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "67",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1690036566,
+      "endTime": 1690295766,
+      "ntitle": "",
+      "description": "Suspend the KOGE single-currency farm and utilize the saved funds to contribute to KOGE LP (Liquidity Provider) farm, aiming to further incentivize KOGE liquidity.\n\n提議暫停KOGE 單幣農場，將節省下來的資金投入KOGE LP農場，以進一步鼓勵KOGE流動性。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "63",
+      "proposer": "0x48A6b6746341a99141D77a717C5400392c65fc8D",
+      "startTime": 1681283025,
+      "endTime": 1681542225,
+      "ntitle": "",
+      "description": "为铂金群接入chatGPT机器人问答服务 ｜ Integrate chatGPT chatbot Q&A service for the platinum group\n\n\n为铂金群接入chatGPT机器人问答服务，并允许群成员私聊机器人。要求保证API质量，建议使用ChatGPT官方提供的付费订阅服务，以保证API质量和稳定性，已证实免费的订阅服务无法满足高频次的对话请求。\nIntegrate chatGPT chatbot Q&A service for the platinum group and allow group members to privately chat with the bot. It is required to ensure API quality, and it is recommended to use the paid subscription service provided by chatGPT official to ensure API quality and stability as it has been confirmed that free subscription service cannot meet high-frequency dialogue requests."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "62",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1681273577,
+      "endTime": 1681532777,
+      "ntitle": "",
+      "description": "让DAO社区做点事\n\n受Arbitrum Blacklist Systematic Scammers提案启发，48club可以建立一份bsc的黑名单警示标记目录，黑名单目录可以由受害者提供的诈骗钱包地址、受骗过程及其他相关信息组合展示，由社区人员参与维护共建，也可邀请bsc官方人员来互动参与维护该目录，让节点的魅力充分发挥起来，促进bsc链上的健康可持续发展。\n\nInspired by Arbitrum Blacklist Systematic Scammers proposal, 48club can build a blacklist warning mark directory of bsc. The blacklist directory can be displayed by a combination of fraudulent wallet address, scamming process and other related information provided by victims, community members can participate in maintaining the common construction, and official bsc personnel can also be invited to interact and participate in maintaining the directory, so that the charm of the nodes can be given full play to promote the healthy and sustainable development on the bsc chain.\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "60",
+      "proposer": "0x7f5372735e5F5338582D1F32A586E4b423Ad6999",
+      "startTime": 1677637009,
+      "endTime": 1677896209,
+      "ntitle": "",
+      "description": "Adjust the 48er increase step\n\nFor more 48er adoption,proposal the increase step change to 4.8Koge from 4.8% when mint next 48er NFT"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "58",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1673516604,
+      "endTime": 1673775804,
+      "ntitle": "",
+      "description": "让鸡蛋再放一个篮子\n\n过去的一年，币圈经历了两大波折，一是LUNA骗局，二是FTX破产。一路走来，谁也不知道明天会怎样。\n特发起提案：48Club每月4.8%的BNB收入转换为USDC储备，并纳入季度资产报表公布。\nVote:4.8% of BNB revenue per month is converted into USDC reserves and included in the quarterly asset statement."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "33",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1663557134,
+      "endTime": 1664161934,
+      "ntitle": "",
+      "description": "俱乐部灵活投资提案-002\n1、提议使用俱乐部资产购入14800U BTC，\n2、交易价格不应高于20480U每枚，\n3、如提案通过七天后仍未完成交易，则中断执行不再继续。\n1.It is proposed to use the club's assets to purchase 14800U BTC,\n2.The transaction price should not be higher than 20480U  per piece,\n3.If the transaction is not completed seven days after the proposal is passed, the execution will be suspended and will not be continued."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "44",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1668137439,
+      "endTime": 1668742239,
+      "ntitle": "",
+      "description": "Start a KOGE Vault by creating a stake-koge-earn-wbnb farm, allocate equal amount of stake-lp-earn-wbnb farm but with a lower priority i.e. if the Club has difficulty provides fund for both farms, the stake-lp farm gets priority over stake-koge farm.\n\n提議開設一個KOGE單幣池，即質押KOGE獲得WBNB獎勵的farm。每季度分配資金額度與質押lp獲得wbnb的farm相同，但優先級更低。具體來說，如果將來俱樂部的資金不足以同時滿足所有farm注入需求，則優先注入lp farm，有剩餘資金再考慮koge單幣farm。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "59",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1677287206,
+      "endTime": 1677546406,
+      "ntitle": "",
+      "description": "允许在同一账户在单个区块发送多笔gas打折交易\nAllow multiple gas discount transactions from one account all in one block\n\n目前，KOGE的一大亮点在于gas费打折，这是BSC上唯一一家。但gas费打折涉及到调整gas price和gas limit，一般用户不会在钱包里调整。对于科学家来说，通常需要在一个区块里进行多次交易，如果采用48rpc，会导致进入黑名单。\n为了提升KOGE对科学家的吸引力，提议允许在同一账户在单个区块发送多笔gas打折交易，但需要持有更多的KOGE。\n\nOne unique advantage of KOGE is gas discount transaction. However, to enjoy the discount, a user need to adjust gas price and gas limit manually in the wallet, which is hardly done by a user without deep solidity knowledge. For a crypto quant, multiple transactions in one block is necessary, which is not allowed by 48rpc.\nIn order to encourage more crypto quants to hold KOGE, we should allow multiple gas discount transactions from one account all in one block, but it requires crypto quants to hold more KOGE.\n---This voting from @tinyhodler"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "42",
+      "proposer": "0xDd9db07eCb20B9eF5FffdA33588c9ac9d48a7CA7",
+      "startTime": 1667121388,
+      "endTime": 1667726188,
+      "ntitle": "",
+      "description": "治理池补充奖励规则修正\nvoting pool add bonus rule amendment\n\n基于36、37、38、39、40号提案，24号提案已不适用，现提案取消。\n原24号内容:仅在治理池余额小于9,999 KOGE时补充奖励。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "41",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1667118994,
+      "endTime": 1667723794,
+      "ntitle": "",
+      "description": "Adjust KOGE holding threshold for gas discount to 1 KOGE\n调整持仓KOGE gas费打折的门槛到 1 KOGE"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "38",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1665368129,
+      "endTime": 1665972929,
+      "ntitle": "",
+      "description": "关于增加minReward的提案\n\n提高minReward，调整原48为480 KOGE。\n\nProposal to increase the amount of minReward\n\nIncrease the amount of minDeposit 48 KOGE to 480 KOGE."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "49",
+      "proposer": "0xB265A4B2136F2C5343cbE8DCe74dBDCd8786aE1E",
+      "startTime": 1669307918,
+      "endTime": 1669912718,
+      "ntitle": "",
+      "description": "Increase the fee rate for bnb48 validator nodes to 10%"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "47",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1668745949,
+      "endTime": 1669350749,
+      "ntitle": "",
+      "description": "Propose to make the case in https://www.bnb48.club/voting/detail/32 a general rule that allow to \"burn\" asset, as recorded in LitePaper, by putting them into a BNB48 farm instead of really burning.\n\n建议在 https://www.bnb48.club/voting/detail/32 中制定一个通用规则，允许“销毁”资产，如 LitePaper 中所记录的那样，将资产放入 BNB48 农场而不是真正销毁。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "53",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1670328916,
+      "endTime": 1670588116,
+      "ntitle": "",
+      "description": "Lower unstake delay from 604800 to 0 (seconds) i.e. user can unstake as soon as just staked\n\n下调解质押冻结时间至0，即用户质押后立刻可以解质押。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "22",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1659964068,
+      "endTime": 1660568868,
+      "ntitle": "",
+      "description": "Gossip Mining Bonus | 聊天挖矿加成\n\n提议Telegram聊天挖矿根据账户持有KOGE数量获得加成，最高不超过原始出矿的两倍。\n\nUser can get a bonus of gossip mining based on the number of KOGE held by the account, up to twice the original mining amount."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "25",
+      "proposer": "0xB9A19aa00a72bf9Ef3Da38F19A1e550945d81a41",
+      "startTime": 1662637523,
+      "endTime": 1663242323,
+      "ntitle": "",
+      "description": "增加流动性挖矿奖励至3-4bnb/天"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "54",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1670507204,
+      "endTime": 1670766404,
+      "ntitle": "",
+      "description": "Stop gas discount ?\n\nAccording to a pm from binance staff checkus to Ian, quoted below, the 'BNB Chain foundation' asks BNB48 club to stop accept the KOGE gas fee discount as soon as possible, other wise they \"might need to review the level of technical support  we provide you and your partner\".\n\nShould we stop the discount or not? \n\n* discount rules: https://docs.bnb48.club/buidl/infrastructure/bsc-validator/enhanced-rpc\n* pm content:\n\"Hey Ian, Hope you are fine. \n\nWe had a lot of discussion internally and we believe that this service is going against all the other validators. \n\nEveryone is trying to keep the gwei at 5 and are not accepting any lower gwei. Private TX is a different topic that we are fine with. \n\nWe would appreciate if you could stop accept the KOGE gas fee discount as soon as possible.\"\n\n\"Hey Ian, \n\nThanks for your feedback regarding the KOGE token utility. As BNB Chain foundation, We would like to encourage you to run a BNB48 Dao vote to adjust this setting. If the DAO vote is against changing this settings we might need to review the level of technical support we provide you and your partner.\""
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "24",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1662046761,
+      "endTime": 1662651561,
+      "ntitle": "",
+      "description": "Only contribute to voting pool when KOGE balance is lower than 9,999\n仅在治理池余额小于9,999 KOGE时补充奖励"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "32",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1663338722,
+      "endTime": 1663943522,
+      "ntitle": "",
+      "description": "Withdraw lp to start new farm as burning\n撤回LP用于开设代替销毁的farm\n\nPreviously in the passed proposal https://www.bnb48.club/voting/detail/6, we suspended quarterly burns and instead provided liquidity.\n\nWith the recent launch of Farm, the liquidity of KOGE has improved significantly. Therefore, it is recommended to withdraw the liquidity of KOGE provided by the club and resume the quarterly burn.\n\nIn addition, based on the https://www.bnb48.club/voting/detail/26 proposal, it is now proposed to open a new farm as a new destruction scheme, and the withdrawn lp funds can be used as the initial funds of the farm.\n\nStaking tokens: Koge-WBNB lp on pancake swap v2\nReward Token: KOGE\nAmount of Rewards: Equivalent to 180 WBNB\nDuration: 90 days (time set when first turned on)\nEmission rate: KOGE equivalent to 2 BNB per day\n\n* Clubs should spend 180 BNB quarterly to buy KOGE and put KOGE into this pool. Since the emission rate is fixed once a farm is opened, the duration of the farm may vary from quarter to quarter.\n\n此前在已经通过的提案 https://www.bnb48.club/voting/detail/6 中，我们暂停了季度销毁代之以提供流动性。\n\n近期随着Farm的推出，KOGE流动性有了肉眼可见的好转，故此建议撤回俱乐部提供的KOGE流动性，恢复季度销毁。\n\n另，基于 https://www.bnb48.club/voting/detail/26 提案，建议开设新Farm的方式作为一种新的销毁方案，而撤出的lp资金可作为farm的初始资金。\n\n质押的代币：Koge-WBNB lp on pancake swap v2\n奖励代币：KOGE\n奖励数量：等值 180 WBNB\n持续时间：90 天 (首次开启时设置的时长)\n排放率：每天等值2 BNB的KOGE\n\n* 俱乐部每季度应花费 180 BNB 购买 KOGE，并将 KOGE 放入此池中。 由于Farm一经开设排放率是固定的，因此每季度的Farm持续时间可能会有所不同。\n"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "17",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1656267765,
+      "endTime": 1656872565,
+      "ntitle": "",
+      "description": "Farming parameters\n\nBased on https://www.bnb48.club/voting/detail/12, we've started the development of the farm.\n\nHereby I would like to propose the parameters for the first farm.\n\nToken to stake: Koge-WBNB lp on pancake swap v2, https://bscscan.com/token/0x26de6c26dd5560c181011907d8f70c202c2a29d6\nToken to earn: WBNB, https://bscscan.com/token/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c\nReward: 200 BNB / 90 days.\nEmission Rate:  200 BNB / 90 days.\n-------------\n基于已经投票通过的提案 https://www.bnb48.club/voting/detail/12，农场的开发已经進入日程。\n\n在此提議ubge挖礦池的参数：\n\n质押的代币：Koge-WBNB 交易對在pancake swap v2 的lp，https://bscscan.com/token/0x26de6c26dd5560c181011907d8f70c202c2a29d6\n挖出的代幣：WBNB，https://bscscan.com/token/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c\n奖励分配：200 BNB / 90 天。\n排放率：200 BNB / 90 天，即每次分配的獎勵在90天內釋放完畢。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "15",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1652882986,
+      "endTime": 1653487786,
+      "ntitle": "",
+      "description": "提議斥資為鉑金會成員提供免費網絡服務\nProposal to spend free internet service for Platinum members\n\n包括但不限於全球服務器資源採購、虛擬專有網建設、自動分流策略、智能客戶端建設等等\n\nIncluding but not limited to global server resource procurement, virtual private network construction, automatic distribution strategy, intelligent client construction, etc.\n\n授權理事會在每月3000 USD以內自行採購部署並向鉑金會成員分發上述福利，無需另行表決。\nAuthorize the council to purchase, deploy and distribute the above benefits to Platinum members within USD 3,000 per month without further voting. But expenses should be reflected in the financial statements."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "14",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1652519094,
+      "endTime": 1653123894,
+      "ntitle": "",
+      "description": "KOGE与各位大哥不得不说的故事\n\n        自KOGE链上质押上线以来，两个月的时间，KOGE链上质押已达1,660,080枚，KOGE总供应量现为3,441,121枚。链上质押数已超过总供应量的48%，质押KOGE的数量离不开各位BNB48成员的贡献，尤其是几位KOGE鲸鱼的大力支持。\n        随着几位鲸鱼的质押入驻，无形中对原有提案机制带来一定的冲击。原提案所需Quorum投票数为提案时质押数量的48%，已本次提案为例，本次提案Quorum Koge数需达到796,838.4枚。\n        虽然提案发起会有社区公告通知，但在投票期间难免会有几位大哥未留意、无参与的情形。故提案：将每次提案所需Quorum投票数调整为提案时质押数量的33%，方便后续提案的有效进展及表决。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "11",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1651905172,
+      "endTime": 1652509972,
+      "ntitle": "",
+      "description": "koge持仓分红提案\n\n    为激励新成员加入bnb48club大家庭，成为koge持仓的一份子，现提案对链上koge持仓地址进行持仓分红，初步设定按比例分发俱乐部月收益部分bnb。\n拟定规则：\n1、持仓小于48koge的不计算在内；\n2、统计方式：从通知持仓返利起，每日不定时快照，记录单个地址koge月平均持仓（每日快照持仓之和/30），单个地址koge月平均持仓/地址koge月平均持仓总数计算比例。 按照上述公式计算奖励，每月结算发放。\n3、俱乐部月收益部分bnb数量，根据俱乐部实际收益，理事会决定动态调整。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "6",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1649074882,
+      "endTime": 1649679682,
+      "ntitle": "DAO迁移中止计划外回购季度燃烧方式的修改及其他提议",
+      "description": "https://telegra.ph/DAO%E8%BF%81%E7%A7%BB%E4%B8%AD%E6%AD%A2%E8%AE%A1%E5%88%92%E5%A4%96%E5%9B%9E%E8%B4%AD%E5%AD%A3%E5%BA%A6%E7%87%83%E7%83%A7%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E5%85%B6%E4%BB%96%E6%8F%90%E8%AE%AE-04-04\n\n1. 自2022年4月起，不再使用Telegram 链下DAO，改用基于KOGE Staking的链上DAO。\n2. 采纳已经投票通过的提案 https://www.bnb48.club/voting/detail/1 ， 废除https://t.me/bnb48_gov/14 第三条约定的理事必须持有10,000 链下KOGE的要求。\n3. 约定俱乐部不会使用持有的KOGE参与Staking、Vote等。\n4. 采纳已经投票通过的提案 https://www.bnb48.club/voting/detail/3 ，约定俱乐部每季度向DAO激励池注入10,000 KOGE，除非遇到重大功能性、安全性事件另行决议。\n5. 俱乐部累积已经执行计划外回购约25万KOGE，目前市场上KOGE卖盘稀少，实际流动性双向金额不足50 BNB，故中止 https://t.me/bnb48_gov/17 约定的计划外回购计划。\n6. 参考投票中但未给出清晰方案的提案 https://www.bnb48.club/voting/detail/5 ，暂停季度销毁计划，改为定期拨付资金永久提供流动性。待市场流动性好转后，另行决议恢复季度销毁计划。\n\n1. From April 2022, the Telegram off-chain DAO will no longer be used, and the on-chain DAO based on KOGE Staking will be used instead.\n2. Adopt the already voted proposal https://www.bnb48.club/voting/detail/1 and repeal https://t.me/bnb48_gov/14 Article 3 which requires directors to hold 10,000 off-chain KOGE.\n3. The club will not use the KOGE it holds to participate in Staking, Vote, etc.\n4. Adopting the proposal that has been voted on https://www.bnb48.club/voting/detail/3, it is agreed that the club will allocate 10,000 KOGE into the DAO incentive pool every quarter unless it encounters major functional and security events.\n5. The club has executed an unplanned repurchase of about 250,000 KOGE. Currently, there are few KOGE sales in the market, and the actual two-way amount of liquidity is less than 50 BNB. Therefore, the unplanned repurchase plan agreed at https://t.me/bnb48_gov/17 will be suspended. \n6. Referring to the proposal in the voting but not giving a clear plan https://www.bnb48.club/voting/detail/5 , suspend the quarterly burning plan, and change to regular allocation of funds to permanently provide liquidity. After the market liquidity improves, a separate decision could be made to resume the quarterly burn plan."
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "9",
+      "proposer": "0x3847100431049Be057e8Cc5e1CAB8A13B548AA88",
+      "startTime": 1650338919,
+      "endTime": 1650943719,
+      "ntitle": "",
+      "description": "关于提高NFT购买积极性的提案-1\n        现NFT铸造者每铸造1枚NFT，需销毁一定数量的koge，销毁的这些koge就彻底没有了，难免给大家带来一种心理落差。\n        为提高大家购买积极性，现提案：购买NFT时花费销毁的koge，算在本人提案时的基本投票数里。以此作为激励，进而提高大家购买NFT积极性及提案热情。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "4",
+      "proposer": "0xB9A19aa00a72bf9Ef3Da38F19A1e550945d81a41",
+      "startTime": 1648430878,
+      "endTime": 1649035678,
+      "ntitle": "",
+      "description": "建议在电报群提供 累计销毁、收入查询入口，直观展示。不经常水群可能都错过这些信息了。"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "1",
+      "proposer": "0x48A6b6746341a99141D77a717C5400392c65fc8D",
+      "startTime": 1648387739,
+      "endTime": 1648992539,
+      "ntitle": "",
+      "description": "修改KOGE链下治理规则，包含但不限于：铂金群/理事会门槛。\n鼓励用户将链下koge转移至链上参与DAO\n\nModify KOGE's off-chain governance rules, including but not limited to: platinum group/committee threshold.\nEncourage users to move off-chain koge to on-chain to participate in DAO"
+  },
+  {
+      "address": "0x71E4407ba985d6a08c637E91FC0AA3721B456F3f",
+      "proposalId": "3",
+      "proposer": "0xda4Ee24723cCf8F7Ad840Ce4647049F91fF664FE",
+      "startTime": 1648397456,
+      "endTime": 1649002256,
+      "ntitle": "",
+      "description": "季度冗余盈利不全部销毁，而是分配一定比例注入DAO激励池。\n\nInstead of burning all, put a portion of quarterly redundant profit into DAO reward pool."
+  }
+]
