@@ -87,9 +87,3 @@ export const GovSetFilterContext = createContext<{
   setClaimable: () => {
   },
 })
-
-export const GovListContext = createContext<{
-  list: any[],
-}>({
-  list: [],
-})
