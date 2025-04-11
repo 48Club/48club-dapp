@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { CheckCircleFilled, CloseCircleFilled, FrownFilled, SmileFilled } from '@ant-design/icons'
 import Label from 'components/Label'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +18,43 @@ export const ResultSectionView = ({ info }: any) => {
   const { t } = useTranslation()
   const { againstVotes, forVotes, state, quorum, totalStakeAtStart, loading } = info
   const quorumBN = new BigNumber(quorum).div(TEN_POW(4)).times(totalStakeAtStart)
+  console.log(forVotes,againstVotes, 'quorum', quorumBN.div(0.8).div(TEN_POW(18)).toNumber())
+  const quorumNormal = new BigNumber(quorumBN).div(TEN_POW(18))
+  const totalVotesNeeded = quorumBN.div(0.8).div(TEN_POW(18))
+  
+  const totalVotes = new BigNumber(forVotes + againstVotes)
+  const isExceedTotal = totalVotes.gt(totalVotesNeeded)
+
+  const [forVotesPercent, againstVotesPercent] = useMemo(() => {
+    if (totalVotes.eq(0)) {
+      return [0, 0]
+    }
+    
+    if (isExceedTotal) {
+      // 如果总票数超过了需求，计算相对比例然后分配98%
+      const forRatio = new BigNumber(forVotes).div(totalVotes)
+      const againstRatio = new BigNumber(againstVotes).div(totalVotes)
+      console.log(forRatio.toNumber(), againstRatio.toNumber())
+      // 按照投票比例分配98%
+      const forPercent = forRatio.times(98).toNumber()
+      const againstPercent = againstRatio.times(98).toNumber()
+
+      return [forPercent, againstPercent]
+    } else {
+      // 如果没超过，直接计算相对于totalVotesNeeded的比例
+      const forPercent = new BigNumber(forVotes)
+        .div(totalVotesNeeded)
+        .times(100)
+        .toNumber()
+      
+      const againstPercent = new BigNumber(againstVotes)
+        .div(totalVotesNeeded)
+        .times(100)
+        .toNumber()
+      console.log(forPercent, againstPercent)
+      return [forPercent, againstPercent]
+    }
+  }, [forVotes, againstVotes, totalVotesNeeded])
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Spin spinning={loading}>
@@ -68,8 +106,25 @@ export const ResultSectionView = ({ info }: any) => {
               </div>
             </div>
           </div>
+          <div className="w-full h-6 bg-gray-200 relative">
+            <div className="absolute left-0 top-0 h-full flex w-full bg-[#EEF2F6]">
+              <div 
+                className="h-full bg-[#FF590066] absolute" 
+                style={{ width: `${80}%` }} 
+              />
+              <div 
+                className="h-full bg-[#ef2b2b]" 
+                style={{ width: `${againstVotesPercent}%` }} 
+              />
+              <div 
+                className="h-full bg-[#08c849]" 
+                style={{ width: `${forVotesPercent}%` }} 
+              />
+            </div>
+          </div>
         </div>
       </Spin>
     </div>
   )
 }
+
