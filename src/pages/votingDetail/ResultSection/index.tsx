@@ -106,10 +106,19 @@ export const ResultSectionView = ({ info }: any) => {
               </div>
             </div>
           </div>
+          <div 
+            className="h-[10px] bg-black mt-2"
+            style={{ 
+              width: `${againstVotesPercent + forVotesPercent}%`,
+              borderTop: '1px solid black',
+              borderLeft: '1px solid black',
+              borderRight: '1px solid black',
+            }}
+          />
           <div className="w-full h-6 bg-gray-200 relative">
             <div className="absolute left-0 top-0 h-full flex w-full bg-[#EEF2F6]">
               <div 
-                className="h-full bg-[#FF590066] absolute" 
+                className="h-full bg-[#FF5900] absolute z-[-1]" 
                 style={{ width: `${80}%` }} 
               />
               <div 
