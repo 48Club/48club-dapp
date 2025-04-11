@@ -1,7 +1,7 @@
 import { BSC, BSCTestnet, ChainId } from '@usedapp/core'
 
-export let CHAIN_ID = ChainId.BSC
-// export let CHAIN_ID = ChainId.BSCTestnet
+// export let CHAIN_ID = ChainId.BSC
+export let CHAIN_ID = ChainId.BSCTestnet
 
 export const CHAIN_ID_HEX = '0x' + CHAIN_ID.toString(16)
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'

@@ -1,19 +1,19 @@
 import { ChainId } from '@usedapp/core'
 import { CHAIN_ID } from './env'
 
-export const START_BLOCK_NUMBER = 16397000
-// export const START_BLOCK_NUMBER = 49989989
+// export const START_BLOCK_NUMBER = 16397000
+export const START_BLOCK_NUMBER = 49989989
 
 export const ZeroAddress = '0x0000000000000000000000000000000000000000'
 
 export const KogeAddress = {
   [ChainId.BSC]: '0xe6df05ce8c8301223373cf5b969afcb1498c5528',
-  [ChainId.BSCTestnet]: '0xAA2b984b64d178258c865ADef6a01e5272c30283',
+  [ChainId.BSCTestnet]: '0x52d7ab01f689b9cbe9eef96ae6812df3c5a41090',
 }[CHAIN_ID as number]
 
 export const StakingAddress = {
   [ChainId.BSC]: '0xa31F6B577704B4622d2ba63F6aa1b7e92fe8C8a9',
-  [ChainId.BSCTestnet]: '0x4D481fB79a22759c0Dbc0deB8d8DcA8C2F7B45EA',
+  [ChainId.BSCTestnet]: '0x242bdc5511bA662ec0CAe196d89Ed09810Aff625',
 }[CHAIN_ID as number]
 
 export const NftAddress = {
