@@ -31,22 +31,17 @@ export default function useGovInfo() {
     (async () => {
       const titles = await (await fetch('/static/voting.title.json')).json()
       const createdFilter = govContractNewReadonly.filters.ProposalCreated(null, null)
-      const events = await govContractNewReadonly.queryFilter(createdFilter, START_BLOCK_NUMBER, START_BLOCK_NUMBER)
+      const events = await govContractNewReadonly.queryFilter(createdFilter, START_BLOCK_NUMBER)
       const rows = events.map(i => ({
         address: i.address?.toString(),
         proposalId: i.args?.proposalId?.toString(),
         proposer: i.args?.proposer?.toString(),
         startTime: i.args?.startTime?.toNumber(),
         endTime: i.args?.endTime?.toNumber(),
-        ntitle: (() => {
-          const _tmp_id = i.args?.proposalId?.toString()
-          if (titles[_tmp_id]) {
-            return titles[_tmp_id]
-          }
-          return ''
-        })(),
+        ntitle:i.args?.title?.toString(),
         description: i.args?.description?.toString(),
       }))
+      // setRecords(rows.reverse())
       setRecords(rows.reverse().concat(oldVotes))
     })()
   }, [govContractReadonly])
