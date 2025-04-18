@@ -4,6 +4,7 @@ import { CHAIN_ID } from './env'
 export const START_BLOCK_NUMBER = 16397000
 // export const START_BLOCK_NUMBER = 49989989
 
+
 export const ZeroAddress = '0x0000000000000000000000000000000000000000'
 
 export const KogeAddress = {
