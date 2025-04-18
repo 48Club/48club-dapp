@@ -61,5 +61,7 @@
   "quorum_vote": "有效票数",
   "interim_result_for": "当前赞同总票数大于总票数的{{forVotesLevel}}，提案进展为赞同。",
   "interim_result_against": "当前赞同总票数小于总票数的{{forVotesLevel}}，提案进展为反对。",
-  "away_from_valid_vote_threshold": "距离有效票数还需要KOGE"
+  "away_from_valid_vote_threshold": "距离有效票数还需要KOGE",
+  "still_needed": "还需要",
+  "goal": "目标"
 }

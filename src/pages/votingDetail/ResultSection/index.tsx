@@ -75,7 +75,7 @@ export const ResultSectionView = ({ info }: any) => {
         #DC6803 2px,
         #fff 2px,
         #fff 4px)`,
-      text: 'still need',
+      text: t('still_needed'),
       amount: formatAmount(stillNeeded.isGreaterThan(0) ? stillNeeded : 0, 0),
     },
   ]
@@ -136,10 +136,10 @@ export const ResultSectionView = ({ info }: any) => {
             </div>
           </div> */}
         <div className="p-6 shadow rounded-lg mt-6 pb-16">
-          <div className="flex mt-[10px] justify-between items-start">
-            <div>
+          <div className="flex mt-[10px] justify-between items-start flex-wrap <md:flex-col <md:w-full">
+            <div className="<md:mb-4">
               <div className="text-[24px] text-[#252B37]">{formatAmount(forVotes + againstVotes, 0)}</div>
-              <div className="text-[14px] text-[#717680]">{t('current_vote')}(koge)</div>
+              <div className="text-[12px] text-[#717680]">{t('current_vote')}(koge)</div>
               <div className="items-center">
                 {threeBlocks.slice(0, 2).map((item, index) => {
                   return (
@@ -153,9 +153,9 @@ export const ResultSectionView = ({ info }: any) => {
                 })}
               </div>
             </div>
-            <div>
+            <div className="<md:mb-4">
               <div className="text-[24px] text-[#DC6803]">{rightBlock.amount}</div>
-              <div className="text-[14px] text-[#DC6803]">{rightBlock.text}</div>
+              <div className="text-[12px] text-[#DC6803]">{rightBlock.text}</div>
               {stillNeeded.isGreaterThan(0) && (
                 <div className="items-center">
                   {threeBlocks.slice(2, 3).map((item, index) => {
@@ -171,11 +171,11 @@ export const ResultSectionView = ({ info }: any) => {
                 </div>
               )}
             </div>
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col items-end <md:w-full <md:items-start">
               <div className="text-[24px] text-[#252B37]" style={{ color: interimResult ? '#08C849' : '#EF2B2B' }}>
                 {interimResult ? t('approve_vote') : t('reject_vote')}
               </div>
-              <div className="text-[14px] text-[#717680] flex items-center">
+              <div className="text-[12px] text-[#717680] flex items-center">
                 {t('interim_result')}
                 <Popover
                   content={
@@ -212,7 +212,7 @@ export const ResultSectionView = ({ info }: any) => {
                 }}
               />
               <CaretUpOutlined style={{ fontSize: '10px' }} />
-              <div>Goal</div>
+              <div>{t('goal')}</div>
             </div>
             <div className="w-full h-6 bg-gray-200 relative rounded-[4px] overflow-hidden">
               <div className="absolute left-0 top-0 h-full flex w-full bg-[#EEF2F6]">
