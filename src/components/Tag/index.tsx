@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 const map: any = {
   Active: {
     style: {
-      backgroundColor: '#1DA9F8',
+      backgroundColor: '#4096ff',
       color: '#FFFFFF',
     },
   },
@@ -21,8 +21,8 @@ const map: any = {
   },
   Defeated: {
     style: {
-      backgroundColor: '#E9E9E9',
-      color: '#54606C',
+      backgroundColor: '#d02a2a',
+      color: '#fff',
     },
   },
   Refunded: {
