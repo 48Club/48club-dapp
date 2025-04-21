@@ -1,15 +1,19 @@
 import { createContext, useCallback } from 'react'
 import { useContractFunction } from '@usedapp/core'
-import { useGovernanceContract } from '../useContract'
+import { useGovernanceContract, useGovernanceNewContract } from '../useContract'
 
 
 export default function useGov() {
   // const { account } = useEthers()
   const govContract = useGovernanceContract()
-  const { send: propose, state: proposeState } = useContractFunction(govContract, 'propose', { transactionName: 'Propose' })
+  const govNewContract = useGovernanceNewContract()
+  const { send: propose, state: proposeState } = useContractFunction(govNewContract, 'propose', { transactionName: 'Propose' })
   const { send: vote, state: voteState } = useContractFunction(govContract, 'castVote', { transactionName: 'Vote' })
   const { send: claim, state: claimState } = useContractFunction(govContract, 'claimReward', { transactionName: 'Claim Reward' })
   const { send: refund, state: refundState } = useContractFunction(govContract, 'refundInvalidProposal', { transactionName: 'Refund Invalid Proposal' })
+  const { send: voteNew, state: voteStateNew } = useContractFunction(govNewContract, 'castVote', { transactionName: 'Vote' })
+  const { send: claimNew, state: claimStateNew } = useContractFunction(govNewContract, 'claimReward', { transactionName: 'Claim Reward' })
+  const { send: refundNew, state: refundStateNew } = useContractFunction(govNewContract, 'refundInvalidProposal', { transactionName: 'Refund Invalid Proposal' })
 
   const onPropose = useCallback(async (tokenId: string, deposit: string, description: string) => {
     console.info('Propose', tokenId, deposit, description)
@@ -18,18 +22,32 @@ export default function useGov() {
 
   const onVote = useCallback(async (proposalId: any, support: 0 | 1, reason: string = '') => {
     console.info('Vote', proposalId, support, reason)
-    await vote(proposalId, support, reason)
-  }, [vote])
+    if (+proposalId > 165) {
+      await voteNew(proposalId, support, reason)
+    } else {
+      await vote(proposalId, support, reason)
+    }
+  }, [vote, voteNew])
 
   const onClaim = useCallback(async (proposalId: any) => {
     console.info('Claim', proposalId)
-    await claim(proposalId)
-  }, [claim])
+    if (+proposalId > 165) {
+      await claimNew(proposalId)
+    } else {
+      await claim(proposalId)
+    }
+    
+  }, [claim, claimNew])
 
   const onRefund = useCallback(async (proposalId: any) => {
     console.info('Refund', proposalId)
-    await refund(proposalId)
-  }, [refund])
+    if (+proposalId > 165) {
+      await refundNew(proposalId)
+    } else {
+      await refund(proposalId)
+    }
+    
+  }, [refund, refundNew])
 
   return {
     onPropose,
