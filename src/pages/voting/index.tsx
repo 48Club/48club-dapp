@@ -14,32 +14,32 @@ export default function Voting() {
     <div className="px-4 max-w-6xl mx-auto">
       <HeaderSection />
       <GovInfoFilterContext.Provider value={{
-          status,
-          timeRanges,
-          related,
-          claimable,
-          voted
+        status,
+        timeRanges,
+        related,
+        claimable,
+        voted
+      }}>
+        <GovSetFilterContext.Provider value={{
+          setStatus,
+          setTimeRanges,
+          setRelated,
+          setClaimable,
+          setVoted
         }}>
-          <GovSetFilterContext.Provider value={{
-            setStatus,
-            setTimeRanges,
-            setRelated,
-            setClaimable,
-            setVoted
-          }}>
-            <FilterSection />
-          </GovSetFilterContext.Provider>
-        </GovInfoFilterContext.Provider>
+          <FilterSection />
+        </GovSetFilterContext.Provider>
+      </GovInfoFilterContext.Provider>
 
-        <GovInfoFilterContext.Provider value={{
-          status,
-          timeRanges,
-          related,
-          claimable,
-          voted,
-        }}>
-          <CardSection />
-        </GovInfoFilterContext.Provider>
+      <GovInfoFilterContext.Provider value={{
+        status,
+        timeRanges,
+        related,
+        claimable,
+        voted,
+      }}>
+        <CardSection />
+      </GovInfoFilterContext.Provider>
     </div>
   )
 }

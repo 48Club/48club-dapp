@@ -36,7 +36,7 @@ export default function VotingCreate() {
     await onPropose(nft, amountBN.toString(), desc)
     nav('/voting')
   }, [nft, desc, amountBN, onPropose, history])
-  console.log(formatAmount(minDeposit, 18), formatAmount(reward, 18))
+
   return (
     <div className="px-4 max-w-2xl mx-auto relative">
       <Back />

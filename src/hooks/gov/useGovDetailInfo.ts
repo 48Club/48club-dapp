@@ -1,5 +1,5 @@
 import { useContractCalls, useEthers } from '@usedapp/core'
-import { useGovernanceContract, useGovernanceNewContract } from '../useContract'
+import { useGovernanceContract } from '../useContract'
 import { Result } from '@ethersproject/abi'
 import { useMemo } from 'react'
 import BigNumber from 'bignumber.js'
@@ -8,42 +8,41 @@ import { TEN_POW } from '@funcblock/dapp-sdk'
 export default function useGovDetailInfo(proposalId: string) {
   const { account } = useEthers()
   const govContract = useGovernanceContract()
-  const govNewContract = useGovernanceNewContract()
-  const contract = +proposalId > 165 ? govNewContract : govContract
+
   const [proposalResult, votesResult, myVoteInfoResult, stateResult, rewardInfoResult, quorumThresholdResult] = (useContractCalls([
     {
-      address: contract.address,
-      abi: contract.interface,
+      address: govContract.address,
+      abi: govContract.interface,
       method: 'proposals',
       args: [proposalId],
     },
     {
-      address: contract.address,
-      abi: contract.interface,
+      address: govContract.address,
+      abi: govContract.interface,
       method: 'proposalVotes',
       args: [proposalId],
     },
     {
-      address: contract.address,
-      abi: contract.interface,
+      address: govContract.address,
+      abi: govContract.interface,
       method: 'proposalVoteInfo',
       args: [proposalId, account],
     },
     {
-      address: contract.address,
-      abi: contract.interface,
+      address: govContract.address,
+      abi: govContract.interface,
       method: 'state',
       args: [proposalId],
     },
     {
-      address: contract.address,
-      abi: contract.interface,
+      address: govContract.address,
+      abi: govContract.interface,
       method: 'getClaimableRewardInfo',
       args: [account, proposalId],
     },
     {
-      address: contract.address,
-      abi: contract.interface,
+      address: govContract.address,
+      abi: govContract.interface,
       method: 'quorumThresholdBps',
       args: [],
     },
