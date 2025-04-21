@@ -15,9 +15,9 @@ export default function useGov() {
   const { send: claimNew, state: claimStateNew } = useContractFunction(govNewContract, 'claimReward', { transactionName: 'Claim Reward' })
   const { send: refundNew, state: refundStateNew } = useContractFunction(govNewContract, 'refundInvalidProposal', { transactionName: 'Refund Invalid Proposal' })
 
-  const onPropose = useCallback(async (tokenId: string, deposit: string, description: string) => {
-    console.info('Propose', tokenId, deposit, description)
-    await propose(tokenId, deposit, description)
+  const onPropose = useCallback(async (tokenId: string, deposit: string, title: string, description: string) => {
+    console.info('Propose', tokenId, deposit, title, description)
+    await propose(tokenId, deposit, title, description)
   }, [propose])
 
   const onVote = useCallback(async (proposalId: any, support: 0 | 1, reason: string = '') => {
