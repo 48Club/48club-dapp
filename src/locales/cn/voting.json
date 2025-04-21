@@ -40,6 +40,7 @@
   "koge_desc": "提案人需要支付一定数量的KOGE投入治理激励；有效提案的提案人可以得到本提案治理激励的4.8%；建議在發起提案前，將提案內容在Telegram治理群 https://t.me/gov_48club 發表並經過充分討論，有助於吸引票數，提高提案有效的概率。",
   "choose": "选择 48er",
   "description": "提案内容",
+  "title": "提案标题",
   "voting_type": "表决类型",
   "voting_period": "表决时间",
   "options": "表决选项",

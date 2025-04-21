@@ -22,6 +22,7 @@ export default function VotingCreate() {
   const { myNFTs } = useNftInfo()
   const [nft, setNft] = useState<string | undefined>()
   const [desc, setDesc] = useState('')
+  const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const { t } = useTranslation()
 
@@ -33,9 +34,9 @@ export default function VotingCreate() {
     if (nft === undefined || !amountBN.gt(0)) {
       return
     }
-    await onPropose(nft, amountBN.toString(), desc)
+    await onPropose(nft, amountBN.toString(), title, desc)
     nav('/voting')
-  }, [nft, desc, amountBN, onPropose, history])
+  }, [nft, desc, amountBN, onPropose, history, title])
   console.log(formatAmount(minDeposit, 18), formatAmount(reward, 18))
   return (
     <div className="px-4 max-w-2xl mx-auto relative">
@@ -53,7 +54,10 @@ export default function VotingCreate() {
           }
         </Select>
       </div>
-
+      <div className="flex flex-col mt-12">
+        <span className="text-sm font-medium mb-2 text-light-black">{t('title')}</span>
+        <Input placeholder={t('please_input')} className="border rounded text-sm text-light-black" value={title} onChange={e => setTitle(e.target.value)} />
+      </div>
       <div className="flex flex-col mt-12">
         <span className="text-sm font-medium mb-2 text-light-black">{t('description')}</span>
         <TextArea rows={4} placeholder={t('please_input')} className="border rounded text-sm text-light-black" value={desc} onChange={e => setDesc(e.target.value)} />
