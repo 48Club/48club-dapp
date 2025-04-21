@@ -58,6 +58,8 @@ function Card({ item }: { item: any }) {
     e.preventDefault()
     setShowPanel(flag => !flag)
   }
+  const forVotesLevel = 2 / 3
+  const interimResult = info.forVotes / (info.forVotes + info.againstVotes) >= forVotesLevel
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
       <div className="flex flex-col md:flex-row-reverse md:mb-2 items-center">
@@ -79,12 +81,12 @@ function Card({ item }: { item: any }) {
             getVoteStatusDesc(t, info)
           }
         </div>
-        <Button className='flex justify-end items-center' onClick={handleShowPanel}>
+        <Button className='flex justify-end items-center p-[20px]' onClick={handleShowPanel}>
           <div className='flex justify-end items-center'>
             {!['Defeated', 'Succeeded', 'Refunded', 'Invalid'].includes(info.state) && (<><div className="text-xs leading-5 text-dark-gray mr-[5px]">
               {t('interim_result')}:
             </div>
-              <div className="text-xs leading-5 text-dark-gray">{info.forVotes > info.againstVotes ? t('approve_vote') : t('reject_vote')}</div></>)
+              <div className="text-xs leading-5 text-dark-gray">{interimResult ? t('approve_vote') : t('reject_vote')}</div></>)
             }
           </div>
           
