@@ -139,7 +139,7 @@ export const ResultSectionView = ({ info }: any) => {
           <div className="flex mt-[10px] justify-between items-start flex-wrap <md:flex-col <md:w-full">
             <div className="<md:mb-4">
               <div className="text-[24px] text-[#252B37]">{formatAmount(forVotes + againstVotes, 0)}</div>
-              <div className="text-[12px] text-[#717680]">{t('current_vote')}(koge)</div>
+              <div className="text-[12px] text-[#717680]">{t('current_vote')}(KOGE)</div>
               <div className="items-center">
                 {threeBlocks.slice(0, 2).map((item, index) => {
                   return (
