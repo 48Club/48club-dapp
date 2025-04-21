@@ -56,5 +56,12 @@
   "placeholder_reason": "Comment",
   "vote-refund-hint": "The proposal is invalid because it did not reach the required number of votes.",
   "my_vote": "My voted",
-  "voted_hint": "You have participated in the vote: Please wait for the final voting results!"
+  "voted_hint": "You have participated in the vote: Please wait for the final voting results!",
+  "current_vote": "Current Vote",
+  "quorum_vote": "Quorum Vote",
+  "interim_result_for": "The current total number of Approve votes is greater than {{forVotesLevel}} of the total number of votes, and the proposal progresses to Approve",
+  "interim_result_against": "The current total number of Approve votes is not greater than {{forVotesLevel}} of the total number of votes, and the proposal progresses to reject.",
+  "away_from_valid_vote_threshold": "need KOGE votes to reach quorum",
+  "still_needed": "Still needed",
+  "goal": "Goal"
 }
