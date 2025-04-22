@@ -64,5 +64,6 @@
   "interim_result_against": "当前赞同总票数小于总票数的{{forVotesLevel}}，提案进展为反对。",
   "away_from_valid_vote_threshold": "距离有效票数还需要KOGE",
   "still_needed": "还需要",
-  "goal": "目标"
+  "goal": "目标",
+  "not_voted": "尚未投票"
 }

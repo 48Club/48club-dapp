@@ -137,7 +137,7 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
     case 'Active':
       let CardSectioNode = <>
         <CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
-          Not Voted
+          t('not_voted')
         </div>
       </>
       if (info.myVotes?.gt(0)) {
