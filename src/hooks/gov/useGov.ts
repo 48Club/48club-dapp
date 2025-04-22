@@ -64,9 +64,9 @@ export default function useGov() {
   const onVote = useCallback(async (proposalId: any, support: 0 | 1, reason: string = '') => {
     console.info('Vote', proposalId, support, reason)
     if (+proposalId > 165) {
-      await voteNew(11, support, reason)
+      await voteNew(proposalId, support, reason)
     } else {
-      await vote(11, support, reason)
+      await vote(proposalId, support, reason)
     }
   }, [vote, voteNew])
 
