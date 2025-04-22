@@ -7,7 +7,7 @@ import useGovInfo from '../../hooks/gov/useGovInfo'
 import { formatAmount, TEN_POW } from '@funcblock/dapp-sdk'
 import BigNumber from 'bignumber.js'
 import useApprove from '../../hooks/erc20/useApprove'
-import { GovernanceAddress, KogeAddress } from '../../constants/contracts'
+import { GovernanceAddress, KogeAddress, GovernanceAddressNew } from '../../constants/contracts'
 import { useEthers, useTokenAllowance } from '@usedapp/core'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
@@ -26,8 +26,8 @@ export default function VotingCreate() {
   const [amount, setAmount] = useState('')
   const { t } = useTranslation()
 
-  const { approve, loading: approveLoading } = useApprove(KogeAddress, GovernanceAddress)
-  const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, GovernanceAddress)?.toString() ?? '0')
+  const { approve, loading: approveLoading } = useApprove(KogeAddress, GovernanceAddressNew)
+  const allowance = new BigNumber(useTokenAllowance(KogeAddress, account, GovernanceAddressNew)?.toString() ?? '0')
   const amountBN = new BigNumber(amount).times(TEN_POW(18))
 
   const onSubmit = useCallback(async () => {
