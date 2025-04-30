@@ -25,7 +25,8 @@ export default function HeaderSection() {
           <div className="font-bold text-2xl mb-4 text-light-black md:mb-0 md:mr-4 md:text-4xl">
             {ntitle}
           </div>
-          <Tag type={state} />
+          <div><Tag type={state} className='break-keep' /></div>
+          
         </div>
         <div className="w-full mb-4 text-base text-dark-gray pb-6 border-b border-gray text-left md:pb-8 md:border-none md:mb-0 break-word break-all">
           {detail?.description.split('\n').map((item: any, index: number) => (index === 0) ? item : [<br key={index} />, item])}

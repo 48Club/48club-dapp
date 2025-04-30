@@ -64,6 +64,7 @@
   "interim_result_against": "The current total number of Approve votes is not greater than {{forVotesLevel}} of the total number of votes, and the proposal progresses to reject.",
   "away_from_valid_vote_threshold": "need KOGE votes to reach quorum",
   "still_needed": "Still needed",
-  "goal": "Goal",
-  "not_voted": "Not Voted"
+  "goal": "Quorum",
+  "not_voted": "Not Voted",
+  "abstain_vote": "Abstain"
 }
