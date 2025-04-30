@@ -55,7 +55,6 @@ export default function useGovDetailInfo(proposalId: string) {
   const myCanVote = useMemo(() => {
     return state === 'Active'
   }, [state])
-  console.log(votesResult, 'votesResult')
   return {
     loading: !proposalResult || !votesResult,
     proposer: proposalResult?.proposer.toString(),
