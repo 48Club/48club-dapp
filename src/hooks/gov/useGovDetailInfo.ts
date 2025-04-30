@@ -54,6 +54,7 @@ export default function useGovDetailInfo(proposalId: string) {
   const myCanVote = useMemo(() => {
     return state === 'Active'
   }, [state])
+  console.log(votesResult, 'votesResult')
   return {
     loading: !proposalResult || !votesResult,
     proposer: proposalResult?.proposer.toString(),
@@ -61,10 +62,11 @@ export default function useGovDetailInfo(proposalId: string) {
     refunded: proposalResult?.refunded.toString(),
     totalReward: proposalResult?.totalReward.toString(),
     totalStakeAtStart: proposalResult?.totalStakeAtStart.toString(),
-    voteEnd: proposalResult?.voteEnd.toString(),
+    voteEnd: proposalResult?.voteEnd?.toString(),
     voteStart: proposalResult?.voteStart.toString(),
     againstVotes: new BigNumber(votesResult?.againstVotes.toString()).div(TEN_POW(18)).toNumber(),
     forVotes: new BigNumber(votesResult?.forVotes.toString()).div(TEN_POW(18)).toNumber(),
+    abstainVotes: +proposalId > 165 ? new BigNumber(votesResult?.abstainVotes.toString()).div(TEN_POW(18)).toNumber() : 0,
     state,
     quorum: quorumThresholdResult?.[0]?.toNumber(),
     myCanVote,
