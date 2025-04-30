@@ -93,7 +93,7 @@ export const ResultSectionView = ({ info, id }: any) => {
     amount: formatAmount(quorumNormal, 0),
     text: t('quorum_vote'),
   }
-  const interimResult = info.forVotes / (info.forVotes + info.againstVotes) >= forVotesLevel
+  const interimResult = info.forVotes / (info.forVotes + info.againstVotes + info.abstainVotes) >= forVotesLevel
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Spin spinning={loading}>
