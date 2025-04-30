@@ -48,7 +48,16 @@ export default function useGovDetailInfo(proposalId: string) {
       method: 'quorumThresholdBps',
       args: [],
     },
-  ]) ?? []) as Result[]
+  ]
+  if (+proposalId > 165) {
+    methodList.push({
+      address: contract.address,
+      abi: contract.interface,
+      method: 'forVotesThresholdBps',
+      args: [],
+    })
+  }
+  const [proposalResult, votesResult, myVoteInfoResult, stateResult, rewardInfoResult, quorumThresholdResult, forVotesThresholdBps] = (useContractCalls(methodList) ?? []) as Result[]
 
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any
 
