@@ -10,7 +10,8 @@ export default function useGovDetailInfo(proposalId: string) {
   const govContract = useGovernanceContract()
   const govNewContract = useGovernanceNewContract()
   const contract = +proposalId > 165 ? govNewContract : govContract
-  const methodList = [
+
+  const [proposalResult, votesResult, myVoteInfoResult, stateResult, rewardInfoResult, quorumThresholdResult] = (useContractCalls([
     {
       address: contract.address,
       abi: contract.interface,
@@ -47,16 +48,7 @@ export default function useGovDetailInfo(proposalId: string) {
       method: 'quorumThresholdBps',
       args: [],
     },
-  ]
-  if (+proposalId > 165) {
-    methodList.push({
-      address: contract.address,
-      abi: contract.interface,
-      method: 'forVotesThresholdBps',
-      args: [],
-    })
-  }
-  const [proposalResult, votesResult, myVoteInfoResult, stateResult, rewardInfoResult, quorumThresholdResult, forVotesThresholdBps] = (useContractCalls(methodList) ?? []) as Result[]
+  ]) ?? []) as Result[]
 
   const state: 'Active' | 'Defeated' | 'Succeeded' | 'Invalid' | 'Refunded' = ['Active', 'Defeated', 'Succeeded', 'Invalid', 'Refunded'][stateResult?.[0]] as any
 
@@ -82,6 +74,6 @@ export default function useGovDetailInfo(proposalId: string) {
     myReward: new BigNumber(rewardInfoResult?.claimableAmount.toString()),
     myVotes: new BigNumber(myVoteInfoResult?.[0].weight.toString()),
     myVoteType: myVoteInfoResult?.[0].voteType,
-    forVotesThresholdBps: (forVotesThresholdBps && forVotesThresholdBps?.[0]?.toNumber() / 10000) || 2/3
+    forVotesThresholdBps: +proposalId > 165 ? (proposalResult?.forVotesThresholdBps?.toNumber() / 10000) : 0.6666
   }
 }

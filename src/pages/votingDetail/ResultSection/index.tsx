@@ -25,7 +25,6 @@ export const ResultSectionView = ({ info, id }: any) => {
   const { t } = useTranslation()
   const { againstVotes, forVotes, abstainVotes, state, quorum, totalStakeAtStart, loading, forVotesThresholdBps } = info
   const quorumBN = new BigNumber(quorum).div(TEN_POW(4)).times(totalStakeAtStart)
-  // console.log(forVotes,againstVotes, 'quorum', quorumBN.div(0.8).div(TEN_POW(18)).toNumber())
   const quorumNormal = new BigNumber(quorumBN).div(TEN_POW(18))
   const totalVotesNeeded = quorumBN.div(1).div(TEN_POW(18))
 
