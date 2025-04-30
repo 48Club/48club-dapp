@@ -30,7 +30,7 @@ export default function CardSection() {
 function Card({ item }: { item: any }) {
   const { t } = useTranslation()
   const info = useGovDetailInfo(item.proposalId)
-  const { state, voteStart, proposer } = info
+  const { state, voteStart, proposer, forVotesThresholdBps } = info
   const { status, related, claimable, timeRanges, voted } = useContext(GovInfoFilterContext)
   const { account } = useEthers()
   const [showPanel, setShowPanel] = useState(false)
@@ -58,8 +58,8 @@ function Card({ item }: { item: any }) {
     e.preventDefault()
     setShowPanel(flag => !flag)
   }
-  const forVotesLevel = 2 / 3
-  const interimResult = info.forVotes / (info.forVotes + info.againstVotes + info.abstainVotes) >= forVotesLevel
+  const forVotesLevel = forVotesThresholdBps
+  const interimResult = info.forVotes / (info.forVotes + info.againstVotes) >= forVotesLevel
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
       <div className="flex flex-col md:flex-row-reverse md:mb-2 items-center">
