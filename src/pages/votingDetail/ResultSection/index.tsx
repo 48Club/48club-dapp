@@ -105,7 +105,7 @@ export const ResultSectionView = ({ info, id }: any) => {
               <div className="items-center">
                 {(id <= 165 ? threeBlocks.slice(0, 2) : threeBlocks).map((item, index) => {
                   return (
-                    <div key={index} className="flex items-center wrap mr-10 mt-2">
+                    <div key={index} className="flex items-center wrap mt-2">
                       <div className="w-[16px] h-[12px] rounded-[2px] mr-2" style={{ background: item.bg }} />
                       <div className="text-[12px]">
                         {item.text}:{item.amount}
@@ -122,7 +122,7 @@ export const ResultSectionView = ({ info, id }: any) => {
                 <div className="items-center">
                   {stillNeededBlocks.map((item, index) => {
                     return (
-                      <div key={index} className="flex items-center wrap mr-10 mt-2">
+                      <div key={index} className="flex items-center wrap mt-2">
                         <div className="w-[16px] h-[12px] rounded-[2px] mr-2" style={{ background: item.bg }} />
                         <div className="text-[12px]">
                           {item.text}:{item.amount}
