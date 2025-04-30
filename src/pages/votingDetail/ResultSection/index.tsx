@@ -23,17 +23,16 @@ export default function ResultSection() {
 
 export const ResultSectionView = ({ info, id }: any) => {
   const { t } = useTranslation()
-  const { againstVotes, forVotes, abstainVotes, state, quorum, totalStakeAtStart, loading } = info
+  const { againstVotes, forVotes, abstainVotes, state, quorum, totalStakeAtStart, loading, forVotesThresholdBps } = info
   const quorumBN = new BigNumber(quorum).div(TEN_POW(4)).times(totalStakeAtStart)
   // console.log(forVotes,againstVotes, 'quorum', quorumBN.div(0.8).div(TEN_POW(18)).toNumber())
-  console.log(info, 'info')
   const quorumNormal = new BigNumber(quorumBN).div(TEN_POW(18))
   const totalVotesNeeded = quorumBN.div(1).div(TEN_POW(18))
 
   const totalVotes = new BigNumber(forVotes + againstVotes + abstainVotes)
   const isExceedTotal = totalVotes.gt(totalVotesNeeded)
   const stillNeeded = quorumBN.div(TEN_POW(18)).minus(totalVotes)
-  const forVotesLevel = 2 / 3
+  const forVotesLevel = forVotesThresholdBps
   const [forVotesPercent, againstVotesPercent, abstainVotesPercent] = useMemo(() => {
     if (totalVotes.eq(0)) {
       return [0, 0, 0]
@@ -94,7 +93,7 @@ export const ResultSectionView = ({ info, id }: any) => {
     amount: formatAmount(quorumNormal, 0),
     text: t('quorum_vote'),
   }
-  const interimResult = info.forVotes / (info.forVotes + info.againstVotes + info.abstainVotes) >= forVotesLevel
+  const interimResult = info.forVotes / (info.forVotes + info.againstVotes) >= forVotesLevel
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Spin spinning={loading}>
@@ -200,7 +199,7 @@ export const ResultSectionView = ({ info, id }: any) => {
                   againstVotesPercent > 0 && (<div
                     className="h-full bg-[#EF2B2B] relative"
                     style={{
-                      width: `${againstVotesPercent}%`,
+                      width: `${Math.max(againstVotesPercent, 1)}%`,
                       borderLeft: '2px solid #fff',
                       borderRight: stillNeeded.isGreaterThan(0) ? '1px solid #fff' : '',
                     }}
