@@ -30,7 +30,7 @@ export default function CardSection() {
 function Card({ item }: { item: any }) {
   const { t } = useTranslation()
   const info = useGovDetailInfo(item.proposalId)
-  const { state, voteStart, proposer } = info
+  const { state, voteStart, proposer, forVotesThresholdBps } = info
   const { status, related, claimable, timeRanges, voted } = useContext(GovInfoFilterContext)
   const { account } = useEthers()
   const [showPanel, setShowPanel] = useState(false)
@@ -58,7 +58,7 @@ function Card({ item }: { item: any }) {
     e.preventDefault()
     setShowPanel(flag => !flag)
   }
-  const forVotesLevel = 2 / 3
+  const forVotesLevel = forVotesThresholdBps
   const interimResult = info.forVotes / (info.forVotes + info.againstVotes) >= forVotesLevel
   return (
     <NavLink to={`/voting/detail/${item.proposalId}`} className={`w-full mb-10 flex flex-col p-6 md:p-10 shadow rounded-lg ${show ? 'block' : 'hidden'}`}>
@@ -110,7 +110,7 @@ function Card({ item }: { item: any }) {
       {/* { info.myVotes?.gt(0) && (<div>{info.myVoteType === 1 ? 'Approve' : 'Reject'}</div>) } */}
       {showPanel && (<div className="flex flex-col md:flex-row items-stretch mt-[10px]" onClick={handleVotePanel}>
         <VoteSectionView info={info} proposalId={item.proposalId} notInitRecords={true} />
-        <ResultSectionView info={info} />
+        <ResultSectionView info={info} id={item.proposalId} />
       </div>)}
 
     </NavLink>
@@ -137,7 +137,7 @@ function getVoteStatusDesc(t: TFunction, info: ReturnType<typeof useGovDetailInf
     case 'Active':
       let CardSectioNode = <>
         <CloseCircleTwoTone twoToneColor='#0849C8' className="w-3.5 h-3.5 mr-1" /><div className="text-xs leading-5 text-dark-gray">
-          t('not_voted')
+          {t('not_voted')}
         </div>
       </>
       if (info.myVotes?.gt(0)) {

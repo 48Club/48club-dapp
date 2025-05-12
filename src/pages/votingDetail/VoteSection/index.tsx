@@ -1,5 +1,5 @@
-import { CheckCircleTwoTone, CloseCircleTwoTone, MinusCircleTwoTone, CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons'
-import { Button, Input, Spin, Tooltip } from 'antd'
+import { CheckCircleTwoTone, CloseCircleTwoTone, MinusCircleTwoTone, CheckCircleFilled, CloseCircleFilled, MinusCircleOutlined } from '@ant-design/icons'
+import { Button, Input, Tooltip } from 'antd'
 import Label from 'components/Label'
 import { useCallback, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -76,13 +76,19 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
 
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
   const votedView = useMemo(() => {
+    const text = {
+      0: t('approve_vote'),
+      1: t('reject_vote'),
+      2: t('abstain_vote')
+    }
     return (<div className='flex items-center flex-col'>
       <div className='mb-[20px] flex items-center'>
         {
           myVoteType === 1 && (<CheckCircleFilled className={`mr-2.5 text-green text-base`} style={{ fontSize: '50px' }} />)
         }
         { myVoteType === 0 && (<CloseCircleFilled className="mr-2.5 text-red text-base" style={{ fontSize: '50px' }} />) }
-        <div className='text-[24px]'>{ myVoteType === 1 ? t('approve_vote') : t('reject_vote')}</div>
+        { myVoteType === 2 && (<MinusCircleOutlined className="mr-2.5 text-[#A9A29D]" style={{ fontSize: '50px' }} />) }
+        <div className='text-[24px]'>{text[myVoteType as keyof typeof text]}</div>
       </div>
       <div className='mb-[20px] text-center'>{t('my_vote')}: {formatAmount(myVotesBN, 18)} KOGE</div>
       <div className='text-center'>{t('voted_hint')}</div>
@@ -112,6 +118,14 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
       disabled={!canVote || myVoted}
     >
       {t('reject_vote')}
+    </Button>
+    <Button
+      className={`bg-white mt-6 h-12 text-light-black text-xl font-bold`}
+      icon={<MinusCircleOutlined twoToneColor="#A9A29D" className="align-baseline" />}
+      onClick={() => !myVoted && onSubmit(id, 2, reason)}
+      disabled={!canVote || myVoted}
+    >
+      {t('abstain_vote')}
     </Button>
 
   </>)
