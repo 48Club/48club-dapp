@@ -45,5 +45,7 @@ api.interceptors.response.use(
 export const stat = async (data: any) => {
   return api.get('/v4/stat', { params: data, method: 'GET' })
 }
-
+export const getVoteList = async() => {
+  return api.get('v2/')
+}
 export default api
