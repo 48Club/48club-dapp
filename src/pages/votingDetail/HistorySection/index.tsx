@@ -1,18 +1,51 @@
 import { useTranslation } from 'react-i18next'
 import Label from '../../../components/Label'
+import { useEthers } from '@usedapp/core'
 import { useParams } from 'react-router-dom'
 import { formatAmount } from '@funcblock/dapp-sdk'
 import useGovDetailVotes from '../../../hooks/gov/useGovDetailVotes'
+import { useEffect } from 'react'
+import { getVoteList, vote, getUserVote } from '@/utils/axios'
+import { DislikeOutlined, LikeOutlined } from '@ant-design/icons'
+import useSignMessage from '@/hooks/useSignMessage'
 
 export default function HistorySection() {
   const { t } = useTranslation()
+  const { account } = useEthers()
   const { id } = useParams<{ id: string }>()
   const { voteRecords } = useGovDetailVotes(id as string)
+  const { signMessage } = useSignMessage()
+  const handleDislike = async (tx_hash: string) => {
+    const signature = await signMessage(`${id}:{"msg":"dis","tx_hash": "${tx_hash}"}`)
+    vote(id as string, {
+      sign: signature,
+      msg: 'dis',
+      tx_hash: tx_hash,
+    })
+  }
+
+  const handleLike = async (tx_hash: string) => {
+    const signature = await signMessage(`${id}:{"msg":"agree","tx_hash": "${tx_hash}"}`)
+    vote(id as string, {
+      sign: signature,
+      msg: 'agree',
+      tx_hash: tx_hash,
+    })
+  }
+
+  useEffect(() => {
+    getVoteList(id as string)
+  }, [])
+  useEffect(() => {
+    if (account) {
+      getUserVote(id as string, account)
+    }
+  }, [account])
 
   if (!voteRecords) {
     return null
   }
-
+  console.log(voteRecords, 'voteRecords')
   return (
     <div className="flex flex-col my-20">
       <Label text={t('vote_details')} />
@@ -70,8 +103,14 @@ export default function HistorySection() {
                     <span className="break-words">
                       {i.support === '1' ? 'Approve' : 'Reject'}
                     </span>
-                    <span className="break-words">
+                    <span className="break-words flex">
                       {i.reason}
+                      {i.reason && (
+                        <div className="flex flex-row">
+                          <div className="text-red-500 cursor-pointer" onClick={() => handleDislike(i.transactionHash)}><DislikeOutlined style={{fontSize: 20}} /></div>
+                          <div className="text-green-500 cursor-pointer" onClick={() => handleLike(i.transactionHash)}><LikeOutlined style={{fontSize: 20}} /></div>
+                        </div>
+                      )}
                     </span>
                     <span className="break-words">
                       {formatAmount(i.weight, 18)}

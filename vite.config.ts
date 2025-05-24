@@ -30,7 +30,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
       "/v2": {
-        target: "https://www.48.club/api/v2",
+        target: "https://www.48.club",
         changeOrigin: true,
         rewrite: path => path.replace(/^\/v2/, 'api/v2'),
         secure: false,
