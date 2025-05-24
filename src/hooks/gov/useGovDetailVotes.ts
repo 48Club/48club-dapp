@@ -25,6 +25,7 @@ export default function useGovDetailVotes(proposalId: string, notInitRecords?: b
       voter: i.args?.voter?.toString(),
       weight: i.args?.weight?.toString(),
       blockNumber: i.blockNumber,
+      transactionHash: i.transactionHash
     }))
     setVoteRecords(rows)
   }, [govContractReadonly, proposalId, govNewContractReadonly])
