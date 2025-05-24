@@ -24,6 +24,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      "/api/v2": {
+        target: "https://www.48.club",
+        changeOrigin: true,
+        // rewrite: path => path.replace(/^\/v2/, 'api/v2'),
+        secure: false,
+      },
       "/api": {
         target: "https://inscription.48.club",
         changeOrigin: true,

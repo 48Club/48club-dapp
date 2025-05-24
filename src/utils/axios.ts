@@ -1,8 +1,18 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+// 根据环境设置 baseURL
+const getBaseURL = () => {
+  if (process.env.NODE_ENV === 'production') {
+    // 生产环境
+    return '/';
+  }
+  // 开发环境
+  return '/';
+};
+
 const api = axios.create({
-  baseURL: '/',
+  baseURL: getBaseURL(),
   timeout: 10000, // 可选：超时时间
 })
 
@@ -46,12 +56,12 @@ export const stat = async (data: any) => {
   return api.get('/v4/stat', { params: data, method: 'GET' })
 }
 export const getVoteList = async(id: string) => {
-  return api.get(`/v2/vote/list/${id}`)
+  return api.get(`/api/v2/vote/list/${id}`)
 }
 export const vote = async(id: string, params: any) => {
-  return api.post(`/v2/vote/${id}`, params)
+  return api.post(`/api/v2/vote/${id}`, params)
 }
 export const getUserVote = async(id: string, account: string) => {
-  return api.get(`/v2/vote/user/${id}?address=${account}`)
+  return api.get(`/api/v2/vote/user/${id}?address=${account}`)
 }
 export default api
