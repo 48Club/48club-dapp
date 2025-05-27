@@ -10,6 +10,7 @@ import { message, Tooltip } from 'antd'
 import { DislikeOutlined, LikeOutlined, LikeFilled, DislikeFilled } from '@ant-design/icons'
 import useSignMessage from '@/hooks/useSignMessage'
 
+
 export default function HistorySection() {
   const { t } = useTranslation()
   const { account } = useEthers()
@@ -31,9 +32,10 @@ export default function HistorySection() {
     if (userVote[tx_hash]) {
       return
     }
-    const signature = await signMessage(`${id}:{"msg":"dis","tx_hash":"${tx_hash}"}`)
-    const res = await vote(id as string, {
-      sign: signature,
+    try {
+      const signature = await signMessage(`${id}:{"msg":"dis","tx_hash":"${tx_hash}"}`)
+      const res = await vote(id as string, {
+        sign: signature,
       msg: 'dis',
       tx_hash: tx_hash,
       address: account,
@@ -43,8 +45,14 @@ export default function HistorySection() {
         type: 'error',
         content: res.data.msg,
       });
-    } else {
-      fetchUserVote()
+      } else {
+        fetchUserVote()
+      }
+    } catch (error: any) {
+      messageApi.open({
+        type: 'error',
+        content: error?.message || 'Operation failed'
+      });
     }
     
   }
@@ -53,20 +61,27 @@ export default function HistorySection() {
     if (userVote[tx_hash]) {
       return
     }
-    const signature = await signMessage(`${id}:{"msg":"agree","tx_hash":"${tx_hash}"}`)
-    const res = await vote(id as string, {
-      sign: signature,
-      msg: 'agree',
-      tx_hash: tx_hash,
-      address: account,
-    })
-    if (res.status === 200 && res.data.code !== 200) {
+    try {
+      const signature = await signMessage(`${id}:{"msg":"agree","tx_hash":"${tx_hash}"}`)
+      const res = await vote(id as string, {
+        sign: signature,
+        msg: 'agree',
+        tx_hash: tx_hash,
+        address: account,
+      })
+      if (res.status === 200 && res.data.code !== 200) {
+        messageApi.open({
+          type: 'error',
+          content: res.data.msg,
+        });
+      } else {
+        fetchUserVote()
+      }
+    } catch (error: any) {
       messageApi.open({
         type: 'error',
-        content: res.data.msg,
+        content: error?.message || 'Operation failed'
       });
-    } else {
-      fetchUserVote()
     }
   }
 
@@ -142,19 +157,19 @@ export default function HistorySection() {
                         <div className="flex flex-row">
                           <Tooltip title={voteList[i.transactionHash]?.agree}>
                             <div className="text-green-500 cursor-pointer mx-[5px]" onClick={() => handleLike(i.transactionHash)}>
-                              {userVote[i.transactionHash] && userVote[i.transactionHash].agree ? (
+                              {userVote[i.transactionHash]?.agree ? (
                                 <LikeFilled style={{ fontSize: 16, color: '#000' }} />
                               ) : (
-                                <LikeOutlined style={{ fontSize: 16 }} />
+                                <LikeOutlined style={{ fontSize: 16, color: userVote[i.transactionHash]? '#808080' : '#000' }} />
                               )}
                             </div>
                           </Tooltip>
                           <Tooltip title={voteList[i.transactionHash]?.dis}>
                             <div className="text-red-500 cursor-pointer" onClick={() => handleDislike(i.transactionHash)}>
-                              {userVote[i.transactionHash] && userVote[i.transactionHash].dis ? (
+                              {userVote[i.transactionHash]?.dis ? (
                                 <DislikeFilled style={{ fontSize: 16, color: '#000' }} />
                               ) : (
-                                <DislikeOutlined style={{ fontSize: 16 }} />
+                                <DislikeOutlined style={{ fontSize: 16, color: userVote[i.transactionHash]? '#808080' : '#000' }} />
                               )}
                             </div>
                           </Tooltip>
