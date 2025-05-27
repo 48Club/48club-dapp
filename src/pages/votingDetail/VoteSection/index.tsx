@@ -77,8 +77,8 @@ function ActionPanel({ id, canVote, voteRecords, reloadVoteRecords, myVotes, myV
   const myVotesBN = myVotes?.gt(0) ? myVotes : myStakeBalance
   const votedView = useMemo(() => {
     const text = {
-      0: t('approve_vote'),
-      1: t('reject_vote'),
+      1: t('approve_vote'),
+      0: t('reject_vote'),
       2: t('abstain_vote')
     }
     return (<div className='flex items-center flex-col'>
