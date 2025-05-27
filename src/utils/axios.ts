@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 const getBaseURL = () => {
   if (process.env.NODE_ENV === 'production') {
     // 生产环境
-    return '/';
+    return 'https://www.48.club';
   }
   // 开发环境
   return '/';
