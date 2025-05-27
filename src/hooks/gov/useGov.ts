@@ -16,45 +16,45 @@ export default function useGov() {
   const { send: claimNew, state: claimStateNew } = useContractFunction(govNewContract, 'claimReward', { transactionName: 'Claim Reward' })
   const { send: refundNew, state: refundStateNew } = useContractFunction(govNewContract, 'refundInvalidProposal', { transactionName: 'Refund Invalid Proposal' })
    // 统一监听所有状态
-   const handleStateChange = useCallback((state: any, actionName: string) => {
-    if (state.status === 'Success') {
-      message.success(`${actionName} successful`)
-    } else if (state.status === 'Exception' || state.status === 'Fail') {
-      if (state.errorMessage) {
-        message.error(state.errorMessage)
-      } else {
-        message.error(`${actionName} failed`)
-      }
-    }
-  }, [])
-  // 监听所有状态变化
-  useEffect(() => {
-    handleStateChange(proposeState, 'Propose')
-  }, [proposeState.status, proposeState.errorMessage])
+  //  const handleStateChange = useCallback((state: any, actionName: string) => {
+  //   if (state.status === 'Success') {
+  //     message.success(`${actionName} successful`)
+  //   } else if (state.status === 'Exception' || state.status === 'Fail') {
+  //     if (state.errorMessage) {
+  //       message.error(state.errorMessage)
+  //     } else {
+  //       message.error(`${actionName} failed`)
+  //     }
+  //   }
+  // }, [])
+  // // 监听所有状态变化
+  // useEffect(() => {
+  //   handleStateChange(proposeState, 'Propose')
+  // }, [proposeState.status, proposeState.errorMessage])
 
-  useEffect(() => {
-    handleStateChange(voteState, 'Vote')
-  }, [voteState.status, voteState.errorMessage])
+  // useEffect(() => {
+  //   handleStateChange(voteState, 'Vote')
+  // }, [voteState.status, voteState.errorMessage])
 
-  useEffect(() => {
-    handleStateChange(voteStateNew, 'Vote')
-  }, [voteStateNew.status, voteStateNew.errorMessage])
+  // useEffect(() => {
+  //   handleStateChange(voteStateNew, 'Vote')
+  // }, [voteStateNew.status, voteStateNew.errorMessage])
 
-  useEffect(() => {
-    handleStateChange(claimState, 'Claim')
-  }, [claimState.status, claimState.errorMessage])
+  // useEffect(() => {
+  //   handleStateChange(claimState, 'Claim')
+  // }, [claimState.status, claimState.errorMessage])
 
-  useEffect(() => {
-    handleStateChange(claimStateNew, 'Claim')
-  }, [claimStateNew.status, claimStateNew.errorMessage])
+  // useEffect(() => {
+  //   handleStateChange(claimStateNew, 'Claim')
+  // }, [claimStateNew.status, claimStateNew.errorMessage])
 
-  useEffect(() => {
-    handleStateChange(refundState, 'Refund')
-  }, [refundState.status, refundState.errorMessage])
+  // useEffect(() => {
+  //   handleStateChange(refundState, 'Refund')
+  // }, [refundState.status, refundState.errorMessage])
 
-  useEffect(() => {
-    handleStateChange(refundStateNew, 'Refund')
-  }, [refundStateNew.status, refundStateNew.errorMessage])
+  // useEffect(() => {
+  //   handleStateChange(refundStateNew, 'Refund')
+  // }, [refundStateNew.status, refundStateNew.errorMessage])
 
   const onPropose = useCallback(async (tokenId: string, deposit: string, title: string, description: string) => {
     console.info('Propose', tokenId, deposit, title, description)
