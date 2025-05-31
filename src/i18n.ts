@@ -14,6 +14,9 @@ import modalEN from './locales/en/modal.json'
 import modalCN from './locales/cn/modal.json'
 import poolEN from './locales/en/pool.json'
 import poolCN from './locales/cn/pool.json'
+import tradeEN from './locales/en/trade.json'
+import tradeCN from './locales/cn/trade.json'
+
 
 i18n
   // learn more: https://github.com/i18next/i18next-xhr-backend
@@ -32,6 +35,7 @@ i18n
           ...modalEN,
           ...votingEN,
           ...poolEN,
+          ...tradeEN,
         },
       },
       cn: {
@@ -43,6 +47,7 @@ i18n
           ...modalCN,
           ...votingCN,
           ...poolCN,
+          ...tradeCN,
         },
       },
     },
