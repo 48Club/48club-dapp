@@ -1,0 +1,23 @@
+{
+  "trade_race_title": "用币安Web3钱包交易KOGE，赢取手续费奖励！",
+  "trade_race_time": "活动周期：",
+  "trade_race_time_desc": "UTC 时间 2025年6月2日 周一 00:00 至 2025年6月9日 周日 23:59",
+  "trade_race_rule_title": "活动规则：",
+  "trade_race_rule_desc1": "交易额统计范围： 使用币安Web3钱包(无私钥钱包)直接Swap(与 binanceDEXRouter交互)并实际与PancakeSwap KOGE/USDT V3万分之一流动性池(0xcF59B8C8BAA2dea520e3D549F97d4e49aDE17057)产生资产流动的KOGE买入金额。",
+  "trade_race_rule_desc2": "由于聚合器分流功能，单笔交易可能通过多个流动性池进行，因此按上述规则统计到的金额可能比实际总金额小，属正常现象。",
+  "trade_race_rule_desc3": "奖励池计算方式：奖励池 = 活动期间主办方(48Club)在该交易对提供的LP所获交易手续费的 48%（上不封顶）",
+  "trade_race_rule_desc4": "奖池由主办方从提供流动性收到的手续费中拨付。 非主办方提供的lp收到的手续费与本次活动奖池无关。",
+  "trade_race_rule_desc5": "奖励分配机制：活动期间有效交易额排名前 4800 的无私钥钱包地址，平分奖励池。奖励形式为 等值 KOGE 空投。",
+  "trade_race_reward_title": "奖励发放与公布时间：",
+  "trade_race_reward_desc1": "奖励将在次周陆续发放",
+  "trade_race_reward_desc2": "结果将在社群或平台公告",
+  "trade_race_reward_desc3": "无需报名，链上自动识别",
+  "trade_race_reward_desc4": "活动排名以及奖励发放历史可在活动页面查看",
+  "trade_race_note_title": "特别说明：",
+  "trade_race_note_desc1": "48Club 保留提前 24 小时公告并终止活动的权利",
+  "trade_race_note_desc2": "参与即视为认同本活动规则及最终解释权归 48Club 所有",
+  "trade_race_note_desc3": "活动如果延期，会在本期活动结束（下期活动开始）之前24小时公布。",
+  "trade_race_leaderboard_commit": "排行榜即将上线，敬请期待！",
+  "trade_race_eventdata_commit": "活动数据即将上线，敬请期待！",
+  "trade_race_leaderboard_title": "交易排行榜"
+}

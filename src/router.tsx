@@ -33,6 +33,7 @@ import InscriptionsFarm from './pages/inscriptions/farm'
 import InscriptionsWrapped from './pages/inscriptions/wrapped'
 import Administrator from './pages/administrator'
 import AddRpc from './pages/addRpc'
+import TradeRace from './pages/tradeRace/index'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const LayoutWrap = () => (
@@ -160,6 +161,10 @@ const routes = createBrowserRouter([
             element: <InscriptionsWrapped />,
           },
         ],
+      },
+      {
+        path: '/trade-race',
+        element: <TradeRace />,
       },
     ],
   },
