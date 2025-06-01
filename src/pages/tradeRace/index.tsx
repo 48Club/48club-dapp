@@ -13,18 +13,19 @@ export default function TradeRacePage() {
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const columns = [
     {
-      title: '排名',
+      title: t('trade_race_rank_title'),
+      key: 'index',
       align: 'center' as const,
       render: (_: any, data: any, index: any) => {
-        return <div>{index + 1 >= ranklist.length ? '最后一名' : `第${index + 1}名`}</div>
+        return <div>{index + 1 >= ranklist.length ? t('trade_race_rank_number_last') : t('trade_race_rank_number', {rank : index + 1 })}</div>
       },
     },
-    { title: '地址', dataIndex: 'address', key: 'address', align: 'center' as const,
+    { title: t('trade_race_address'), dataIndex: 'address', key: 'address', align: 'center' as const,
       render: (text: any) => {
         return <div className='font-mono'>{text}</div>
       }
      },
-    { title: '交易量', dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any) => {
+    { title: t('trade_race_volume'), dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any) => {
       return <div>{text}</div>
     } },
     // { title: '预计奖金', dataIndex: '', key: '', align: 'center' as const },
@@ -132,11 +133,11 @@ export default function TradeRacePage() {
                     border: '1px solid #f0f0f0',
                     borderRadius: 8,
                   }}
-                  bodyStyle={{ padding: 16 }}
+                  styles={{ body: { padding: 16 } }}
                 >
                   {
                     columns.map((column, columnIndex) => {
-                      return columnIndex <= 0 ? (<div key={column.key} style={{ margin: '8px 0', color: '#333' }}>
+                      return columnIndex <= 0 ? (<div key={column.key} className='font-bold' style={{ margin: '8px 0', color: '#333' }}>
                         <span>{column.render?.(rank[column.dataIndex || ''], rank, index)}</span>
                       </div>) : (<div className='flex' key={column.key} style={{ margin: '8px 0', color: '#333' }}>
                         <span style={{ fontWeight: 500 }}>{column.title}：</span>
