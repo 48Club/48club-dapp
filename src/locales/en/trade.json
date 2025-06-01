@@ -19,5 +19,10 @@
   "trade_race_note_desc3": "If the event is extended, updates will be posted at least 24 hours before the current event ends",
   "trade_race_leaderboard_commit": "The leaderboard is coming soon, please stay tuned!",
   "trade_race_eventdata_commit": "Event data will be available soon, please stay tuned!",
-  "trade_race_leaderboard_title": "Trade Leaderboard"
+  "trade_race_leaderboard_title": "Trade Leaderboard",
+  "trade_race_rank_number": "Top {{rank}}",
+  "trade_race_rank_number_last": "Last One",
+  "trade_race_rank_title": "Rank",
+  "trade_race_address": "Address",
+  "trade_race_volume": "Volume"
 }
