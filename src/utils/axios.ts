@@ -64,4 +64,7 @@ export const vote = async(id: string, params: any) => {
 export const getUserVote = async(id: string, account: string) => {
   return api.get(`/api/v2/vote/user/${id}?address=${account}`)
 }
+export const getTradeRace = async() => {
+  return api.get('https://api.trade-race.48.club/')
+}
 export default api

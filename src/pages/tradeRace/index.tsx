@@ -1,34 +1,42 @@
-import React from 'react'
-import { Card, Typography, Divider } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Card, Typography, Divider, Table } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { getTradeRace } from '@/utils/axios'
+import { useMediaQuery } from 'react-responsive'
 // import { Table } from 'antd'
 
 const { Title, Text } = Typography
 
-// mock 数据
-// const stats = {
-//   total: 689898,
-//   reward: 689898,
-//   entry: 689898,
-// }
-
-// const ranking = Array.from({ length: 11 }).map((_, i) => ({
-//   key: i + 1,
-//   rank: `第${i + 1}名${i === 0 ? ' 🥇' : i === 1 ? ' 🥈' : i === 2 ? ' 🥉' : ''}`,
-//   address: '0x7E3...3da6F',
-//   volume: 876088,
-//   reward: 876088,
-// }))
-
-// const columns = [
-//   { title: '排名', dataIndex: 'rank', key: 'rank', align: 'center' as const },
-//   { title: '地址', dataIndex: 'address', key: 'address', align: 'center' as const },
-//   { title: '交易量', dataIndex: 'volume', key: 'volume', align: 'center' as const },
-//   { title: '预计奖金', dataIndex: 'reward', key: 'reward', align: 'center' as const },
-// ]
-
 export default function TradeRacePage() {
   const { t } = useTranslation()
+  const [ranklist, setRanklist] = useState([])
+  const isMobile = useMediaQuery({ maxWidth: 768 })
+  const columns = [
+    {
+      title: '排名',
+      align: 'center' as const,
+      render: (_: any, data: any, index: any) => {
+        return <div>{index + 1 >= ranklist.length ? '最后一名' : `第${index + 1}名`}</div>
+      },
+    },
+    { title: '地址', dataIndex: 'address', key: 'address', align: 'center' as const,
+      render: (text: any) => {
+        return <div className='font-mono'>{text}</div>
+      }
+     },
+    { title: '交易量', dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any) => {
+      return <div>{text}</div>
+    } },
+    // { title: '预计奖金', dataIndex: '', key: '', align: 'center' as const },
+  ]
+  useEffect(() => {
+    getTradeRace().then((res) => {
+      console.log(res)
+      if (res.status === 200 && res.data.status === 200) {
+        setRanklist(res.data.data.top_n)
+      }
+    })
+  }, [])
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
@@ -39,16 +47,16 @@ export default function TradeRacePage() {
           <Text strong>⏰ {t('trade_race_time')}</Text>
           {t('trade_race_time_desc')}
         </div>
-        <div className='work-break-all' style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
-          <div className='font-bold text-[14px]'>📊 {t('trade_race_rule_title')}</div>
+        <div className="work-break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
+          <div className="font-bold text-[14px]">📊 {t('trade_race_rule_title')}</div>
           <div>📌 {t('trade_race_rule_desc1')}</div>
           <div>{t('trade_race_rule_desc2')}</div>
           <div>🥇 {t('trade_race_rule_desc3')}</div>
           <div>{t('trade_race_rule_desc4')}</div>
           <div>🎯 {t('trade_race_rule_desc5')}</div>
         </div>
-        <div className='work-break-all' style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
-          <div className='font-bold text-[14px]'>🎁 {t('trade_race_reward_title')}</div>
+        <div className="work-break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
+          <div className="font-bold text-[14px]">🎁 {t('trade_race_reward_title')}</div>
           <div>•{t('trade_race_reward_desc1')}</div>
           <div>•{t('trade_race_reward_desc2')}</div>
           <div>•{t('trade_race_reward_desc3')}</div>
@@ -72,43 +80,78 @@ export default function TradeRacePage() {
         </div>
         */}
         {/* Coming Soon for stats */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: 120,
-          marginBottom: 24,
-          background: 'linear-gradient(90deg, #fffbe6 0%, #fff 100%)',
-          borderRadius: 12,
-          border: '1px dashed #E2B201',
-        }}>
-          <span style={{
-            fontSize: 28,
-            fontWeight: 700,
-            color: '#E2B201',
-            letterSpacing: 2,
-            marginBottom: 4,
-          }}>Coming Soon</span>
-          <span className='text-center' style={{ color: '#888', fontSize: 14 }}>{t('trade_race_eventdata_commit')}</span>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 120,
+            marginBottom: 24,
+            background: 'linear-gradient(90deg, #fffbe6 0%, #fff 100%)',
+            borderRadius: 12,
+            border: '1px dashed #E2B201',
+          }}
+        >
+          <span
+            style={{
+              fontSize: 28,
+              fontWeight: 700,
+              color: '#E2B201',
+              letterSpacing: 2,
+              marginBottom: 4,
+            }}
+          >
+            Coming Soon
+          </span>
+          <span className="text-center" style={{ color: '#888', fontSize: 14 }}>
+            {t('trade_race_eventdata_commit')}
+          </span>
         </div>
         <Divider />
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-          <Title level={4} style={{ margin: 0 }}>{t('trade_race_leaderboard_title')}</Title>
+          <Title level={4} style={{ margin: 0 }}>
+            {t('trade_race_leaderboard_title')}
+          </Title>
           {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
           {/* <Text style={{ marginLeft: 24, color: '#E2B201' }}>我的交易量：{stats.total}</Text> */}
         </div>
-        {/*
-        <Table
-          columns={columns}
-          dataSource={ranking}
-          pagination={false}
-          bordered
-          style={{ marginBottom: 24 }}
-        />
-        */}
+
+        <div style={{ marginBottom: 24 }}>
+          {!isMobile ? (
+            // PC端显示表格
+            <Table columns={columns} dataSource={ranklist} pagination={false} bordered style={{ marginBottom: 24 }} />
+          ) : (
+            // 移动端竖排卡片
+            <div>
+              {ranklist.map((rank: any, index: any) => (
+                <Card
+                  key={index}
+                  style={{
+                    marginBottom: 12,
+                    border: '1px solid #f0f0f0',
+                    borderRadius: 8,
+                  }}
+                  bodyStyle={{ padding: 16 }}
+                >
+                  {
+                    columns.map((column, columnIndex) => {
+                      return columnIndex <= 0 ? (<div key={column.key} style={{ margin: '8px 0', color: '#333' }}>
+                        <span>{column.render?.(rank[column.dataIndex || ''], rank, index)}</span>
+                      </div>) : (<div className='flex' key={column.key} style={{ margin: '8px 0', color: '#333' }}>
+                        <span style={{ fontWeight: 500 }}>{column.title}：</span>
+                        <span>{column.render?.(rank[column.dataIndex || ''], rank, index)}</span>
+                      </div>)
+                    })
+                  }
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* Coming Soon 替换排行榜表格 */}
-        <div style={{
+        {/* <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -127,7 +170,7 @@ export default function TradeRacePage() {
             marginBottom: 8,
           }}>Coming Soon</span>
           <span className='text-center' style={{ color: '#888', fontSize: 14 }}>{t('trade_race_leaderboard_commit')}</span>
-        </div>
+        </div> */}
         <Divider />
         <div style={{ color: '#888', fontSize: 13 }}>
           <div>❗️{t('trade_race_note_title')}</div>
