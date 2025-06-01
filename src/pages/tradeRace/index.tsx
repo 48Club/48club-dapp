@@ -130,17 +130,17 @@ export default function TradeRacePage() {
           <div>•{t('trade_race_reward_desc4')}</div>
         </div>
         <Divider />
-        {fee.usdt_amount && <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: 24 }}>
+        {fee.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div>
-            <Text>活动总交易量</Text>
+            <Text>{t('trade_race_total_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${fee.usdt_amount}</div>
           </div>
           <div>
-            <Text>奖励总金额</Text>
+            <Text>{t('trade_race_current_reward')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${(+fee.usdt_amount * 0.96).toFixed(2)}</div>
           </div>
           <div>
-            <Text>入围交易量</Text>
+            <Text>{t('trade_race_eligible_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>{lastRankDetail.usdt_amount}</div>
           </div>
         </div>}
@@ -181,7 +181,7 @@ export default function TradeRacePage() {
             {t('trade_race_leaderboard_title')}
           </Title>
           {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
-          {account && <Text style={{ marginLeft: 24, color: '#E2B201' }}>我的交易量：{userRank?.usdt_amount}</Text>}
+          {account && <Text style={{ marginLeft: 24, color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text>}
           
         </div>
 

@@ -26,5 +26,9 @@
   "trade_race_address": "地址",
   "trade_race_volume": "交易量",
   "trade_race_out_rank": "未入围",
-  "trade_race_in_rank": "入围"
+  "trade_race_in_rank": "入围",
+  "trade_race_my_volume": "我的交易量",
+  "trade_race_total_volume": "活动总交易量",
+  "trade_race_current_reward": "奖励总金额",
+  "eltrade_race_eligible_volume": "入围交易量"
 }

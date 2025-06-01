@@ -26,5 +26,9 @@
   "trade_race_address": "Address",
   "trade_race_volume": "Volume",
   "trade_race_out_rank": "Not Eligible",
-  "trade_race_in_rank": "Eligible"
+  "trade_race_in_rank": "Eligible",
+  "trade_race_my_volume": "My Volume",
+  "trade_race_total_volume": "Total Effective Volume",
+  "trade_race_current_reward": "Current Award Pool",
+  "trade_race_eligible_volume": "Minimum Egilibility Volume"
 }
