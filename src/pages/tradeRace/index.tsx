@@ -7,24 +7,6 @@ import { useMediaQuery } from 'react-responsive'
 
 const { Title, Text } = Typography
 
-// mock 数据
-// const stats = {
-//   total: 689898,
-//   reward: 689898,
-//   entry: 689898,
-// }
-
-// const ranking = Array.from({ length: 11 }).map((_, i) => ({
-//   key: i + 1,
-//   rank: `第${i + 1}名${i === 0 ? ' 🥇' : i === 1 ? ' 🥈' : i === 2 ? ' 🥉' : ''}`,
-//   address: '0x7E3...3da6F',
-//   volume: 876088,
-//   reward: 876088,
-// }))
-
-// 判断是否是移动端
-// const isMobile = window.innerWidth <= 768 // 或用 useMediaQuery
-
 export default function TradeRacePage() {
   const { t } = useTranslation()
   const [ranklist, setRanklist] = useState([])
