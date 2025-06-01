@@ -45,7 +45,7 @@ export default function TradeRacePage() {
       }
      },
     { title: t('trade_race_volume'), dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any, data: any) => {
-      return <div className={`${currentAccount.toLocaleLowerCase() === data.address.toLocaleLowerCase() ? 'font-bold text-[#E2B201]' : ''}`}>{text}</div>
+      return <div className={`${currentAccount.toLocaleLowerCase() === data.address.toLocaleLowerCase() ? 'font-bold text-[#E2B201]' : ''}`}>{text}</div>e
     } },
     // { title: '预计奖金', dataIndex: '', key: '', align: 'center' as const },
   ]
