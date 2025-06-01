@@ -67,7 +67,7 @@ export default function TradeRacePage() {
   useEffect(() => {
     getTradeRace({}).then((res) => {
       console.log(res)
-      if (res.status === 200 && res.data.status === 200) {
+      if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
         setRanklist(dealList)
         setTotal(res.data.data.total)
@@ -81,7 +81,7 @@ export default function TradeRacePage() {
       const address = account
       getTradeRace({address}).then((res) => {
         console.log(res)
-        if (res.status === 200 && res.data.status === 200) {
+        if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
           const selfData = res.data.data.this;
           const isInRankList = res.data.data.top_n.find((item: any) => item.address.toLocaleLowerCase() === account.toLocaleLowerCase())
           let list = addRankToList(res.data.data.top_n, res.data.data.total)
