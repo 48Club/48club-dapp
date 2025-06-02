@@ -30,5 +30,9 @@
   "trade_race_my_volume": "My Volume",
   "trade_race_total_volume": "Total Effective Volume",
   "trade_race_current_reward": "Current Award Pool",
-  "trade_race_eligible_volume": "Minimum Egilibility Volume"
+  "trade_race_eligible_volume": "Minimum Egilibility Volume",
+  "trade_race_expected": "Expected",
+  "trade_race_lastupdate": "Last Update",
+  "trade_race_search_placeholder": "Search by address",
+  "trade_race_search_button": "Search"
 }
