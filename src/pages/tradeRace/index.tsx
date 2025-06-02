@@ -71,7 +71,7 @@ export default function TradeRacePage() {
       if (data.rank === 0) {
         amount = '0'
       } else {
-        amount = `${rewardKoge} KOGE≈(${reward} USDT)`
+        amount = `${rewardKoge} KOGE (${reward} USDT)`
       }
       return <div className={getClass(data)}>{amount}</div>
     } },
@@ -125,7 +125,12 @@ export default function TradeRacePage() {
       console.log(res)
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
-        setRanklist(dealList)
+        setRanklist(pre => { 
+          if (pre.length > 0) {
+            return pre
+          }
+          return dealList
+        })
         setTotal(res.data.data.total)
         setFee(res.data.data.fee)
         setTradeFeeThisWeek(res.data.data.trade_total_this_week)
