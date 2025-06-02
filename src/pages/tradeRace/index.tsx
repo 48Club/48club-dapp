@@ -48,7 +48,7 @@ export default function TradeRacePage() {
       key: 'index',
       align: 'center' as const,
       render: (_: any, data: any, index: any) => {
-        return <div className={`${getClass(data)}`}>{getRankText(data)}</div>
+        return <div id={data.address} className={`${getClass(data)}`} style={{ scrollMarginTop: '100px' }}>{getRankText(data)}</div>
       },
     },
     { title: t('trade_race_address'), dataIndex: 'address', key: 'address', align: 'center' as const,
@@ -64,12 +64,14 @@ export default function TradeRacePage() {
       if (!fee.usdt_amount) {
         amount = '0'
       }
+      const totalFeeKoge = +fee.koge_amount * 0.96
       const totalFee = +fee.usdt_amount * 0.96
       const reward = (totalFee / total).toFixed(2)
+      const rewardKoge = (totalFeeKoge / total).toFixed(2)
       if (data.rank === 0) {
         amount = '0'
       } else {
-        amount = `${reward}`
+        amount = `${rewardKoge} KOGE≈(${reward} USDT)`
       }
       return <div className={getClass(data)}>{amount}</div>
     } },
@@ -243,7 +245,6 @@ export default function TradeRacePage() {
                     borderRadius: 8,
                   }}
                   styles={{ body: { padding: 16 } }}
-                  id={rank.address}
                 >
                   {
                     columns.map((column, columnIndex) => {
