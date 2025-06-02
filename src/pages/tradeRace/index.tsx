@@ -63,16 +63,18 @@ export default function TradeRacePage() {
       let amount = '0'
       if (!fee.usdt_amount) {
         amount = '0'
-      }
-      const totalFeeKoge = +fee.koge_amount * 0.96
-      const totalFee = +fee.usdt_amount * 0.96
-      const reward = (totalFee / total).toFixed(2)
-      const rewardKoge = (totalFeeKoge / total).toFixed(2)
-      if (data.rank === 0) {
-        amount = '0'
       } else {
-        amount = `${rewardKoge} KOGE≈(${reward} USDT)`
+        const totalFeeKoge = +fee.koge_amount * 0.96
+        const totalFee = +fee.usdt_amount * 0.96
+        const reward = (totalFee / total).toFixed(2)
+        const rewardKoge = (totalFeeKoge / total).toFixed(2)
+        if (data.rank === 0) {
+          amount = '0'
+        } else {
+          amount = `${rewardKoge} KOGE (${reward} USDT)`
+        }
       }
+      
       return <div className={getClass(data)}>{amount}</div>
     } },
   ]
@@ -113,6 +115,8 @@ export default function TradeRacePage() {
         setRanklist(list)
         setUserRank(selfData)
         setTotal(res.data.data.total)
+        setFee(res.data.data.fee)
+        setTradeFeeThisWeek(res.data.data.trade_total_this_week)
       }
     })
   }
@@ -125,10 +129,30 @@ export default function TradeRacePage() {
       console.log(res)
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
-        setRanklist(dealList)
-        setTotal(res.data.data.total)
-        setFee(res.data.data.fee)
-        setTradeFeeThisWeek(res.data.data.trade_total_this_week)
+        setRanklist(pre => { 
+          if (pre.length > 0) {
+            return pre
+          }
+          return dealList
+        })
+        setTotal((pre: any) => {
+          if (pre) {
+            return pre
+          }
+          return res.data.data.total
+        })
+        setFee((pre: any) => {
+          if (pre?.usdt_amount) {
+            return pre
+          }
+          return res.data.data.fee
+        })
+        setTradeFeeThisWeek(pre => {
+          if (pre) {
+            return pre
+          }
+          return res.data.data.trade_total_this_week
+        })
       }
     })
   }, [])
