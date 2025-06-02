@@ -30,7 +30,7 @@
   "trade_race_my_volume": "我的交易量",
   "trade_race_total_volume": "总有效交易量",
   "trade_race_current_reward": "当前奖池",
-  "eltrade_race_eligible_volume": "最小入围交易量",
+  "trade_race_eligible_volume": "最小入围交易量",
   "trade_race_expected": "预计奖金",
   "trade_race_lastupdate": "最后更新时间",
   "trade_race_search_placeholder": "请输入地址",
