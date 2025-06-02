@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Card, Typography, Divider, Table } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { getTradeRace } from '@/utils/axios'
 import { useMediaQuery } from 'react-responsive'
 import { useEthers } from '@usedapp/core'
-import { formatAmount } from '@funcblock/dapp-sdk'
+import dayjs from 'dayjs'
+import AddressSearch, { AddressSearchRef } from './search'
 // import { Table } from 'antd'
 
 const { Title, Text } = Typography
@@ -16,7 +17,9 @@ export default function TradeRacePage() {
   const [userRank, setUserRank] = useState<any>({})
   const [total, setTotal] = useState(0)
   const [fee, setFee] = useState<any>({})
+  const [tradeFeeThisWeek, setTradeFeeThisWeek] = useState('')
   const [currentAccount, setCurrentAccount] = useState('')
+  const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const getRankText = (data: any) => {
     if (data.rank === 0) {
@@ -25,10 +28,19 @@ export default function TradeRacePage() {
     if (data.rank === 'random') {
       return t('trade_race_in_rank')
     }
-    if (data.rank < total) {
-      return t('trade_race_rank_number', {rank : data.rank })
+    // if (data.rank < total) {
+    //   return t('trade_race_rank_number', {rank : data.rank })
+    // }
+    return t('trade_race_rank_number', {rank : data.rank })
+  }
+  const getClass = (data: any) => {
+    if (currentAccount.toLocaleLowerCase() === data.address.toLocaleLowerCase()) {
+      if (data.rank === 0) {
+        return 'font-bold text-[#a9a9a9]'
+      }
+      return 'font-bold text-[#E2B201]'
     }
-    return t('trade_race_rank_number_last')
+    return ''
   }
   const columns = [
     {
@@ -36,18 +48,31 @@ export default function TradeRacePage() {
       key: 'index',
       align: 'center' as const,
       render: (_: any, data: any, index: any) => {
-        return <div className={`${currentAccount.toLocaleLowerCase() === data.address.toLocaleLowerCase() ? 'font-bold text-[#E2B201]' : ''}`}>{getRankText(data)}</div>
+        return <div className={`${getClass(data)}`}>{getRankText(data)}</div>
       },
     },
     { title: t('trade_race_address'), dataIndex: 'address', key: 'address', align: 'center' as const,
-      render: (text: any) => {
-        return <div className={`font-mono ${currentAccount.toLocaleLowerCase() === text.toLocaleLowerCase() ? 'font-bold text-[#E2B201]' : ''}`}>{text}</div>
+      render: (text: any, data: any) => {
+        return <div className={`font-mono break-all ${getClass(data)}`}>{text}</div>
       }
      },
     { title: t('trade_race_volume'), dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any, data: any) => {
-      return <div className={`${currentAccount.toLocaleLowerCase() === data.address.toLocaleLowerCase() ? 'font-bold text-[#E2B201]' : ''}`}>{text}</div>
+      return <div className={`${getClass(data)}`}>{text}</div>
     } },
-    // { title: '预计奖金', dataIndex: '', key: '', align: 'center' as const },
+    { title: t('trade_race_expected'), dataIndex: 'reward', key: 'reward', align: 'center' as const, render: (text: any, data: any) => {
+      let amount = '0'
+      if (!fee.usdt_amount) {
+        amount = '0'
+      }
+      const totalFee = +fee.usdt_amount * 0.96
+      const reward = (totalFee / total).toFixed(2)
+      if (data.rank === 0) {
+        amount = '0'
+      } else {
+        amount = `${reward}`
+      }
+      return <div className={getClass(data)}>{amount}</div>
+    } },
   ]
   const addRankToList = (list: any[], total: number) => {
     for (let index = 0; index < list.length; index++) {
@@ -64,6 +89,35 @@ export default function TradeRacePage() {
     const data = ranklist.find(item => item.rank === total)
     return data
   }, [ranklist, total])
+  const getDataByAddress = (address: string) => {
+    // const address = account
+    getTradeRace({address}).then((res) => {
+      console.log(res)
+      if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
+        const selfData = res.data.data.this;
+        const isInRankList = res.data.data.top_n.find((item: any) => item.address.toLocaleLowerCase() === address.toLocaleLowerCase())
+        let list = addRankToList(res.data.data.top_n, res.data.data.total)
+        if (!isInRankList) {
+          const outRankAmount = list[list.length - 1].usdt_amount.replace(/[$,]/g, "");
+          const accountAmount = selfData.usdt_amount.replace(/[$,]/g, "");
+          if (+accountAmount > +outRankAmount) {
+            const insertIndex = Math.max(list.length - 1, 0);
+            list = [...list];
+            list.splice(insertIndex, 0, {...selfData, rank: 'random'});
+          } else {
+            list.push({...selfData, rank: 0})
+          }
+        }
+        setRanklist(list)
+        setUserRank(selfData)
+        setTotal(res.data.data.total)
+      }
+    })
+  }
+  const handleSearch = (address: string) => {
+    setCurrentAccount(address)
+    // getDataByAddress(address)
+  }
   useEffect(() => {
     getTradeRace({}).then((res) => {
       console.log(res)
@@ -72,38 +126,24 @@ export default function TradeRacePage() {
         setRanklist(dealList)
         setTotal(res.data.data.total)
         setFee(res.data.data.fee)
+        setTradeFeeThisWeek(res.data.data.trade_total_this_week)
       }
     })
   }, [])
   useEffect(() => {
-    if (account) {
+    if (currentAccount) {
       // const address = '0x64Bd8AB0F47Baa9c692fF5e29DDAb3F833bA3E80'
-      const address = account
-      getTradeRace({address}).then((res) => {
-        console.log(res)
-        if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
-          const selfData = res.data.data.this;
-          const isInRankList = res.data.data.top_n.find((item: any) => item.address.toLocaleLowerCase() === account.toLocaleLowerCase())
-          let list = addRankToList(res.data.data.top_n, res.data.data.total)
-          if (!isInRankList) {
-            const outRankAmount = list[list.length - 1].usdt_amount.replace(/[$,]/g, "");
-            const accountAmount = selfData.usdt_amount.replace(/[$,]/g, "");
-            if (+accountAmount > +outRankAmount) {
-              const insertIndex = Math.max(list.length - 1, 0);
-              list = [...list];
-              list.splice(insertIndex, 0, {...selfData, rank: 'random'});
-            } else {
-              list.push({...selfData, rank: 0})
-            }
-          }
-          setRanklist(list)
-          setUserRank(selfData)
-          setCurrentAccount(address)
-          setTotal(res.data.data.total)
-        }
-      })
+      const address = currentAccount
+      getDataByAddress(address)
+    }
+  }, [currentAccount])
+  useEffect(() => {
+    if (account) {
+      setCurrentAccount(account)
+      searchRef.current?.reset()
     }
   }, [account])
+
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
@@ -114,7 +154,7 @@ export default function TradeRacePage() {
           <Text strong>⏰ {t('trade_race_time')}</Text>
           {t('trade_race_time_desc')}
         </div>
-        <div className="work-break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
+        <div className="break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
           <div className="font-bold text-[14px]">📊 {t('trade_race_rule_title')}</div>
           <div>📌 {t('trade_race_rule_desc1')}</div>
           <div>{t('trade_race_rule_desc2')}</div>
@@ -122,7 +162,7 @@ export default function TradeRacePage() {
           <div>{t('trade_race_rule_desc4')}</div>
           <div>🎯 {t('trade_race_rule_desc5')}</div>
         </div>
-        <div className="work-break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
+        <div className="break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
           <div className="font-bold text-[14px]">🎁 {t('trade_race_reward_title')}</div>
           <div>•{t('trade_race_reward_desc1')}</div>
           <div>•{t('trade_race_reward_desc2')}</div>
@@ -133,7 +173,7 @@ export default function TradeRacePage() {
         {fee.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div>
             <Text>{t('trade_race_total_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${fee.usdt_amount}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>{tradeFeeThisWeek}</div>
           </div>
           <div>
             <Text>{t('trade_race_current_reward')}</Text>
@@ -176,12 +216,14 @@ export default function TradeRacePage() {
           </span>
         </div> */}
         <Divider />
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-          <Title level={4} style={{ margin: 0 }}>
+        <AddressSearch onSearch={handleSearch} ref={searchRef} />
+        <div className='flex items-end mb-[16px] flex-wrap'>
+          <Title level={4} style={{ margin: '0 10px 0 0' }}>
             {t('trade_race_leaderboard_title')}
           </Title>
+          { fee.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
           {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
-          {account && <Text style={{ marginLeft: 24, color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text>}
+          {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
           
         </div>
 
@@ -201,14 +243,15 @@ export default function TradeRacePage() {
                     borderRadius: 8,
                   }}
                   styles={{ body: { padding: 16 } }}
+                  id={rank.address}
                 >
                   {
                     columns.map((column, columnIndex) => {
                       return columnIndex <= 0 ? (<div key={column.key} className='font-bold' style={{ margin: '8px 0', color: '#333' }}>
                         <span>{column.render?.(rank[column.dataIndex || ''], rank, index)}</span>
                       </div>) : (<div className='flex' key={column.key} style={{ margin: '8px 0', color: '#333' }}>
-                        <span style={{ fontWeight: 500 }}>{column.title}：</span>
-                        <span>{column.render?.(rank[column.dataIndex || ''], rank, index)}</span>
+                        <span className={`${getClass(rank)}`} style={{ fontWeight: 500 }}>{column.title}：</span>
+                        <span className='word-break-all'>{column.render?.(rank[column.dataIndex || ''], rank, index)}</span>
                       </div>)
                     })
                   }
