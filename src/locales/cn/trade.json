@@ -19,5 +19,20 @@
   "trade_race_note_desc3": "活动如果延期，会在本期活动结束（下期活动开始）之前24小时公布。",
   "trade_race_leaderboard_commit": "排行榜即将上线，敬请期待！",
   "trade_race_eventdata_commit": "活动数据即将上线，敬请期待！",
-  "trade_race_leaderboard_title": "交易排行榜"
+  "trade_race_leaderboard_title": "交易排行榜",
+  "trade_race_rank_number": "第{{rank}}名",
+  "trade_race_rank_number_last": "最小入围交易量",
+  "trade_race_rank_title": "排名",
+  "trade_race_address": "地址",
+  "trade_race_volume": "交易量",
+  "trade_race_out_rank": "未入围",
+  "trade_race_in_rank": "入围",
+  "trade_race_my_volume": "我的交易量",
+  "trade_race_total_volume": "总有效交易量",
+  "trade_race_current_reward": "当前奖池",
+  "trade_race_eligible_volume": "最小入围交易量",
+  "trade_race_expected": "预计奖金",
+  "trade_race_lastupdate": "最后更新时间",
+  "trade_race_search_placeholder": "请输入地址",
+  "trade_race_search_button": "查询"
 }

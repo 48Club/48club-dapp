@@ -19,5 +19,20 @@
   "trade_race_note_desc3": "If the event is extended, updates will be posted at least 24 hours before the current event ends",
   "trade_race_leaderboard_commit": "The leaderboard is coming soon, please stay tuned!",
   "trade_race_eventdata_commit": "Event data will be available soon, please stay tuned!",
-  "trade_race_leaderboard_title": "Trade Leaderboard"
+  "trade_race_leaderboard_title": "Trade Leaderboard",
+  "trade_race_rank_number": "Top {{rank}}",
+  "trade_race_rank_number_last": "Last One",
+  "trade_race_rank_title": "Rank",
+  "trade_race_address": "Address",
+  "trade_race_volume": "Volume",
+  "trade_race_out_rank": "Not Eligible",
+  "trade_race_in_rank": "Eligible",
+  "trade_race_my_volume": "My Volume",
+  "trade_race_total_volume": "Total Effective Volume",
+  "trade_race_current_reward": "Current Award Pool",
+  "trade_race_eligible_volume": "Minimum Egilibility Volume",
+  "trade_race_expected": "Expected",
+  "trade_race_lastupdate": "Last Update",
+  "trade_race_search_placeholder": "Search by address",
+  "trade_race_search_button": "Search"
 }
