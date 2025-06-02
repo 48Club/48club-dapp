@@ -245,6 +245,7 @@ export default function TradeRacePage() {
                     borderRadius: 8,
                   }}
                   styles={{ body: { padding: 16 } }}
+                  id={rank.address}
                 >
                   {
                     columns.map((column, columnIndex) => {
