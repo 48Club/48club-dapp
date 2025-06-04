@@ -3,7 +3,7 @@
   "trade_race_time": "活动周期：",
   "trade_race_time_desc": "UTC 时间 2025年6月2日 周一 00:00 至 2025年6月9日 周日 23:59",
   "trade_race_rule_title": "活动规则：",
-  "trade_race_rule_desc1": "交易额统计范围： 使用币安Web3钱包(无私钥钱包)直接Swap(与 binanceDEXRouter交互)并实际与PancakeSwap KOGE/USDT V3万分之一流动性池(0xcF59B8C8BAA2dea520e3D549F97d4e49aDE17057)产生资产流动的KOGE买入金额。",
+  "trade_race_rule_desc1": "交易额统计范围： 使用币安Web3钱包(无私钥钱包)直接Swap(与 binanceDEXRouter交互)并实际与PancakeSwap/UniSwap KOGE/USDT V3万分之一流动性池产生资产流动的KOGE买入金额。",
   "trade_race_rule_desc2": "由于聚合器分流功能，单笔交易可能通过多个流动性池进行，因此按上述规则统计到的金额可能比实际总金额小，属正常现象。",
   "trade_race_rule_desc3": "奖励池计算方式：奖励池 = 活动期间主办方(48Club)在该交易对提供的LP所获交易手续费的 48%（上不封顶）",
   "trade_race_rule_desc4": "奖池由主办方从提供流动性收到的手续费中拨付。 非主办方提供的lp收到的手续费与本次活动奖池无关。",

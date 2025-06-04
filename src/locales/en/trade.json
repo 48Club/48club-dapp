@@ -3,7 +3,7 @@
   "trade_race_time": "Event Period:",
   "trade_race_time_desc": "From 00:00 UTC, Monday, June 2, 2025 To 23:59 UTC, Sunday, June 9, 2025",
   "trade_race_rule_title": "Event Rules:",
-  "trade_race_rule_desc1": "Eligible Trade Volume:Only KOGE buy transactions executed via the Binance Web3 Wallet (Keyless Wallet) through a direct swap interaction with the binanceDEXRouter, and resulting in actual asset flow through the PancakeSwap KOGE/USDT V3 0.01% fee tier liquidity pool (0xcF59B8C8BAA2dea520e3D549F97d4e49aDE17057), will be counted.",
+  "trade_race_rule_desc1": "Eligible Trade Volume:Only KOGE buy transactions executed via the Binance Web3 Wallet (Keyless Wallet) through a direct swap interaction with the binanceDEXRouter, and resulting in actual asset flow through the PancakeSwapUniSwap KOGE/USDT V3 0.01% fee tier liquidity pool, will be counted.",
   "trade_race_rule_desc2": "Note: Due to DEX aggregator routing, a single swap may interact with multiple liquidity pools. Therefore, the recorded volume based on the above criteria may be lower than the total transaction amount. This is expected behavior.",
   "trade_race_rule_desc3": "Reward Pool Calculation:Reward Pool = 48% of the total trading fees earned by 48Club’s liquidity position on this trading pair during the event period.",
   "trade_race_rule_desc4": "The reward pool is funded solely from fees collected by 48Club’s LP. Fees earned by LPs not operated by the organizer are excluded from the reward pool.",
