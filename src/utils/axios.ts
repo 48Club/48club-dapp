@@ -67,4 +67,7 @@ export const getUserVote = async(id: string, account: string) => {
 export const getTradeRace = async(params: any) => {
   return api.get(`https://api.trade-race.48.club`, { params, method: 'GET' })
 }
+export const getTradeRaceAirdrop = async(params: any) => {
+  return api.get(`https://api.trade-race.48.club/airdrop`, { params, method: 'GET' })
+}
 export default api

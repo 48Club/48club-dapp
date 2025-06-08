@@ -174,3 +174,6 @@ button {
     justify-content: start !important;
   }
 }
+.address-search-modal .ant-modal-content .ant-modal-close {
+  display: block;
+}

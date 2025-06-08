@@ -11,6 +11,7 @@ import Oracle_ABI from './abi/Oracle.json'
 
 import stakeinscription from './abi/stakeinscription.json'
 import WrappedABI from './abi/WrappedInscription.json'
+import airdropABI from './abi/airdrop.json'
 import {
   GovernanceAddress,
   GovernanceAddressNew,
@@ -20,6 +21,7 @@ import {
   OracleAddress,
   wrappedAddress,
   stakeInscription,
+  airdropAddress,
 } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { READONLY_RPC_URL } from '../constants/env'
@@ -79,4 +81,9 @@ export function useWrappedContract() {
 export function useStakeInscriptionContract() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(stakeInscription as string, stakeinscription, provider), [provider])
+}
+
+export function useAirDropContract() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(airdropAddress as string, airdropABI, provider), [provider])
 }

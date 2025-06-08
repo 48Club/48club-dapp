@@ -67,3 +67,8 @@ export const stakeInscription = {
   [ChainId.BSC]: '',
   [ChainId.BSCTestnet]: '0xC29C4320c6224efA87136cd9D2885bbBa090171f',
 }[CHAIN_ID as number]
+
+export const airdropAddress = {
+  [ChainId.BSC]: '0x092F23A885649936306b7702f588815445427934',
+  [ChainId.BSCTestnet]: '0x0000000000000000000000000000000000000000',
+}[CHAIN_ID as number]
