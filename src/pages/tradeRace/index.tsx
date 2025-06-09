@@ -1,15 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Card, Typography, Divider, Table } from 'antd'
+import { Card, Typography, Divider, Table, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { getTradeRace } from '@/utils/axios'
+import { getTradeRace, getTradeRaceAirdrop } from '@/utils/axios'
 import { useMediaQuery } from 'react-responsive'
 import { useEthers } from '@usedapp/core'
 import dayjs from 'dayjs'
 import AddressSearch, { AddressSearchRef } from './search'
+import AddressSearchModal from './AddressSearchModal'
 // import { Table } from 'antd'
 
 const { Title, Text } = Typography
-
+const formatNumber = (num: string | number) => {
+  return Number(num).toLocaleString('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  })
+}
 export default function TradeRacePage() {
   const { t } = useTranslation()
   const { account } = useEthers()
@@ -21,6 +27,7 @@ export default function TradeRacePage() {
   const [currentAccount, setCurrentAccount] = useState('')
   const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
+  const [addressSearchModalVisible, setAddressSearchModalVisible] = useState(false)
   const getRankText = (data: any) => {
     if (data.rank === 0) {
       return t('trade_race_out_rank')
@@ -57,7 +64,7 @@ export default function TradeRacePage() {
       }
      },
     { title: t('trade_race_volume'), dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any, data: any) => {
-      return <div className={`${getClass(data)}`}>{text}</div>
+      return <div className={`${getClass(data)}`}>${formatNumber(text)}</div>
     } },
     { title: t('trade_race_expected'), dataIndex: 'reward', key: 'reward', align: 'center' as const, render: (text: any, data: any) => {
       let amount = '0'
@@ -199,15 +206,15 @@ export default function TradeRacePage() {
         {fee.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div>
             <Text>{t('trade_race_total_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>{tradeFeeThisWeek}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
           </div>
           <div>
             <Text>{t('trade_race_current_reward')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${(+fee.usdt_amount * 0.96).toFixed(2)}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee.usdt_amount * 0.96)}</div>
           </div>
           <div>
             <Text>{t('trade_race_eligible_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>{lastRankDetail.usdt_amount}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail.usdt_amount)}</div>
           </div>
         </div>}
         
@@ -250,7 +257,11 @@ export default function TradeRacePage() {
           { fee.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
           {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
           {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
-          
+          <Button type="primary" onClick={() => {
+            setAddressSearchModalVisible(true)
+          }}>
+            {t('search_address')}
+          </Button>
         </div>
 
         <div style={{ marginBottom: 24 }}>
@@ -316,6 +327,7 @@ export default function TradeRacePage() {
           <div>• {t('trade_race_note_desc3')}</div>
         </div>
       </Card>
+      <AddressSearchModal visible={addressSearchModalVisible} onClose={() => setAddressSearchModalVisible(!addressSearchModalVisible)} />
     </div>
   )
 }

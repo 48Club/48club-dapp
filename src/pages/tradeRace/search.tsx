@@ -1,42 +1,81 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react'
-import { Input, Button } from 'antd'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import { Modal, Input, Button, message } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { isAddress } from 'ethers/lib/utils'
 
 export interface AddressSearchRef {
+  open: () => void
   reset: () => void
 }
 
 interface AddressSearchProps {
-  onSearch?: (address: string) => void
+  onSearch: (address: string) => void
 }
 
 const AddressSearch = forwardRef<AddressSearchRef, AddressSearchProps>(({ onSearch }, ref) => {
-  const [address, setAddress] = useState('')
   const { t } = useTranslation()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [address, setAddress] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useImperativeHandle(ref, () => ({
-    reset: () => setAddress('')
+    open: () => setIsModalOpen(true),
+    reset: () => {
+      setAddress('')
+      setIsModalOpen(false)
+    }
   }))
 
-  const handleSearch = () => {
-    if (onSearch) {
+  const handleSearch = async () => {
+    if (!address) {
+      message.error(t('trade_race_address_required'))
+      return
+    }
+
+    try {
+      // 验证地址格式
+      if (!isAddress(address)) {
+        message.error(t('trade_race_invalid_address'))
+        return
+      }
+
+      setLoading(true)
       onSearch(address)
+      setIsModalOpen(false)
+    } catch (error) {
+      console.error('Search error:', error)
+      message.error(t('trade_race_search_error'))
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
-    <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-      <Input
-        placeholder={t('trade_race_search_placeholder')}
-        value={address}
-        onChange={e => setAddress(e.target.value)}
-        style={{ maxWidth: 300 }}
-        allowClear={true}
-      />
-      <Button type="primary" onClick={handleSearch}>
-        {t('trade_race_search_button')}
-      </Button>
-    </div>
+    <Modal
+      title={t('trade_race_search_title')}
+      open={isModalOpen}
+      onCancel={() => setIsModalOpen(false)}
+      footer={null}
+      width={400}
+    >
+      <div className="flex flex-col gap-4">
+        <Input
+          placeholder={t('trade_race_address_placeholder')}
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          onPressEnter={handleSearch}
+          className="font-mono"
+        />
+        <Button 
+          type="primary" 
+          onClick={handleSearch}
+          loading={loading}
+          style={{ background: '#E2B201' }}
+        >
+          {t('trade_race_search')}
+        </Button>
+      </div>
+    </Modal>
   )
 })
 
