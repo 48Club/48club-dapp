@@ -139,9 +139,6 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
         <div style={{ color: '#888', fontSize: 12 }}>
           {t('search_address_tip')}
         </div>
-        <div style={{ color: '#888', fontSize: 12 }}>
-          {t('search_address_tip2')}
-        </div>
         <div className="flex gap-4">
           <Input
             placeholder={t('enter_address')}
