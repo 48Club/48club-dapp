@@ -18,13 +18,12 @@ export default function useAirDrop() {
     console.log(events, 'events')
     const rows = events.map((log: any) => ({
       token: log.args.token,
-      eventID: 1748822400,  // log.args.eventID.toString(),
-      recipient: '0xfB93B098025EAD6E98DAab039243D110372DF08C', //log.args.recipient,
+      eventID: log.args.eventID.toString(),
+      recipient:  log.args.recipient,
       amount: utils.formatUnits(log.args.amount, 18).toString(),
       blockNumber: log.blockNumber,
       txHash: log.transactionHash,
     }))
-    console.log(rows, 'rows')
     setAirdropList(rows)
   }, [airdropContract])
 

@@ -60,7 +60,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       key: 'dispatch',
       render: (_: any, data: any) => {
         const isDispatch = (airdropList || []).find((item: any) => +item.eventID === data.range[0] && item.recipient === address)
-        return isDispatch ? <span className="text-green-500">{t('yes')}</span> : <span className="text-red-500">{t('no')}</span>
+        return isDispatch ? <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${isDispatch.txHash}`} target="_blank">{isDispatch.txHash}</a> : <span className="text-red-500">{t('no')}</span>
       }
     }
   ]
@@ -175,18 +175,13 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
                 padding: 16,
                 background: '#fff'
               }}>
-                <div style={{ fontWeight: 500, color: '#333', marginBottom: 8 }}>
-                  {t('amount')}：<span className="font-mono">{item.amount} KOGE</span>
-                </div>
-                <div style={{ color: '#333', marginBottom: 8 }}>
-                  {t('time')}：{dayjs(item.range[0] * 1000).format('YYYY-MM-DD HH:mm:ss')}
-                </div>
-                <div style={{ color: '#333' }}>
-                  {t('isDispatch')}：{(airdropList || []).find((a: any) => +a.eventID === item.range[0] && a.recipient === address)
-                    ? <span className="text-green-500">{t('yes')}</span>
-                    : <span className="text-red-500">{t('no')}</span>
-                  }
-                </div>
+                {
+                  columns.map((column, idx) => (
+                    <div key={idx} style={{ fontWeight: 500, color: '#333', marginBottom: 8 }}>
+                      {column.title}：{column.render('', item)}
+                    </div>
+                  ))
+                }
               </div>
             ))}
             {searchResults.length === 0 && (
