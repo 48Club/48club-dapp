@@ -68,11 +68,11 @@ export default function TradeRacePage() {
     } },
     { title: t('trade_race_expected'), dataIndex: 'reward', key: 'reward', align: 'center' as const, render: (text: any, data: any) => {
       let amount = '0'
-      if (!fee.usdt_amount) {
+      if (!fee?.usdt_amount) {
         amount = '0'
       } else {
         const totalFeeKoge = +fee.koge_amount * 0.96
-        const totalFee = +fee.usdt_amount * 0.96
+        const totalFee = +fee?.usdt_amount * 0.96
         const reward = (totalFee / total).toFixed(2)
         const rewardKoge = (totalFeeKoge / total).toFixed(2)
         if (data.rank === 0) {
@@ -203,18 +203,18 @@ export default function TradeRacePage() {
           <div>•{t('trade_race_reward_desc4')}</div>
         </div>
         <Divider />
-        {fee.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
+        {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div>
             <Text>{t('trade_race_total_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${tradeFeeThisWeek}</div>
           </div>
           <div>
             <Text>{t('trade_race_current_reward')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee.usdt_amount * 0.96)}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${+fee?.usdt_amount * 0.96}</div>
           </div>
           <div>
             <Text>{t('trade_race_eligible_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail.usdt_amount)}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${lastRankDetail?.usdt_amount}</div>
           </div>
         </div>}
         
@@ -254,7 +254,7 @@ export default function TradeRacePage() {
           <Title level={4} style={{ margin: '0 10px 0 0' }}>
             {t('trade_race_leaderboard_title')}
           </Title>
-          { fee.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
+          { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
           {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
           {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
           <Button type="primary" onClick={() => {

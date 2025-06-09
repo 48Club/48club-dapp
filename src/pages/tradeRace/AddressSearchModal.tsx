@@ -139,9 +139,6 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
         <div style={{ color: '#888', fontSize: 12 }}>
           {t('search_address_tip')}
         </div>
-        <div style={{ color: '#888', fontSize: 12 }}>
-          {t('search_address_tip2')}
-        </div>
         <div className="flex gap-4">
           <Input
             placeholder={t('enter_address')}
@@ -179,7 +176,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
                 background: '#fff'
               }}>
                 <div style={{ fontWeight: 500, color: '#333', marginBottom: 8 }}>
-                  {t('amount')}：<span className="font-mono">{formatNumberFull(item.amount / 100)} KOGE</span>
+                  {t('amount')}：<span className="font-mono">{formatNumberFull(item.amount)} KOGE</span>
                 </div>
                 <div style={{ color: '#333', marginBottom: 8 }}>
                   {t('time')}：{dayjs(item.range[0] * 1000).format('YYYY-MM-DD HH:mm:ss')}
