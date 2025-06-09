@@ -1,7 +1,7 @@
 {
   "trade_race_title": "Trade KOGE with Binance Web3 Wallet and Win Fee Rewards!",
   "trade_race_time": "Event Period:",
-  "trade_race_time_desc": "From 00:00 UTC, Monday, June 2, 2025 To 23:59 UTC, Sunday, June 9, 2025",
+  "trade_race_time_desc": "From 00:00 UTC, Monday, June 2, 2025 To 23:59 UTC, Sunday, June 8, 2025",
   "trade_race_rule_title": "Event Rules:",
   "trade_race_rule_desc1": "Eligible Trade Volume:Only KOGE buy transactions executed via the Binance Web3 Wallet (Keyless Wallet) through a direct swap interaction with the binanceDEXRouter, and resulting in actual asset flow through the PancakeSwapUniSwap KOGE/USDT V3 0.01% fee tier liquidity pool, will be counted.",
   "trade_race_rule_desc2": "Note: Due to DEX aggregator routing, a single swap may interact with multiple liquidity pools. Therefore, the recorded volume based on the above criteria may be lower than the total transaction amount. This is expected behavior.",

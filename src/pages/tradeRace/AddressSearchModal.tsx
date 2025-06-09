@@ -6,6 +6,8 @@ import { getTradeRaceAirdrop } from '@/utils/axios'
 import dayjs from 'dayjs'
 import { CloseOutlined } from '@ant-design/icons'
 import useAirDrop from '@/hooks/gov/useAirDrop'
+import Bignumber from 'bignumber.js'
+import { useMediaQuery } from 'react-responsive'
 
 interface AddressSearchModalProps {
   visible: boolean
@@ -27,13 +29,14 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const [searchResults, setSearchResults] = useState<AirdropRecord[]>([])
   const [isEligible, setIsEligible] = useState(true)
   const { airdropList, loadAirdropEvent } = useAirDrop()
-
-  const formatNumber = (num: string | number) => {
-    return Number(num).toLocaleString('en-US', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    })
+  const formatNumberFull = (num: string | number) => {
+    const [int, dec] = String(num).split('.')
+    return (
+      Number(int).toLocaleString('en-US') +
+      (dec ? '.' + dec : '')
+    )
   }
+  const isMobile = useMediaQuery({ maxWidth: 768 })
 
   const columns = [
     {
@@ -41,7 +44,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       dataIndex: 'amount',
       key: 'amount',
       render: (_: string, data: any) => (
-        <span className="font-mono">{formatNumber(data.amount)}</span>
+        <span className="font-mono">{Bignumber(data.amount).div(100).toString()} KOGE</span>
       )
     },
     {
@@ -97,6 +100,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
     } catch (error) {
       if (error?.status === 404) {
         setIsEligible(false)
+        setSearchResults([])
         return
       }
       message.error(t('search_error'))
@@ -142,10 +146,17 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           <Input
             placeholder={t('enter_address')}
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => {
+              setAddress(e.target.value)
+              if (e.target.value === '') {
+                setSearchResults([])
+                setIsEligible(true)
+              }
+            }}
             onPressEnter={handleSearch}
             className="font-mono"
             autoFocus
+            allowClear
           />
           <Button 
             type="primary" 
@@ -157,18 +168,50 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           </Button>
         </div>
 
-        <Table
-          columns={columns}
-          dataSource={searchResults}
-          rowKey="txHash"
-          loading={loading}
-          pagination={false}
-          locale={{
-            emptyText: isEligible
-              ? <div style={{ color: '#888', padding: 24 }}>{t('no_data')}</div>
-              : <div style={{ color: '#E24C4B', padding: 24, fontWeight: 600 }}>{t('not_eligible')}</div>
-          }}
-        />
+        {isMobile ? (
+          <div>
+            {searchResults.map((item, idx) => (
+              <div key={idx} style={{
+                border: '1px solid #f0f0f0',
+                borderRadius: 8,
+                marginBottom: 12,
+                padding: 16,
+                background: '#fff'
+              }}>
+                <div style={{ fontWeight: 500, color: '#333', marginBottom: 8 }}>
+                  {t('amount')}：<span className="font-mono">{formatNumberFull(item.amount / 100)} KOGE</span>
+                </div>
+                <div style={{ color: '#333', marginBottom: 8 }}>
+                  {t('time')}：{dayjs(item.range[0] * 1000).format('YYYY-MM-DD HH:mm:ss')}
+                </div>
+                <div style={{ color: '#333' }}>
+                  {t('isDispatch')}：{(airdropList || []).find((a: any) => +a.eventID === item.range[0] && a.recipient === address)
+                    ? <span className="text-green-500">{t('yes')}</span>
+                    : <span className="text-red-500">{t('no')}</span>
+                  }
+                </div>
+              </div>
+            ))}
+            {searchResults.length === 0 && (
+              <div style={{ color: isEligible ? '#888' : '#E24C4B', padding: 24, fontWeight: isEligible ? 400 : 600 }}>
+                {isEligible ? t('no_data') : t('not_eligible')}
+              </div>
+            )}
+          </div>
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={searchResults}
+            rowKey="txHash"
+            loading={loading}
+            pagination={false}
+            locale={{
+              emptyText: isEligible
+                ? <div style={{ color: '#888', padding: 24 }}>{t('no_data')}</div>
+                : <div style={{ color: '#E24C4B', padding: 24, fontWeight: 600 }}>{t('not_eligible')}</div>
+            }}
+          />
+        )}
       </div>
     </Modal>
   )

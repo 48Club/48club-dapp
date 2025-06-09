@@ -64,7 +64,7 @@ export default function TradeRacePage() {
       }
      },
     { title: t('trade_race_volume'), dataIndex: 'usdt_amount', key: 'usdt_amount', align: 'center' as const, render: (text: any, data: any) => {
-      return <div className={`${getClass(data)}`}>{formatNumber(text)}</div>
+      return <div className={`${getClass(data)}`}>${formatNumber(text)}</div>
     } },
     { title: t('trade_race_expected'), dataIndex: 'reward', key: 'reward', align: 'center' as const, render: (text: any, data: any) => {
       let amount = '0'
