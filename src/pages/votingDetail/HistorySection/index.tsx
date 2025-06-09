@@ -133,7 +133,31 @@ export default function HistorySection() {
                     </div>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
                       <span className="text-gray">{t('reason')}</span>
-                      <span className="break-words text-right">{i.reason}</span>
+                      <div className="flex flex-row">
+                        <span className="break-words text-right">{i.reason}</span>
+                        {i.reason && (
+                          <div className="flex flex-row">
+                            <Tooltip title={voteList[i.transactionHash]?.agree}>
+                              <div className="text-green-500 cursor-pointer mx-[5px]" onClick={() => handleLike(i.transactionHash)}>
+                                {userVote[i.transactionHash]?.agree ? (
+                                  <LikeFilled style={{ fontSize: 16, color: '#000' }} />
+                                ) : (
+                                  <LikeOutlined style={{ fontSize: 16, color: userVote[i.transactionHash]? '#808080' : '#000' }} />
+                                )}
+                              </div>
+                            </Tooltip>
+                            <Tooltip title={voteList[i.transactionHash]?.dis}>
+                              <div className="text-red-500 cursor-pointer" onClick={() => handleDislike(i.transactionHash)}>
+                                {userVote[i.transactionHash]?.dis ? (
+                                  <DislikeFilled style={{ fontSize: 16, color: '#000' }} />
+                                ) : (
+                                  <DislikeOutlined style={{ fontSize: 16, color: userVote[i.transactionHash]? '#808080' : '#000' }} />
+                                )}
+                              </div>
+                            </Tooltip>
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <div className="flex flex-row mb-4 text-sm leading-5 justify-between">
                       <span className="text-gray">KOGE</span>
