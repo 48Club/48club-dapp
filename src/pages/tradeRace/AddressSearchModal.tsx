@@ -44,7 +44,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       dataIndex: 'amount',
       key: 'amount',
       render: (_: string, data: any) => (
-        <span className="font-mono">{Bignumber(data.amount).div(100).toString()} KOGE</span>
+        <span className="font-mono">{data.amount} KOGE</span>
       )
     },
     {
@@ -176,7 +176,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
                 background: '#fff'
               }}>
                 <div style={{ fontWeight: 500, color: '#333', marginBottom: 8 }}>
-                  {t('amount')}：<span className="font-mono">{formatNumberFull(item.amount)} KOGE</span>
+                  {t('amount')}：<span className="font-mono">{item.amount} KOGE</span>
                 </div>
                 <div style={{ color: '#333', marginBottom: 8 }}>
                   {t('time')}：{dayjs(item.range[0] * 1000).format('YYYY-MM-DD HH:mm:ss')}
