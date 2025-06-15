@@ -110,6 +110,13 @@ export default function Header() {
             <Dropdown dropdownRender={() => menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
             </Dropdown>
+            <Link
+              className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/inscriptions') ? 'text-primary' : 'text-black'
+                }`}
+              to={'/trade-race'}
+            >
+              <img src="/static/trade-race-icon.png" className="h-[40px]" alt="" />
+            </Link>
           </div>
         </div>
         <div className="flex flex-row items-center">
