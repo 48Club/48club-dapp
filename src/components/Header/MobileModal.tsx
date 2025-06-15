@@ -79,6 +79,11 @@ export default function MobileModal(props: { open: boolean, oncancel: () => void
             <Link className="text-black opacity-75 hover:text-primary" to={'/inscriptions'}>{t('inscriptions')}</Link>
           </Menu.Item>
           <Menu.Item>
+            <Link className="text-black opacity-75 hover:text-primary" to={'/trade-race'}>
+              <img src="/static/trade-race-icon.png" className="h-[40px]" alt="" />
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
             <Link className="text-black opacity-75 hover:text-primary" to={'/committee'}>{t('app_header_menu_committee_title')}</Link>
           </Menu.Item>
           <Menu.Item>
