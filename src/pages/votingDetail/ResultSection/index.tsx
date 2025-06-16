@@ -193,13 +193,13 @@ export const ResultSectionView = ({ info, id }: any) => {
                 />
                 <div className={`flex flex-row ${interimResult ? 'flex-row-reverse' : ''}` } style={{ width: `${Math.max(againstVotesPercent + forVotesPercent, 1)}%` }}>
                 {
-                  forVotesPercent > 0 && (<div className="h-full bg-[#08C849] relative" style={{ width: `${forVotesPercent}%`, borderRight: stillNeeded.isGreaterThan(0) && !interimResult ? ' 1px solid #fff' : '', }} />)
+                  forVotesPercent > 0 && (<div className="h-full bg-[#08C849] relative" style={{ width: `${forVotesPercent * 100 / (forVotesPercent + againstVotesPercent)}%`, borderRight: stillNeeded.isGreaterThan(0) && !interimResult ? ' 1px solid #fff' : '', }} />)
                 }
                 {
                   againstVotesPercent > 0 && (<div
                     className="h-full bg-[#EF2B2B] relative"
                     style={{
-                      width: `${Math.max(againstVotesPercent, 1)}%`,
+                      width: `${againstVotesPercent * 100 / (forVotesPercent + againstVotesPercent)}%`,
                       borderRight: stillNeeded.isGreaterThan(0) && interimResult ? '1px solid #fff' : '',
                     }}
                   />)
