@@ -203,7 +203,7 @@ export default function TradeRacePage() {
           <div>•{t('trade_race_reward_desc4')}</div>
         </div>
         <Divider />
-        {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
+        {/* {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div>
             <Text>{t('trade_race_total_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${tradeFeeThisWeek}</div>
@@ -216,11 +216,11 @@ export default function TradeRacePage() {
             <Text>{t('trade_race_eligible_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${lastRankDetail?.usdt_amount}</div>
           </div>
-        </div>}
+        </div>} */}
         
        
         {/* Coming Soon for stats */}
-        {/* <div
+        <div
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -247,24 +247,24 @@ export default function TradeRacePage() {
           <span className="text-center" style={{ color: '#888', fontSize: 14 }}>
             {t('trade_race_eventdata_commit')}
           </span>
-        </div> */}
+        </div>
         <Divider />
         <AddressSearch onSearch={handleSearch} ref={searchRef} />
         <div className='flex items-end mb-[16px] flex-wrap'>
           <Title level={4} style={{ margin: '0 10px 0 0' }}>
             {t('trade_race_leaderboard_title')}
           </Title>
-          { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
+          {/* { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> } */}
           {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
-          {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
-          <Button type="primary" onClick={() => {
+          {/* {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>} */}
+          {/* <Button type="primary" onClick={() => {
             setAddressSearchModalVisible(true)
           }}>
             {t('search_address')}
-          </Button>
+          </Button> */}
         </div>
 
-        <div style={{ marginBottom: 24 }}>
+        {/* <div style={{ marginBottom: 24 }}>
           {!isMobile ? (
             // PC端显示表格
             <Table columns={columns} dataSource={ranklist} pagination={false} bordered style={{ marginBottom: 24 }} />
@@ -296,10 +296,10 @@ export default function TradeRacePage() {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Coming Soon 替换排行榜表格 */}
-        {/* <div style={{
+        <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -318,7 +318,7 @@ export default function TradeRacePage() {
             marginBottom: 8,
           }}>Coming Soon</span>
           <span className='text-center' style={{ color: '#888', fontSize: 14 }}>{t('trade_race_leaderboard_commit')}</span>
-        </div> */}
+        </div>
         <Divider />
         <div style={{ color: '#888', fontSize: 13 }}>
           <div>❗️{t('trade_race_note_title')}</div>

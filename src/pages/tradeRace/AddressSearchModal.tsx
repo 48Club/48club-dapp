@@ -59,7 +59,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       title: t('isDispatch'),
       key: 'dispatch',
       render: (_: any, data: any) => {
-        const isDispatch = (airdropList || []).find((item: any) => +item.eventID === data.range[0] && item.recipient === address)
+        const isDispatch = (airdropList || []).find((item: any) => +item.eventID === data.range[0] && item.recipient.toLowerCase() === address.toLowerCase())
         return isDispatch ? <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${isDispatch.txHash}`} target="_blank">{isDispatch.txHash}</a> : <span className="text-red-500">{t('no')}</span>
       }
     }
