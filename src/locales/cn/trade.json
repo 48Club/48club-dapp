@@ -1,6 +1,6 @@
 {
   "trade_race_title": "用币安Web3钱包交易KOGE，赢取手续费奖励！",
-  "trade_race_time": "活动周期：",
+  "trade_race_time": "活动周期:",
   "trade_race_time_desc": "UTC 时间 2025年6月16日 周一 00:00 至 2025年6月22日 周日 23:59",
   "trade_race_rule_title": "活动规则：",
   "trade_race_rule_desc1": "交易额统计范围： 使用币安Web3钱包(无私钥钱包)直接Swap(与 binanceDEXRouter交互)并实际与PancakeSwap/UniSwap KOGE/USDT V3万分之一流动性池产生资产流动的KOGE买入金额。",

@@ -16,7 +16,7 @@ dayjs.extend(utc)
 const { Title, Text } = Typography
 const formatNumber = (num: string | number) => {
   return Number(num).toLocaleString('en-US', {
-    minimumFractionDigits: 0,
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })
 }
@@ -80,7 +80,7 @@ export default function TradeRacePage() {
         const totalFeeKoge = +fee.koge_amount * 0.96
         const totalFee = +fee?.usdt_amount * 0.96
         const reward = (totalFee / total).toFixed(2)
-        const rewardKoge = (totalFeeKoge / total).toFixed(2)
+        const rewardKoge = (totalFeeKoge / total).toFixed(4)
         if (data.rank === 0) {
           amount = '0'
         } else {
@@ -150,12 +150,10 @@ export default function TradeRacePage() {
     const locale = i18n.language === 'cn' ? 'zh-cn' : 'en'
     
     if (locale === 'zh-cn') {
-      dayjs.locale('zh-cn')
-      return `${startTime.format('M月DD日 HH:mm:ss')} ~ ${endTime.format('M月DD日 HH:mm:ss')} (UTC)`
+      return ` ${startTime.locale('zh-cn').format('M月DD日 HH:mm:ss')} ~ ${endTime.locale('zh-cn').format('M月DD日 HH:mm:ss')} (UTC)`
     }
     
-    dayjs.locale('en')
-    return `${startTime.format('DD MMM. HH:mm:ss')} ~ ${endTime.format('DD MMM. HH:mm:ss')} (UTC)`
+    return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   useEffect(() => {
     getTradeRace({}).then((res) => {
