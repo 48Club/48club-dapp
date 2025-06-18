@@ -5,10 +5,13 @@ import { getTradeRace, getTradeRaceAirdrop } from '@/utils/axios'
 import { useMediaQuery } from 'react-responsive'
 import { useEthers } from '@usedapp/core'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 // import { Table } from 'antd'
+
+dayjs.extend(utc)
 
 const { Title, Text } = Typography
 const formatNumber = (num: string | number) => {
@@ -142,18 +145,17 @@ export default function TradeRacePage() {
     const [start, end] = timeRange
     if (!start || !end) return ''
 
-    const startTime = dayjs.unix(start)
-    const endTime = dayjs.unix(end)
+    const startTime = dayjs.unix(start).utc()
+    const endTime = dayjs.unix(end - 1).utc()
     const locale = i18n.language === 'cn' ? 'zh-cn' : 'en'
     
-    // 设置全局语言环境
-    dayjs.locale(locale)
-    
     if (locale === 'zh-cn') {
-      return `UTC 时间 ${startTime.format('YYYY年MM月DD日 dddd')} 00:00 至 ${endTime.format('YYYY年MM月DD日 dddd')} 23:59`
+      dayjs.locale('zh-cn')
+      return `${startTime.format('M月DD日 HH:mm:ss')} ~ ${endTime.format('M月DD日 HH:mm:ss')} (UTC)`
     }
     
-    return `From 00:00 UTC, ${startTime.format('dddd')}, ${startTime.format('MMMM D, YYYY')} To 23:59 UTC, ${endTime.format('dddd')}, ${endTime.format('MMMM D, YYYY')}`
+    dayjs.locale('en')
+    return `${startTime.format('DD MMM. HH:mm:ss')} ~ ${endTime.format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   useEffect(() => {
     getTradeRace({}).then((res) => {
