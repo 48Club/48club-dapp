@@ -5,6 +5,7 @@ import { getTradeRace, getTradeRaceAirdrop } from '@/utils/axios'
 import { useMediaQuery } from 'react-responsive'
 import { useEthers } from '@usedapp/core'
 import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 // import { Table } from 'antd'
@@ -17,7 +18,7 @@ const formatNumber = (num: string | number) => {
   })
 }
 export default function TradeRacePage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { account } = useEthers()
   const [ranklist, setRanklist] = useState<any[]>([])
   const [userRank, setUserRank] = useState<any>({})
@@ -25,6 +26,8 @@ export default function TradeRacePage() {
   const [fee, setFee] = useState<any>({})
   const [tradeFeeThisWeek, setTradeFeeThisWeek] = useState('')
   const [currentAccount, setCurrentAccount] = useState('')
+  const [timeRange, setTimeRange] = useState<[number, number]>([0, 0])
+  const [nonce, setNonce] = useState<number>(0)
   const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const [addressSearchModalVisible, setAddressSearchModalVisible] = useState(false)
@@ -124,6 +127,10 @@ export default function TradeRacePage() {
         setTotal(res.data.data.total)
         setFee(res.data.data.fee)
         setTradeFeeThisWeek(res.data.data.trade_total_this_week)
+        // Set nonce if available in response
+        if (res.data.data.nonce) {
+          setNonce(res.data.data.nonce)
+        }
       }
     })
   }
@@ -131,6 +138,23 @@ export default function TradeRacePage() {
     setCurrentAccount(address)
     // getDataByAddress(address)
   }
+  const formatTimeRange = useMemo(() => {
+    const [start, end] = timeRange
+    if (!start || !end) return ''
+
+    const startTime = dayjs.unix(start)
+    const endTime = dayjs.unix(end)
+    const locale = i18n.language === 'cn' ? 'zh-cn' : 'en'
+    
+    // 设置全局语言环境
+    dayjs.locale(locale)
+    
+    if (locale === 'zh-cn') {
+      return `UTC 时间 ${startTime.format('YYYY年MM月DD日 dddd')} 00:00 至 ${endTime.format('YYYY年MM月DD日 dddd')} 23:59`
+    }
+    
+    return `From 00:00 UTC, ${startTime.format('dddd')}, ${startTime.format('MMMM D, YYYY')} To 23:59 UTC, ${endTime.format('dddd')}, ${endTime.format('MMMM D, YYYY')}`
+  }, [timeRange, i18n.language])
   useEffect(() => {
     getTradeRace({}).then((res) => {
       console.log(res)
@@ -160,6 +184,14 @@ export default function TradeRacePage() {
           }
           return res.data.data.trade_total_this_week
         })
+        // Set nonce if available in response
+        if (res.data.data.nonce) {
+          setNonce(res.data.data.nonce)
+        }
+        // Set time range if available in response
+        if (res.data.data.range && Array.isArray(res.data.data.range) && res.data.data.range.length === 2) {
+          setTimeRange(res.data.data.range)
+        }
       }
     })
   }, [])
@@ -180,12 +212,31 @@ export default function TradeRacePage() {
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
-        <Title level={3} style={{ textAlign: 'center', marginBottom: 0 }}>
-          {t('trade_race_title')}
-        </Title>
+        <div className="flex items-center justify-center gap-2">
+          <Title level={3} style={{ marginBottom: 0 }}>
+            {t('trade_race_title')}
+          </Title>
+          {nonce > 0 && (
+            <div
+              style={{
+                backgroundColor: '#FFE8B2',
+                border: '1px solid #E2B201',
+                borderRadius: '16px',
+                padding: '2px 16px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                height: '32px'
+              }}
+            >
+              <Text strong style={{ color: '#D48806', fontSize: 20, lineHeight: '28px' }}>
+                #{nonce}
+              </Text>
+            </div>
+          )}
+        </div>
         <div style={{ textAlign: 'center', color: '#E2B201', margin: '8px 0' }}>
           <Text strong>⏰ {t('trade_race_time')}</Text>
-          {t('trade_race_time_desc')}
+          {formatTimeRange}
         </div>
         <div className="break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
           <div className="font-bold text-[14px]">📊 {t('trade_race_rule_title')}</div>
@@ -203,24 +254,24 @@ export default function TradeRacePage() {
           <div>•{t('trade_race_reward_desc4')}</div>
         </div>
         <Divider />
-        {/* {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
+        {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div>
             <Text>{t('trade_race_total_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${tradeFeeThisWeek}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
           </div>
           <div>
             <Text>{t('trade_race_current_reward')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${+fee?.usdt_amount * 0.96}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * 0.96)}</div>
           </div>
           <div>
             <Text>{t('trade_race_eligible_volume')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${lastRankDetail?.usdt_amount}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail?.usdt_amount)}</div>
           </div>
-        </div>} */}
+        </div>}
         
        
         {/* Coming Soon for stats */}
-        <div
+        {/* <div
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -247,24 +298,25 @@ export default function TradeRacePage() {
           <span className="text-center" style={{ color: '#888', fontSize: 14 }}>
             {t('trade_race_eventdata_commit')}
           </span>
-        </div>
+        </div> */}
         <Divider />
         <AddressSearch onSearch={handleSearch} ref={searchRef} />
-        <div className='flex items-end mb-[16px] flex-wrap'>
-          <Title level={4} style={{ margin: '0 10px 0 0' }}>
-            {t('trade_race_leaderboard_title')}
-          </Title>
-          {/* { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> } */}
-          {/* <Text style={{ marginLeft: 24, color: '#888' }}>空投记录</Text> */}
-          {/* {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>} */}
-          {/* <Button type="primary" onClick={() => {
+        <div className='flex items-end mb-[16px] flex-wrap justify-between'>
+          <div className='flex items-center flex-wrap'>
+            <Title level={4} style={{ margin: '0 10px 0 0' }}>
+              {t('trade_race_leaderboard_title')}
+            </Title>
+            { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
+            {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
+          </div>
+          <Button type="primary" onClick={() => {
             setAddressSearchModalVisible(true)
           }}>
             {t('search_address')}
-          </Button> */}
+          </Button>
         </div>
 
-        {/* <div style={{ marginBottom: 24 }}>
+        <div style={{ marginBottom: 24 }}>
           {!isMobile ? (
             // PC端显示表格
             <Table columns={columns} dataSource={ranklist} pagination={false} bordered style={{ marginBottom: 24 }} />
@@ -296,10 +348,10 @@ export default function TradeRacePage() {
               ))}
             </div>
           )}
-        </div> */}
+        </div>
 
         {/* Coming Soon 替换排行榜表格 */}
-        <div style={{
+        {/* <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -318,7 +370,7 @@ export default function TradeRacePage() {
             marginBottom: 8,
           }}>Coming Soon</span>
           <span className='text-center' style={{ color: '#888', fontSize: 14 }}>{t('trade_race_leaderboard_commit')}</span>
-        </div>
+        </div> */}
         <Divider />
         <div style={{ color: '#888', fontSize: 13 }}>
           <div>❗️{t('trade_race_note_title')}</div>
