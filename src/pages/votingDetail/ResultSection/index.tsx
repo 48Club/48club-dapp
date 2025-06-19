@@ -92,7 +92,8 @@ export const ResultSectionView = ({ info, id }: any) => {
     amount: formatAmount(quorumNormal, 0),
     text: t('quorum_vote'),
   }
-  const interimResult = info.forVotes / (info.forVotes + info.againstVotes + info.abstainVotes) >= forVotesLevel
+  console.log(forVotesThresholdBps, 'forVotesThresholdBps')
+  const interimResult = info.forVotes / (info.forVotes + info.againstVotes) >= forVotesLevel
   return (
     <div className="flex-1 flex flex-col mt-20 md:ml-4 md:mt-0">
       <Spin spinning={loading}>
@@ -191,6 +192,19 @@ export const ResultSectionView = ({ info, id }: any) => {
                     )`,
                   }}
                 />
+                {
+                  abstainVotesPercent > 0 && (
+                    <div
+                      className="h-full bg-[#A9A29D] relative"
+                      style={{
+                        width: `${Math.max(abstainVotesPercent, 1)}%`,
+                        borderLeft: '2px solid #fff',
+                        borderRight: stillNeeded.isGreaterThan(0) ? '1px solid #fff' : '',
+                        borderRadius: '4px 0 0 4px'
+                      }}
+                    />
+                  )
+                }
                 <div className={`flex flex-row ${interimResult ? 'flex-row-reverse' : ''}` } style={{ width: `${Math.max(againstVotesPercent + forVotesPercent, 1)}%` }}>
                 {
                   forVotesPercent > 0 && (<div className="h-full bg-[#08C849] relative" style={{ width: `${forVotesPercent * 100 / (forVotesPercent + againstVotesPercent)}%`, borderRight: stillNeeded.isGreaterThan(0) && !interimResult ? ' 1px solid #fff' : '', }} />)
@@ -205,18 +219,7 @@ export const ResultSectionView = ({ info, id }: any) => {
                   />)
                 }
                 </div>
-                {
-                  abstainVotesPercent > 0 && (
-                    <div
-                      className="h-full bg-[#A9A29D] relative"
-                      style={{
-                        width: `${Math.max(abstainVotesPercent, 1)}%`,
-                        borderLeft: '2px solid #fff',
-                        borderRight: stillNeeded.isGreaterThan(0) ? '1px solid #fff' : '',
-                      }}
-                    />
-                  )
-                }
+                
               </div>
             </div>
           </div>
