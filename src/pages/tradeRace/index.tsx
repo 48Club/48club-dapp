@@ -225,12 +225,14 @@ export default function TradeRacePage() {
                 padding: '2px 16px',
                 display: 'inline-flex',
                 alignItems: 'center',
-                height: '32px'
+                height: '32px',
+                color: '#D48806',
+                fontSize: 20,
+                lineHeight: '28px',
+                fontWeight: 700
               }}
             >
-              <Text strong style={{ color: '#D48806', fontSize: 20, lineHeight: '28px' }}>
-                #{nonce}
-              </Text>
+              #{nonce}
             </div>
           )}
         </div>
@@ -252,6 +254,39 @@ export default function TradeRacePage() {
           <div>•{t('trade_race_reward_desc2')}</div>
           <div>•{t('trade_race_reward_desc3')}</div>
           <div>•{t('trade_race_reward_desc4')}</div>
+        </div>
+        <div className="flex justify-center mb-6">
+          <Button 
+            type="primary" 
+            onClick={() => {
+              setAddressSearchModalVisible(true)
+            }}
+            style={{
+              background: '#ffc801',
+              border: 'none',
+              borderRadius: '25px',
+              height: '48px',
+              padding: '0 32px',
+              fontSize: '16px',
+              fontWeight: '600',
+              boxShadow: '0 4px 15px rgba(226, 178, 1, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)'
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(226, 178, 1, 0.4)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(226, 178, 1, 0.3)'
+            }}
+          >
+            <span style={{ fontSize: '18px' }}>🎯</span>
+            {t('search_address')}
+          </Button>
         </div>
         <Divider />
         {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
@@ -300,8 +335,7 @@ export default function TradeRacePage() {
           </span>
         </div> */}
         <Divider />
-        <AddressSearch onSearch={handleSearch} ref={searchRef} />
-        <div className='flex items-end mb-[16px] flex-wrap justify-between'>
+        <div className=' mb-[16px]'>
           <div className='flex items-center flex-wrap'>
             <Title level={4} style={{ margin: '0 10px 0 0' }}>
               {t('trade_race_leaderboard_title')}
@@ -309,11 +343,10 @@ export default function TradeRacePage() {
             { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
             {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
           </div>
-          <Button type="primary" onClick={() => {
-            setAddressSearchModalVisible(true)
-          }}>
-            {t('search_address')}
-          </Button>
+          <div className='flex items-center gap-2 justify-between mt-[16px]'>
+            <AddressSearch onSearch={handleSearch} ref={searchRef} />
+          </div>
+          
         </div>
 
         <div style={{ marginBottom: 24 }}>
