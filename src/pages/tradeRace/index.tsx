@@ -265,9 +265,9 @@ export default function TradeRacePage() {
               background: '#ffc801',
               border: 'none',
               borderRadius: '25px',
-              height: '48px',
-              padding: '0 32px',
-              fontSize: '16px',
+              height: '40px',
+              padding: '0 24px',
+              fontSize: '14px',
               fontWeight: '600',
               boxShadow: '0 4px 15px rgba(226, 178, 1, 0.3)',
               display: 'flex',
@@ -284,7 +284,7 @@ export default function TradeRacePage() {
               e.currentTarget.style.boxShadow = '0 4px 15px rgba(226, 178, 1, 0.3)'
             }}
           >
-            <span style={{ fontSize: '18px' }}>🎯</span>
+            <span style={{ fontSize: '18px' }}>🍭</span>
             {t('search_address')}
           </Button>
         </div>
