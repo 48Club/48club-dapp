@@ -247,12 +247,12 @@ export default function TradeRacePage() {
           <div>🥇 {t('trade_race_rule_desc3')}</div>
           <div>{t('trade_race_rule_desc4')}</div>
           <div>🎯 {t('trade_race_rule_desc5')}</div>
+          <div>❗️{t('trade_race_note_desc2')}</div>
         </div>
         <div className="break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
           <div className="font-bold text-[14px]">🎁 {t('trade_race_reward_title')}</div>
           <div>•{t('trade_race_reward_desc1')}</div>
           <div>•{t('trade_race_reward_desc2')}</div>
-          <div>•{t('trade_race_reward_desc3')}</div>
           <div>•{t('trade_race_reward_desc4')}</div>
         </div>
         <div className="flex justify-center mb-6">
@@ -404,13 +404,13 @@ export default function TradeRacePage() {
           }}>Coming Soon</span>
           <span className='text-center' style={{ color: '#888', fontSize: 14 }}>{t('trade_race_leaderboard_commit')}</span>
         </div> */}
-        <Divider />
-        <div style={{ color: '#888', fontSize: 13 }}>
+        {/* <Divider /> */}
+        {/* <div style={{ color: '#888', fontSize: 13 }}>
           <div>❗️{t('trade_race_note_title')}</div>
           <div>• {t('trade_race_note_desc1')}</div>
           <div>• {t('trade_race_note_desc2')}</div>
           <div>• {t('trade_race_note_desc3')}</div>
-        </div>
+        </div> */}
       </Card>
       <AddressSearchModal visible={addressSearchModalVisible} onClose={() => setAddressSearchModalVisible(!addressSearchModalVisible)} />
     </div>
