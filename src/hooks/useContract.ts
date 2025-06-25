@@ -12,6 +12,7 @@ import Oracle_ABI from './abi/Oracle.json'
 import stakeinscription from './abi/stakeinscription.json'
 import WrappedABI from './abi/WrappedInscription.json'
 import airdropABI from './abi/airdrop.json'
+import airdropStatusABI from './abi/airdropStatus.json'
 import {
   GovernanceAddress,
   GovernanceAddressNew,
@@ -22,9 +23,10 @@ import {
   wrappedAddress,
   stakeInscription,
   airdropAddress,
+  airdropStatusAddress,
 } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
-import { READONLY_RPC_URL } from '../constants/env'
+import { READONLY_RPC_URL, READONLY_RPC_URL_NEW } from '../constants/env'
 
 export default function useERC20Contract(address?: string) {
   return useMemo(() => (address ? new Contract(address, ERC20Interface) : undefined), [address])
@@ -86,4 +88,13 @@ export function useStakeInscriptionContract() {
 export function useAirDropContract() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(airdropAddress as string, airdropABI, provider), [provider])
+}
+
+export function useAirDropStatusContractReadonly() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL_NEW), [])
+  return useMemo(() => new Contract(airdropStatusAddress as string, airdropStatusABI, provider), [provider])
+}
+
+export function useAirDropStatusContract() {
+  return useMemo(() => new Contract(airdropStatusAddress as string, airdropStatusABI), [])
 }

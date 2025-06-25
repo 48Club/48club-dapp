@@ -16,5 +16,9 @@ export const READONLY_RPC_URL = {
   [BSC.chainId]: 'https://fake-rpc.48.club/',
 }[CHAIN_ID]
 
+export const READONLY_RPC_URL_NEW = {
+  ...RPC_URLS,
+}[CHAIN_ID]
+
 console.log('IS_PRODUCTION', IS_PRODUCTION)
 console.log('CHAIN_ID', CHAIN_ID)

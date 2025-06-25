@@ -72,3 +72,8 @@ export const airdropAddress = {
   [ChainId.BSC]: '0x092F23A885649936306b7702f588815445427934',
   [ChainId.BSCTestnet]: '0x0000000000000000000000000000000000000000',
 }[CHAIN_ID as number]
+
+export const airdropStatusAddress = {
+  [ChainId.BSC]: '0xa2b2d40545f3c385e9a83054c941a76e4c251772',
+  [ChainId.BSCTestnet]: '0x0000000000000000000000000000000000000000',
+}[CHAIN_ID as number]
