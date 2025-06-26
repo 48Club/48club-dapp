@@ -53,5 +53,8 @@
   "search_address_tip": "输入你的地址，查询是否中奖",
   "no_data": "暂无数据",
   "not_eligible": "当前地址不存在奖励",
-  "search_address_tip2": "UTC 时间 2025年6月8日 00:00 后可查询到领奖结果"
+  "search_address_tip2": "UTC 时间 2025年6月8日 00:00 后可查询到领奖结果",
+  "can_claim": "领取",
+  "claim": "领取",
+  "error": "错误"
 }

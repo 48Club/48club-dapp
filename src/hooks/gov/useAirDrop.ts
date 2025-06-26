@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import { utils } from 'ethers'
-import { START_BLOCK_NUMBER } from '../../constants/contracts'
-import { useAirDropContract } from '../useContract'
+import { Result } from '@ethersproject/abi'
+import { useAirDropContract, useAirDropStatusContract } from '../useContract'
+import { useContractCalls } from '@usedapp/core'
 
 export default function useAirDrop() {
   const [airdropList, setAirdropList] = useState<any[] | undefined>(undefined)
   const airdropContract = useAirDropContract()
+  const airdropStatusContract = useAirDropStatusContract()
   const loadAirdropEvent = useCallback(async (address: string) => {
     if (!address) {
       return

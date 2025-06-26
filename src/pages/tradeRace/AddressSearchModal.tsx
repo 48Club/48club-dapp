@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { Modal, Input, Button, message, Table } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { isAddress } from 'ethers/lib/utils'
 import { getTradeRaceAirdrop } from '@/utils/axios'
 import dayjs from 'dayjs'
 import { CloseOutlined } from '@ant-design/icons'
-import useAirDrop from '@/hooks/gov/useAirDrop'
-import Bignumber from 'bignumber.js'
 import { useMediaQuery } from 'react-responsive'
+import { useContractFunction, useEthers } from '@usedapp/core'
+import { useAirDropStatusContract, useAirDropStatusContractReadonly } from '@/hooks/useContract'
 
 interface AddressSearchModalProps {
   visible: boolean
@@ -17,6 +17,8 @@ interface AddressSearchModalProps {
 interface AirdropRecord {
   amount: string
   range: number[]
+  tx_hash: string
+  address?: string
 }
 
 const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
@@ -24,20 +26,75 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   onClose,
 }) => {
   const { t } = useTranslation()
+  const { account } = useEthers()
+  const [messageApi, contextHolder] = message.useMessage();
+  // const account = '0xE023AA810Aa868751ba11B590208a13A1a1a10f4'
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<AirdropRecord[]>([])
   const [isEligible, setIsEligible] = useState(true)
-  const { airdropList, loadAirdropEvent } = useAirDrop()
-  const formatNumberFull = (num: string | number) => {
-    const [int, dec] = String(num).split('.')
-    return (
-      Number(int).toLocaleString('en-US') +
-      (dec ? '.' + dec : '')
-    )
-  }
+  const [contractResults, setContractResults] = useState<any[]>([])
+  const airdropStatusContractReadonly = useAirDropStatusContractReadonly()
+  const airdropStatusContract = useAirDropStatusContract()
+  const { send: claim, state: claimState } = useContractFunction(airdropStatusContract, 'claim', { transactionName: 'Claim Reward' })
   const isMobile = useMediaQuery({ maxWidth: 768 })
+  // 统一监听所有状态
+   const handleStateChange = useCallback((state: any, actionName: string) => {
+    console.log(state, 'state')
+    if (state.status === 'Success') {
+      handleSearch()
+    } else if (state.status === 'Exception' || state.status === 'Fail') {
+      messageApi.error({
+        type: 'error',
+        content: state.errorMessage,
+      })
+    }
+  }, [])
+  // 获取所有没有 tx_hash 的记录
+  const recordsWithoutTxHash = useMemo(() => {
+    return searchResults.filter((item) => !item.tx_hash)
+  }, [searchResults])
 
+  // 直接调用合约方法
+  const fetchContractResults = async () => {
+    try {
+      recordsWithoutTxHash.map(async (item) => {
+        try {
+          // 根据 ABI，getAirdropStatus 需要 eventID 和 user 参数
+          // item.range[0] 应该是 eventID
+          const result = await airdropStatusContractReadonly.getAirdropStatus(item.range[0], address)
+          console.log(`Contract result for eventID ${item.range[0]}:`, result)
+          setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
+          return result
+        } catch (error) {
+          setContractResults(prev => ({ ...prev, [item.range[0]]: null }))
+          return null
+        }
+      })
+    } catch (error) {
+      console.error('Error fetching contract results:', error)
+    }
+  }
+
+  // 当地址或记录变化时重新获取结果
+  useEffect(() => {
+    fetchContractResults()
+  }, [searchResults])
+    // 监听所有状态变化
+  useEffect(() => {
+    handleStateChange(claimState, 'Claim Reward')
+  }, [claimState.status, claimState.errorMessage])
+  const handleClaim = async (data: any) => {
+    try {
+      console.log(data, 'data')
+      // TODO: 实现领取逻辑
+      await claim(data.range[0])
+    } catch (error) {
+      message.error(error?.toString())
+      console.error('Error claiming:', error)
+    }
+  }
+  
   const columns = [
     {
       title: t('amount'),
@@ -59,8 +116,24 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       title: t('isDispatch'),
       key: 'dispatch',
       render: (_: any, data: any) => {
-        const isDispatch = (airdropList || []).find((item: any) => +item.eventID === data.range[0] && item.recipient.toLowerCase() === address.toLowerCase())
-        return isDispatch ? <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${isDispatch.txHash}`} target="_blank">{isDispatch.txHash}</a> : <span className="text-red-500">{t('no')}</span>
+        // 如果有 tx_hash，显示已发放
+        if (data.tx_hash) {
+          return <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${data.tx_hash}`} target="_blank">{data.tx_hash}</a>
+        }
+        if (contractResults[data.range[0]]) {
+          const [token, amount, claimed, isExist] = contractResults[data.range[0]]
+          if (claimed) {
+            return <span className="text-green-500">{t('claimed')}</span>
+          }
+          if (isExist) {
+            if (account?.toLowerCase() === address?.toLowerCase()) {
+              return <Button type="primary" onClick={() => handleClaim(data)}>{t('claim')}</Button>
+            }
+            return <span className="text-orange-500">{t('can_claim')}</span>
+          }
+          return <span className="text-red-500">{t('not_eligible')}</span>
+        }
+        return <span className="text-gray-500">{t('error')}</span>
       }
     }
   ]
@@ -79,25 +152,30 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       }
 
       setLoading(true)
-      loadAirdropEvent(address)
       const res = await getTradeRaceAirdrop({ address })
-      console.log(res, 'res')
       if (res.status === 200 && res.data.status === 200) {
-        // const data = [
-        //   {
-        //     range: [
-        //       1748822400,
-        //       1749427200
-        //     ],
-        //     amount: "12"
-        //   },
-        // ]
         setIsEligible(true)
         setSearchResults(res.data.data || [])
-      } else {
-        message.error(res.data.message || t('search_error'))
+        // setSearchResults([
+        //   {
+        //     "amount": "0.18986511676003673",
+        //     "range": [1748822400, 1749427200],
+        //     "tx_hash": "0x57dd8ba85920143ddb0a2f1137ab69475b5e468efa32f1c06b1e63a318af7a88"
+        //   },
+        //   {
+        //     "amount": "0.026694762593112032",
+        //     "range": [1750032000, 1750636800],
+        //     "tx_hash": ""
+        //   },
+        //   {
+        //     "amount": "0.016694762593112032",
+        //     "range": [1750636800,1751241600],
+        //     "tx_hash": ""
+        //   }
+
+        // ])
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error?.status === 404) {
         setIsEligible(false)
         setSearchResults([])
@@ -115,7 +193,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
     onClose()
     setIsEligible(true)
   }
-
+  
   return (
     <Modal
       title={t('search_address')}
@@ -205,6 +283,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           />
         )}
       </div>
+      {contextHolder}
     </Modal>
   )
 }

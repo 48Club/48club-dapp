@@ -53,5 +53,8 @@
   "search_address_tip": "Enter your address to check if you won the airdrop",
   "no_data": "No data",
   "not_eligible": "No rewards for the address",
-  "search_address_tip2": "After UTC 2025-06-08 00:00:00, you can query the results of the airdrop"
+  "search_address_tip2": "After UTC 2025-06-08 00:00:00, you can query the results of the airdrop",
+  "can_claim": "Eligible",
+  "claim": "Claim",
+  "error": "Error"
 }
