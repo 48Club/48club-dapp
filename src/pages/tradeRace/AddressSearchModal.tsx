@@ -127,7 +127,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           }
           if (isExist) {
             if (account?.toLowerCase() === address?.toLowerCase()) {
-              return <Button type="primary" onClick={() => handleClaim(data)}>{t('can_claim')}</Button>
+              return <Button type="primary" onClick={() => handleClaim(data)}>{t('claim')}</Button>
             }
             return <span className="text-orange-500">{t('can_claim')}</span>
           }
