@@ -56,5 +56,6 @@
   "search_address_tip2": "UTC 时间 2025年6月8日 00:00 后可查询到领奖结果",
   "can_claim": "可领取",
   "claim": "领取",
-  "error": "错误"
+  "error": "错误",
+  "loading": "加载中"
 }

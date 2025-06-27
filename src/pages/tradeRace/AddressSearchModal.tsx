@@ -28,7 +28,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const { t } = useTranslation()
   const { account } = useEthers()
   const [messageApi, contextHolder] = message.useMessage();
-  // const account = '0xE023AA810Aa868751ba11B590208a13A1a1a10f4'
+  // const account = '0x979a2505960917b78568752B8D05fBCeDDF11A50'
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<AirdropRecord[]>([])
@@ -67,7 +67,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
           return result
         } catch (error) {
-          setContractResults(prev => ({ ...prev, [item.range[0]]: null }))
+          setContractResults(prev => ({ ...prev, [item.range[0]]: { error: true } }))
           return null
         }
       })
@@ -121,6 +121,9 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           return <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${data.tx_hash}`} target="_blank">{data.tx_hash}</a>
         }
         if (contractResults[data.range[0]]) {
+          if (contractResults[data.range[0]].error) {
+            return <span className="text-red-500">{t('error')}</span>
+          }
           const [token, amount, claimed, isExist] = contractResults[data.range[0]]
           if (claimed) {
             return <span className="text-green-500">{t('claimed')}</span>
@@ -133,7 +136,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           }
           return <span className="text-red-500">{t('not_eligible')}</span>
         }
-        return <span className="text-gray-500">{t('error')}</span>
+        return <span className="text-gray-500">{t('loading')}</span>
       }
     }
   ]
