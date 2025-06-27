@@ -50,37 +50,38 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       })
     }
   }, [])
-  // 获取所有没有 tx_hash 的记录
-  const recordsWithoutTxHash = useMemo(() => {
-    return searchResults.filter((item) => !item.tx_hash)
-  }, [searchResults])
 
   // 直接调用合约方法
   const fetchContractResults = async () => {
-    try {
-      recordsWithoutTxHash.map(async (item) => {
-        try {
-          // 根据 ABI，getAirdropStatus 需要 eventID 和 user 参数
-          // item.range[0] 应该是 eventID
-          const result = await airdropStatusContractReadonly.getAirdropStatus(item.range[0], address)
-          console.log(`Contract result for eventID ${item.range[0]}:`, result)
-          setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
-          return result
-        } catch (error) {
-          setContractResults(prev => ({ ...prev, [item.range[0]]: { error: true } }))
-          return null
-        }
-      })
-    } catch (error) {
-      console.error('Error fetching contract results:', error)
+    const list = searchResults.filter((item) => !item.tx_hash)
+    if (list.length === 0) {
+      return
     }
+    list.map(async (item) => {
+      try {
+        // 根据 ABI，getAirdropStatus 需要 eventID 和 user 参数
+        // item.range[0] 应该是 eventID
+        const result = await airdropStatusContractReadonly.getAirdropStatus(item.range[0], address)
+        console.log(`Contract result for eventID ${item.range[0]}:`, result)
+        setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
+        return result
+      } catch (error) {
+        setContractResults(prev => ({ ...prev, [item.range[0]]: { error: true } }))
+        return null
+      }
+    })
   }
 
+  useEffect(() => {
+    if (account && visible) {
+      setAddress(account)
+    }
+  }, [account, visible])
   // 当地址或记录变化时重新获取结果
   useEffect(() => {
     fetchContractResults()
   }, [searchResults])
-    // 监听所有状态变化
+  // 监听所有状态变化
   useEffect(() => {
     handleStateChange(claimState, 'Claim Reward')
   }, [claimState.status, claimState.errorMessage])
