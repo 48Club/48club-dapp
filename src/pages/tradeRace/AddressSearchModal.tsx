@@ -28,7 +28,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const { t } = useTranslation()
   const { account } = useEthers()
   const [messageApi, contextHolder] = message.useMessage();
-  // const account = '0xE023AA810Aa868751ba11B590208a13A1a1a10f4'
+  // const account = '0x979a2505960917b78568752B8D05fBCeDDF11A50'
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<AirdropRecord[]>([])
@@ -50,37 +50,38 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       })
     }
   }, [])
-  // 获取所有没有 tx_hash 的记录
-  const recordsWithoutTxHash = useMemo(() => {
-    return searchResults.filter((item) => !item.tx_hash)
-  }, [searchResults])
 
   // 直接调用合约方法
   const fetchContractResults = async () => {
-    try {
-      recordsWithoutTxHash.map(async (item) => {
-        try {
-          // 根据 ABI，getAirdropStatus 需要 eventID 和 user 参数
-          // item.range[0] 应该是 eventID
-          const result = await airdropStatusContractReadonly.getAirdropStatus(item.range[0], address)
-          console.log(`Contract result for eventID ${item.range[0]}:`, result)
-          setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
-          return result
-        } catch (error) {
-          setContractResults(prev => ({ ...prev, [item.range[0]]: null }))
-          return null
-        }
-      })
-    } catch (error) {
-      console.error('Error fetching contract results:', error)
+    const list = searchResults.filter((item) => !item.tx_hash)
+    if (list.length === 0) {
+      return
     }
+    list.map(async (item) => {
+      try {
+        // 根据 ABI，getAirdropStatus 需要 eventID 和 user 参数
+        // item.range[0] 应该是 eventID
+        const result = await airdropStatusContractReadonly.getAirdropStatus(item.range[0], address)
+        console.log(`Contract result for eventID ${item.range[0]}:`, result)
+        setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
+        return result
+      } catch (error) {
+        setContractResults(prev => ({ ...prev, [item.range[0]]: { error: true } }))
+        return null
+      }
+    })
   }
 
+  useEffect(() => {
+    if (account && visible) {
+      setAddress(account)
+    }
+  }, [account, visible])
   // 当地址或记录变化时重新获取结果
   useEffect(() => {
     fetchContractResults()
   }, [searchResults])
-    // 监听所有状态变化
+  // 监听所有状态变化
   useEffect(() => {
     handleStateChange(claimState, 'Claim Reward')
   }, [claimState.status, claimState.errorMessage])
@@ -121,6 +122,9 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           return <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${data.tx_hash}`} target="_blank">{data.tx_hash}</a>
         }
         if (contractResults[data.range[0]]) {
+          if (contractResults[data.range[0]].error) {
+            return <span className="text-red-500">{t('error')}</span>
+          }
           const [token, amount, claimed, isExist] = contractResults[data.range[0]]
           if (claimed) {
             return <span className="text-green-500">{t('claimed')}</span>
@@ -133,7 +137,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           }
           return <span className="text-red-500">{t('not_eligible')}</span>
         }
-        return <span className="text-gray-500">{t('error')}</span>
+        return <span className="text-gray-500">{t('loading')}</span>
       }
     }
   ]

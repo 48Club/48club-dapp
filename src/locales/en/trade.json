@@ -56,5 +56,6 @@
   "search_address_tip2": "After UTC 2025-06-08 00:00:00, you can query the results of the airdrop",
   "can_claim": "Eligible",
   "claim": "Claim",
-  "error": "Error"
+  "error": "Transaction Failed, Please try again later",
+  "loading": "Loading"
 }
