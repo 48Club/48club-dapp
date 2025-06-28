@@ -20,7 +20,7 @@ const config: Partial<Config> = {
       projectId: '96f3a7a0146532521ba4500b816d57fd',
       chains: [BSC],
       rpcMap: {
-        56: 'https://bsc-dataseed.binance.org/',
+        56: RPC_URLS[CHAIN_ID],
       },
     }),
   },
