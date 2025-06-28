@@ -8,7 +8,7 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const RPC_URLS = {
   [BSCTestnet.chainId]: 'https://data-seed-prebsc-2-s2.binance.org:8545/', // 'https://chapel.rpc.48.club',
-  [BSC.chainId]: 'https:dao-rpc.fzqpszmm.cyou',
+  [BSC.chainId]: 'https://dao-rpc.fzqpszmm.cyou',
 }
 
 export const READONLY_RPC_URL = {
