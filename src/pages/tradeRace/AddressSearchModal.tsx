@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { isAddress } from 'ethers/lib/utils'
 import { getTradeRaceAirdrop } from '@/utils/axios'
 import dayjs from 'dayjs'
+import Bignumber from 'bignumber.js'
 import { CloseOutlined } from '@ant-design/icons'
 import { useMediaQuery } from 'react-responsive'
-import { useContractFunction, useEthers } from '@usedapp/core'
+import { useContractFunction, useEthers, useContractCalls } from '@usedapp/core'
 import { useAirDropStatusContract, useAirDropStatusContractReadonly } from '@/hooks/useContract'
 
 interface AddressSearchModalProps {
@@ -38,8 +39,9 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const airdropStatusContract = useAirDropStatusContract()
   const { send: claim, state: claimState } = useContractFunction(airdropStatusContract, 'claim', { transactionName: 'Claim Reward' })
   const isMobile = useMediaQuery({ maxWidth: 768 })
+  
   // 统一监听所有状态
-   const handleStateChange = useCallback((state: any, actionName: string) => {
+  const handleStateChange = useCallback((state: any, actionName: string) => {
     console.log(state, 'state')
     if (state.status === 'Success') {
       handleSearch()
@@ -51,40 +53,93 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
     }
   }, [])
 
-  // 直接调用合约方法
-  const fetchContractResults = async () => {
-    const list = searchResults.filter((item) => !item.tx_hash)
-    if (list.length === 0) {
-      return
+  // 获取所有没有 tx_hash 的记录
+  const recordsWithoutTxHash = useMemo(() => {
+    return searchResults.filter((item) => !item.tx_hash)
+  }, [searchResults])
+
+  // 第一步：使用multicall调用airdrop方法获取有效的eventID
+  const airdropCalls = useMemo(() => {
+    if (!airdropStatusContractReadonly || recordsWithoutTxHash.length === 0 || !address) {
+      return []
     }
-    list.map(async (item) => {
-      try {
-        // 根据 ABI，getAirdropStatus 需要 eventID 和 user 参数
-        // item.range[0] 应该是 eventID
-        const result = await airdropStatusContractReadonly.getAirdropStatus(item.range[0], address)
-        console.log(`Contract result for eventID ${item.range[0]}:`, result)
-        setContractResults(prev => ({ ...prev, [item.range[0]]: result }))
-        return result
-      } catch (error) {
-        setContractResults(prev => ({ ...prev, [item.range[0]]: { error: true } }))
-        return null
+    
+    return recordsWithoutTxHash.map((item) => ({
+      address: airdropStatusContractReadonly.address,
+      abi: airdropStatusContractReadonly.interface,
+      method: 'Airdrops',
+      args: [item.range[0]]
+    }))
+  }, [airdropStatusContractReadonly, recordsWithoutTxHash, address])
+
+  const airdropResults = useContractCalls(airdropCalls)
+  // 第二步：根据airdrop结果筛选有效的eventID，然后调用getAirdropStatus
+  const validEventIds = useMemo(() => {
+    if (!airdropResults || airdropResults.length === 0) return []
+    console.log(airdropResults, 'airdropResults')
+    const validIds: number[] = []
+    airdropResults.forEach((result) => {
+      if (result && result[2]) {
+        const eventId = result[2].toNumber()
+        console.log(eventId, 'eventId',result[2])
+        if (eventId !== 0) {
+          validIds.push(eventId)
+        }
       }
     })
-  }
+    
+    console.log('Valid event IDs:', validIds)
+    return validIds
+  }, [airdropResults, recordsWithoutTxHash])
+
+  // 第三步：对有效的eventID调用getAirdropStatus
+  const statusCalls = useMemo(() => {
+    if (!airdropStatusContractReadonly || validEventIds.length === 0 || !address) {
+      return []
+    }
+    
+    return validEventIds.map((eventId) => ({
+      address: airdropStatusContractReadonly.address,
+      abi: airdropStatusContractReadonly.interface,
+      method: 'getAirdropStatus',
+      args: [eventId, address]
+    }))
+  }, [airdropStatusContractReadonly, validEventIds, address])
+
+  const statusResults = useContractCalls(statusCalls)
+
+  // 处理最终结果
+  useEffect(() => {
+    if (!statusResults || statusResults.length === 0) return
+
+    const newResults: any = {}
+    console.log(statusResults, 'statusResults')
+    statusResults.forEach((result, index) => {
+      if (!result) {
+        return
+      }
+      const eventId = validEventIds[index]
+      if (result && Array.isArray(result)) {
+        newResults[eventId] = result
+      } else {
+        newResults[eventId] = { error: true }
+      }
+    })
+
+    setContractResults(prev => ({ ...prev, ...newResults }))
+  }, [statusResults, validEventIds])
 
   useEffect(() => {
     if (account && visible) {
       setAddress(account)
     }
   }, [account, visible])
-  // 当地址或记录变化时重新获取结果
-  useEffect(() => {
-    fetchContractResults()
-  }, [searchResults])
+
   // 监听所有状态变化
   useEffect(() => {
     handleStateChange(claimState, 'Claim Reward')
   }, [claimState.status, claimState.errorMessage])
+
   const handleClaim = async (data: any) => {
     try {
       console.log(data, 'data')

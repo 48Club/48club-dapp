@@ -91,7 +91,7 @@ export function useAirDropContract() {
 }
 
 export function useAirDropStatusContractReadonly() {
-  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL_NEW), [])
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
   return useMemo(() => new Contract(airdropStatusAddress as string, airdropStatusABI, provider), [provider])
 }
 
