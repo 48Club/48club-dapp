@@ -245,6 +245,7 @@ export default function TradeRacePage() {
           <div className="font-bold text-[14px]">📊 {t('trade_race_rule_title')}</div>
           <div>📌 {t('trade_race_rule_desc1')}</div>
           <div>{t('trade_race_rule_desc2')}</div>
+          <div>🥇 {t('trade_race_rule_desc3')}</div>
           <div>{t('trade_race_rule_desc4')}</div>
           <div>🎯 {t('trade_race_rule_desc5')}</div>
           <div>❗️{t('trade_race_note_desc2')}</div>

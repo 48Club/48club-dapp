@@ -5,7 +5,7 @@
   "trade_race_rule_title": "活动规则：",
   "trade_race_rule_desc1": "交易额统计范围： 使用币安Web3钱包(无私钥钱包)直接Swap(与 binanceDEXRouter交互) 用USDT 买入 KOGE的金额。",
   "trade_race_rule_desc2": "由于聚合器分流功能，单笔交易可能通过多个流动性池进行，因此按上述规则统计到的金额可能比实际总金额小，属正常现象。",
-  "trade_race_rule_desc3": "奖励池计算方式：奖励池 = 活动期间主办方(48Club)在该交易对提供的LP所获交易手续费的 48%（上不封顶）",
+  "trade_race_rule_desc3": "奖励池计算方式：奖励池 = 活动期间主办方(48Club)在该交易对提供的LP所获交易手续费的 64.8%（上不封顶）",
   "trade_race_rule_desc4": "奖池由主办方从提供流动性收到的手续费中拨付。 非主办方提供的lp收到的手续费与本次活动奖池无关。",
   "trade_race_rule_desc5": "奖励分配机制：活动期间每日有效交易额达到 15,000 USDT 的无私钥钱包地址，平分奖励池。奖励形式为 等值 KOGE。",
   "trade_race_reward_title": "奖励发放与公布时间：",
