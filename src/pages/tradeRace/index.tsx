@@ -77,8 +77,8 @@ export default function TradeRacePage() {
       if (!fee?.usdt_amount) {
         amount = '0'
       } else {
-        const totalFeeKoge = +fee.koge_amount * 0.96
-        const totalFee = +fee?.usdt_amount * 0.96
+        const totalFeeKoge = +fee.koge_amount * 0.648
+        const totalFee = +fee?.usdt_amount * 0.648
         const reward = (totalFee / total).toFixed(2)
         const rewardKoge = (totalFeeKoge / total).toFixed(4)
         if (data.rank === 0) {
@@ -244,7 +244,6 @@ export default function TradeRacePage() {
           <div className="font-bold text-[14px]">📊 {t('trade_race_rule_title')}</div>
           <div>📌 {t('trade_race_rule_desc1')}</div>
           <div>{t('trade_race_rule_desc2')}</div>
-          <div>🥇 {t('trade_race_rule_desc3')}</div>
           <div>{t('trade_race_rule_desc4')}</div>
           <div>🎯 {t('trade_race_rule_desc5')}</div>
           <div>❗️{t('trade_race_note_desc2')}</div>
