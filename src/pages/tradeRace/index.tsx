@@ -21,6 +21,8 @@ const formatNumber = (num: string | number) => {
   })
 }
 export default function TradeRacePage() {
+  const ratio = 0.648 * 2 // 总奖池的 64.8% 转为KOGE的比例
+
   const { t, i18n } = useTranslation()
   const { account } = useEthers()
   const [ranklist, setRanklist] = useState<any[]>([])
@@ -77,7 +79,6 @@ export default function TradeRacePage() {
       if (!fee?.usdt_amount) {
         amount = '0'
       } else {
-          const ratio = 0.648 * 2
           const totalFeeKoge = +fee.koge_amount * ratio
           const totalFee = +fee?.usdt_amount * ratio
         const reward = (totalFee / total).toFixed(2)
@@ -296,7 +297,7 @@ export default function TradeRacePage() {
           </div>
           <div>
             <Text>{t('trade_race_current_reward')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * 0.96)}</div>
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div>
           </div>
           <div>
             <Text>{t('trade_race_eligible_volume')}</Text>
