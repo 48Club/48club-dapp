@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Card, Typography, Divider, Table, Button } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { getTradeRace, getTradeRaceAirdrop } from '@/utils/axios'
 import { useMediaQuery } from 'react-responsive'
 import { useEthers } from '@usedapp/core'
@@ -9,6 +9,7 @@ import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
+import OdometerNumber from '@/components/OdometerNumber'
 // import { Table } from 'antd'
 
 dayjs.extend(utc)
@@ -33,6 +34,7 @@ export default function TradeRacePage() {
   const [currentAccount, setCurrentAccount] = useState('')
   const [timeRange, setTimeRange] = useState<[number, number]>([0, 0])
   const [nonce, setNonce] = useState<number>(0)
+  const [requestCount, setRequestCount] = useState(0)
   const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const [addressSearchModalVisible, setAddressSearchModalVisible] = useState(false)
@@ -109,6 +111,9 @@ export default function TradeRacePage() {
     return data
   }, [ranklist, total])
   const getDataByAddress = (address: string) => {
+    // 增加请求计数器
+    // setRequestCount(prev => prev + 1)
+    
     // const address = account
     getTradeRace({address}).then((res) => {
       console.log(res)
@@ -157,7 +162,10 @@ export default function TradeRacePage() {
     
     return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
-  useEffect(() => {
+  const getTradeRaceData = () => {
+    // 增加请求计数器
+    setRequestCount(prev => prev + 1)
+    
     getTradeRace({}).then((res) => {
       console.log(res)
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
@@ -196,6 +204,15 @@ export default function TradeRacePage() {
         }
       }
     })
+  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getTradeRaceData()
+    }, 20000)
+    getTradeRaceData()
+    return () => {
+      clearInterval(interval)
+    }
   }, [])
   useEffect(() => {
     if (currentAccount) {
@@ -246,8 +263,21 @@ export default function TradeRacePage() {
           <div className="font-bold text-[14px]">📊 {t('trade_race_rule_title')}</div>
           <div>📌 {t('trade_race_rule_desc1')}</div>
           <div>{t('trade_race_rule_desc2')}</div>
-          <div>🥇{t('trade_race_rule_desc3')}{t('trade_race_rule_desc4')}</div>
-          <div>🎯 {t('trade_race_rule_desc5')}</div>
+          <div>🥇<Trans 
+              i18nKey="trade_race_rule_desc3"
+              components={{
+                strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
+              }}
+            />{t('trade_race_rule_desc4')}</div>
+          <div>
+            🎯
+            <Trans 
+              i18nKey="trade_race_rule_desc5"
+              components={{
+                strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
+              }}
+            />
+          </div>
           <div>❗️{t('trade_race_note_desc2')}</div>
         </div>
         <div className="break-all" style={{ color: '#888', fontSize: 12, marginBottom: 8 }}>
@@ -291,15 +321,21 @@ export default function TradeRacePage() {
         </div>
         <Divider />
         {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
-          <div>
+          <div className='w-[33%] text-center'>
             <Text>{t('trade_race_total_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
           </div>
-          <div>
+          <div className='w-[33%] text-center'>
             <Text>{t('trade_race_current_reward')}</Text>
-            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div>
+            {/* <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div> */}
+            <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>
+              <OdometerNumber 
+                key={`reward-${requestCount}`} 
+                value={+fee?.usdt_amount * ratio} 
+              />
+            </div>
           </div>
-          <div>
+          <div className='w-[33%] text-center'>
             <Text>{t('trade_race_eligible_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail?.usdt_amount)}</div>
           </div>
