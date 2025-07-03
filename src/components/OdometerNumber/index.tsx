@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface OdometerNumberProps {
   value: number;
@@ -11,7 +11,7 @@ interface OdometerNumberProps {
 
 export default function OdometerNumber({ 
   value, 
-  duration = 1.5, 
+  duration = 20, 
   delay = 0,
   className = "",
   format = true
@@ -24,17 +24,18 @@ export default function OdometerNumber({
       maximumFractionDigits: 2
     }) : num.toString();
   });
+  
+  const prevValue = useRef(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // 先重置到 0，然后动画到目标值
-      count.set(0);
-      
+      // 从当前值开始动画到新值
       const controls = animate(count, value, { 
         duration,
         ease: "easeOut"
       });
       
+      prevValue.current = value;
       return controls.stop;
     }, delay);
 
@@ -42,7 +43,7 @@ export default function OdometerNumber({
   }, [value, count, duration, delay]);
 
   return (
-    <motion.span className={className} >
+    <motion.span className={className}>
       {rounded}
     </motion.span>
   );

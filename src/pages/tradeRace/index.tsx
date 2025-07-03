@@ -10,6 +10,7 @@ import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 import OdometerNumber from '@/components/OdometerNumber'
+import { use } from 'i18next'
 // import { Table } from 'antd'
 
 dayjs.extend(utc)
@@ -111,9 +112,6 @@ export default function TradeRacePage() {
     return data
   }, [ranklist, total])
   const getDataByAddress = (address: string) => {
-    // 增加请求计数器
-    // setRequestCount(prev => prev + 1)
-    
     // const address = account
     getTradeRace({address}).then((res) => {
       console.log(res)
@@ -163,11 +161,8 @@ export default function TradeRacePage() {
     return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   const getTradeRaceData = () => {
-    // 增加请求计数器
-    setRequestCount(prev => prev + 1)
     
     getTradeRace({}).then((res) => {
-      console.log(res)
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
         setRanklist(pre => { 
@@ -208,7 +203,7 @@ export default function TradeRacePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       getTradeRaceData()
-    }, 20000)
+    }, 30000)
     getTradeRaceData()
     return () => {
       clearInterval(interval)
@@ -227,7 +222,17 @@ export default function TradeRacePage() {
       searchRef.current?.reset()
     }
   }, [account])
-
+  useEffect(() => {
+    window.addEventListener('focus', () => {
+      console.log('focus')
+      getTradeRaceData()
+    })
+    return () => {
+      window.removeEventListener('focus', () => {
+        getTradeRaceData()
+      })
+    }
+  }, [i18n.language])
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
@@ -330,7 +335,6 @@ export default function TradeRacePage() {
             {/* <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div> */}
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>
               <OdometerNumber 
-                key={`reward-${requestCount}`} 
                 value={+fee?.usdt_amount * ratio} 
               />
             </div>
