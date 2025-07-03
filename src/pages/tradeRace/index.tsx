@@ -232,7 +232,7 @@ export default function TradeRacePage() {
         getTradeRaceData()
       })
     }
-  }, [i18n.language])
+  }, [])
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>

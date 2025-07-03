@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 interface OdometerNumberProps {
   value: number;
@@ -24,8 +24,6 @@ export default function OdometerNumber({
       maximumFractionDigits: 2
     }) : num.toString();
   });
-  
-  const prevValue = useRef(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -35,7 +33,6 @@ export default function OdometerNumber({
         ease: "easeOut"
       });
       
-      prevValue.current = value;
       return controls.stop;
     }, delay);
 
