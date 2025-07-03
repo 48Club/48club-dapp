@@ -223,14 +223,9 @@ export default function TradeRacePage() {
     }
   }, [account])
   useEffect(() => {
-    window.addEventListener('focus', () => {
-      console.log('focus')
-      getTradeRaceData()
-    })
+    window.addEventListener('focus',  getTradeRaceData)
     return () => {
-      window.removeEventListener('focus', () => {
-        getTradeRaceData()
-      })
+      window.removeEventListener('focus',  getTradeRaceData)
     }
   }, [])
   return (
