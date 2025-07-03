@@ -45,7 +45,8 @@
     "uuid": "^9.0.1",
     "vite-plugin-node-polyfills": "^0.17.0",
     "web3-utils": "^4.1.0",
-    "web3-validator": "^2.0.3"
+    "web3-validator": "^2.0.3",
+    "framer-motion": "^12.23.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
