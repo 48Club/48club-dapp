@@ -165,18 +165,16 @@ export default function TradeRacePage() {
     getTradeRace({}).then((res) => {
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
-        setRanklist(pre => { 
+        // 这样做是为了防止用户连接钱包之后 两个请求前后发出，带address的先返回数据，ranklist 被不带address的数据覆盖了
+        setRanklist(pre => {
+          if (pre.length > 0) {
+            return pre
+          }
           return dealList
         })
-        setTotal((pre: any) => {
-          return res.data.data.total
-        })
-        setFee((pre: any) => {
-          return res.data.data.fee
-        })
-        setTradeFeeThisWeek(pre => {
-          return res.data.data.trade_total_this_week
-        })
+        setTotal(res.data.data.total)
+        setFee(res.data.data.fee)
+        setTradeFeeThisWeek(res.data.data.trade_total_this_week)
         // Set nonce if available in response
         if (res.data.data.nonce) {
           setNonce(res.data.data.nonce)
