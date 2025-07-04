@@ -191,7 +191,7 @@ export default function TradeRacePage() {
     if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => {
       getTradeRaceData()
-    }, 3000)
+    }, 20000)
   }
   const clearTimer = () => {
     if (intervalRef.current) {
