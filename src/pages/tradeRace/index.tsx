@@ -187,11 +187,18 @@ export default function TradeRacePage() {
       }
     })
   }
+  const getAirdropDataInterval = () => {
+    getTradeRace({}).then((res) => {
+      if (res.status === 200 && res.data.status === 200 && res.data.data.fee) {
+        setFee(res.data.data.fee)
+      }
+    })
+  }
   // 定义定时器启动和清除函数
   const startInterval = () => {
     if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => {
-      getTradeRaceData()
+      getAirdropDataInterval()
     }, 20000)
   }
   const clearTimer = () => {
@@ -223,7 +230,7 @@ export default function TradeRacePage() {
     // 监听 focus/unfocus
     const handleFocus = () => {
       console.log('focus')
-      getTradeRaceData()
+      getAirdropDataInterval()
       startInterval()
     }
     const handleBlur = () => {
@@ -335,27 +342,27 @@ export default function TradeRacePage() {
           </Button>
         </div>
         <Divider />
-        {fee?.airdrop_usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
-          <div className='w-[33%] text-center'>
+        <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
+          <div className='w-[100%] md:w-[27%] text-center'>
             <Text>{t('trade_race_total_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
           </div>
-          <div className='w-[33%] text-center'>
+          <div className='w-[100%] md:w-[43%] text-center'>
             <Text>{t('trade_race_current_reward')}</Text>
             {/* <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div> */}
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>
-              $<OdometerNumber 
-                value={+fee?.airdrop_usdt_amount} 
+              <OdometerNumber value={+fee?.airdrop_koge_amount || 0} firstAppear={true} />KOGE
+              (~$<OdometerNumber 
+                value={+fee?.airdrop_usdt_amount || 0} 
                 firstAppear={true}
-              />
-              (<OdometerNumber value={+fee?.airdrop_koge_amount} firstAppear={true} />KOGE)
+              />)
             </div>
           </div>
-          <div className='w-[33%] text-center'>
+          <div className='w-[100%] md:w-[27%] text-center'>
             <Text>{t('trade_race_eligible_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail?.usdt_amount)}</div>
           </div>
-        </div>}
+        </div>
         
        
         {/* Coming Soon for stats */}
