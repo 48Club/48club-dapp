@@ -227,7 +227,6 @@ export default function TradeRacePage() {
       startInterval()
     }
     const handleBlur = () => {
-      console.log('blur')
       clearTimer()
     }
     window.addEventListener('focus', handleFocus)
