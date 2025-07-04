@@ -16,7 +16,6 @@ dayjs.extend(utc)
 
 const { Title, Text } = Typography
 const formatNumber = (num: string | number) => {
-  console.log(num, 'num')
   if (Number.isFinite(Number(num))) {
     return Number(num).toLocaleString('en-US', {
       minimumFractionDigits: 2,
