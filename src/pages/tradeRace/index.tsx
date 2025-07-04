@@ -161,7 +161,6 @@ export default function TradeRacePage() {
     return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   const getTradeRaceData = () => {
-    
     getTradeRace({}).then((res) => {
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
@@ -199,6 +198,7 @@ export default function TradeRacePage() {
       intervalRef.current = null
     }
   }
+
   useEffect(() => {
     // 首次加载，带 address（如果有）
     if (account) {
@@ -214,6 +214,7 @@ export default function TradeRacePage() {
       searchRef.current?.reset()
     }
   }, [account])
+
   useEffect(() => {
     // interval 只更新 fee
     startInterval()
@@ -237,7 +238,6 @@ export default function TradeRacePage() {
       window.removeEventListener('blur', handleBlur)
     }
   }, [])
-
 
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
