@@ -35,7 +35,6 @@ export default function TradeRacePage() {
   const [currentAccount, setCurrentAccount] = useState('')
   const [timeRange, setTimeRange] = useState<[number, number]>([0, 0])
   const [nonce, setNonce] = useState<number>(0)
-  const [requestCount, setRequestCount] = useState(0)
   const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const [addressSearchModalVisible, setAddressSearchModalVisible] = useState(false)
@@ -161,7 +160,7 @@ export default function TradeRacePage() {
     return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   const getTradeRaceData = () => {
-    
+    if (!isActive) return
     getTradeRace({}).then((res) => {
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
@@ -200,15 +199,7 @@ export default function TradeRacePage() {
       }
     })
   }
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getTradeRaceData()
-    }, 30000)
-    getTradeRaceData()
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
+
   useEffect(() => {
     if (currentAccount) {
       // const address = '0x64Bd8AB0F47Baa9c692fF5e29DDAb3F833bA3E80'
@@ -222,12 +213,33 @@ export default function TradeRacePage() {
       searchRef.current?.reset()
     }
   }, [account])
+
+
+  const [isActive, setIsActive] = useState<boolean>(true)
   useEffect(() => {
-    window.addEventListener('focus',  getTradeRaceData)
+    const handleFocus = () => setIsActive(true)
+    const handleBlur = () => setIsActive(false)
+
+    window.addEventListener('focus', handleFocus)
+    window.addEventListener('blur', handleBlur)
+
     return () => {
-      window.removeEventListener('focus',  getTradeRaceData)
+      window.removeEventListener('focus', handleFocus)
+      window.removeEventListener('blur', handleBlur)
     }
   }, [])
+
+  useEffect(() => {
+    if (isActive) getTradeRaceData()
+    const queryInterval = () => {
+      if (!isActive) return
+      getTradeRaceData()
+    }
+    const interval = setInterval(queryInterval, 30000)
+    return () => clearInterval(interval)
+  }, [isActive])
+
+
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
