@@ -10,17 +10,19 @@ import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 import OdometerNumber from '@/components/OdometerNumber'
-import { use } from 'i18next'
 // import { Table } from 'antd'
 
 dayjs.extend(utc)
 
 const { Title, Text } = Typography
 const formatNumber = (num: string | number) => {
-  return Number(num).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
+  if (Number.isFinite(Number(num))) {
+    return Number(num).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  }
+  return '--'
 }
 export default function TradeRacePage() {
   const ratio = 0.648 * 2 // 总奖池的 64.8% 转为KOGE的比例
@@ -35,6 +37,7 @@ export default function TradeRacePage() {
   const [currentAccount, setCurrentAccount] = useState('')
   const [timeRange, setTimeRange] = useState<[number, number]>([0, 0])
   const [nonce, setNonce] = useState<number>(0)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const [addressSearchModalVisible, setAddressSearchModalVisible] = useState(false)
@@ -143,7 +146,7 @@ export default function TradeRacePage() {
   }
   const handleSearch = (address: string) => {
     setCurrentAccount(address)
-    // getDataByAddress(address)
+    getDataByAddress(address)
   }
   const formatTimeRange = useMemo(() => {
     const [start, end] = timeRange
@@ -160,34 +163,19 @@ export default function TradeRacePage() {
     return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   const getTradeRaceData = () => {
-    if (!isActive) return
     getTradeRace({}).then((res) => {
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
-        setRanklist(pre => { 
+        // 这样做是为了防止用户连接钱包之后 两个请求前后发出，带address的先返回数据，ranklist 被不带address的数据覆盖了
+        setRanklist(pre => {
           if (pre.length > 0) {
             return pre
           }
           return dealList
         })
-        setTotal((pre: any) => {
-          if (pre) {
-            return pre
-          }
-          return res.data.data.total
-        })
-        setFee((pre: any) => {
-          if (pre?.usdt_amount) {
-            return pre
-          }
-          return res.data.data.fee
-        })
-        setTradeFeeThisWeek(pre => {
-          if (pre) {
-            return pre
-          }
-          return res.data.data.trade_total_this_week
-        })
+        setTotal(res.data.data.total)
+        setFee(res.data.data.fee)
+        setTradeFeeThisWeek(res.data.data.trade_total_this_week)
         // Set nonce if available in response
         if (res.data.data.nonce) {
           setNonce(res.data.data.nonce)
@@ -199,14 +187,29 @@ export default function TradeRacePage() {
       }
     })
   }
+  // 定义定时器启动和清除函数
+  const startInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(() => {
+      getTradeRaceData()
+    }, 20000)
+  }
+  const clearTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }
 
   useEffect(() => {
-    if (currentAccount) {
-      // const address = '0x64Bd8AB0F47Baa9c692fF5e29DDAb3F833bA3E80'
-      const address = currentAccount
-      getDataByAddress(address)
+    // 首次加载，带 address（如果有）
+    if (account) {
+      getDataByAddress(account)
+    } else {
+      getTradeRaceData()
     }
-  }, [currentAccount])
+
+  }, [account])
   useEffect(() => {
     if (account) {
       setCurrentAccount(account)
@@ -214,31 +217,28 @@ export default function TradeRacePage() {
     }
   }, [account])
 
-
-  const [isActive, setIsActive] = useState<boolean>(true)
   useEffect(() => {
-    const handleFocus = () => setIsActive(true)
-    const handleBlur = () => setIsActive(false)
-
+    // interval 只更新 fee
+    startInterval()
+    // 监听 focus/unfocus
+    const handleFocus = () => {
+      console.log('focus')
+      getTradeRaceData()
+      startInterval()
+    }
+    const handleBlur = () => {
+      clearTimer()
+    }
     window.addEventListener('focus', handleFocus)
     window.addEventListener('blur', handleBlur)
 
     return () => {
+      clearTimer()
+      console.log('destroy')
       window.removeEventListener('focus', handleFocus)
       window.removeEventListener('blur', handleBlur)
     }
   }, [])
-
-  useEffect(() => {
-    if (isActive) getTradeRaceData()
-    const queryInterval = () => {
-      if (!isActive) return
-      getTradeRaceData()
-    }
-    const interval = setInterval(queryInterval, 30000)
-    return () => clearInterval(interval)
-  }, [isActive])
-
 
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
@@ -279,6 +279,9 @@ export default function TradeRacePage() {
               i18nKey="trade_race_rule_desc3"
               components={{
                 strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
+              }}
+              values={{
+                rate: fee?.ratio / 10
               }}
             />{t('trade_race_rule_desc4')}</div>
           <div>
@@ -332,7 +335,7 @@ export default function TradeRacePage() {
           </Button>
         </div>
         <Divider />
-        {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
+        {fee?.airdrop_usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
           <div className='w-[33%] text-center'>
             <Text>{t('trade_race_total_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
@@ -341,9 +344,11 @@ export default function TradeRacePage() {
             <Text>{t('trade_race_current_reward')}</Text>
             {/* <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div> */}
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>
-              <OdometerNumber 
-                value={+fee?.usdt_amount * ratio} 
+              $<OdometerNumber 
+                value={+fee?.airdrop_usdt_amount} 
+                firstAppear={true}
               />
+              (<OdometerNumber value={+fee?.airdrop_koge_amount} firstAppear={true} />KOGE)
             </div>
           </div>
           <div className='w-[33%] text-center'>
