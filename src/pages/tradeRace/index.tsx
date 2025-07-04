@@ -234,7 +234,7 @@ export default function TradeRacePage() {
 
     return () => {
       clearTimer()
-      console.log('destory')
+      console.log('destroy')
       window.removeEventListener('focus', handleFocus)
       window.removeEventListener('blur', handleBlur)
     }
