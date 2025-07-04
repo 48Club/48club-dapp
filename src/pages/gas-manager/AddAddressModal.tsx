@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Modal, Form, Input, Button } from 'antd';
+import useSignMessage from '@/hooks/useSignMessage'
 
 interface ManageAddressModalProps {
   open: boolean;
@@ -9,6 +10,7 @@ interface ManageAddressModalProps {
 
 export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressModalProps) {
   const [form] = Form.useForm();
+  const { signMessage } = useSignMessage()
 
   useEffect(() => {
     if (open) form.resetFields();
