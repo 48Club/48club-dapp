@@ -10,17 +10,20 @@ import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 import OdometerNumber from '@/components/OdometerNumber'
-import { use } from 'i18next'
 // import { Table } from 'antd'
 
 dayjs.extend(utc)
 
 const { Title, Text } = Typography
 const formatNumber = (num: string | number) => {
-  return Number(num).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
+  console.log(num, 'num')
+  if (Number.isFinite(Number(num))) {
+    return Number(num).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  }
+  return '--'
 }
 export default function TradeRacePage() {
   const ratio = 0.648 * 2 // 总奖池的 64.8% 转为KOGE的比例
