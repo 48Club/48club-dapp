@@ -1,0 +1,10 @@
+.edit-gas-modal .ant-modal-body {
+  padding: 20px;
+} 
+.edit-gas-modal .ant-modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.edit-gas-modal .ant-modal-footer {
+  padding: 20px;
+}

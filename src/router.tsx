@@ -34,6 +34,7 @@ import InscriptionsWrapped from './pages/inscriptions/wrapped'
 import Administrator from './pages/administrator'
 import AddRpc from './pages/addRpc'
 import TradeRace from './pages/tradeRace/index'
+import GasManager from './pages/gas-manager'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const LayoutWrap = () => (
@@ -165,6 +166,10 @@ const routes = createBrowserRouter([
       {
         path: '/trade-race',
         element: <TradeRace />,
+      },
+      {
+        path: '/gas-manager',
+        element: <GasManager />,
       },
     ],
   },
