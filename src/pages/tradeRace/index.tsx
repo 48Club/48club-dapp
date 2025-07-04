@@ -187,11 +187,18 @@ export default function TradeRacePage() {
       }
     })
   }
+  const getAirdropDataInterval = () => {
+    getTradeRace({}).then((res) => {
+      if (res.status === 200 && res.data.status === 200 && res.data.data.fee) {
+        setFee(res.data.data.fee)
+      }
+    })
+  }
   // 定义定时器启动和清除函数
   const startInterval = () => {
     if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => {
-      getTradeRaceData()
+      getAirdropDataInterval()
     }, 20000)
   }
   const clearTimer = () => {
@@ -223,7 +230,7 @@ export default function TradeRacePage() {
     // 监听 focus/unfocus
     const handleFocus = () => {
       console.log('focus')
-      getTradeRaceData()
+      getAirdropDataInterval()
       startInterval()
     }
     const handleBlur = () => {
