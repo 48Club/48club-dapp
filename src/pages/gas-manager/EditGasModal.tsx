@@ -1,15 +1,20 @@
 import React, { useEffect } from 'react';
-import { Modal, Form, Input } from 'antd';
+import { Modal, Form, Input, message } from 'antd';
+import { useEthers } from '@usedapp/core';
+import { parseUnits } from 'ethers/lib/utils';
+import useSignMessage from '@/hooks/useSignMessage';
 
 interface EditGasModalProps {
   open: boolean;
   initialValue?: string;
-  onOk: (value: string) => void;
+  onOk: (value: string, signature: string) => void;
   onCancel: () => void;
 }
 
 export default function EditGasModal({ open, initialValue = '', onOk, onCancel }: EditGasModalProps) {
   const [form] = Form.useForm();
+  const { account } = useEthers();
+  const { signMessage } = useSignMessage();
 
   useEffect(() => {
     if (open) {
@@ -17,15 +22,28 @@ export default function EditGasModal({ open, initialValue = '', onOk, onCancel }
     }
   }, [initialValue, open, form]);
 
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields();
+      if (!account) {
+        message.error('请先连接钱包');
+        return;
+      }
+      // 金额转为wei
+      const wei = parseUnits(values.gas, 18).toString();
+      const msg = `I authorize master account ${account.toLowerCase()} to set gas tip to ${wei} wei`;
+      const signature = await signMessage(msg);
+      onOk(values.gas, signature);
+    } catch (e: any) {
+      if (e?.message) message.error(e.message);
+    }
+  };
+
   return (
     <Modal
       open={open}
       title={<div className="text-xl font-bold p-[20px]">编辑 Gas Price</div>}
-      onOk={() => {
-        form.validateFields().then(values => {
-          onOk(values.gas);
-        });
-      }}
+      onOk={handleOk}
       onCancel={onCancel}
       okText="设置"
       cancelText="取消"

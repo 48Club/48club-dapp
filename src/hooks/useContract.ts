@@ -98,3 +98,8 @@ export function useAirDropStatusContractReadonly() {
 export function useAirDropStatusContract() {
   return useMemo(() => new Contract(airdropStatusAddress as string, airdropStatusABI), [])
 }
+
+export function useGasInfoContractReadonly() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL_NEW), [])
+  return useMemo(() => new Contract(airdropStatusAddress as string, airdropStatusABI, provider), [provider])
+}
