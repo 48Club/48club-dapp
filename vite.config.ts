@@ -42,9 +42,9 @@ export default defineConfig({
         secure: false,
       },
       "/v3": {
-        target: "https://www.48.club",
+        target: "https://explore.48.club/v3",
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/v3/, '/v3'),
+        rewrite: path => path.replace(/^\/v3/, ''),
         secure: false,
       },
     },

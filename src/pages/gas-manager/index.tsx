@@ -38,11 +38,12 @@ export default function GasManager() {
   const [mainTab, setMainTab] = useState<'address' | 'recharge' | 'consume' | 'withdraw'>('address');
   const loadSubAccount = async () => {
     const timestamp = Math.floor(Date.now() / 1000);
-    const msg = `check all sub-accounts under master account ${address.toLowerCase()}, at unix timestamp ${timestamp}`;
-    const signature = await signMessage(msg);
+    const msg = `check all sub-accounts under master account ${account?.toLowerCase()}, at unix timestamp ${timestamp}`;
+    console.log(msg, 'msg')
+    const sign = await signMessage(msg);
     getSubAccount({
-      account,
-      signature,
+      account: account?.toLowerCase(),
+      sign,
       timestamp,
     })
   }
