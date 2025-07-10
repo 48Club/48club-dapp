@@ -3,6 +3,7 @@ import { Modal, Form, Input, Button, message } from 'antd';
 import useSignMessage from '@/hooks/useSignMessage'
 import { isAddress } from 'ethers/lib/utils';
 import { useEthers } from '@usedapp/core';
+import { bindSubAccount } from '@/utils/axios';
 
 interface ManageAddressModalProps {
   open: boolean;
@@ -42,9 +43,14 @@ export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressM
         return;
       }
       // 拼接签名消息
-      const msg = `i authorize master account ${account.toLowerCase()} to pay all gas fees incurred by transactions from sub-accounts ${addresses.join(',')}`;
-      const signature = await signMessage(msg);
-      onOk(addresses, signature);
+      const timestamp = Math.floor(Date.now() / 1000);
+      const msg = `i authorize master account ${account.toLowerCase()} to pay all gas fees incurred by transactions from sub-accounts ${addresses.join(',')}, at unix timestamp ${timestamp}`;
+      const sign = await signMessage(msg);
+      const res = await bindSubAccount({
+        sign,
+        timestamp,
+        accounts: [account.toLowerCase(), ...addresses],
+      })
     } catch (e: any) {
       if (e?.message) message.error(e.message);
     }

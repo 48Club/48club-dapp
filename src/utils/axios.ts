@@ -73,4 +73,10 @@ export const getTradeRaceAirdrop = async(params: any) => {
 export const getSubAccount = async(params: any) => {
   return api.post(`/v3/sponsor_subs`, params)
 }
+export const bindSubAccount = async(params: any) => {
+  return api.post(`/v3/sponsor`, params)
+}
+export const unbindSubAccount = async(params: any) => {
+  return api.delete(`/v3/sponsor`, { data: params })
+}
 export default api

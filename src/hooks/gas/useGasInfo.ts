@@ -10,7 +10,7 @@ export default function useGasInfo() {
 
   const loadDepositRecords = useCallback(async (address: string) => {
     setDepositRecords(undefined)
-    const contract = useGasInfoContractReadonly
+    const contract = gasInfoContractReadonly
     const filter = contract.filters.Deposit(address, null)
     const events = await contract.queryFilter(filter, START_BLOCK_NUMBER)
     const rows = events.map(i => ({
@@ -32,8 +32,8 @@ export default function useGasInfo() {
   }, [gasInfoContractReadonly])
   const loadWithdrawRecords = useCallback(async (address: string) => {
     setWithdrawRecords(undefined)
-    const contract = useGasInfoContractReadonly
-    const filter = contract.filters.Withdraw(address, null)
+    const contract = gasInfoContractReadonly
+    const filter = contract.filters.Withdrawal(address, null)
     const events = await contract.queryFilter(filter, START_BLOCK_NUMBER)
     const rows = events.map(i => ({
       proposalId: i.args?.proposalId?.toString(),
@@ -54,8 +54,8 @@ export default function useGasInfo() {
   }, [gasInfoContractReadonly])
   const loadAuthorizedSpendRecords = useCallback(async (address: string) => {
     setAuthorizedSpendRecords(undefined)
-    const contract = useGasInfoContractReadonly
-    const filter = contract.filters.AuthorizedSpend(address, null)
+    const contract = gasInfoContractReadonly
+    const filter = contract.filters.SponsorPaid(address, null)
     const events = await contract.queryFilter(filter, START_BLOCK_NUMBER)
     const rows = events.map(i => ({
       proposalId: i.args?.proposalId?.toString(),

@@ -9,7 +9,7 @@ import useGasInfo from '@/hooks/gas/useGasInfo';
 import useSignMessage from '@/hooks/useSignMessage';
 import { useOpenModal } from '@/state/application/hooks';
 import { ApplicationModal } from '@/state/application/actions';
-import { getSubAccount } from '@/utils/axios';
+import { getSubAccount, unbindSubAccount } from '@/utils/axios';
 
 const address = '0x7E3B9009eCf5D8DBB8433e74C8241632C6B3da6F';
 const initialGasPrice = 0.001;
@@ -26,7 +26,7 @@ export default function GasManager() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [manageAddressOpen, setManageAddressOpen] = useState(false);
   const [rechargeOpen, setRechargeOpen] = useState(false);
-  const [addressList, setAddressList] = useState(initialAddressList.map((item, idx) => ({ ...item, key: idx })));
+  const [addressList, setAddressList] = useState([]);
   const { depositRecords, withdrawRecords, authorizedSpendRecords, loadDepositRecords, loadWithdrawRecords, loadAuthorizedSpendRecords } = useGasInfo();
   const { signMessage } = useSignMessage();
   const openwallet = useOpenModal(ApplicationModal.WALLET)
@@ -36,22 +36,28 @@ export default function GasManager() {
     { title: '数量', dataIndex: 'amount', key: 'amount', align: 'left' as const },
   ];
   const [mainTab, setMainTab] = useState<'address' | 'recharge' | 'consume' | 'withdraw'>('address');
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const loadSubAccount = async () => {
     const timestamp = Math.floor(Date.now() / 1000);
     const msg = `check all sub-accounts under master account ${account?.toLowerCase()}, at unix timestamp ${timestamp}`;
     console.log(msg, 'msg')
     const sign = await signMessage(msg);
-    getSubAccount({
+    const res = await getSubAccount({
       account: account?.toLowerCase(),
       sign,
       timestamp,
     })
+    if (res.status === 200) {
+      setAddressList(res.data.sub_accounts || [])
+      setGasPrice(res.data.gas_tip)
+    }
+    console.log(res, 'res')
   }
   useEffect(() => {
     if (account) {
-      // loadDepositRecords(account)
-      // loadWithdrawRecords(account)
-      // loadAuthorizedSpendRecords(account)
+      loadDepositRecords(account)
+      loadWithdrawRecords(account)
+      loadAuthorizedSpendRecords(account)
       loadSubAccount()
     }
   }, [account])
@@ -62,16 +68,34 @@ export default function GasManager() {
     setEditModalOpen(false);
   };
 
-  const handleDelete = (key: number) => {
-    setAddressList(list => list.filter(item => item.key !== key));
+  const handleDelete = async(addresses: any[]) => {
+    const timestamp = Math.floor(Date.now() / 1000);
+    const msg = `i authorize master account ${account?.toLowerCase()} to stop paying gas fees for sub-accounts ${addresses.join(',')}, at unix timestamp ${timestamp}`;
+    try {
+      const sign = await signMessage(msg);
+      const res = await unbindSubAccount({
+        accounts: [account, ...addresses],
+        sign,
+        timestamp,
+      })
+      message.success('已移除子账户');
+    } catch (e: any) {
+      message.error(e?.message || '签名失败');
+    }
     message.success('删除成功');
   };
 
   const handleRemoveAll = async () => {
     if (!account) return;
-    const msg = `I authorize master account ${account.toLowerCase()} to stop paying gas fees for all sub-accounts`;
+    const timestamp = Math.floor(Date.now() / 1000);
+    const msg = `i authorize master account ${account.toLowerCase()} to stop paying gas fees for all sub-accounts, at unix timestamp ${timestamp}`;
     try {
-      await signMessage(msg);
+      const sign = await signMessage(msg);
+      const res = await unbindSubAccount({
+        accounts: [account],
+        sign,
+        timestamp,
+      })
       setAddressList([]);
       message.success('已移除全部子账户');
     } catch (e: any) {
@@ -79,13 +103,27 @@ export default function GasManager() {
     }
   };
 
+  const handleBatchDelete = async () => {
+    if (!account) return;
+    if (selectedRowKeys.length === 0) {
+      message.warning('请选择要删除的子账户');
+      return;
+    }
+    // 可选：签名确认
+    // const msg = `I authorize master account ${account.toLowerCase()} to remove sub-accounts: ${selectedRowKeys.join(',')}`;
+    // await signMessage(msg);
+    setAddressList(list => list.filter(item => !selectedRowKeys.includes(item.key)));
+    setSelectedRowKeys([]);
+    message.success('已批量删除选中子账户');
+  };
+
   const columns = [
     {
       title: '时间',
-      dataIndex: 'time',
-      key: 'time',
+      dataIndex: 'add_time',
+      key: 'add_time',
       align: 'left' as const,
-      render: (text: string) => <span className="font-mono text-gray-700">{text}</span>,
+      render: (text: string) => <span className="font-mono text-gray-700">{new Date(Number(text) * 1000).toLocaleString()}</span>,
     },
     {
       title: '地址',
@@ -99,7 +137,7 @@ export default function GasManager() {
       key: 'action',
       align: 'center' as const,
       render: (_: any, record: any) => (
-        <Popconfirm title="确定删除该地址吗？" onConfirm={() => handleDelete(record.key)} okText="删除" cancelText="取消" disabled={!account}>
+        <Popconfirm title="确定删除该地址吗？" onConfirm={() => handleDelete([record.address])} okText="删除" cancelText="取消" disabled={!account}>
           <Button type="link" size="small" className="text-yellow-500" disabled={!account}>删除</Button>
         </Popconfirm>
       ),
@@ -147,7 +185,7 @@ export default function GasManager() {
           <div className="bg-white rounded-xl shadow border border-[#e0e0e0] p-6">
             <Tabs activeKey={mainTab} onChange={key => setMainTab(key as 'address' | 'recharge' | 'consume' | 'withdraw')}>
               <Tabs.TabPane tab="地址列表" key="address">
-                <div className="mb-3 flex items-center justify-end">
+                <div className="mb-3 flex items-center justify-end gap-2">
                   <Button
                     className="px-4 py-2 rounded-lg shadow transition text-base text-primary bg-white"
                     onClick={handleRemoveAll}
@@ -155,9 +193,21 @@ export default function GasManager() {
                   >
                     移除全部子账户
                   </Button>
+                  <Button
+                    className="px-4 py-2 rounded-lg shadow transition text-base text-primary bg-white"
+                    onClick={handleBatchDelete}
+                    disabled={!account || selectedRowKeys.length === 0}
+                  >
+                    批量删除
+                  </Button>
                 </div>
                 <div className="overflow-x-auto rounded-xl shadow border border-[#e0e0e0] bg-white">
                   <Table
+                    rowSelection={{
+                      selectedRowKeys,
+                      onChange: setSelectedRowKeys,
+                      columnWidth: 48,
+                    }}
                     columns={columns}
                     dataSource={addressList}
                     pagination={false}
