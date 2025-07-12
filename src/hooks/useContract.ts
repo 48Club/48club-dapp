@@ -102,6 +102,15 @@ export function useAirDropStatusContract() {
 }
 
 export function useGasInfoContractReadonly() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(gasInfoAddress as string, gasInfoABI, provider), [provider])
+}
+
+export function useGasInfoContractReadonlyNew() {
   const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL_NEW), [])
   return useMemo(() => new Contract(gasInfoAddress as string, gasInfoABI, provider), [provider])
+}
+
+export function useGasInfoContract() {
+  return useMemo(() => new Contract(gasInfoAddress as string, gasInfoABI), [])
 }
