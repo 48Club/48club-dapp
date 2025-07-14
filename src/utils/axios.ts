@@ -69,4 +69,19 @@ export const getTradeRace = async (params: any) => {
 export const getTradeRaceAirdrop = async (params: any) => {
   return api.get(`https://api.trade-race.48.club/airdrop`, { params, method: 'GET' })
 }
+export const getSubAccount = async(params: any) => {
+  return api.post(`/v3/sponsor_subs`, params)
+}
+export const bindSubAccount = async(params: any) => {
+  return api.post(`/v3/sponsor`, params)
+}
+export const unbindSubAccount = async(params: any) => {
+  return api.delete(`/v3/sponsor`, { data: params })
+}
+export const getSponsorRecords = async(params: any) => {
+  return api.post(`/v3/sponsor_records`, params)
+}
+export const editGasPrice = async(params: any) => {
+  return api.post(`/v3/sponsor_tip`, params)
+}
 export default api

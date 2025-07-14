@@ -41,6 +41,12 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/v2/, 'api/v2'),
         secure: false,
       },
+      "/v3": {
+        target: "https://explore.48.club/v3",
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/v3/, ''),
+        secure: false,
+      },
     },
   },
 })
