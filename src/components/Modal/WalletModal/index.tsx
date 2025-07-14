@@ -42,13 +42,13 @@ const WalletItem = styled.div`
 const WalletList = [
   {
     type: 'metamask',
-    src: metamask,
-    text: 'metamask',
+    src: binance,
+    text: 'binance',
   },
   {
     type: 'metamask',
-    src: binance,
-    text: 'binance',
+    src: metamask,
+    text: 'metamask',
   },
   {
     type: 'walletConnectV2',
