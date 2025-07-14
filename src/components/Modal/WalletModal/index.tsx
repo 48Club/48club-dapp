@@ -3,6 +3,7 @@ import { useCloseModals, useModalOpen } from '@/state/application/hooks'
 import { Modal } from 'antd'
 import { useCallback, useEffect, useState } from 'react'
 import metamask from '@/assets/images/wallet/metamask.svg'
+import binance from '@/assets/images/wallet/binance-w3w.png'
 import walletConnect from '@/assets/images/wallet/walletConnect.svg'
 import { styled } from 'styled-components'
 import { useEthers } from '@usedapp/core'
@@ -42,10 +43,17 @@ const WalletList = [
   {
     type: 'metamask',
     src: metamask,
+    text: 'metamask',
+  },
+  {
+    type: 'metamask',
+    src: binance,
+    text: 'binance',
   },
   {
     type: 'walletConnectV2',
     src: walletConnect,
+    text: 'walletConnectV2',
   },
 ]
 
@@ -103,8 +111,8 @@ export default function WalletModal() {
           return (
             <WalletItem onClick={() => activate(idx.type)} key={i + 'WalletItem'}>
               <div className="flex items-center">
-                <img src={idx.src} alt="" className="mr-[8px] rounded-[12px]" />
-                {idx.type}
+                <img src={idx.src} alt="" className="mr-[8px] rounded-[12px] w-[40px] h-[40px]" />
+                {idx.text}
               </div>
               {isActive === idx.type && <LoadingOutlined />}
             </WalletItem>
