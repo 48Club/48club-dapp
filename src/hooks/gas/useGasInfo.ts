@@ -28,18 +28,18 @@ export default function useGasInfo() {
   const { send: withdraw, state: withdrawState } = useContractFunction(gasInfoContract, 'withdraw', {
     transactionName: 'Withdraw BNB',
   })
-
+  console.log(depositState, 'depositState')
+  console.log(withdrawState, 'withdrawState')
   const loadDepositRecords = async (account: string) => {
     if (!account || !gasInfoContractReadonly) return;
     
-    setDepositRecords(undefined)
+    // setDepositRecords(undefined)
     try {
       // 查询 Deposit 事件日志
       const depositFilter = gasInfoContractReadonly.filters.Deposit(account, null);
       const depositEvents = await gasInfoContractReadonly.queryFilter(depositFilter);
       
       const records = depositEvents.map(event => ({
-        time: new Date(event.blockNumber * 1000).toLocaleString(),
         address: event.args?.user || '',
         amount: ethers.utils.formatEther(event.args?.amount || 0) + ' BNB',
         txHash: event.transactionHash,
@@ -56,14 +56,13 @@ export default function useGasInfo() {
   const loadWithdrawRecords = async (account: string) => {
     if (!account || !gasInfoContractReadonly) return;
     
-    setWithdrawRecords(undefined)
+    // setWithdrawRecords(undefined)
     try {
       // 查询 Withdrawal 事件日志
       const withdrawFilter = gasInfoContractReadonly.filters.Withdrawal(account, null);
       const withdrawEvents = await gasInfoContractReadonly.queryFilter(withdrawFilter);
-      
+      console.log(withdrawEvents, 'withdrawEvents')
       const records = withdrawEvents.map(event => ({
-        time: new Date(event.blockNumber * 1000).toLocaleString(),
         address: event.args?.user || '',
         amount: ethers.utils.formatEther(event.args?.amount || 0) + ' BNB',
         txHash: event.transactionHash,
@@ -102,8 +101,9 @@ export default function useGasInfo() {
       sign,
       timestamp: Math.floor(Date.now() / 1000),
     })
+    console.log(res, 'loadSponsorRecords res')
     if (res.status === 200) {
-      setSponsorRecords(res.data.sponsor_records || [])
+      setSponsorRecords(res.data?.sponsor_records || [])
     }
   }
 
@@ -166,6 +166,7 @@ export default function useGasInfo() {
       accounts: [account.toLowerCase(), ...addresses],
     })
     console.log(res, 'addSubAccount res')
+    return res
   }
   const editGasTip = async (account: string, gasPrice: number) => {
     const timestamp = Math.floor(Date.now() / 1000);
@@ -179,13 +180,15 @@ export default function useGasInfo() {
       timestamp,
       set_tip: gasPriceInWei,
     })
+    return res
   }
   const removeAllSubAccount = async (account: string) => {
     const timestamp = Math.floor(Date.now() / 1000);
     const msg = `i authorize master account ${account.toLowerCase()} to stop paying gas fees for all sub-accounts, at unix timestamp ${timestamp}`;
+    let res = null
     try {
       const sign = await signMessage(msg);
-      const res = await unbindSubAccount({
+      res = await unbindSubAccount({
         accounts: [account],
         sign,
         timestamp,
@@ -194,7 +197,9 @@ export default function useGasInfo() {
       // message.success('已移除全部子账户');
     } catch (e: any) {
       // message.error(e?.message || '签名失败');
+
     }
+    return res
   }
   const removeSomeSubAccount = async (account: string, addresses: string[]) => {
     const timestamp = Math.floor(Date.now() / 1000);
@@ -205,6 +210,7 @@ export default function useGasInfo() {
       sign,
       timestamp,
     })
+    return res
   }
 
   // 充值 BNB 到 gasInfo 合约
@@ -261,6 +267,7 @@ export default function useGasInfo() {
 
   // 监听 deposit 交易状态
   useEffect(() => {
+    console.log(depositState, 'depositState')
     if (depositState.status === 'Success') {
       console.log('Deposit transaction successful');
       // 交易成功后刷新合约余额和充值记录
