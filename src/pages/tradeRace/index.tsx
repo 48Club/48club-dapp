@@ -288,7 +288,7 @@ export default function TradeRacePage() {
                 strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
               }}
               values={{
-                rate: fee?.ratio / 10
+                rate: fee?.ratio / 10,
               }}
             />{t('trade_race_rule_desc4')}</div>
           <div>
@@ -298,7 +298,17 @@ export default function TradeRacePage() {
               components={{
                 strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
               }}
+              values={{
+                min_usdt: fee?.min_trade_amount,
+              }}
             />
+            {fee?.max_traders && fee?.max_traders > 0 ? (
+              <Trans 
+                i18nKey="trade_race_rule_desc6"
+                values={{
+                  rank: fee?.max_traders,
+                }}
+              />): ''}
           </div>
           <div>❗️{t('trade_race_note_desc2')}</div>
         </div>

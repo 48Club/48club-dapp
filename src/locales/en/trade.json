@@ -8,6 +8,7 @@
   "trade_race_rule_desc3": "Reward Pool Calculation:Reward Pool = <strong>{{rate}}%</strong> of the total trading fees earned by 48Club's liquidity position on this trading pair during the event period.",
   "trade_race_rule_desc4": "The reward pool is funded solely from fees collected by 48Club's LP. Fees earned by LPs not operated by the organizer are excluded from the reward pool.",
   "trade_race_rule_desc5": "Reward Distribution: The top keyless wallet addresses whose valid trading volume exceeding <strong>15,000 USDT</strong> daily (including) in average, will equally share the reward pool.Rewards will be distributed in KOGE tokens of equivalent value via airdrop.",
+  "trade_race_rule_desc6": "(Limited to top {{rank}})",
   "trade_race_reward_title": "Reward Distribution & Announcement:",
   "trade_race_reward_desc1": "Rewards can be claimed starting next week.",
   "trade_race_reward_desc2": "Winners will be announced on the platform.",
