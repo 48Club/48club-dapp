@@ -105,7 +105,8 @@ export default function GasManager() {
 
   const handleDelete = async(addresses: any[]) => {
     const timestamp = Math.floor(Date.now() / 1000);
-    const msg = `i authorize master account ${account?.toLowerCase()} to stop paying gas fees for sub-accounts ${addresses.join(',')}, at unix timestamp ${timestamp}`;
+    const addressLow = addresses.map(item => item.toLowerCase())
+    const msg = `i authorize master account ${account?.toLowerCase()} to stop paying gas fees for sub-accounts ${addressLow.join(',')}, at unix timestamp ${timestamp}`;
     try {
       const sign = await signMessage(msg);
       const res = await unbindSubAccount({
