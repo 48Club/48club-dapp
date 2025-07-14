@@ -10,17 +10,19 @@ import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 import OdometerNumber from '@/components/OdometerNumber'
-import { use } from 'i18next'
 // import { Table } from 'antd'
 
 dayjs.extend(utc)
 
 const { Title, Text } = Typography
 const formatNumber = (num: string | number) => {
-  return Number(num).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
+  if (Number.isFinite(Number(num))) {
+    return Number(num).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  }
+  return '--'
 }
 export default function TradeRacePage() {
   const ratio = 0.648 * 2 // 总奖池的 64.8% 转为KOGE的比例
@@ -35,7 +37,7 @@ export default function TradeRacePage() {
   const [currentAccount, setCurrentAccount] = useState('')
   const [timeRange, setTimeRange] = useState<[number, number]>([0, 0])
   const [nonce, setNonce] = useState<number>(0)
-  const [requestCount, setRequestCount] = useState(0)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const searchRef = useRef<AddressSearchRef>(null)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const [addressSearchModalVisible, setAddressSearchModalVisible] = useState(false)
@@ -144,7 +146,7 @@ export default function TradeRacePage() {
   }
   const handleSearch = (address: string) => {
     setCurrentAccount(address)
-    // getDataByAddress(address)
+    getDataByAddress(address)
   }
   const formatTimeRange = useMemo(() => {
     const [start, end] = timeRange
@@ -161,34 +163,19 @@ export default function TradeRacePage() {
     return ` ${startTime.locale('en').format('DD MMM. HH:mm:ss')} ~ ${endTime.locale('en').format('DD MMM. HH:mm:ss')} (UTC)`
   }, [timeRange, i18n.language])
   const getTradeRaceData = () => {
-    
     getTradeRace({}).then((res) => {
       if (res.status === 200 && res.data.status === 200 && res.data.data.top_n && res.data.data.top_n.length > 0) {
         const dealList = addRankToList(res.data.data.top_n, res.data.data.total)
-        setRanklist(pre => { 
+        // 这样做是为了防止用户连接钱包之后 两个请求前后发出，带address的先返回数据，ranklist 被不带address的数据覆盖了
+        setRanklist(pre => {
           if (pre.length > 0) {
             return pre
           }
           return dealList
         })
-        setTotal((pre: any) => {
-          if (pre) {
-            return pre
-          }
-          return res.data.data.total
-        })
-        setFee((pre: any) => {
-          if (pre?.usdt_amount) {
-            return pre
-          }
-          return res.data.data.fee
-        })
-        setTradeFeeThisWeek(pre => {
-          if (pre) {
-            return pre
-          }
-          return res.data.data.trade_total_this_week
-        })
+        setTotal(res.data.data.total)
+        setFee(res.data.data.fee)
+        setTradeFeeThisWeek(res.data.data.trade_total_this_week)
         // Set nonce if available in response
         if (res.data.data.nonce) {
           setNonce(res.data.data.nonce)
@@ -200,34 +187,66 @@ export default function TradeRacePage() {
       }
     })
   }
+  const getAirdropDataInterval = () => {
+    getTradeRace({}).then((res) => {
+      if (res.status === 200 && res.data.status === 200 && res.data.data.fee) {
+        setFee(res.data.data.fee)
+      }
+    })
+  }
+  // 定义定时器启动和清除函数
+  const startInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(() => {
+      getAirdropDataInterval()
+    }, 20000)
+  }
+  const clearTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    // 首次加载，带 address（如果有）
+    if (account) {
+      getDataByAddress(account)
+    } else {
       getTradeRaceData()
-    }, 30000)
-    getTradeRaceData()
-    return () => {
-      clearInterval(interval)
     }
-  }, [])
-  useEffect(() => {
-    if (currentAccount) {
-      // const address = '0x64Bd8AB0F47Baa9c692fF5e29DDAb3F833bA3E80'
-      const address = currentAccount
-      getDataByAddress(address)
-    }
-  }, [currentAccount])
+
+  }, [account])
   useEffect(() => {
     if (account) {
       setCurrentAccount(account)
       searchRef.current?.reset()
     }
   }, [account])
+
   useEffect(() => {
-    window.addEventListener('focus',  getTradeRaceData)
+    // interval 只更新 fee
+    startInterval()
+    // 监听 focus/unfocus
+    const handleFocus = () => {
+      console.log('focus')
+      getAirdropDataInterval()
+      startInterval()
+    }
+    const handleBlur = () => {
+      clearTimer()
+    }
+    window.addEventListener('focus', handleFocus)
+    window.addEventListener('blur', handleBlur)
+
     return () => {
-      window.removeEventListener('focus',  getTradeRaceData)
+      clearTimer()
+      console.log('destroy')
+      window.removeEventListener('focus', handleFocus)
+      window.removeEventListener('blur', handleBlur)
     }
   }, [])
+
   return (
     <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
@@ -268,6 +287,9 @@ export default function TradeRacePage() {
               components={{
                 strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
               }}
+              values={{
+                rate: fee?.ratio / 10,
+              }}
             />{t('trade_race_rule_desc4')}</div>
           <div>
             🎯
@@ -276,7 +298,17 @@ export default function TradeRacePage() {
               components={{
                 strong: <strong style={{ color: '#ffc801', fontWeight: 'bold',fontSize: '16px' }} />
               }}
+              values={{
+                min_usdt: fee?.min_trade_amount,
+              }}
             />
+            {fee?.max_traders && fee?.max_traders > 0 ? (
+              <Trans 
+                i18nKey="trade_race_rule_desc6"
+                values={{
+                  rank: fee?.max_traders,
+                }}
+              />): ''}
           </div>
           <div>❗️{t('trade_race_note_desc2')}</div>
         </div>
@@ -320,25 +352,27 @@ export default function TradeRacePage() {
           </Button>
         </div>
         <Divider />
-        {fee?.usdt_amount && <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
-          <div className='w-[33%] text-center'>
+        <div className="flex justify-around md:flex-row flex-col items-start md:items-center mb-[24px]">
+          <div className='w-[100%] md:w-[27%] text-center'>
             <Text>{t('trade_race_total_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(tradeFeeThisWeek)}</div>
           </div>
-          <div className='w-[33%] text-center'>
+          <div className='w-[100%] md:w-[43%] text-center'>
             <Text>{t('trade_race_current_reward')}</Text>
             {/* <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div> */}
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>
-              <OdometerNumber 
-                value={+fee?.usdt_amount * ratio} 
-              />
+              <OdometerNumber value={+fee?.airdrop_koge_amount || 0} firstAppear={true} />KOGE
+              (~$<OdometerNumber 
+                value={+fee?.airdrop_usdt_amount || 0} 
+                firstAppear={true}
+              />)
             </div>
           </div>
-          <div className='w-[33%] text-center'>
+          <div className='w-[100%] md:w-[27%] text-center'>
             <Text>{t('trade_race_eligible_volume')}</Text>
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail?.usdt_amount)}</div>
           </div>
-        </div>}
+        </div>
         
        
         {/* Coming Soon for stats */}

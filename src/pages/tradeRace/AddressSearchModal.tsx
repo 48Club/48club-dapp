@@ -39,19 +39,6 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const airdropStatusContract = useAirDropStatusContract()
   const { send: claim, state: claimState } = useContractFunction(airdropStatusContract, 'claim', { transactionName: 'Claim Reward' })
   const isMobile = useMediaQuery({ maxWidth: 768 })
-  
-  // 统一监听所有状态
-  const handleStateChange = useCallback((state: any, actionName: string) => {
-    console.log(state, 'state')
-    if (state.status === 'Success') {
-      handleSearch()
-    } else if (state.status === 'Exception' || state.status === 'Fail') {
-      messageApi.error({
-        type: 'error',
-        content: state.errorMessage,
-      })
-    }
-  }, [])
 
   // 获取所有没有 tx_hash 的记录
   const recordsWithoutTxHash = useMemo(() => {
@@ -252,6 +239,19 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
     onClose()
     setIsEligible(true)
   }
+
+  // 统一监听所有状态
+  const handleStateChange = useCallback((state: any, actionName: string) => {
+    console.log(state, 'state')
+    if (state.status === 'Success') {
+      handleSearch()
+    } else if (state.status === 'Exception' || state.status === 'Fail') {
+      messageApi.error({
+        type: 'error',
+        content: state.errorMessage,
+      })
+    }
+  }, [handleSearch])
   
   return (
     <Modal
