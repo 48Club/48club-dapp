@@ -39,6 +39,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const airdropStatusContract = useAirDropStatusContract()
   const { send: claim, state: claimState } = useContractFunction(airdropStatusContract, 'claim', { transactionName: 'Claim Reward' })
   const isMobile = useMediaQuery({ maxWidth: 768 })
+  const [getContractResults, setGetContractResults] = useState(false)
 
   // 获取所有没有 tx_hash 的记录
   const recordsWithoutTxHash = useMemo(() => {
@@ -114,11 +115,16 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
     })
 
     setContractResults(prev => ({ ...prev, ...newResults }))
+    if (statusResults.length > 0 && statusResults[0]) {
+      setGetContractResults(true)
+    }
+    
   }, [statusResults, validEventIds])
 
   useEffect(() => {
     if (account && visible) {
       setAddress(account)
+      setGetContractResults(false)
     }
   }, [account, visible])
 
@@ -176,8 +182,12 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
               return <Button type="primary" onClick={() => handleClaim(data)}>{t('claim')}</Button>
             }
             return <span className="text-orange-500">{t('can_claim')}</span>
+          } else {
+            return <span className="text-red-500">{t('wait_dispatch')}</span>
           }
-          return <span className="text-red-500">{t('not_eligible')}</span>
+        }
+        if (getContractResults) {
+          return <span className="text-red-500">{t('wait_dispatch')}</span>
         }
         return <span className="text-gray-500">{t('loading')}</span>
       }
