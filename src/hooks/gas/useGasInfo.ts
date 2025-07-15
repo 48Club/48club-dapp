@@ -150,8 +150,11 @@ export default function useGasInfo() {
     // 清除之前的签名
     sessionStorage.removeItem(account);
     setSignatureStatus(null);
-    
+    const sign = await getLoginSign(account)
+    if (!sign) return
     // 重新获取签名和信息
+    loadDepositRecords(account)
+    loadWithdrawRecords(account)
     await loadSubAccount(account);
     await loadSponsorRecords(account);
   }
@@ -203,7 +206,8 @@ export default function useGasInfo() {
   }
   const removeSomeSubAccount = async (account: string, addresses: string[]) => {
     const timestamp = Math.floor(Date.now() / 1000);
-    const msg = `i authorize master account ${account.toLowerCase()} to stop paying gas fees for sub-accounts ${addresses.join(',')}, at unix timestamp ${timestamp}`;
+    const addressLow = addresses.map(item => item.toLowerCase())
+    const msg = `i authorize master account ${account?.toLowerCase()} to stop paying gas fees for sub-accounts ${addressLow.join(',')}, at unix timestamp ${timestamp}`;
     const sign = await signMessage(msg);
     const res = await unbindSubAccount({
       accounts: [account, ...addresses],
