@@ -5,13 +5,10 @@ import EditGasModal from './EditGasModal'
 import AddAddressModal from './AddAddressModal'
 import RechargeModal from './RechargeModal'
 import WithdrawModal from './WithdrawModal'
-import { useEthers, useTokenBalance } from '@usedapp/core'
+import { useEthers } from '@usedapp/core'
 import useGasInfo from '@/hooks/gas/useGasInfo'
-import useSignMessage from '@/hooks/useSignMessage'
 import { useOpenModal } from '@/state/application/hooks'
 import { ApplicationModal } from '@/state/application/actions'
-import { getSubAccount, unbindSubAccount } from '@/utils/axios'
-import { formatEther } from 'ethers/lib/utils'
 
 export default function GasManager() {
   const { account, library } = useEthers()
@@ -43,8 +40,10 @@ export default function GasManager() {
     withdrawBnb,
     withdrawState,
     getLoginSign,
+    loadingDepositRecords,
+    loadingWithdrawRecords,
+    clearList,
   } = useGasInfo()
-  const { signMessage } = useSignMessage()
   const openwallet = useOpenModal(ApplicationModal.WALLET)
 
   // 获取用户 BNB 余额
@@ -69,6 +68,13 @@ export default function GasManager() {
   ]
 
   const sponsorRecordColumns = [
+    {
+      title: 'block number',
+      dataIndex: 'block_number',
+      key: 'block_number',
+      align: 'left' as const,
+      render: (text: string) => <span className="text-sm text-gray-600">{text}</span>,
+    },
     {
       title: 'gas',
       dataIndex: 'gas_cost',
@@ -197,6 +203,8 @@ export default function GasManager() {
     }
     if (account) {
       fetchData(account)
+    } else {
+      clearList()
     }
   }, [account])
 
@@ -450,14 +458,14 @@ export default function GasManager() {
                   <>
                     <div className="mb-3 flex items-center justify-end gap-2">
                       <Button
-                        className="px-4 py-2 rounded-lg shadow transition text-base text-primary bg-white"
+                        className="px-4 py-2 rounded-lg shadow transition"
                         onClick={handleRemoveAll}
-                        disabled={!account}
+                        disabled={!account || addressList.length === 0}
                       >
                         移除全部子账户
                       </Button>
                       <Button
-                        className="px-4 py-2 rounded-lg shadow transition text-base text-primary bg-white"
+                        className="px-4 py-2 rounded-lg shadow transition text-[14px]"
                         onClick={handleBatchDelete}
                         disabled={!account || selectedRowKeys.length === 0}
                       >
@@ -521,6 +529,7 @@ export default function GasManager() {
                   locale={{
                     emptyText: <div className="text-gray-500 py-8 text-center">暂无记录</div>,
                   }}
+                  loading={loadingDepositRecords}
                 />
               </Tabs.TabPane>
               <Tabs.TabPane tab="提现记录" key="withdraw">
@@ -535,6 +544,7 @@ export default function GasManager() {
                   locale={{
                     emptyText: <div className="text-gray-500 py-8 text-center">暂无记录</div>,
                   }}
+                  loading={loadingWithdrawRecords}
                 />
               </Tabs.TabPane>
             </Tabs>

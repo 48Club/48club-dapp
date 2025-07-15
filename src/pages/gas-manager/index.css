@@ -8,3 +8,9 @@
 .edit-gas-modal .ant-modal-footer {
   padding: 20px;
 }
+.form-label-item .ant-form-item-required {
+  width: 100%;
+}
+.ant-modal-content .ant-modal-close {
+  display: block;
+}

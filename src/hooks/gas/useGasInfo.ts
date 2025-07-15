@@ -13,6 +13,8 @@ export default function useGasInfo() {
   const gasInfoContractReadonlyNew = useGasInfoContractReadonlyNew();
   const [depositRecords, setDepositRecords] = useState<any[] | undefined>(undefined)
   const [withdrawRecords, setWithdrawRecords] = useState<any[] | undefined>(undefined)
+  const [loadingDepositRecords, setLoadingDepositRecords] = useState<boolean>(false)
+  const [loadingWithdrawRecords, setLoadingWithdrawRecords] = useState<boolean>(false)
   const [sponsorRecords, setSponsorRecords] = useState<any[] | undefined>(undefined)
   const [addressList, setAddressList] = useState<any[]>([])
   const [gasPrice, setGasPrice] = useState<number>(0)
@@ -36,6 +38,7 @@ export default function useGasInfo() {
     // setDepositRecords(undefined)
     try {
       // 查询 Deposit 事件日志
+      setLoadingDepositRecords(true)
       const depositFilter = gasInfoContractReadonly.filters.Deposit(account, null);
       const depositEvents = await gasInfoContractReadonly.queryFilter(depositFilter);
       
@@ -47,6 +50,7 @@ export default function useGasInfo() {
       }));
       console.log(records, 'records')
       setDepositRecords(records);
+      setLoadingDepositRecords(false)
     } catch (error) {
       console.error('Error loading deposit records:', error);
       setDepositRecords([]);
@@ -59,9 +63,11 @@ export default function useGasInfo() {
     // setWithdrawRecords(undefined)
     try {
       // 查询 Withdrawal 事件日志
+      setLoadingWithdrawRecords(true)
       const withdrawFilter = gasInfoContractReadonly.filters.Withdrawal(account, null);
       const withdrawEvents = await gasInfoContractReadonly.queryFilter(withdrawFilter);
       console.log(withdrawEvents, 'withdrawEvents')
+      
       const records = withdrawEvents.map(event => ({
         address: event.args?.user || '',
         amount: ethers.utils.formatEther(event.args?.amount || 0) + ' BNB',
@@ -70,6 +76,7 @@ export default function useGasInfo() {
       }));
       
       setWithdrawRecords(records);
+      setLoadingWithdrawRecords(false)
     } catch (error) {
       console.error('Error loading withdraw records:', error);
       setWithdrawRecords([]);
@@ -297,7 +304,15 @@ export default function useGasInfo() {
       console.error('Withdraw transaction failed:', withdrawState.errorMessage);
     }
   }, [withdrawState.status, withdrawState.errorMessage, account])
-
+  const clearList = () => {
+    setDepositRecords([])
+    setWithdrawRecords([])
+    setSponsorRecords([])
+    setAddressList([])
+    setGasPrice(0)
+    setUserBalance('0')
+    setSignatureStatus(null)
+  }
   return {
     sponsorRecords,
     addressList,
@@ -321,5 +336,8 @@ export default function useGasInfo() {
     depositState,
     withdrawBnb,
     withdrawState,
+    loadingDepositRecords,
+    loadingWithdrawRecords,
+    clearList,
   }
 }
