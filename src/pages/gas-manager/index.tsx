@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Popconfirm, message, Tabs } from 'antd';
+import { Table, Button, Popconfirm, message, Tabs, TableProps } from 'antd';
 import './index.css';
 import EditGasModal from './EditGasModal';
 import AddAddressModal from './AddAddressModal';
@@ -20,7 +20,7 @@ export default function GasManager() {
   const [rechargeOpen, setRechargeOpen] = useState(false);
   const [withdrawOpen, setWithdrawOpen] = useState(false);
   const [bnbBalance, setBnbBalance] = useState<string>('0');
-  const { sponsorRecords, addressList, gasPrice, depositRecords, withdrawRecords, userBalance, signatureStatus, loadSponsorRecords, loadDepositRecords, loadWithdrawRecords, loadUserBalance, loadSubAccount, retrySignature, addSubAccount, editGasTip, removeSomeSubAccount, removeAllSubAccount, depositBnb, depositState, withdrawBnb, withdrawState } = useGasInfo();
+  const { sponsorRecords, addressList, gasPrice, depositRecords, withdrawRecords, userBalance, signatureStatus, loadSponsorRecords, loadDepositRecords, loadWithdrawRecords, loadUserBalance, loadSubAccount, retrySignature, addSubAccount, editGasTip, removeSomeSubAccount, removeAllSubAccount, depositBnb, depositState, withdrawBnb, withdrawState, getLoginSign } = useGasInfo();
   const { signMessage } = useSignMessage();
   const openwallet = useOpenModal(ApplicationModal.WALLET)
   
@@ -120,13 +120,19 @@ export default function GasManager() {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   useEffect(() => {
-    if (account) {
-      loadSubAccount(account)
-      loadSponsorRecords(account)
+    const fetchData = async (account: string) => {
+      const sign = await getLoginSign(account)
+      if (!sign) return
       loadDepositRecords(account)
       loadWithdrawRecords(account)
-      loadUserBalance(account)
+      await loadSubAccount(account)
+      await loadSponsorRecords(account)
+      await loadUserBalance(account)
     }
+    if (account) {
+      fetchData(account)
+    }
+    
   }, [account])
 
   const handleEdit = () => setEditModalOpen(true);
@@ -140,17 +146,14 @@ export default function GasManager() {
     const addressLow = addresses.map(item => item.toLowerCase())
     const msg = `i authorize master account ${account?.toLowerCase()} to stop paying gas fees for sub-accounts ${addressLow.join(',')}, at unix timestamp ${timestamp}`;
     try {
-      const sign = await signMessage(msg);
-      const res = await unbindSubAccount({
-        accounts: [account, ...addresses],
-        sign,
-        timestamp,
-      })
-      message.success('已移除子账户');
-      // 重新获取子账户列表
-      if (account) {
+      const res = await removeSomeSubAccount(account as string, addressLow)
+      if (res.status === 200) {
+        message.success('已移除子账户');
         loadSubAccount(account);
+      } else {
+        message.error(res.data.message || '移除失败');
       }
+      message.success('已移除子账户');
     } catch (e: any) {
       message.error(e?.message || '签名失败');
     }
@@ -163,6 +166,7 @@ export default function GasManager() {
       if (res && res.status === 200) {
         message.success('已移除全部子账户');
         loadSubAccount(account);
+        setSelectedRowKeys([])
       } else {
         message.error(res.data.message || '移除失败');
       }
@@ -182,14 +186,9 @@ export default function GasManager() {
     if (res.status === 200) {
       message.success('已批量删除选中子账户');
       loadSubAccount(account)
+      setSelectedRowKeys([]);
     } else {
       message.error(res.data.message || '删除失败');
-    }
-    setSelectedRowKeys([]);
-    message.success('已批量删除选中子账户');
-    // 重新获取子账户列表
-    if (account) {
-      loadSubAccount(account);
     }
   };
 
@@ -200,10 +199,10 @@ export default function GasManager() {
     if (res.status === 200) {
       message.success('已添加子账户');
       loadSubAccount(account)
+      setManageAddressOpen(false)
     } else {
       message.error(res.data.message || '添加失败');
     }
-    setManageAddressOpen(false)
   }
 
   const handleEditGasTip = async (value: string) => {
@@ -212,10 +211,10 @@ export default function GasManager() {
     if (res && res.status === 200) {
       message.success('已设置 Gas Price');
       loadSubAccount(account)
+      setEditModalOpen(false)
     } else {
       message.error(res.data.message || '设置失败');
     }
-    setEditModalOpen(false)
   }
 
   const handleRecharge = async (amount: string) => {
@@ -225,9 +224,7 @@ export default function GasManager() {
       setRechargeOpen(false);
       message.success('充值交易已发送');
       // 刷新充值记录列表
-      if (account) {
-        loadDepositRecords(account);
-      }
+      loadDepositRecords(account);
     } catch (error: any) {
       message.error(error?.message || '充值失败');
     }
@@ -240,9 +237,7 @@ export default function GasManager() {
       setWithdrawOpen(false);
       message.success('提现交易已发送');
       // 刷新提现记录列表
-      if (account) {
-        loadWithdrawRecords(account);
-      }
+      loadWithdrawRecords(account);
     } catch (error: any) {
       message.error(error?.message || '提现失败');
     }
@@ -274,7 +269,16 @@ export default function GasManager() {
       ),
     },
   ];
-
+  // rowSelection object indicates the need for row selection
+const rowSelection: TableProps<any>['rowSelection'] = {
+  onChange: (newSelectedRowKeys: React.Key[], selectedRows: any[]) => {
+    console.log(newSelectedRowKeys, 'newSelectedRowKeys')
+    setSelectedRowKeys(newSelectedRowKeys);
+  },
+  getCheckboxProps: (record: any) => ({
+    name: record.address,
+  }),
+};
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-2">
       <div className="max-w-[1000px] mx-auto">
@@ -356,17 +360,14 @@ export default function GasManager() {
                     </div>
                     <div className="overflow-x-auto rounded-xl shadow border border-[#e0e0e0] bg-white">
                       <Table
-                        rowSelection={{
-                          selectedRowKeys,
-                          onChange: setSelectedRowKeys,
-                          columnWidth: 48,
-                        }}
+                        rowSelection={{ ...rowSelection }}
                         columns={columns}
                         dataSource={addressList}
                         pagination={false}
                         bordered
                         rowClassName={(_, idx) => idx % 2 === 0 ? 'bg-white' : 'bg-blue-50'}
                         className="custom-ant-table"
+                        rowKey="address"
                       />
                     </div>
                   </>
