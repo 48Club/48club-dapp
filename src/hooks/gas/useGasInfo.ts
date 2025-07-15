@@ -103,7 +103,7 @@ export default function useGasInfo() {
     })
     console.log(res, 'loadSponsorRecords res')
     if (res.status === 200) {
-      setSponsorRecords(res.data?.sponsor_records || [])
+      setSponsorRecords(res.data || [])
     }
   }
 

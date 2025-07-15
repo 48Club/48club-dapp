@@ -64,6 +64,7 @@ export default function EditGasModal({ open, initialValue = '', onOk, onCancel }
             placeholder="请输入 Gas Price"
             className="rounded-lg"
             autoFocus
+            addonAfter="gwei"
           />
         </Form.Item>
       </Form>
