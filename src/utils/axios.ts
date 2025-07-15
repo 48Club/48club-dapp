@@ -84,16 +84,4 @@ export const getSponsorRecords = async(params: any) => {
 export const editGasPrice = async(params: any) => {
   return api.post(`https://explore.48.club/v3/sponsor_tip`, params)
 }
-export const bindSubAccount = async(params: any) => {
-  return api.post(`https://explore.48.club/v3/sponsor`, params)
-}
-export const unbindSubAccount = async(params: any) => {
-  return api.delete(`https://explore.48.club/v3/sponsor`, { data: params })
-}
-export const getSponsorRecords = async(params: any) => {
-  return api.post(`https://explore.48.club/v3/sponsor_records`, params)
-}
-export const editGasPrice = async(params: any) => {
-  return api.post(`https://explore.48.club/v3/sponsor_tip`, params)
-}
 export default api
