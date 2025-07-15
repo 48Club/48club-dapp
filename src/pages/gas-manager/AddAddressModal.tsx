@@ -7,7 +7,7 @@ import { bindSubAccount } from '@/utils/axios';
 
 interface ManageAddressModalProps {
   open: boolean;
-  onOk: (addresses: string[], signature: string) => void;
+  onOk: (addresses: string[]) => void;
   onCancel: () => void;
 }
 
@@ -42,15 +42,8 @@ export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressM
         message.error('请先连接钱包');
         return;
       }
-      // 拼接签名消息
-      const timestamp = Math.floor(Date.now() / 1000);
-      const msg = `i authorize master account ${account.toLowerCase()} to pay all gas fees incurred by transactions from sub-accounts ${addresses.join(',')}, at unix timestamp ${timestamp}`;
-      const sign = await signMessage(msg);
-      const res = await bindSubAccount({
-        sign,
-        timestamp,
-        accounts: [account.toLowerCase(), ...addresses],
-      })
+      await onOk(addresses)
+      onCancel()
     } catch (e: any) {
       if (e?.message) message.error(e.message);
     }

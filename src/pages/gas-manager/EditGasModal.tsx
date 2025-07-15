@@ -7,7 +7,7 @@ import useSignMessage from '@/hooks/useSignMessage';
 interface EditGasModalProps {
   open: boolean;
   initialValue?: string;
-  onOk: (value: string, signature: string) => void;
+  onOk: (value: string) => void;
   onCancel: () => void;
 }
 
@@ -29,11 +29,7 @@ export default function EditGasModal({ open, initialValue = '', onOk, onCancel }
         message.error('请先连接钱包');
         return;
       }
-      // 金额转为wei
-      const wei = parseUnits(values.gas, 18).toString();
-      const msg = `I authorize master account ${account.toLowerCase()} to set gas tip to ${wei} wei`;
-      const signature = await signMessage(msg);
-      onOk(values.gas, signature);
+      onOk(values.gas);
     } catch (e: any) {
       if (e?.message) message.error(e.message);
     }

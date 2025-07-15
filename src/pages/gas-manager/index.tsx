@@ -84,6 +84,38 @@ export default function GasManager() {
       )
     },
   ];
+  const depositWithdrawColumns = [
+    { 
+      title: '地址', 
+      dataIndex: 'address', 
+      key: 'address', 
+      align: 'left' as const,
+      render: (text: string) => <span className="font-mono text-sm text-blue-600">{text}</span>
+    },
+    { 
+      title: '数量', 
+      dataIndex: 'amount', 
+      key: 'amount', 
+      align: 'left' as const,
+      render: (text: string) => <span className="font-medium text-green-600">{text}</span>
+    },
+    { 
+      title: '交易哈希', 
+      dataIndex: 'txHash', 
+      key: 'txHash', 
+      align: 'left' as const,
+      render: (text: string) => (
+        <a 
+          href={`https://bscscan.com/tx/${text}`} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:text-blue-700 underline text-sm break-all"
+        >
+          {text ? `${text.slice(0, 10)}...${text.slice(-8)}` : '--'}
+        </a>
+      )
+    },
+  ];
   const [mainTab, setMainTab] = useState<'address' | 'recharge' | 'consume' | 'withdraw' | 'deposit' | 'withdraw'>('address');
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
@@ -126,16 +158,16 @@ export default function GasManager() {
 
   const handleRemoveAll = async () => {
     if (!account) return;
-    const timestamp = Math.floor(Date.now() / 1000);
-    const msg = `i authorize master account ${account.toLowerCase()} to stop paying gas fees for all sub-accounts, at unix timestamp ${timestamp}`;
     try {
-      removeAllSubAccount(account)
-      // 重新获取子账户列表
-      if (account) {
+      const res = await removeAllSubAccount(account)
+      if (res && res.status === 200) {
+        message.success('已移除全部子账户');
         loadSubAccount(account);
+      } else {
+        message.error(res.data.message || '移除失败');
       }
     } catch (e: any) {
-      message.error(e?.message || '签名失败');
+      message.error(e?.message);
     }
   };
 
@@ -145,11 +177,14 @@ export default function GasManager() {
       message.warning('请选择要删除的子账户');
       return;
     }
-    // 可选：签名确认
-    // const msg = `I authorize master account ${account.toLowerCase()} to remove sub-accounts: ${selectedRowKeys.join(',')}`;
-    // await signMessage(msg);
     const addresses = selectedRowKeys.map(key => key.toString())
-    removeSomeSubAccount(account, addresses)
+    const res = await removeSomeSubAccount(account, addresses)
+    if (res.status === 200) {
+      message.success('已批量删除选中子账户');
+      loadSubAccount(account)
+    } else {
+      message.error(res.data.message || '删除失败');
+    }
     setSelectedRowKeys([]);
     message.success('已批量删除选中子账户');
     // 重新获取子账户列表
@@ -160,13 +195,26 @@ export default function GasManager() {
 
   const handleAddSubAccount = async (addresses: string[]) => {
     if (!account) return;
-    addSubAccount(account, addresses)
+    const res = await addSubAccount(account, addresses)
+    console.log(res, 'handleAddSubAccount res')
+    if (res.status === 200) {
+      message.success('已添加子账户');
+      loadSubAccount(account)
+    } else {
+      message.error(res.data.message || '添加失败');
+    }
     setManageAddressOpen(false)
   }
 
   const handleEditGasTip = async (value: string) => {
     if (!account) return;
-    editGasTip(account, Number(value))
+    const res = await editGasTip(account, Number(value))
+    if (res && res.status === 200) {
+      message.success('已设置 Gas Price');
+      loadSubAccount(account)
+    } else {
+      message.error(res.data.message || '设置失败');
+    }
     setEditModalOpen(false)
   }
 
@@ -252,7 +300,7 @@ export default function GasManager() {
               <Button className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" onClick={() => setManageAddressOpen(true)} disabled={!account}>绑定地址</Button>
             </div>
             <div className="flex flex-col items-center bg-gray-50 rounded-xl px-6 py-6 shadow">
-              <div className="text-3xl font-extrabold mb-1 text-primary">{account ? gasPrice : '--'}</div>
+              <div className="text-3xl font-extrabold mb-1 text-primary">{account ? `${gasPrice} gwei` : '--'}</div>
               <div className="text-gray-600 mb-2 text-sm">Gas Price</div>
               <Button onClick={handleEdit} className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" disabled={!account}>编辑</Button>
             </div>
@@ -355,21 +403,8 @@ export default function GasManager() {
                 )}
               </Tabs.TabPane>
               <Tabs.TabPane tab="充值记录" key="deposit">
-                <div className="mb-4 flex justify-end">
-                  <Button 
-                    type="default"
-                    onClick={() => {
-                      if (account) {
-                        loadDepositRecords(account);
-                      }
-                    }}
-                    className="px-4"
-                  >
-                    刷新
-                  </Button>
-                </div>
                 <Table
-                  columns={transactionColumns}
+                  columns={depositWithdrawColumns}
                   dataSource={depositRecords?.map((item, idx) => ({ ...item, key: idx })) || []}
                   pagination={false}
                   size="small"
@@ -383,7 +418,7 @@ export default function GasManager() {
               </Tabs.TabPane>
               <Tabs.TabPane tab="提现记录" key="withdraw">
                 <Table
-                  columns={transactionColumns}
+                  columns={depositWithdrawColumns}
                   dataSource={withdrawRecords?.map((item, idx) => ({ ...item, key: idx })) || []}
                   pagination={false}
                   size="small"
@@ -414,14 +449,14 @@ export default function GasManager() {
         open={rechargeOpen}
         onOk={handleRecharge}
         onCancel={() => setRechargeOpen(false)}
-        loading={depositState.status === 'Mining'}
+        loading={!['None', 'Success'].includes(depositState.status)}
         bnbBalance={bnbBalance}
       />
       <WithdrawModal
         open={withdrawOpen}
         onOk={handleWithdraw}
         onCancel={() => setWithdrawOpen(false)}
-        loading={withdrawState.status === 'Mining'}
+        loading={!['None', 'Success'].includes(withdrawState.status)}
         userBalance={userBalance}
       />
     </div>
