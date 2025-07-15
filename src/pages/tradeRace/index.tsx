@@ -122,9 +122,8 @@ export default function TradeRacePage() {
         const isInRankList = res.data.data.top_n.find((item: any) => item.address.toLocaleLowerCase() === address.toLocaleLowerCase())
         let list = addRankToList(res.data.data.top_n, res.data.data.total)
         if (!isInRankList) {
-          const outRankAmount = list[list.length - 1].usdt_amount.replace(/[$,]/g, "");
-          const accountAmount = selfData.usdt_amount.replace(/[$,]/g, "");
-          if (+accountAmount > +outRankAmount) {
+          const eligible = selfData?.eligible;
+          if (eligible) {
             const insertIndex = Math.max(list.length - 1, 0);
             list = [...list];
             list.splice(insertIndex, 0, {...selfData, rank: 'random'});
