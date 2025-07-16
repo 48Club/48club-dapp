@@ -23,7 +23,7 @@ export default function GasManager() {
   const [rechargeOpen, setRechargeOpen] = useState(false);
   const [withdrawOpen, setWithdrawOpen] = useState(false);
   const [bnbBalance, setBnbBalance] = useState<string>('0');
-  const { sponsorRecords, addressList, gasPrice, depositRecords, withdrawRecords, userBalance, signatureStatus, loadSponsorRecords, loadDepositRecords, loadWithdrawRecords, loadUserBalance, loadSubAccount, retrySignature, addSubAccount, editGasTip, removeSomeSubAccount, removeAllSubAccount, depositBnb, depositState, withdrawBnb, withdrawState } = useGasInfo();
+  const { sponsorRecords, addressList, gasPrice, depositRecords, withdrawRecords, userBalance, signatureStatus, loadSponsorRecords, loadDepositRecords, loadWithdrawRecords, loadUserBalance, loadSubAccount, retrySignature, addSubAccount, editGasTip, removeSomeSubAccount, removeAllSubAccount, depositBnb, depositState, withdrawBnb, withdrawState, clearList, getLoginSign } = useGasInfo();
   const { signMessage } = useSignMessage();
   const openwallet = useOpenModal(ApplicationModal.WALLET)
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -129,6 +129,8 @@ export default function GasManager() {
 
   useEffect(() => {
     const fetchData = async (account: string) => {
+      const sign = await getLoginSign(account)
+      if (!sign) return
       loadDepositRecords(account)
       loadWithdrawRecords(account)
       await loadSubAccount(account)
@@ -137,6 +139,8 @@ export default function GasManager() {
     }
     if (account) {
       fetchData(account)
+    } else {
+      clearList()
     }
     
   }, [account])
@@ -357,7 +361,7 @@ const rowSelection: TableProps<any>['rowSelection'] = {
             <Tabs activeKey={mainTab} onChange={key => setMainTab(key as 'address' | 'recharge' | 'consume' | 'withdraw' | 'deposit' | 'withdraw')}>
               <Tabs.TabPane tab={t('gas.address_list')} key="address">
                 {signatureStatus === false && (
-                  <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg hidden md:block">
                     <div className="flex items-center justify-between">
                       <div className="text-yellow-800">
                         <div className="font-medium">{t('gas.need_signature')}</div>
@@ -440,7 +444,7 @@ const rowSelection: TableProps<any>['rowSelection'] = {
               </Tabs.TabPane>
               <Tabs.TabPane tab={t('gas.consume_list')} key="recharge">
                 {signatureStatus === false && (
-                  <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg hidden md:block">
                     <div className="flex items-center justify-between">
                       <div className="text-yellow-800">
                         <div className="font-medium">{t('gas.need_signature')}</div>
