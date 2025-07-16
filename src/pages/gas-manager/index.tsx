@@ -56,7 +56,7 @@ export default function GasManager() {
       dataIndex: 'gas_cost', 
       key: 'gas_cost', 
       align: 'left' as const,
-      render: (text: string) => <span className="text-sm text-gray-600">{+text / 1e18}</span>
+      render: (text: string) => <span className="text-sm text-gray-600">{+text / 1e18} BNB</span>
     },
     { 
       title: <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ export default function GasManager() {
       dataIndex: 'service_fee', 
       key: 'service_fee', 
       align: 'left' as const,
-      render: (text: string) => <span className="text-sm text-gray-600">{+text / 1e18}</span>
+      render: (text: string) => <span className="text-sm text-gray-600">{+text / 1e18} BNB</span>
     },
     { 
       title: t('gas.address'), 
@@ -147,10 +147,6 @@ export default function GasManager() {
   }, [account])
 
   const handleEdit = () => setEditModalOpen(true);
-  const handleEditSave = (value: string) => {
-    // setGasPrice(Number(value));
-    setEditModalOpen(false);
-  };
 
   const handleDelete = async(addresses: any[]) => {
     const timestamp = Math.floor(Date.now() / 1000);
@@ -470,7 +466,7 @@ const rowSelection: TableProps<any>['rowSelection'] = {
                             const value = col.dataIndex ? item[col.dataIndex] : undefined;
                             return (
                               <div className="mb-1 flex" key={col.key || colIdx}>
-                                <span className="text-gray-600 min-w-[90px] mr-2">{typeof col.title === 'string' ? col.title : ''}</span>
+                                <span className="text-gray-600 min-w-[90px] mr-2">{col.title}</span>
                                 <span className="flex-1 break-all">{col.render ? col.render(value) : value}</span>
                               </div>
                             );
