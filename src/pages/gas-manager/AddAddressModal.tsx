@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Modal, Form, Input, Button, message } from 'antd';
+import { useTranslation } from 'react-i18next';
 import useSignMessage from '@/hooks/useSignMessage'
 import { isAddress } from 'ethers/lib/utils';
 import { useEthers } from '@usedapp/core';
@@ -12,6 +13,7 @@ interface ManageAddressModalProps {
 }
 
 export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressModalProps) {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { signMessage } = useSignMessage()
   const { account } = useEthers();
@@ -28,18 +30,18 @@ export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressM
         .map((addr: string) => addr.trim().toLowerCase())
         .filter((addr: string) => !!addr);
       if (!addresses.length) {
-        message.error('请输入至少一个地址');
+        message.error(t('gas.enter_at_least_one_address'));
         return;
       }
       // 校验每个地址
       for (const addr of addresses) {
         if (!isAddress(addr)) {
-          message.error(`地址格式错误: ${addr}`);
+          message.error(`${t('gas.address_format_error')}: ${addr}`);
           return;
         }
       }
       if (!account) {
-        message.error('请先连接钱包');
+        message.error(t('gas.please_connect_wallet'));
         return;
       }
       await onOk(addresses)
@@ -52,20 +54,20 @@ export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressM
   return (
     <Modal
       open={open}
-      title={<div className="text-xl font-bold p-[20px]">添加地址</div>}
+      title={<div className="text-xl font-bold p-[20px]">{t('gas.add_address_title')}</div>}
       onOk={handleOk}
       onCancel={onCancel}
-      okText="添加地址"
-      cancelText="取消"
+      okText={t('gas.add_address')}
+      cancelText={t('gas.cancel')}
       centered
       destroyOnClose
       className="edit-gas-modal"
     >
-      <div className="mb-2 text-gray-700">输入多个地址请用英文逗号分隔。支持任何格式。</div>
+      <div className="mb-2 text-gray-700">{t('gas.input_multiple_addresses')}</div>
       <Form form={form} layout="vertical">
         <Form.Item
           name="addresses"
-          rules={[{ required: true, message: '请输入地址' }]}
+          rules={[{ required: true, message: t('gas.enter_address') }]}
         >
           <Input.TextArea
             className="font-mono min-h-[120px] rounded-lg"
