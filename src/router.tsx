@@ -168,7 +168,7 @@ const routes = createBrowserRouter([
         element: <TradeRace />,
       },
       {
-        path: '/gas-manager',
+        path: '/gasponsor',
         element: <GasManager />,
       },
     ],

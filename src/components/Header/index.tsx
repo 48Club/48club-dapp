@@ -56,6 +56,11 @@ export default function Header() {
           {t('app_header_menu_docs_title')}
         </a>
       </Menu.Item>
+      <Menu.Item>
+        <Link className="text-black opacity-75 hover:text-primary" to={'/inscriptions'}>
+          {t('inscriptions')}
+        </Link>
+      </Menu.Item>
     </Menu>
   )
 
@@ -103,9 +108,9 @@ export default function Header() {
             <Link
               className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/inscriptions') ? 'text-primary' : 'text-black'
                 }`}
-              to={'/inscriptions'}
+              to={'/gasponsor'}
             >
-              {t('inscriptions')}
+              {t('gas.title')}
             </Link>
             <Dropdown dropdownRender={() => menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
