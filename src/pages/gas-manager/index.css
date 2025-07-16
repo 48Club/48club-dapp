@@ -11,6 +11,39 @@
 .form-label-item .ant-form-item-required {
   width: 100%;
 }
-.ant-modal-content .ant-modal-close {
+.edit-gas-modal .ant-modal-content .ant-modal-close {
+  display: block;
+}
+.custom-yellow-checkbox {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 2px solid #ffd829;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  vertical-align: middle;
+  margin-right: 12px;
+  display: inline-block;
+}
+.custom-yellow-checkbox:checked {
+  background: #ffd829;
+  border-color: #ffd829;
+}
+.custom-yellow-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.5px;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  border-radius: 1px;
+  transform: rotate(45deg);
   display: block;
 }
