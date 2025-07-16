@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Modal, Form, Input, message } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useEthers } from '@usedapp/core';
-import { parseUnits } from 'ethers/lib/utils';
-import useSignMessage from '@/hooks/useSignMessage';
 
 interface EditGasModalProps {
   open: boolean;
@@ -12,9 +11,9 @@ interface EditGasModalProps {
 }
 
 export default function EditGasModal({ open, initialValue = '', onOk, onCancel }: EditGasModalProps) {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { account } = useEthers();
-  const { signMessage } = useSignMessage();
 
   useEffect(() => {
     if (open) {
@@ -26,7 +25,7 @@ export default function EditGasModal({ open, initialValue = '', onOk, onCancel }
     try {
       const values = await form.validateFields();
       if (!account) {
-        message.error('请先连接钱包');
+        message.error(t('gas.connect_wallet'));
         return;
       }
       onOk(values.gas);
@@ -38,11 +37,11 @@ export default function EditGasModal({ open, initialValue = '', onOk, onCancel }
   return (
     <Modal
       open={open}
-      title={<div className="text-xl font-bold p-[20px]">编辑 Gas Price</div>}
+      title={<div className="text-xl font-bold p-[20px]">{t('gas.edit')} {t('gas.gas_price')}</div>}
       onOk={handleOk}
       onCancel={onCancel}
-      okText="设置"
-      cancelText="取消"
+      okText={t('gas.set')}
+      cancelText={t('gas.cancel')}
       centered
       destroyOnClose
       className='edit-gas-modal'
@@ -53,15 +52,15 @@ export default function EditGasModal({ open, initialValue = '', onOk, onCancel }
         initialValues={{ gas: initialValue }}
       >
         <Form.Item
-          label={<span className="font-medium">Gas Price</span>}
+          label={<span className="font-medium">{t('gas.gas_price')}</span>}
           name="gas"
-          rules={[{ required: true, message: '请输入 Gas Price' }]}
+          rules={[{ required: true, message: t('gas.amount_required') }]}
         >
           <Input
             type="number"
             min={0}
             step={0.001}
-            placeholder="请输入 Gas Price"
+            placeholder={t('gas.amount_required')}
             className="rounded-lg"
             autoFocus
             addonAfter="gwei"
