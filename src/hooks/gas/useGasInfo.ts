@@ -159,6 +159,7 @@ export default function useGasInfo() {
     setSignatureStatus(null);
     const sign = await getLoginSign(account)
     if (!sign) return
+    setSignatureStatus(true)
     // 重新获取签名和信息
     loadDepositRecords(account)
     loadWithdrawRecords(account)
@@ -339,5 +340,6 @@ export default function useGasInfo() {
     loadingDepositRecords,
     loadingWithdrawRecords,
     clearList,
+    setSignatureStatus,
   }
 }

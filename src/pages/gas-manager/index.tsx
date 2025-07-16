@@ -23,7 +23,7 @@ export default function GasManager() {
   const [rechargeOpen, setRechargeOpen] = useState(false);
   const [withdrawOpen, setWithdrawOpen] = useState(false);
   const [bnbBalance, setBnbBalance] = useState<string>('0');
-  const { sponsorRecords, addressList, gasPrice, depositRecords, withdrawRecords, userBalance, signatureStatus, loadSponsorRecords, loadDepositRecords, loadWithdrawRecords, loadUserBalance, loadSubAccount, retrySignature, addSubAccount, editGasTip, removeSomeSubAccount, removeAllSubAccount, depositBnb, depositState, withdrawBnb, withdrawState, clearList, getLoginSign } = useGasInfo();
+  const { sponsorRecords, addressList, gasPrice, depositRecords, withdrawRecords, userBalance, signatureStatus, setSignatureStatus, loadSponsorRecords, loadDepositRecords, loadWithdrawRecords, loadUserBalance, loadSubAccount, retrySignature, addSubAccount, editGasTip, removeSomeSubAccount, removeAllSubAccount, depositBnb, depositState, withdrawBnb, withdrawState, clearList, getLoginSign } = useGasInfo();
   const { signMessage } = useSignMessage();
   const openwallet = useOpenModal(ApplicationModal.WALLET)
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -131,6 +131,7 @@ export default function GasManager() {
     const fetchData = async (account: string) => {
       const sign = await getLoginSign(account)
       if (!sign) return
+      setSignatureStatus(true)
       loadDepositRecords(account)
       loadWithdrawRecords(account)
       await loadSubAccount(account)
@@ -311,8 +312,8 @@ const rowSelection: TableProps<any>['rowSelection'] = {
       <div className="flex flex-col items-center md:flex-row md:items-center gap-4 w-full md:justify-end">
         <span className="text-3xl font-extrabold text-primary mb-1">{account && userBalance !== '0' ? userBalance : '0.0'}<span className="text-sm font-normal">BNB</span></span>
         <div className="flex flex-row gap-2">
-          <Button type="primary" className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" onClick={() => setRechargeOpen(true)} disabled={!account}>{t('gas.recharge')}</Button>
-          <Button className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" style={{ background: '#ccc', color: '#fff', border: 'none' }} onClick={() => setWithdrawOpen(true)} disabled={!account}>{t('gas.withdraw')}</Button>
+          <Button type="primary" className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" onClick={() => setRechargeOpen(true)} disabled={!signatureStatus}>{t('gas.recharge')}</Button>
+          <Button className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" style={{ background: '#ccc', color: '#fff', border: 'none' }} onClick={() => setWithdrawOpen(true)} disabled={!signatureStatus}>{t('gas.withdraw')}</Button>
         </div>
         
       </div>
@@ -349,12 +350,12 @@ const rowSelection: TableProps<any>['rowSelection'] = {
             <div className="flex flex-col items-center bg-blue-50 rounded-xl px-6 py-6 shadow">
               <div className="text-3xl font-extrabold text-primary mb-1">{account ? addressList.length : '--'}</div>
               <div className="text-gray-600 mb-2 text-sm">{t('gas.bound_address_count')}</div>
-              <Button className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" onClick={() => setManageAddressOpen(true)} disabled={!account}>{t('gas.bind_address')}</Button>
+              <Button className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" onClick={() => setManageAddressOpen(true)} disabled={!signatureStatus}>{t('gas.bind_address')}</Button>
             </div>
             <div className="flex flex-col items-center bg-gray-50 rounded-xl px-6 py-6 shadow">
               <div className="text-3xl font-extrabold mb-1 text-primary">{account ? `${gasPrice} gwei` : '--'}</div>
               <div className="text-gray-600 mb-2 text-sm">{t('gas.gas_price')}</div>
-              <Button onClick={handleEdit} className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" disabled={!account}>{t('gas.edit')}</Button>
+              <Button onClick={handleEdit} className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" disabled={!signatureStatus}>{t('gas.edit')}</Button>
             </div>
           </div>
           <div className="bg-white rounded-xl md:shadow md:border md:border-[#e0e0e0] md:p-2">
