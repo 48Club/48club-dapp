@@ -76,7 +76,7 @@ export default function MobileModal(props: { open: boolean, oncancel: () => void
             <Link className="text-black opacity-75 hover:text-primary" to={'/pool'}>{t('nav-farm')}</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link className="text-black opacity-75 hover:text-primary" to={'/gasponsor'}>{t('gas.title')}</Link>
+            <Link className="text-black opacity-75 hover:text-primary" to={'/gasponsor'}>GaSponsor</Link>
           </Menu.Item>
           <Menu.Item>
             <Link className="text-black opacity-75 hover:text-primary" to={'/inscriptions'}>{t('inscriptions')}</Link>

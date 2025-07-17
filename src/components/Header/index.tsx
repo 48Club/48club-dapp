@@ -110,7 +110,7 @@ export default function Header() {
                 }`}
               to={'/gasponsor'}
             >
-              {t('gas.title')}
+              GaSponsor
             </Link>
             <Dropdown dropdownRender={() => menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
