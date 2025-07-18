@@ -105,13 +105,13 @@ export default function Header() {
             >
               {t('nav-farm')}
             </Link>
-            <Link
+            {/* <Link
               className={`ml-5 font-medium hover:text-primary ${location.pathname.startsWith('/inscriptions') ? 'text-primary' : 'text-black'
                 }`}
               to={'/gasponsor'}
             >
-              {t('gas.title')}
-            </Link>
+              GaSponsor
+            </Link> */}
             <Dropdown dropdownRender={() => menu} placement="bottomLeft" overlayStyle={{ zIndex: 10000 }}>
               <div className="text-black ml-5 font-medium hover:text-primary cursor-pointer">{t('nav-more')}</div>
             </Dropdown>
