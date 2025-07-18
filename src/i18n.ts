@@ -16,6 +16,8 @@ import poolEN from './locales/en/pool.json'
 import poolCN from './locales/cn/pool.json'
 import tradeEN from './locales/en/trade.json'
 import tradeCN from './locales/cn/trade.json'
+import gasEN from './locales/en/gas.json'
+import gasCN from './locales/cn/gas.json'
 
 
 i18n
@@ -36,6 +38,7 @@ i18n
           ...votingEN,
           ...poolEN,
           ...tradeEN,
+          ...gasEN,
         },
       },
       cn: {
@@ -48,6 +51,7 @@ i18n
           ...votingCN,
           ...poolCN,
           ...tradeCN,
+          ...gasCN,
         },
       },
     },
