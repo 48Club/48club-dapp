@@ -13,6 +13,7 @@ import stakeinscription from './abi/stakeinscription.json'
 import WrappedABI from './abi/WrappedInscription.json'
 import airdropABI from './abi/airdrop.json'
 import airdropStatusABI from './abi/airdropStatus.json'
+import gasInfoABI from './abi/gasInfo.json'
 import {
   GovernanceAddress,
   GovernanceAddressNew,
@@ -24,6 +25,7 @@ import {
   stakeInscription,
   airdropAddress,
   airdropStatusAddress,
+  gasInfoAddress,
 } from '../constants/contracts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { READONLY_RPC_URL, READONLY_RPC_URL_NEW } from '../constants/env'
@@ -97,4 +99,18 @@ export function useAirDropStatusContractReadonly() {
 
 export function useAirDropStatusContract() {
   return useMemo(() => new Contract(airdropStatusAddress as string, airdropStatusABI), [])
+}
+
+export function useGasInfoContractReadonly() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL), [])
+  return useMemo(() => new Contract(gasInfoAddress as string, gasInfoABI, provider), [provider])
+}
+
+export function useGasInfoContractReadonlyNew() {
+  const provider = useMemo(() => new JsonRpcProvider(READONLY_RPC_URL_NEW), [])
+  return useMemo(() => new Contract(gasInfoAddress as string, gasInfoABI, provider), [provider])
+}
+
+export function useGasInfoContract() {
+  return useMemo(() => new Contract(gasInfoAddress as string, gasInfoABI), [])
 }

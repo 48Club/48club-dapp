@@ -58,5 +58,6 @@
   "can_claim": "Eligible",
   "claim": "Claim",
   "error": "Transaction Failed, Please try again later",
-  "loading": "Loading"
+  "loading": "Loading",
+  "wait_dispatch": "Waiting for distribution"
 }

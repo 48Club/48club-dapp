@@ -77,3 +77,8 @@ export const airdropStatusAddress = {
   [ChainId.BSC]: '0xa2b2d40545f3c385e9a83054c941a76e4c251772',
   [ChainId.BSCTestnet]: '0x0000000000000000000000000000000000000000',
 }[CHAIN_ID as number]
+
+export const gasInfoAddress = {
+  [ChainId.BSC]: '0x85E86B3B8A5955cE55d5f66A5d359bcA2C6a6Bd3',
+  [ChainId.BSCTestnet]: '0x0000000000000000000000000000000000000000',
+}[CHAIN_ID as number]
