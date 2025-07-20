@@ -1,6 +1,6 @@
 {
-  "gas.title": "GaSponsor",
-  "gas.subtitle": "",
+  "gas.title": "GaSponsor -- multiple wallets 0 gas solution",
+  "gas.subtitle": "One top up, no more dust",
   "gas.your_address": "Master Wallet",
   "gas.connect_wallet": "Connect Wallet",
   "gas.bound_address_count": "SubWallets",

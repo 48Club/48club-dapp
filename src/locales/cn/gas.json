@@ -1,9 +1,9 @@
 {
-  "gas.title": "Gas统一代付",
-  "gas.subtitle": "",
-  "gas.your_address": "当前主钱包",
+  "gas.title": "GaSponsor -- 多钱包零Gas中继服务",
+  "gas.subtitle": "一处充值，统一支付",
+  "gas.your_address": "主钱包",
   "gas.connect_wallet": "连接钱包",
-  "gas.bound_address_count": "个子钱包",
+  "gas.bound_address_count": "子钱包",
   "gas.bind_address": "添加",
   "gas.gas_price": "预设 GasPrice",
   "gas.edit": "修改",
