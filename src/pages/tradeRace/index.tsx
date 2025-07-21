@@ -84,8 +84,8 @@ export default function TradeRacePage() {
       if (!fee?.usdt_amount) {
         amount = '0'
       } else {
-          const totalFeeKoge = +fee.koge_amount * ratio
-          const totalFee = +fee?.usdt_amount * ratio
+        const totalFeeKoge = +fee.koge_amount
+        const totalFee = +fee?.usdt_amount
         const reward = (totalFee / total).toFixed(2)
         const rewardKoge = (totalFeeKoge / total).toFixed(4)
         if (data.rank === 0) {
