@@ -43,7 +43,7 @@ const WalletList = [
   {
     type: 'metamask',
     src: binance,
-    text: 'binance',
+    text: 'Binance Web3 Wallet',
   },
   {
     type: 'metamask',

@@ -305,7 +305,7 @@ const rowSelection: TableProps<any>['rowSelection'] = {
         <span className="text-gray-600 mb-2 text-sm">{t('gas.your_address')}</span>
         <span className="font-mono text-blue-700 bg-blue-100 rounded px-2 py-1 text-base break-all">{account || '--'}</span>
       </div>
-      <div className="flex flex-col items-center md:flex-row md:items-center gap-4 w-full md:justify-end">
+      <div className="flex flex-col items-center md:flex-row md:items-center gap-1 md:justify-end">
         <span className="text-3xl font-extrabold text-primary mb-1">{account && userBalance !== '0' ? userBalance : '0.0'}<span className="text-sm font-normal">BNB</span></span>
         <div className="flex flex-row gap-2">
           <Button type="primary" className="px-4 py-1 rounded-lg font-bold shadow transition text-sm" onClick={() => setRechargeOpen(true)} disabled={!signatureStatus}>{t('gas.recharge')}</Button>
