@@ -32,7 +32,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<AirdropRecord[]>([])
-  const [isEligible, setIsEligible] = useState(true)
+  const [searched, setSearched] = useState(false)
   const airdropStatusContract = useAirDropStatusContract()
   const { send: claim, state: claimState } = useContractFunction(airdropStatusContract, 'claim', { transactionName: 'Claim Reward' })
   const isMobile = useMediaQuery({ maxWidth: 768 })
@@ -44,7 +44,16 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       setAddress(account)
     }
   }, [account, visible])
-
+  useEffect(() => {
+    if (visible) {
+      getTradeRaceAirdrop({ address: account }).then((res) => {
+        if (res.status === 200 && res.data.status === 200) {
+          setSearchResults(res.data.data || [])
+          setSearched(false)
+        }
+      })
+    }
+  }, [visible])
   // 监听所有状态变化
   useEffect(() => {
     handleStateChange(claimState, 'Claim Reward')
@@ -62,14 +71,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   }
   
   const columns = [
-    {
-      title: t('amount'),
-      dataIndex: 'amount',
-      key: 'amount',
-      render: (_: string, data: any) => (
-        <span className="font-mono">{data.amount} KOGE</span>
-      )
-    },
+    
     {
       title: t('round'),
       dataIndex: 'range',
@@ -80,6 +82,30 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       )
     },
     {
+      title: t('amount'),
+      dataIndex: 'amount',
+      key: 'amount',
+      render: (_: string, data: any) => (
+        <span className="font-mono">{data.each_reward} KOGE</span>
+      )
+    },
+    {
+      title: t('eligible_number'),
+      dataIndex: 'amount',
+      key: 'amount',
+      render: (_: string, data: any) => (
+        <span className="font-mono">{data.eligible_amount}</span>
+      )
+    },
+    {
+      title: t('total_reward'),
+      dataIndex: 'amount',
+      key: 'amount',
+      render: (_: string, data: any) => (
+        <span className="font-mono">{data.total_reward} KOGE</span>
+      )
+    },
+    {
       title: t('isDispatch'),
       key: 'dispatch',
       render: (_: any, data: any) => {
@@ -87,6 +113,16 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           0: t('wait_dispatch'),
           1: t('claimed'),
           2: t('can_claim'),
+        }
+        if (!address) {
+          return '--'
+        }
+        if (!searched) {
+          return '--'
+        }
+        console.log(data)
+        if (!data.eligible) {
+          return <span className="text-red-500">{t('not_eligible')}</span>
         }
         // 如果有 tx_hash，显示已发放
         if (data.tx_hash) {
@@ -119,30 +155,11 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       setLoading(true)
       const res = await getTradeRaceAirdrop({ address })
       if (res.status === 200 && res.data.status === 200) {
-        setIsEligible(true)
         setSearchResults(res.data.data || [])
-        // setSearchResults([
-        //   {
-        //     "amount": "0.18986511676003673",
-        //     "range": [1748822400, 1749427200],
-        //     "tx_hash": "0x57dd8ba85920143ddb0a2f1137ab69475b5e468efa32f1c06b1e63a318af7a88"
-        //   },
-        //   {
-        //     "amount": "0.026694762593112032",
-        //     "range": [1750032000, 1750636800],
-        //     "tx_hash": ""
-        //   },
-        //   {
-        //     "amount": "0.016694762593112032",
-        //     "range": [1750636800,1751241600],
-        //     "tx_hash": ""
-        //   }
-
-        // ])
+        setSearched(true)
       }
     } catch (error: any) {
       if (error?.status === 404) {
-        setIsEligible(false)
         setSearchResults([])
         return
       }
@@ -156,7 +173,6 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
     setAddress('')
     setSearchResults([])
     onClose()
-    setIsEligible(true)
   }
 
   // 统一监听所有状态
@@ -171,6 +187,17 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       })
     }
   }, [handleSearch])
+  const handleInputChange = (e: any) => {
+    setAddress(e.target.value)
+    if (e.target.value === '') {
+      setSearched(false)
+      // getTradeRaceAirdrop({}).then((res) => {
+      //   if (res.status === 200 && res.data.status === 200) {
+      //     setSearchResults(res.data.data || [])
+      //   }
+      // })
+    }
+  }
   
   return (
     <Modal
@@ -199,13 +226,7 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
           <Input
             placeholder={t('enter_address')}
             value={address}
-            onChange={(e) => {
-              setAddress(e.target.value)
-              if (e.target.value === '') {
-                setSearchResults([])
-                setIsEligible(true)
-              }
-            }}
+            onChange={handleInputChange}
             onPressEnter={handleSearch}
             className="font-mono"
             autoFocus
@@ -240,11 +261,11 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
                 }
               </div>
             ))}
-            {searchResults.length === 0 && (
+            {/* {searchResults.length === 0 && (
               <div style={{ color: isEligible ? '#888' : '#E24C4B', padding: 24, fontWeight: isEligible ? 400 : 600 }}>
                 {isEligible ? t('no_data') : t('not_eligible')}
               </div>
-            )}
+            )} */}
           </div>
         ) : (
           <Table
@@ -253,10 +274,9 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
             rowKey="txHash"
             loading={loading}
             pagination={false}
+            scroll={{y: 300}}
             locale={{
-              emptyText: isEligible
-                ? <div style={{ color: '#888', padding: 24 }}>{t('no_data')}</div>
-                : <div style={{ color: '#E24C4B', padding: 24, fontWeight: 600 }}>{t('not_eligible')}</div>
+              emptyText: <div style={{ color: '#888', padding: 24 }}>{t('no_data')}</div>
             }}
           />
         )}
