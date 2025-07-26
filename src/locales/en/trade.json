@@ -59,5 +59,11 @@
   "claim": "Claim",
   "error": "Transaction Failed, Please try again later",
   "loading": "Loading",
-  "wait_dispatch": "Waiting for distribution"
+  "wait_dispatch": "Settling",
+  "round": "Round",
+  "trade.each_reward": "Each Round Reward",
+  "trade.eligible_amount": "Eligible Trade Volume",
+  "trade.total_reward": "Total Reward",
+  "trade.round": "Round",
+  "trade.all_nonce.title": "All Nonce"
 }

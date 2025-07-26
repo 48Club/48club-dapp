@@ -4,11 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { isAddress } from 'ethers/lib/utils'
 import { getTradeRaceAirdrop } from '@/utils/axios'
 import dayjs from 'dayjs'
-import Bignumber from 'bignumber.js'
 import { CloseOutlined } from '@ant-design/icons'
 import { useMediaQuery } from 'react-responsive'
-import { useContractFunction, useEthers, useContractCalls } from '@usedapp/core'
-import { useAirDropStatusContract, useAirDropStatusContractReadonly } from '@/hooks/useContract'
+import { useContractFunction, useEthers } from '@usedapp/core'
+import { useAirDropStatusContract } from '@/hooks/useContract'
 
 interface AddressSearchModalProps {
   visible: boolean
@@ -34,97 +33,15 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
   const [loading, setLoading] = useState(false)
   const [searchResults, setSearchResults] = useState<AirdropRecord[]>([])
   const [isEligible, setIsEligible] = useState(true)
-  const [contractResults, setContractResults] = useState<any[]>([])
-  const airdropStatusContractReadonly = useAirDropStatusContractReadonly()
   const airdropStatusContract = useAirDropStatusContract()
   const { send: claim, state: claimState } = useContractFunction(airdropStatusContract, 'claim', { transactionName: 'Claim Reward' })
   const isMobile = useMediaQuery({ maxWidth: 768 })
-  const [getContractResults, setGetContractResults] = useState(false)
+  
 
-  // 获取所有没有 tx_hash 的记录
-  const recordsWithoutTxHash = useMemo(() => {
-    return searchResults.filter((item) => !item.tx_hash)
-  }, [searchResults])
-
-  // 第一步：使用multicall调用airdrop方法获取有效的eventID
-  const airdropCalls = useMemo(() => {
-    if (!airdropStatusContractReadonly || recordsWithoutTxHash.length === 0 || !address) {
-      return []
-    }
-    
-    return recordsWithoutTxHash.map((item) => ({
-      address: airdropStatusContractReadonly.address,
-      abi: airdropStatusContractReadonly.interface,
-      method: 'Airdrops',
-      args: [item.range[0]]
-    }))
-  }, [airdropStatusContractReadonly, recordsWithoutTxHash, address])
-
-  const airdropResults = useContractCalls(airdropCalls)
-  // 第二步：根据airdrop结果筛选有效的eventID，然后调用getAirdropStatus
-  const validEventIds = useMemo(() => {
-    if (!airdropResults || airdropResults.length === 0) return []
-    console.log(airdropResults, 'airdropResults')
-    const validIds: number[] = []
-    airdropResults.forEach((result) => {
-      if (result && result[2]) {
-        const eventId = result[2].toNumber()
-        console.log(eventId, 'eventId',result[2])
-        if (eventId !== 0) {
-          validIds.push(eventId)
-        }
-      }
-    })
-    
-    console.log('Valid event IDs:', validIds)
-    return validIds
-  }, [airdropResults, recordsWithoutTxHash])
-
-  // 第三步：对有效的eventID调用getAirdropStatus
-  const statusCalls = useMemo(() => {
-    if (!airdropStatusContractReadonly || validEventIds.length === 0 || !address) {
-      return []
-    }
-    
-    return validEventIds.map((eventId) => ({
-      address: airdropStatusContractReadonly.address,
-      abi: airdropStatusContractReadonly.interface,
-      method: 'getAirdropStatus',
-      args: [eventId, address]
-    }))
-  }, [airdropStatusContractReadonly, validEventIds, address])
-
-  const statusResults = useContractCalls(statusCalls)
-
-  // 处理最终结果
-  useEffect(() => {
-    if (!statusResults || statusResults.length === 0) return
-
-    const newResults: any = {}
-    console.log(statusResults, 'statusResults')
-    statusResults.forEach((result, index) => {
-      if (!result) {
-        return
-      }
-      const eventId = validEventIds[index]
-      if (result && Array.isArray(result)) {
-        newResults[eventId] = result
-      } else {
-        newResults[eventId] = { error: true }
-      }
-    })
-
-    setContractResults(prev => ({ ...prev, ...newResults }))
-    if (statusResults.length > 0 && statusResults[0]) {
-      setGetContractResults(true)
-    }
-    
-  }, [statusResults, validEventIds])
 
   useEffect(() => {
     if (account && visible) {
       setAddress(account)
-      setGetContractResults(false)
     }
   }, [account, visible])
 
@@ -154,42 +71,34 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       )
     },
     {
-      title: t('time'),
+      title: t('round'),
       dataIndex: 'range',
       key: 'range',
+      width: 100,
       render: (_: any, data: any) => (
-        <span>{dayjs(data.range[0] * 1000).format('YYYY-MM-DD HH:mm:ss')}</span>
+        <span>{t('round')} {data.nonce}</span>
       )
     },
     {
       title: t('isDispatch'),
       key: 'dispatch',
       render: (_: any, data: any) => {
+        const statusMap = {
+          0: t('wait_dispatch'),
+          1: t('claimed'),
+          2: t('can_claim'),
+        }
         // 如果有 tx_hash，显示已发放
         if (data.tx_hash) {
           return <a className="text-green-500 underline break-all" href={`https://bscscan.com/tx/${data.tx_hash}`} target="_blank">{data.tx_hash}</a>
         }
-        if (contractResults[data.range[0]]) {
-          if (contractResults[data.range[0]].error) {
-            return <span className="text-red-500">{t('error')}</span>
+        if (data.status === 1) {
+          if (account?.toLowerCase() === address?.toLowerCase()) {
+            return <Button type="primary" onClick={() => handleClaim(data)}>{t('claim')}</Button>
           }
-          const [token, amount, claimed, isExist] = contractResults[data.range[0]]
-          if (claimed) {
-            return <span className="text-green-500">{t('claimed')}</span>
-          }
-          if (isExist) {
-            if (account?.toLowerCase() === address?.toLowerCase()) {
-              return <Button type="primary" onClick={() => handleClaim(data)}>{t('claim')}</Button>
-            }
-            return <span className="text-orange-500">{t('can_claim')}</span>
-          } else {
-            return <span className="text-red-500">{t('wait_dispatch')}</span>
-          }
+          return <span className="text-orange-500">{t('can_claim')}</span>
         }
-        if (getContractResults) {
-          return <span className="text-red-500">{t('wait_dispatch')}</span>
-        }
-        return <span className="text-gray-500">{t('loading')}</span>
+        return <span className="text-red-500">{t('wait_dispatch')}</span>
       }
     }
   ]
