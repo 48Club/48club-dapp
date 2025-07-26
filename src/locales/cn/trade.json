@@ -59,5 +59,11 @@
   "claim": "领取",
   "error": "调用合约失败，请稍后重试",
   "loading": "加载中",
-  "wait_dispatch": "等待发放"
+  "wait_dispatch": "待结算",
+  "round": "期数",
+  "trade.each_reward": "每期奖励",
+  "trade.eligible_amount": "最小入围交易量",
+  "trade.total_reward": "总奖励",
+  "trade.round": "期数",
+  "trade.all_nonce.title": "往期数据查询"
 }
