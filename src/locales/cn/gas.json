@@ -65,7 +65,7 @@
   "gas.address_format_error": "地址格式错误",
   "gas.please_connect_wallet": "请先连接钱包",
   "gas.enter_address": "请输入地址",
-  "gas.input_multiple_addresses": "输入多个地址请用英文逗号分隔。支持任何格式。",
+  "gas.input_multiple_addresses": "输入多个地址请用英文逗号或换行符分隔。支持任何格式。",
   "gas.block_number": "区块高度",
   "gas.gas_cost": "Gas 成本",
   "gas.service_fee": "服务费",

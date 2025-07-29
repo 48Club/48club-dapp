@@ -26,7 +26,7 @@ export default function AddAddressModal({ open, onOk, onCancel }: ManageAddressM
     try {
       const values = await form.validateFields();
       let addresses: string[] = values.addresses
-        .split(',')
+        .split(/[,\n]/) // 支持逗号和换行符分隔
         .map((addr: string) => addr.trim().toLowerCase())
         .filter((addr: string) => !!addr);
       if (!addresses.length) {

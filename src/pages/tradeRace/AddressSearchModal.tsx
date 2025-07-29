@@ -78,19 +78,19 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       key: 'range',
       width: 100,
       render: (_: any, data: any) => (
-        <span>{t('round')} {data.nonce}</span>
+        <span>#{data.nonce}</span>
       )
     },
     {
-      title: t('amount'),
-      dataIndex: 'amount',
-      key: 'amount',
+      title: t('total_reward'),
+      dataIndex: 'total_reward',
+      key: 'total_reward',
       render: (_: string, data: any) => (
-        <span className="font-mono">{data.each_reward} KOGE</span>
+        <span className="font-mono">{data.total_reward} KOGE</span>
       )
     },
     {
-      title: t('eligible_number'),
+      title: t('trade_eligible'),
       dataIndex: 'amount',
       key: 'amount',
       render: (_: string, data: any) => (
@@ -98,22 +98,17 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       )
     },
     {
-      title: t('total_reward'),
+      title: t('trade.each_reward'),
       dataIndex: 'amount',
       key: 'amount',
       render: (_: string, data: any) => (
-        <span className="font-mono">{data.total_reward} KOGE</span>
+        <span className="font-mono">{data.each_reward} KOGE</span>
       )
     },
     {
       title: t('isDispatch'),
       key: 'dispatch',
       render: (_: any, data: any) => {
-        const statusMap = {
-          0: t('wait_dispatch'),
-          1: t('claimed'),
-          2: t('can_claim'),
-        }
         if (!address) {
           return '--'
         }
