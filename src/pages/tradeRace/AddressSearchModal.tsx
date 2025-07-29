@@ -82,11 +82,11 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       )
     },
     {
-      title: t('total_reward'),
+      title: t('trade.total_reward')+' KOGE',
       dataIndex: 'total_reward',
       key: 'total_reward',
       render: (_: string, data: any) => (
-        <span className="font-mono">{data.total_reward} KOGE</span>
+        <span className="font-mono">{data.total_reward}</span>
       )
     },
     {
@@ -98,11 +98,11 @@ const AddressSearchModal: React.FC<AddressSearchModalProps> = ({
       )
     },
     {
-      title: t('trade.each_reward'),
+      title: t('trade.each_reward')+' KOGE',
       dataIndex: 'amount',
       key: 'amount',
       render: (_: string, data: any) => (
-        <span className="font-mono">{data.each_reward} KOGE</span>
+        <span className="font-mono">{data.each_reward}</span>
       )
     },
     {

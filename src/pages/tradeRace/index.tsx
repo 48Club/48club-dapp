@@ -370,7 +370,7 @@ export default function TradeRacePage() {
             <Text>{t('trade_race_current_reward')}</Text>
             {/* <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(+fee?.usdt_amount * ratio)}</div> */}
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>
-              <OdometerNumber value={+fee?.airdrop_koge_amount || 0} firstAppear={true} />KOGE
+              <OdometerNumber value={+fee?.airdrop_koge_amount || 0} firstAppear={true} /> KOGE
               (~$<OdometerNumber 
                 value={+fee?.airdrop_usdt_amount || 0} 
                 firstAppear={true}
