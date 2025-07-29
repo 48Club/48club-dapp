@@ -10,6 +10,7 @@ import 'dayjs/locale/zh-cn'
 import AddressSearch, { AddressSearchRef } from './search'
 import AddressSearchModal from './AddressSearchModal'
 import OdometerNumber from '@/components/OdometerNumber'
+import ActivityProgress from './ActivityProgress'
 // import { Table } from 'antd'
 
 dayjs.extend(utc)
@@ -23,6 +24,15 @@ const formatNumber = (num: string | number) => {
     })
   }
   return '--'
+}
+function getCurrentDay(rangeStart: number): number {
+  const now = Date.now();
+  const start = rangeStart * 1000; // 秒转毫秒
+  const diff = now - start;
+  let day = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+  if (day < 1) day = 1;
+  if (day > 7) day = 7;
+  return day;
 }
 export default function TradeRacePage() {
   const ratio = 0.648 * 2 // 总奖池的 64.8% 转为KOGE的比例
@@ -247,7 +257,7 @@ export default function TradeRacePage() {
   }, [])
 
   return (
-    <div style={{ background: '#fff', padding: 24, minHeight: '100vh' }}>
+    <div style={{ background: '#fff', minHeight: '100vh' }}>
       <Card bordered={false} style={{ margin: '0 auto', maxWidth: 900 }}>
         <div className="flex items-center justify-center gap-2">
           <Title level={3} style={{ marginBottom: 0 }}>
@@ -372,8 +382,12 @@ export default function TradeRacePage() {
             <div style={{ fontSize: 22, color: '#E2B201', fontWeight: 700 }}>${formatNumber(lastRankDetail?.usdt_amount)}</div>
           </div>
         </div>
-        
-       
+        <ActivityProgress 
+          n={fee?.min_trade_amount}
+          myVolume={userRank?.usdt_amount}
+          currentDay={getCurrentDay(timeRange[0])}
+          dayVolume={lastRankDetail?.usdt_amount}
+        />
         {/* Coming Soon for stats */}
         {/* <div
           style={{
@@ -417,7 +431,6 @@ export default function TradeRacePage() {
           </div>
           
         </div>
-
         <div style={{ marginBottom: 24 }}>
           {!isMobile ? (
             // PC端显示表格

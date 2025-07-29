@@ -65,7 +65,7 @@
   "gas.address_format_error": "Address format error",
   "gas.please_connect_wallet": "Please connect wallet first",
   "gas.enter_address": "Please enter address",
-  "gas.input_multiple_addresses": "Enter multiple addresses separated by commas. Any format is supported.",
+  "gas.input_multiple_addresses": "Enter multiple addresses separated by commas or line breaks. Any format is supported.",
   "gas.block_number": "Block Number",
   "gas.gas_cost": "Gas Cost",
   "gas.service_fee": "Service Fee",
