@@ -424,7 +424,7 @@ export default function TradeRacePage() {
               {t('trade_race_leaderboard_title')}
             </Title>
             { fee?.lastupdate && <div className='mr-[10px]'> {t('trade_race_lastupdate')}: {dayjs(fee.lastupdate * 1000).format('YYYY-MM-DD HH:mm:ss')}</div> }
-            {currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a>}
+            {/* currentAccount && <a className="underline decoration-[#e2b201]" href={`#${currentAccount}`}><Text style={{ color: '#E2B201' }}>{t('trade_race_my_volume')}：{userRank?.usdt_amount}</Text></a> */}
           </div>
           <div className='flex items-center gap-2 justify-between mt-[16px]'>
             <AddressSearch onSearch={handleSearch} ref={searchRef} />

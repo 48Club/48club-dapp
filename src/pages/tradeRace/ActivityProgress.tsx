@@ -87,10 +87,10 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({ n, myVolume, curren
       <div className='relative'>
         {/* 我的交易量与今日标准 */}
         <div style={{ marginBottom: 12, textAlign: 'center' }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#222', marginBottom: 6 }}>{t('trade.my_current_volume')}：{myVolume} USDT</div> 
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#222', marginBottom: 6 }}>{t('trade.my_current_volume')}：{myVolume} USD</div> 
           {+myVolume < +finalVolume && (
             <div style={{ fontSize: 14, margin: '8px 0', color: '#7c5c00', fontWeight: 600 }}>
-              {t('trade.today_qualifying_standard')}：{dayVolume} USDT
+              {t('trade.today_qualifying_standard')}：{dayVolume} USD
               {myVolume !== null && renderMyVolume()}
             </div>
           )}
@@ -108,7 +108,7 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({ n, myVolume, curren
           marginTop: 12,
           boxShadow: '0 2px 8px #ffd82933'
         }}>
-          {t('trade.week_qualifying_standard')}：{finalVolume} USDT
+          {t('trade.week_qualifying_standard')}：{finalVolume} USD
           <div style={{ fontSize: 14, margin: '8px 0', color: '#222', fontWeight: 600 }}>
             {renderFinalVolume()}
           </div>
